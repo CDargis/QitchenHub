@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>settingsTransparent.png</file>
+        <file>settingsWhite.png</file>
+        <file>tentacle.jpeg</file>
+    </qresource>
+</RCC>
