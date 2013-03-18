@@ -11,13 +11,13 @@ Rectangle {
 
     Text {
         id: bText
-        anchors.centerIn: parent
+        anchors.centerIn: parent     // Center the text in the button
         text: buttonText
         font.pointSize: pointSize
     }
     Image {
         id: icon
-        anchors.centerIn: parent
+        anchors.centerIn: parent   // Center the picture in the button
         source: iconSource
         width: parent.width * .5; height: parent.height * .5  // Constrain the image
     }
