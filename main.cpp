@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 
     QtQuick2ApplicationViewer viewer;
     viewer.setMainQmlFile(QStringLiteral("qml/KitchenApp/main.qml"));
-    viewer.showExpanded();
+    viewer.showFullScreen();
 
     return app.exec();
 }

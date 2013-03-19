@@ -18,7 +18,9 @@ SOURCES += main.cpp
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
 
-OTHER_FILES +=
+OTHER_FILES += \
+    qml/KitchenApp/AppInterface.qml \
+    qml/KitchenApp/WidgetInterface.qml
 
 RESOURCES += \
     Resources.qrc
