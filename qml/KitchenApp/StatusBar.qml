@@ -13,6 +13,17 @@ Rectangle {
     property string usrPicSource: ""
     property string currentScreenTitle: ""
 
+    // Timer for refreshing da clock!
+    Item {
+        Timer {
+            interval: 1000; running: true; repeat: true
+            onTriggered: {
+                var today = new Date();
+                date.text = Qt.formatDateTime(today, "MMMM dd, yyyy");
+             }
+        }
+    }
+
     // User info rect
     Rectangle {
         id: userInfo
@@ -63,9 +74,18 @@ Rectangle {
         color: "transparent"
         anchors.left: currentScreenRect.right
         anchors.verticalCenter: parent.verticalCenter
+        Text {
+            id: date
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: settingsImg.left
+            anchors.rightMargin: 20
+            font.family: fontFamily
+            font.pointSize: 14
+        }
         Image {
             id: settingsImg
             width: parent.height; height: parent.height; // make it a square like a sir
+            anchors.verticalCenter: parent.verticalCenter
             source: "qrc:/images/settingsTransparent.png"
             anchors.right: parent.right
         }
