@@ -50,22 +50,21 @@ Rectangle {
 
     }
 
-    DropArea {
+    Dock {
         id: dock
         x: parent.width * 0.85
         y: parent.height * 0.1
         width: parent.width - dock.x
         height: parent.height - dock.y
 
-        onEntered: {
-            console.debug("entered drop area");
-        }
     }
 
     function launch(qmlComp)
     {
         var component = Qt.createComponent(qmlComp);
-        component.createObject(appStack);
+        var app = component.createObject(appStack);
+
+        app.callWidget.connect(dock.createWidget);
     }
 
 

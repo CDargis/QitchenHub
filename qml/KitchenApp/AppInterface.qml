@@ -2,11 +2,18 @@ import QtQuick 2.0
 Flickable {
     id: root
     anchors.fill: parent
-    //Drag.active: dragArea.drag.active
-    flickableDirection: Flickable.HorizontalFlick
-    //interactive: false
+    opacity: 1.0
 
+    flickableDirection: Flickable.HorizontalFlick
+    interactive: false
+    flickDeceleration: 20
+
+    signal callWidget(string source)
+
+    // set this to your widget compnent qml file
     property string widgetSrc: "WidgetInterface.qml"
+
+
     property bool moving: false
     property variant state
 
@@ -23,11 +30,11 @@ Flickable {
         //drag.target: parent
         drag.axis: Drag.XAxis
         onPressAndHold: {
-            //root.interactive = true;
+            root.interactive = true;
         }
 
         onReleased: {
-            //root.interactive = false;
+            root.interactive = false;
         }
     }
 
@@ -37,10 +44,18 @@ Flickable {
 
     onFlickEnded: {
         console.debug("flickended");
+        callWidget(widgetSrc);
+        console.debug(root.state);
+        root.state = "hidden";
+
+        console.debug(root.state);
+        console.debug(root.opacity);
+        root.interactive = false;
     }
 
     onMovementStarted: {
         console.debug("movestarted");
+        console.debug(root.flickDeceleration);
         moving = true;
     }
 
@@ -71,6 +86,17 @@ Flickable {
         anchors.fill: parent
         z: 0
     }
+
+    states: [
+        State {
+            name: "hidden"
+            when: root.state == "hidden"
+            PropertyChanges {
+                target: root
+                opacity: 0.0
+            }
+        }
+    ]
 
     Component.onCompleted: initialize()
 }
