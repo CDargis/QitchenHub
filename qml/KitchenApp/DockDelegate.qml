@@ -7,9 +7,6 @@ Loader {
     property int index
     property string widget
 
-    width: .06*1920
-    height: .10*1080
-
     function loadWidget(source) {
         var widgetComponent;
         //var widget;
@@ -19,8 +16,9 @@ Loader {
         return widgetComponent;
     }
 
-
     Connections{
         target: widgetLoader
     }
 }
+
+

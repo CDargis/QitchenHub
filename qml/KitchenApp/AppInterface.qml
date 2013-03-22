@@ -12,17 +12,11 @@ Flickable {
 
     // set this to your widget compnent qml file
     property string widgetSrc: "WidgetInterface.qml"
+    property string appID: "AppInterface"
 
 
     property bool moving: false
     property variant state
-
-    function initialize()
-    {
-        state.prop1 = 0;
-        state.prop2 = 1;
-        state.prop3 = 2;
-    }
 
     MouseArea {
         id: dragArea
@@ -46,7 +40,7 @@ Flickable {
         console.debug("flickended");
         callWidget(widgetSrc);
         console.debug(root.state);
-        root.state = "hidden";
+        root.state = "HIDDEN";
 
         console.debug(root.state);
         console.debug(root.opacity);
@@ -89,14 +83,27 @@ Flickable {
 
     states: [
         State {
-            name: "hidden"
-            when: root.state == "hidden"
+            name: "HIDDEN"
+            when: root.state == "HIDDEN"
             PropertyChanges {
                 target: root
                 opacity: 0.0
+                enabled: false
             }
         }
     ]
 
-    Component.onCompleted: initialize()
+    transitions: [
+        Transition {
+            from: ""
+            to: "HIDDEN"
+            NumberAnimation {
+                target: root
+                property: "opacity"
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+
+        }
+    ]
 }

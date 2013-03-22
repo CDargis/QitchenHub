@@ -41,7 +41,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: launch("AppInterface.qml")
+                onClicked: launch("AppInterface.qml", "AppInterface")
             }
         }
 
@@ -59,12 +59,16 @@ Rectangle {
 
     }
 
-    function launch(qmlComp)
+    function launch(qmlComp, appID)
     {
         var component = Qt.createComponent(qmlComp);
         var app = component.createObject(appStack);
 
+        // register an app with the dock
         app.callWidget.connect(dock.createWidget);
+
+        // set additional properties
+        app.appID = appID;
     }
 
 
