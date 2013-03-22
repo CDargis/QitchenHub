@@ -3,6 +3,9 @@ import QtQuick 2.0
 Loader {
     id: widgetLoader
     sourceComponent: loadWidget(widget)
+    width: parent.width * 0.9
+    height: item.height
+    anchors.horizontalCenter: parent.horizontalCenter
 
     property int index
     property string widget
@@ -17,7 +20,7 @@ Loader {
     }
 
     Connections{
-        target: widgetLoader
+        target: widgetLoader.item
     }
 }
 
