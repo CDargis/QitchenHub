@@ -14,12 +14,6 @@ Rectangle {
             Qt.quit();
         }
     }
-    StatusBar {
-        id: statusBar
-        usrName: "Chris"
-        usrPicSource: "qrc:/images/tentacle.jpeg"
-        currentScreenTitle: "Title of Current Screen"
-    }
 
     Rectangle {
         id: appStack
@@ -28,6 +22,7 @@ Rectangle {
         width: parent.width * 0.85
         height: parent.height - appStack.y;
         border.color: "#000000"
+        z: 0
 
         /******************** static layer **************************/
         Button {
@@ -68,6 +63,10 @@ Rectangle {
         component.createObject(appStack);
     }
 
-
-
+    StatusBar {
+        id: statusBar
+        usrName: "Chris"
+        usrPicSource: "qrc:/images/tentacle.jpeg"
+        currentScreenTitle: "Title of Current Screen"
+    }
 }
