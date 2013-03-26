@@ -2,6 +2,11 @@ import QtQuick 2.0
 
 Rectangle {
 
+    Component.onCompleted: {
+        statusBar.addNotification({"title": "Notification 1", "message": "something happening"})
+        statusBar.addNotification({"title": "Notification 2", "message": "hi there!"})
+        statusBar.addNotification({"title": "Notification 3", "message": "hey man"})
+    }
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
 
@@ -66,7 +71,7 @@ Rectangle {
     StatusBar {
         id: statusBar
         usrName: "Chris"
-        usrPicSource: "qrc:/images/tentacle.jpeg"
+        usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "Title of Current Screen"
     }
 }

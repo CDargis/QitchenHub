@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.XmlListModel 2.0
 
 Rectangle {
     id: mainRect
@@ -32,7 +33,7 @@ Rectangle {
         color: "transparent"
         Rectangle {
             id: picBackground
-            color: "orange"
+            color: "transparent"
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             width: parent.height; height: parent.height
@@ -48,7 +49,7 @@ Rectangle {
                     onClicked: {
                         if(notificationRect.visible === false) {
                             notificationRect.visible = true
-                            picBackground.color = "#DD777777"
+                            picBackground.color = "#CC777777"
                         }
                         else {
                             notificationRect.visible = false
@@ -75,16 +76,27 @@ Rectangle {
             height: parent.height * 2
             anchors.top: userInfo.bottom
             color: picBackground.color
+            border.width: 1
+            border.color: "black"
             Flickable {
                 anchors.fill: parent
+                clip: true
                 flickableDirection: Flickable.VerticalFlick
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.top: parent.top
-                    anchors.topMargin: 10
-                    font.family: fontFamily
-                    font.pointSize: 16
-                    text: "Notifications"
+                ListModel {
+                    id: notificationModel
+                }
+                ListView {
+                    id: notificationView
+                    anchors.fill: parent
+                    width: parent.width; height: parent.height
+                    verticalLayoutDirection: ListView.BottomToTop
+                    model: notificationModel
+                    spacing: 5
+                    delegate: NotificationItemDelegate {
+                        notificationText: title + ": " + message;
+                        bold: true
+                        ListView.onAdd: picBackground.color = "orange"
+                    }
                 }
             }
         }
@@ -133,6 +145,10 @@ Rectangle {
     }
 
     // Function definitions------------------------------------------------
+
+    function addNotification(jsonNotification) {
+        notificationModel.append(jsonNotification)
+    }
 
     function setUserInfo(name, picSource) {
         usrName = name;

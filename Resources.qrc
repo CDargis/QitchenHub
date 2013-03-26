@@ -3,5 +3,6 @@
         <file>settingsTransparent.png</file>
         <file>settingsWhite.png</file>
         <file>tentacle.jpeg</file>
+        <file>user.png</file>
     </qresource>
 </RCC>
