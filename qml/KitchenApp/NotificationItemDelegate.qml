@@ -11,6 +11,9 @@ Rectangle {
     property bool bold: true
     MouseArea {
         anchors.fill: parent
+        onClicked: {
+            bold = false
+        }
     }
     Text {
         wrapMode: Text.Wrap
