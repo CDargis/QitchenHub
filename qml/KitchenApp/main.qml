@@ -4,15 +4,15 @@ Rectangle {
 
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
-
-    //width: 1280
-    //height: 768
+ id:appRect
+    width: 1280
+    height: 768
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            Qt.quit();
-        }
+           Qt.quit();
+      }
     }
     StatusBar {
         id: statusBar
@@ -45,6 +45,7 @@ Rectangle {
             }
         }
 
+
         /************* dynamic layer *************************/
 
 
@@ -59,6 +60,7 @@ Rectangle {
 
     }
 
+
     function launch(qmlComp, appID)
     {
         var component = Qt.createComponent(qmlComp);
@@ -71,6 +73,61 @@ Rectangle {
         app.appID = appID;
     }
 
+    Rectangle{
+        id:app1
+        opacity:0
+        x:300
+        y:300
+
+        width:50
+        height:50
+        color: "steel blue"
+
+    }
+
+Rectangle{
+
+    x:300
+    y:300
+    Text {
+        id: name
+        text: "app"
+    }
+    width:50
+    height:50
+    color: "steel blue"
+     border.color: "steel blue"
+MouseArea{
+anchors.fill: parent
+
+onClicked: {
+    {if(appRect.state == "")
+                    {appRect.state = "open";
+                      }}
+}
+}
+}
+
+    states: [
+        State {
+            name: "open"
+            PropertyChanges {
+                target: app1
+                opacity:1
+                width:appStack.width
+                height:appStack.height
+                x:appStack.x
+                y:appStack.y
+            }
+        }
+    ]
+    transitions: [
+        Transition {
+            from: ""
+            to: "open"
+            NumberAnimation{properties: "opacity,width,height,x,y"}
+        }
+    ]
 
 
 }
