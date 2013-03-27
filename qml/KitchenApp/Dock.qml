@@ -20,11 +20,19 @@ import QtQuick 2.0
 
         }
 
-        function createWidget(source) {
+        /*MouseArea {
+            id: passer
+            anchors.fill: parent
+            onPressed: {
+                console.debug("pressed on flickable");
+            }
+        }*/
+
+        function createWidget(source, app) {
             var component;
             var widgetNum;
             component = Qt.createComponent("DockDelegate.qml");
-            widgetNum = component.createObject(column,{"widget": source});
+            widgetNum = component.createObject(column,{"widget": source, "app": app});
 
             console.debug(column.children.length);
 

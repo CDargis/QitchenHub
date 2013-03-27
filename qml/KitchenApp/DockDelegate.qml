@@ -9,6 +9,7 @@ Loader {
 
     property int index
     property string widget
+    property Item app
 
     function loadWidget(source) {
         var widgetComponent;

@@ -8,11 +8,14 @@ Flickable {
     interactive: false
     flickDeceleration: 20
 
-    signal callWidget(string source)
+    signal callWidget(string source, Item app)
 
-    // set this to your widget compnent qml file
+    // set this to your widget component qml file
     property string widgetSrc: "WidgetInterface.qml"
-    property string appID: "AppInterface"
+
+    // this holds a reference to a widget if one exists
+    // it is set automatically for you
+    property Item widget
 
 
     property bool moving: false
@@ -38,7 +41,7 @@ Flickable {
 
     onFlickEnded: {
         console.debug("flickended");
-        callWidget(widgetSrc);
+        callWidget(widgetSrc, root);
         console.debug(root.state);
         root.state = "HIDDEN";
 
@@ -95,6 +98,17 @@ Flickable {
 
     transitions: [
         Transition {
+            from: "HIDDEN"
+            to: ""
+            NumberAnimation {
+                target: root
+                property: "opacity"
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+
+        },
+        Transition {
             from: ""
             to: "HIDDEN"
             NumberAnimation {
@@ -106,4 +120,17 @@ Flickable {
 
         }
     ]
+
+    function show() {
+        root.state = "";
+    }
+
+    // called automatically when a widget is instantiated
+    function setWidgetRef(newWidget) {
+        widget = newWidget;
+    }
+
+    function test() {
+        console.debug("App here!");
+    }
 }
