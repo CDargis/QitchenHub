@@ -21,6 +21,9 @@ Rectangle {
         currentScreenTitle: "Title of Current Screen"
     }
 
+
+    // temporary placeholder defining the area containing buttons
+    // and where apps are displayed
     Rectangle {
         id: appStack
         x: 0
@@ -29,7 +32,10 @@ Rectangle {
         height: parent.height - appStack.y;
         border.color: "#000000"
 
+
         /******************** static layer **************************/
+        // if a button is meant to launch an app, make sure it behaves
+        // like the template right below
         Button {
             id: button
             anchors.centerIn: parent
@@ -41,12 +47,14 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: launch("AppInterface.qml", "AppInterface")
+                // make sure you put the name of your qml as an argument
+                onClicked: launch("AppInterface.qml")
             }
         }
 
-
         /************* dynamic layer *************************/
+        // just an abstract placeholder but as a matter of fact
+        // all apps end up right here
 
 
     }
@@ -60,7 +68,8 @@ Rectangle {
 
     }
 
-
+    //************* launch an app ******************/
+    // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
     function launch(qmlComp)
     {
         var component = Qt.createComponent(qmlComp);

@@ -7,16 +7,15 @@ Loader {
     height: item.height
     anchors.horizontalCenter: parent.horizontalCenter
 
+    // defined here but accessible in widget components
     property int index
     property string widget
     property Item app
 
     function loadWidget(source) {
         var widgetComponent;
-        //var widget;
 
         widgetComponent= Qt.createComponent(source);
-        //widget= widgetComponent.createObject(root);
         return widgetComponent;
     }
 

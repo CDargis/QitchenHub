@@ -1,4 +1,12 @@
 import QtQuick 2.0
+
+
+/***********************************************************************
+ * DO NOT MODIFY THIS FILE IF YOU ARE JUST WORKING ON YOUR APP!
+ * INSTEAD, REDEFINE OR REIMPLEMENT STUFF IN YOUR OWN QML SUBCOMPONENT!
+ ***********************************************************************/
+
+
 Flickable {
     id: root
     anchors.fill: parent
@@ -24,7 +32,7 @@ Flickable {
     MouseArea {
         id: dragArea
         anchors.fill: parent
-        //drag.target: parent
+        propagateComposedEvents: true
         drag.axis: Drag.XAxis
         onPressAndHold: {
             root.interactive = true;
@@ -61,7 +69,6 @@ Flickable {
     }
 
     boundsBehavior: Flickable.DragOverBounds
-
 
 
 
