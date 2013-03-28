@@ -3,12 +3,10 @@ import QtQuick 2.0
 Rectangle {
 
     Component.onCompleted: {
-        statusBar.addNotification({"title": "Notification 1", "message": "something happening"})
-        statusBar.addNotification({"title": "Notification 2", "message": "hi there!"})
-        statusBar.addNotification({"title": "Notification 3", "message": "hola"})
-        statusBar.addNotification({"title": "Notification 4", "message": "hhola"})
-        statusBar.addNotification({"title": "Notification 5", "message": "hola"})
-        statusBar.addNotification({"title": "Notification 6", "message": "hhola"})
+        var func1 = "function doIt() {console.log('hey from first notification')}"
+        var func2 = "function doIt() {console.log('hey from second notification')}"
+        statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
+        statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
     }
     // Define globals here ... at least for now
     property string fontFamily: "Sans";

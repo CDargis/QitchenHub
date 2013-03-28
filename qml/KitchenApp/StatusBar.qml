@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick.XmlListModel 2.0
 
 Rectangle {
     id: mainRect
@@ -78,26 +77,28 @@ Rectangle {
             color: picBackground.color
             border.width: 1
             border.color: "black"
-            Flickable {
+            ListModel {
+                id: notificationModel
+            }
+            ListView {
+                id: notificationView
                 anchors.fill: parent
+                anchors.topMargin: 10
+                width: parent.width; height: parent.height;
+                verticalLayoutDirection: ListView.BottomToTop
                 clip: true
-                flickableDirection: Flickable.VerticalFlick
-                ListModel {
-                    id: notificationModel
+                model: notificationModel
+                spacing: 5
+                delegate: NotificationItemDelegate {
+                    notificationText: title + ": " + message;
+                    bold: true
+                    functor: func
+                    ListView.onAdd: picBackground.color = "orange"
                 }
-                ListView {
-                    id: notificationView
-                    anchors.fill: parent
-                    width: parent.width; height: parent.height
-                    verticalLayoutDirection: ListView.BottomToTop
-                    model: notificationModel
-                    spacing: 5
-                    delegate: NotificationItemDelegate {
-                        notificationText: title + ": " + message;
-                        bold: true
-                        ListView.onAdd: picBackground.color = "orange"
-                    }
-                }
+            }
+            onVisibleChanged: {
+                //console.debug(notificationView.contentY);
+                notificationView.currentIndex = notificationModel.count - 1
             }
         }
     }

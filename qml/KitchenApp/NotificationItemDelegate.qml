@@ -9,10 +9,13 @@ Rectangle {
     color: "transparent"
     property string notificationText: ""
     property bool bold: true
+    property string functor: "function doIt() { console.log('nope') }"
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            bold = false
+            bold = false;
+            eval(functor);
+            doIt();
         }
     }
     Text {
