@@ -30,22 +30,76 @@ Rectangle {
         width: parent.width / 3  // 3 Sections of statusbar
         height: parent.height
         color: "transparent"
-        Image {
-            id: pic
+        Rectangle {
+            id: picBackground
+            color: "transparent"
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: parent.height - (parent.height * .85)
-            width: (parent.height * .85); height: (parent.height * .85)  // Make it a square
-            source: usrPicSource
+            width: parent.height; height: parent.height
+            Image {
+                id: pic
+                anchors.left: parent.left
+                anchors.centerIn: parent
+                width: (parent.height * .85); height: (parent.height * .85)  // Make it a square
+                source: usrPicSource
+                // Mouse area clicking to display notifications. If user clicks icon, toggle notification area
+                MouseArea {
+                    anchors.fill: parent;
+                    onClicked: {
+                        if(notificationRect.visible === false) {
+                            notificationRect.visible = true
+                            picBackground.color = "#CC777777"
+                        }
+                        else {
+                            notificationRect.visible = false
+                            picBackground.color = "transparent"
+                        }
+                    }
+                }
+            }
         }
         Text {
             id: name
-            anchors.verticalCenter: pic.verticalCenter
-            anchors.left: pic.right
+            anchors.verticalCenter: picBackground.verticalCenter
+            anchors.left: picBackground.right
             anchors.leftMargin: 20
             font.family: fontFamily
             font.pointSize: 14
             text: usrName
+        }
+        // Notification Rectangle
+        Rectangle {
+            id: notificationRect
+            visible: false
+            width: parent.width
+            height: parent.height * 2
+            anchors.top: userInfo.bottom
+            color: picBackground.color
+            border.width: 1
+            border.color: "black"
+            ListModel {
+                id: notificationModel
+            }
+            ListView {
+                id: notificationView
+                anchors.fill: parent
+                anchors.topMargin: 10
+                width: parent.width; height: parent.height;
+                verticalLayoutDirection: ListView.BottomToTop
+                clip: true
+                model: notificationModel
+                spacing: 5
+                delegate: NotificationItemDelegate {
+                    notificationText: title + ": " + message;
+                    bold: true
+                    functor: func
+                    ListView.onAdd: picBackground.color = "orange"
+                }
+            }
+            onVisibleChanged: {
+                //console.debug(notificationView.contentY);
+                notificationView.currentIndex = notificationModel.count - 1
+            }
         }
     }
 
@@ -92,6 +146,10 @@ Rectangle {
     }
 
     // Function definitions------------------------------------------------
+
+    function addNotification(jsonNotification) {
+        notificationModel.append(jsonNotification)
+    }
 
     function setUserInfo(name, picSource) {
         usrName = name;

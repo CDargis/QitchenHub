@@ -2,9 +2,15 @@ import QtQuick 2.0
 
 Rectangle {
 
+    Component.onCompleted: {
+        var func1 = "function doIt() {console.log('hey from first notification')}"
+        var func2 = "function doIt() {console.log('hey from second notification')}"
+        statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
+        statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
+    }
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
- id:appRect
+    id:appRect
     width: 1280
     height: 768
 
@@ -13,12 +19,6 @@ Rectangle {
         onClicked: {
            Qt.quit();
       }
-    }
-    StatusBar {
-        id: statusBar
-        usrName: "Chris"
-        usrPicSource: "qrc:/images/tentacle.jpeg"
-        currentScreenTitle: "Title of Current Screen"
     }
 
 
@@ -31,6 +31,7 @@ Rectangle {
         width: parent.width * 0.85
         height: parent.height - appStack.y;
         border.color: "#000000"
+        z: 0
 
 
         /******************** static layer **************************/
@@ -67,6 +68,12 @@ Rectangle {
         height: parent.height - dock.y
 
     }
+    StatusBar {
+        id: statusBar
+        usrName: "Chris"
+        usrPicSource: "qrc:/images/user.png"
+        currentScreenTitle: "Title of Current Screen"
+    }
 
     //************* launch an app ******************/
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
@@ -78,5 +85,4 @@ Rectangle {
         // register an app with the dock
         app.callWidget.connect(dock.createWidget);
     }
-
 }
