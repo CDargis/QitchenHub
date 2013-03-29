@@ -49,7 +49,7 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 // make sure you put the name of your qml as an argument
-                onClicked: launch("AppInterface.qml")
+                onClicked: launch("HomeAutomation.qml")
             }
         }
 
