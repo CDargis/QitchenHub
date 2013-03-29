@@ -4,5 +4,8 @@
         <file>settingsWhite.png</file>
         <file>tentacle.jpeg</file>
         <file>user.png</file>
+        <file>lightBulb.png</file>
+        <file>security.png</file>
+        <file>Temperature-256.png</file>
     </qresource>
 </RCC>

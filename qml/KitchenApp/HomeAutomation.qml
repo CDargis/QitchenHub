@@ -3,6 +3,7 @@ import QtQuick 2.0
 AppInterface {
     Component.onCompleted: statusBar.setCurrentScreenTitle("Home Automation")
     anchors.fill: parent
+    width: parent.width; height: parent.height
     Rectangle {
         anchors.fill: parent
         width: parent.width; height: parent.height
@@ -11,220 +12,104 @@ AppInterface {
             GradientStop { position: 1.0; color: "#6E6E6E" }
         }
         Rectangle {
-            id: lights
-            height: parent.height; width: parent.width / 2
-            color: "transparent"
+            id: menuRect
+            width: parent.width * (1/3)
+            height: parent.height
             border.color: "black"
             border.width: 1
-            Rectangle {
-                anchors.bottom: lightingCol.top
-                anchors.bottomMargin: 55
-                width: parent.width; height: 50
-                color: "transparent"
-                Text {
-                    anchors.centerIn: parent
-                    font.family: fontFamily
-                    font.pointSize: 30
-                    text: "Lighting"
-                }
-            }
+            color: "transparent"
+            property int iconSide: width * .50
             Column {
-                id: lightingCol
-                spacing: 10
-                anchors.centerIn: parent
-                Row {
-                    id: kitchenLights
-                    spacing: 10
-                    Rectangle {
-                        id: kitchenRect
-                        width: lights.width / 3; height: 50
-                        border.color: "black"
-                        border.width: 1
-                        color: "#FFEAFF00" // All the way up
-                        Text {
-                            anchors.centerIn: parent
-                            font.family: fontFamily
-                            font.pointSize: 14
-                            text: "Kitchen"
-                        }
+                width: parent.width; height: parent.height
+                Rectangle {
+                    id: lightBulbRect
+                    width: parent.width; height: parent.height * (1/3)
+                    radius: 20
+                    color: "#99EEEEEE"
+                    Image {
+                        height: menuRect.iconSide
+                        width: menuRect.iconSide
+                        anchors.centerIn: parent
+                        source: "qrc:/images/lightBulb.png"
                     }
-                    Rectangle {
-                        width: lights.width / 3; height: 50
-                        color: "transparent"
-                        Slider {
-                            anchors.centerIn: parent
-                            sliderWidth: parent.width * .9
-                            sliderHeight: parent.height * .5
-                            maximum: 15
-                            value: 15
-                            onValueChanged: {
-                                var hex = parseInt(value).toString(16)  // Get the hex code
-                                kitchenRect.color = "#" + hex + hex + "EAFF00" // Adjust the alpha channel
-                            }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            deselectMenu()
+                            parent.color = "#99EEEEEE"
+                            lightsContainer.visible = true
                         }
                     }
                 }
-                Row {
-                    id: livingRoomLights
-                    spacing: 10
-                    Rectangle {
-                        id: livingRoomRect
-                        width: lights.width / 3; height: 50
-                        border.color: "black"
-                        border.width: 1
-                        color: "#FFEAFF00" // All the way up
-                        Text {
-                            anchors.centerIn: parent
-                            font.family: fontFamily
-                            font.pointSize: 14
-                            text: "Living Room"
-                        }
+                Rectangle {
+                    id: tempRect
+                    width: parent.width; height: parent.height * (1/3)
+                    radius: 20
+                    color: "transparent"
+                    Image {
+                        height: menuRect.iconSide
+                        width: menuRect.iconSide
+                        anchors.centerIn: parent
+                        source: "qrc:/images/Temperature-256.png"
                     }
-                    Rectangle {
-                        width: lights.width / 3; height: 50
-                        color: "transparent"
-                        Slider {
-                            anchors.centerIn: parent
-                            sliderWidth: parent.width * .9;
-                            sliderHeight: parent.height * .5;
-                            maximum: 15
-                            value: 15
-                            onValueChanged: {
-                                var hex = parseInt(value).toString(16)  // Get the hex code
-                                livingRoomRect.color = "#" + hex + hex + "EAFF00" // Adjust the alpha channel
-                            }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            deselectMenu()
+                            parent.color = "#99EEEEEE"
+                            tempContainer.visible = true;
                         }
                     }
                 }
-                Row {
-                    id: familyRoomLights
-                    spacing: 10
-                    Rectangle {
-                        id: familyRoomRect
-                        width: lights.width / 3; height: 50
-                        border.color: "black"
-                        border.width: 1
-                        color: "#FFEAFF00" // All the way up
-                        Text {
-                            anchors.centerIn: parent
-                            font.family: fontFamily
-                            font.pointSize: 14
-                            text: "Family Room"
-                        }
+                Rectangle {
+                    id:securityRect
+                    width: parent.width; height: parent.height * (1/3)
+                    radius: 20
+                    color: "transparent"
+                    Image {
+                        height: menuRect.iconSide
+                        width: menuRect.iconSide
+                        anchors.centerIn: parent
+                        source: "qrc:/images/security.png"
                     }
-                    Rectangle {
-                        width: lights.width / 3; height: 50
-                        color: "transparent"
-                        Slider {
-                            anchors.centerIn: parent
-                            sliderWidth: parent.width * .9;
-                            sliderHeight: parent.height * .5;
-                            maximum: 15
-                            value: 15
-                            onValueChanged: {
-                                var hex = parseInt(value).toString(16)  // Get the hex code
-                                familyRoomRect.color = "#" + hex + hex + "EAFF00" // Adjust the alpha channel
-                            }
-                        }
-                    }
-                }
-                Row {
-                    id: frontHallway
-                    spacing: 10
-                    Rectangle {
-                        id: frontHallwayRect
-                        width: lights.width / 3; height: 50
-                        border.color: "black"
-                        border.width: 1
-                        color: "#FFEAFF00" // All the way up
-                        Text {
-                            anchors.centerIn: parent
-                            font.family: fontFamily
-                            font.pointSize: 14
-                            text: "Front Hallway"
-                        }
-                    }
-                    Rectangle {
-                        width: lights.width / 3; height: 50
-                        color: "transparent"
-                        Slider {
-                            anchors.centerIn: parent
-                            sliderWidth: parent.width * .9;
-                            sliderHeight: parent.height * .5;
-                            maximum: 15
-                            value: 15
-                            onValueChanged: {
-                                var hex = parseInt(value).toString(16)  // Get the hex code
-                                frontHallwayRect.color = "#" + hex + hex + "EAFF00" // Adjust the alpha channel
-                            }
-                        }
-                    }
-                }
-                Row {
-                    id: officeLights
-                    spacing: 10
-                    Rectangle {
-                        id: officeRect
-                        width: lights.width / 3; height: 50
-                        border.color: "black"
-                        border.width: 1
-                        color: "#FFEAFF00" // All the way up
-                        Text {
-                            anchors.centerIn: parent
-                            font.family: fontFamily
-                            font.pointSize: 14
-                            text: "Office"
-                        }
-                    }
-                    Rectangle {
-                        width: lights.width / 3; height: 50
-                        color: "transparent"
-                        Slider {
-                            anchors.centerIn: parent
-                            sliderWidth: parent.width * .9;
-                            sliderHeight: parent.height * .5;
-                            maximum: 15
-                            value: 15
-                            onValueChanged: {
-                                var hex = parseInt(value).toString(16)  // Get the hex code
-                                officeRect.color = "#" + hex + hex + "EAFF00" // Adjust the alpha channel
-                            }
-                        }
-                    }
-                }
-                Row {
-                    id: garage
-                    spacing: 10
-                    Rectangle {
-                        id: garageRect
-                        width: lights.width / 3; height: 50
-                        border.color: "black"
-                        border.width: 1
-                        color: "#FFEAFF00" // All the way up
-                        Text {
-                            anchors.centerIn: parent
-                            font.family: fontFamily
-                            font.pointSize: 14
-                            text: "Garage"
-                        }
-                    }
-                    Rectangle {
-                        width: lights.width / 3; height: 50
-                        color: "transparent"
-                        Slider {
-                            anchors.centerIn: parent
-                            sliderWidth: parent.width * .9;
-                            sliderHeight: parent.height * .5;
-                            maximum: 15
-                            value: 15
-                            onValueChanged: {
-                                var hex = parseInt(value).toString(16)  // Get the hex code
-                                garageRect.color = "#" + hex + hex + "EAFF00" // Adjust the alpha channel
-                            }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            deselectMenu()
+                            parent.color = "#99EEEEEE"
+                            securityContainer.visible = true
                         }
                     }
                 }
             }
         }
+        Lights {
+            id: lightsContainer
+            width: parent.width * (2 /3)
+            height: parent.height
+            anchors.left: menuRect.right
+            visible: true
+        }
+        Temperature {
+            id: tempContainer
+            width: parent.width * (2 /3)
+            height: parent.height
+            anchors.left: menuRect.right
+            visible: false
+        }
+        Security {
+            id: securityContainer
+            width: parent.width * (2 /3)
+            height: parent.height
+            anchors.left: menuRect.right
+            visible: false
+        }
+    }
+
+    // Function Definitions --------------------------------------------------------------
+
+    function deselectMenu() {
+        lightBulbRect.color = tempRect.color = securityRect.color = "transparent"
+        lightsContainer.visible = tempContainer.visible = securityContainer.visible = false;
     }
 }
