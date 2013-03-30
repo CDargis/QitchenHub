@@ -6,8 +6,9 @@ Rectangle {
     border.color: "black"
     border.width: 1
     Rectangle {
-        anchors.bottom: lightingCol.top
-        anchors.bottomMargin: 55
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 55
         width: parent.width; height: 50
         color: "transparent"
         Text {

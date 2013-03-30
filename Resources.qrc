@@ -7,5 +7,9 @@
         <file>lightBulb.png</file>
         <file>security.png</file>
         <file>Temperature-256.png</file>
+        <file>downArrow.png</file>
+        <file>upArrow.png</file>
+        <file>up-arrow-icon.png</file>
+        <file>down-arrow-icon.png</file>
     </qresource>
 </RCC>

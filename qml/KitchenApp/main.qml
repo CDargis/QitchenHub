@@ -10,14 +10,11 @@ Rectangle {
     }
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
-    id:appRect
-    width: 1280
-    height: 768
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-           Qt.quit();
+           //Qt.quit();
       }
     }
 
