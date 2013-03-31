@@ -88,10 +88,9 @@ Rectangle {
                 verticalLayoutDirection: ListView.BottomToTop
                 clip: true
                 model: notificationModel
-                spacing: 5
+             //   spacing: 5
                 delegate: NotificationItemDelegate {
                     notificationText: title + ": " + message;
-                    bold: true
                     functor: func
                     ListView.onAdd: picBackground.color = "orange"
                 }

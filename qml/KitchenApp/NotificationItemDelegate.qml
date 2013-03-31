@@ -2,28 +2,47 @@ import QtQuick 2.0
 
 Rectangle {
     id: notificationDelegate
-    width: notificationRect.width
-    height: notificationRect.height / 6
+    width: parent.width
+    height: img.height + sirLine.height + 6
     anchors.left: parent.left
-    anchors.leftMargin: 10
     color: "transparent"
     property string notificationText: ""
-    property bool bold: true
     property string functor: "function doIt() { console.log('nope') }"
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            bold = false;
-            eval(functor);
-            doIt();
+            //img.visible = false
+            nText.font.bold = false
+            eval(functor)
+            doIt()
         }
     }
-    Text {
-        wrapMode: Text.Wrap
+    Rectangle {
+        id: sirLine
+        width: parent.width
+        height: 1
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        color: "black"
+    }
+    Image {
+        id: img
+        anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
+        anchors.leftMargin: 2
+        width: parent.width * (1/22); height: parent.width * (1/22)
+        source: "qrc:/images/ex1.png"
+    }
+
+    Text {
+        id: nText
+        anchors.verticalCenter: img.verticalCenter
+        anchors.left: img.right
+        anchors.leftMargin: 10
+        wrapMode: Text.Wrap
         font.family: fontFamily
         font.pointSize: 10
-        font.bold: bold
+        font.bold: true
         text: notificationText
     }
 }
