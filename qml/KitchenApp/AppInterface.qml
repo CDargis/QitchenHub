@@ -73,22 +73,44 @@ Flickable {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     Rectangle {
         color: "#002277"
         anchors.fill: parent
         z: 0
+
+        Image {
+            id: backArrow
+            source: "qrc:/images/backArrow.png"
+            anchors.left: parent.left
+            anchors.leftMargin: parent.height*0.01
+            anchors.top: parent.top
+            anchors.topMargin: parent.height*0.01
+            signal clicked
+            width: parent.width*.05
+            height: parent.width*.05
+            smooth: true
+            MouseArea {
+              anchors.fill: parent
+              onClicked: hide()
+            }
+        }
+
+        Image {
+            id: terminate
+            source: "qrc:/images/delete.png"
+            anchors.right: parent.right
+            anchors.rightMargin: parent.height*0.01
+            anchors.top: parent.top
+            anchors.topMargin: parent.height*0.01
+            signal clicked
+            width: parent.width*.05
+            height: parent.width*.05
+            smooth: true
+            MouseArea {
+              anchors.fill: parent
+              onClicked: root.destroy()
+            }
+        }
     }
 
     states: [
@@ -130,6 +152,10 @@ Flickable {
 
     function show() {
         root.state = "";
+    }
+
+    function hide() {
+        root.state = "HIDDEN";
     }
 
     // called automatically when a widget is instantiated

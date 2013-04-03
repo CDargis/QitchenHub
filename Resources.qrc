@@ -4,5 +4,7 @@
         <file>settingsWhite.png</file>
         <file>tentacle.jpeg</file>
         <file>user.png</file>
+        <file>backArrow.png</file>
+        <file>delete.png</file>
     </qresource>
 </RCC>
