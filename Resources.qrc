@@ -12,5 +12,9 @@
         <file>up-arrow-icon.png</file>
         <file>down-arrow-icon.png</file>
         <file>ex1.png</file>
+        <file>lock.png</file>
+        <file>unlock.png</file>
+        <file>green_light.png</file>
+        <file>red_light.png</file>
     </qresource>
 </RCC>
