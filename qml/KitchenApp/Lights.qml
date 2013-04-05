@@ -44,7 +44,7 @@ Rectangle {
                 Slider {
                     anchors.centerIn: parent
                     sliderWidth: parent.width * .9
-                    sliderHeight: parent.height * .5
+                    sliderHeight: parent.height * .2
                     maximum: 15
                     value: 15
                     onValueChanged: {
@@ -76,7 +76,7 @@ Rectangle {
                 Slider {
                     anchors.centerIn: parent
                     sliderWidth: parent.width * .9;
-                    sliderHeight: parent.height * .5;
+                    sliderHeight: parent.height * .2;
                     maximum: 15
                     value: 15
                     onValueChanged: {
@@ -108,7 +108,7 @@ Rectangle {
                 Slider {
                     anchors.centerIn: parent
                     sliderWidth: parent.width * .9;
-                    sliderHeight: parent.height * .5;
+                    sliderHeight: parent.height * .2;
                     maximum: 15
                     value: 15
                     onValueChanged: {
@@ -140,7 +140,7 @@ Rectangle {
                 Slider {
                     anchors.centerIn: parent
                     sliderWidth: parent.width * .9;
-                    sliderHeight: parent.height * .5;
+                    sliderHeight: parent.height * .2;
                     maximum: 15
                     value: 15
                     onValueChanged: {
@@ -172,7 +172,7 @@ Rectangle {
                 Slider {
                     anchors.centerIn: parent
                     sliderWidth: parent.width * .9;
-                    sliderHeight: parent.height * .5;
+                    sliderHeight: parent.height * .2;
                     maximum: 15
                     value: 15
                     onValueChanged: {
@@ -204,7 +204,7 @@ Rectangle {
                 Slider {
                     anchors.centerIn: parent
                     sliderWidth: parent.width * .9;
-                    sliderHeight: parent.height * .5;
+                    sliderHeight: parent.height * .2;
                     maximum: 15
                     value: 15
                     onValueChanged: {

@@ -77,9 +77,12 @@ Rectangle {
     function launch(qmlComp)
     {
         var component = Qt.createComponent(qmlComp);
-        var app = component.createObject(appStack);
+        if(component.status === Component.Ready) {
+            var app = component.createObject(appStack);
 
-        // register an app with the dock
-        app.callWidget.connect(dock.createWidget);
+            // register an app with the dock
+            app.callWidget.connect(dock.createWidget);
+        }
+        else console.log(component.errorString());
     }
 }

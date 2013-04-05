@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: slider; width: sliderWidth; height: sliderHeight;
@@ -34,14 +35,25 @@ Item {
         }
     }
 
-    Rectangle {
+    Rectangle{
         id: handle; smooth: true
-        y: 2; width: slider.width * .3; height: slider.height-4; radius: 6
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "lightgray" }
-            GradientStop { position: 1.0; color: "gray" }
+        anchors.verticalCenter: slider.verticalCenter
+        width: slider.height * 2.5; height: slider.height * 2.5;
+        radius: 50
+        border.width: 1     // Masking off the shitty blending job Qt does
+        border.color: "gray"
+        ConicalGradient {
+            anchors.fill: parent
+            angle: 0.0
+            source: handle
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "lightgray" }
+                GradientStop { position: .25; color: "gray" }
+                GradientStop { position: .5; color: "lightgray" }
+                GradientStop { position: .75; color: "gray" }
+                GradientStop { position: 1.0; color: "lightgray" }
+            }
         }
-
         MouseArea {
             id: mouse
             anchors.fill: parent; drag.target: parent
