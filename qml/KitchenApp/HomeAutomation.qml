@@ -120,6 +120,8 @@ AppInterface {
         lights.visible = temp.visible = security.visible = false;
     }
 
+    function toggleSecurity() { security.toggle() }
+
     function getSecurityStatus() { return security.getSecurityStatus() }
 
     function getTempTrend() { return temp.getTrend() }

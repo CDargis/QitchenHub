@@ -100,6 +100,12 @@ WidgetInterface {
                     font.pixelSize: parent.height * .35
                     text: "Unarmed"
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        app.toggleSecurity()
+                    }
+                }
             }
         }
     }
