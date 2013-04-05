@@ -11,27 +11,16 @@ Rectangle {
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
     id:appRect
-    width: 1280
-    height: 768
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-           Qt.quit();
-      }
-    }
+    //width: 1280
+    //height: 768
 
 
     // temporary placeholder defining the area containing buttons
     // and where apps are displayed
-    Rectangle {
+    AppGrid {
         id: appStack
         x: 0
         y: parent.height * 0.1
-        width: parent.width * 0.85
-        height: parent.height - appStack.y;
-        border.color: "#000000"
-        z: 0
 
 
         /******************** static layer **************************/
@@ -39,11 +28,10 @@ Rectangle {
         // like the template right below
         Button {
             id: button
-            anchors.centerIn: parent
             width: 125
             height: 125
             pointSize: 18
-            buttonText: "button!!"
+            buttonText: "App\nInterface\n(Temp)"
 
 
             MouseArea {
@@ -51,8 +39,44 @@ Rectangle {
                 // make sure you put the name of your qml as an argument
                 onClicked: launch("AppInterface.qml")
             }
-        }
 
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
+        Button {
+            width: 125
+            height: 125
+        }
         /************* dynamic layer *************************/
         // just an abstract placeholder but as a matter of fact
         // all apps end up right here
