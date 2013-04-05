@@ -3,7 +3,7 @@ import QtQuick 2.0
 Rectangle {
     id: mainRect
     radius: 5  // Rounded corners
-    color: "#777777"
+    color: "#FF777777"
 
     property string buttonText: ""
     property int pointSize: 14

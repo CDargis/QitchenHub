@@ -10,14 +10,11 @@ Rectangle {
     }
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
-    id:appRect
-    width: 1280
-    height: 768
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-           Qt.quit();
+           //Qt.quit();
       }
     }
 
@@ -49,7 +46,7 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 // make sure you put the name of your qml as an argument
-                onClicked: launch("AppInterface.qml")
+                onClicked: launch("HomeAutomation.qml")
             }
         }
 

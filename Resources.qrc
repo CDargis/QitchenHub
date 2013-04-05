@@ -6,5 +6,17 @@
         <file>user.png</file>
         <file>backArrow.png</file>
         <file>delete.png</file>
+        <file>lightBulb.png</file>
+        <file>security.png</file>
+        <file>Temperature-256.png</file>
+        <file>downArrow.png</file>
+        <file>upArrow.png</file>
+        <file>up-arrow-icon.png</file>
+        <file>down-arrow-icon.png</file>
+        <file>ex1.png</file>
+        <file>lock.png</file>
+        <file>unlock.png</file>
+        <file>green_light.png</file>
+        <file>red_light.png</file>
     </qresource>
 </RCC>
