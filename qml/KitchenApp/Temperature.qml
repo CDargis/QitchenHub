@@ -4,6 +4,9 @@ Rectangle {
     color: "transparent"
     border.color: "black"
     border.width: 1
+
+    property string thermostatState: "Off"
+
     Rectangle {
         id: titleRect
         anchors.horizontalCenter: parent.horizontalCenter
@@ -134,6 +137,7 @@ Rectangle {
                     onClicked: {
                         modeRect.deselectModes()
                         parent.color = "#99EEEEEE"
+                        thermostatState = "Cool"
                     }
                 }
             }
@@ -156,6 +160,7 @@ Rectangle {
                     onClicked: {
                         modeRect.deselectModes()
                         parent.color = "#99EEEEEE"
+                        thermostatState = "Heat"
                     }
                 }
             }
@@ -178,6 +183,7 @@ Rectangle {
                     onClicked: {
                         modeRect.deselectModes()
                         parent.color = "#99EEEEEE"
+                        thermostatState = "Off"
                     }
                 }
             }
@@ -186,4 +192,17 @@ Rectangle {
             }
         }
     }
+
+    // Function definitions ----------------------------------------------------
+
+    function getTrend() {
+        var current = parseInt(currentTemp.text)
+        var target = parseInt(setCurrentTemp.text)
+        if(current < target) return 1
+        else if(current > target) return -1
+        else if(current === target) return 0
+    }
+
+    function getTemp() { return currentTemp.text }
+
 }

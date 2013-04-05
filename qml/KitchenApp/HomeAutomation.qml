@@ -1,6 +1,10 @@
 import QtQuick 2.0
 
 AppInterface {
+
+    // Boom, bam, home automation widget
+    widgetSrc: "HomeAutomationWidget.qml"
+
     Component.onCompleted: {
         statusBar.setCurrentScreenTitle("Home Automation")
         security.unLock()
@@ -115,4 +119,13 @@ AppInterface {
         lightBulbRect.color = tempRect.color = securityRect.color = "transparent"
         lights.visible = temp.visible = security.visible = false;
     }
+
+    function getSecurityStatus() { return security.getSecurityStatus() }
+
+    function getTempTrend() { return temp.getTrend() }
+
+    function getThermostatState() { return temp.thermostatState }
+
+    function getTemp() { return temp.getTemp() }
+
 }

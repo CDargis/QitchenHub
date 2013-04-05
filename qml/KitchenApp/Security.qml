@@ -4,7 +4,7 @@ Rectangle {
 
     Component.onCompleted: {
         frontDoorSensor.close()
-        backDoorSensor.open()
+        backDoorSensor.close()
         basementDoorSensor.close()
         garageDoorSensor.close()
     }
@@ -37,6 +37,10 @@ Rectangle {
             id: theLock
             width: parent.height * .75; height: parent.height * .75
             anchors.horizontalCenter: parent.horizontalCenter
+            MouseArea {
+                anchors.fill: parent
+                onClicked: { toggle() }
+            }
         }
         Rectangle {
             id: armedBackground
@@ -51,10 +55,10 @@ Rectangle {
                 font.pixelSize: 20
                 anchors.centerIn: parent
             }
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: { locked ? unLock() : lock() } // Toggle like a boss
+            MouseArea {
+                anchors.fill: parent
+                onClicked: { toggle() }
+            }
         }
     }
     Rectangle {
@@ -108,7 +112,7 @@ Rectangle {
         locked = false
         theLock.source = "qrc:/images/unlock.png"
         armed.text = "Unarmed"
-        armedBackground.color = "#AA2CFF14"
+        armedBackground.color = "#AAFF0000"
     }
 
     // "Lock" the house
@@ -116,6 +120,14 @@ Rectangle {
         locked = true
         theLock.source = "qrc:/images/lock.png"
         armed.text = "Armed"
-        armedBackground.color = "#AAFF0000"
+        armedBackground.color = "#AA2CFF14"
     }
+
+    function toggle() {
+        if(locked)
+            unLock()
+        else lock()
+    }
+
+    function getSecurityStatus() { return locked }
 }
