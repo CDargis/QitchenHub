@@ -12,6 +12,7 @@ AppInterface {
 
     anchors.fill: parent
     width: parent.width; height: parent.height
+
     Rectangle {
         anchors.fill: parent
         width: parent.width; height: parent.height

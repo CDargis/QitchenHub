@@ -3,7 +3,7 @@ import QtQuick 2.0
 Rectangle {
     id: mainRect
     width: parent.width
-    height: parent.height * .1    // Only take up 10% of space
+    height: parent.height * .065
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
     visible: true

@@ -12,20 +12,11 @@ Rectangle {
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-           //Qt.quit();
-      }
-    }
-
-
     // temporary placeholder defining the area containing buttons
     // and where apps are displayed
     Rectangle {
         id: appStack
-        x: 0
-        y: parent.height * 0.1
+        anchors.top: statusBar.bottom
         width: parent.width * 0.85
         height: parent.height - appStack.y;
         border.color: "#000000"
@@ -69,7 +60,7 @@ Rectangle {
         id: statusBar
         usrName: "Chris"
         usrPicSource: "qrc:/images/user.png"
-        currentScreenTitle: "Title of Current Screen"
+        currentScreenTitle: "QitchenHub"
     }
 
     //************* launch an app ******************/
