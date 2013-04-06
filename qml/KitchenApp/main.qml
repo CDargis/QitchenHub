@@ -9,8 +9,10 @@ Rectangle {
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
     }
+
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
+    signal changeLangSignal(string lang)   // Signal for changing the language
 
     // temporary placeholder defining the area containing buttons
     // and where apps are displayed
@@ -32,8 +34,7 @@ Rectangle {
             width: 125
             height: 125
             pointSize: 18
-            buttonText: "button!!"
-
+            buttonText: qsTr("button") + tr.emptyString
 
             MouseArea {
                 anchors.fill: parent
@@ -46,6 +47,12 @@ Rectangle {
             anchors.left: button.right
             anchors.leftMargin: 25
             anchors.verticalCenter: button.verticalCenter
+            isOn: false
+            onIsOnChanged: {
+                if(isOn)
+                    tr.changeTranslation("pl");
+                else tr.changeTranslation("en");
+            }
         }
 
         /************* dynamic layer *************************/

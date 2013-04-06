@@ -25,7 +25,7 @@ Rectangle {
             font.family: fontFamily
             font.pointSize: 30
             color: "#36C60F"
-            text: "Home Security"
+            text: qsTr("Home Security")
         }
     }
     Rectangle {
@@ -75,7 +75,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 20
-            sensorTitle: "Front Door"
+            sensorTitle: qsTr("Front Door")
         }
         Sensor {
             id: backDoorSensor
@@ -84,7 +84,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: frontDoorSensor.bottom
             anchors.topMargin: 10
-            sensorTitle: "Back Door"
+            sensorTitle: qsTr("Back Door")
         }
         Sensor {
             id: basementDoorSensor
@@ -93,7 +93,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: backDoorSensor.bottom
             anchors.topMargin: 10
-            sensorTitle: "Basement Door"
+            sensorTitle: qsTr("Basement Door")
         }
         Sensor {
             id: garageDoorSensor
@@ -102,7 +102,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: basementDoorSensor.bottom
             anchors.topMargin: 10
-            sensorTitle: "Garage Door"
+            sensorTitle: qsTr("Garage Door")
         }
     }
 
@@ -112,7 +112,7 @@ Rectangle {
     function unLock() {
         locked = false
         theLock.source = "qrc:/images/unlock.png"
-        armed.text = "Unarmed"
+        armed.text = qsTr("Unarmed")
         armedBackground.color = "#AAFF0000"
     }
 
@@ -120,7 +120,7 @@ Rectangle {
     function lock() {
         locked = true
         theLock.source = "qrc:/images/lock.png"
-        armed.text = "Armed"
+        armed.text = qsTr("Armed")
         armedBackground.color = "#AA2CFF14"
     }
 

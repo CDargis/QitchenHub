@@ -16,7 +16,7 @@ Rectangle {
             font.family: fontFamily
             font.pointSize: 30
             color: "#36C60F"
-            text: "Lighting"
+            text: qsTr("Lighting")
         }
     }
     Column {
@@ -36,7 +36,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: "Kitchen"
+                    text: qsTr("Kitchen")
                 }
             }
             Rectangle {
@@ -68,7 +68,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: "Living Room"
+                    text: qsTr("Living Room")
                 }
             }
             Rectangle {
@@ -100,7 +100,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: "Family Room"
+                    text: qsTr("Family Room")
                 }
             }
             Rectangle {
@@ -132,7 +132,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: "Front Hallway"
+                    text: qsTr("Front Hallway")
                 }
             }
             Rectangle {
@@ -164,7 +164,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: "Office"
+                    text: qsTr("Office")
                 }
             }
             Rectangle {
@@ -196,7 +196,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: "Garage"
+                    text: qsTr("Garage")
                 }
             }
             Rectangle {
