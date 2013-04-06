@@ -77,7 +77,7 @@ Rectangle {
             id: notificationRect
             visible: false
             width: parent.width
-            height: parent.height * 2
+            height: parent.height * 2.5
             anchors.top: userInfo.bottom
             color: picBackground.color
             border.width: 1
