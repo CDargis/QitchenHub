@@ -42,6 +42,12 @@ Rectangle {
             }
         }
 
+        ToggleSwitch {
+            anchors.left: button.right
+            anchors.leftMargin: 25
+            anchors.verticalCenter: button.verticalCenter
+        }
+
         /************* dynamic layer *************************/
         // just an abstract placeholder but as a matter of fact
         // all apps end up right here
