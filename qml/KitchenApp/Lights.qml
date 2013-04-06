@@ -15,6 +15,7 @@ Rectangle {
             anchors.centerIn: parent
             font.family: fontFamily
             font.pointSize: 30
+            color: "#36C60F"
             text: "Lighting"
         }
     }

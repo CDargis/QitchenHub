@@ -9,14 +9,15 @@ AppInterface {
         statusBar.setCurrentScreenTitle("Home Automation")
         security.unLock()
     }
+
     anchors.fill: parent
     width: parent.width; height: parent.height
     Rectangle {
         anchors.fill: parent
         width: parent.width; height: parent.height
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#18C4B3" }
-            GradientStop { position: 1.0; color: "#6E6E6E" }
+            GradientStop { position: 0.0; color: "#7b7b85" }
+            GradientStop { position: 1.0; color: "#26242a" }
         }
         Rectangle {
             id: menuRect
@@ -26,12 +27,14 @@ AppInterface {
             border.width: 1
             color: "transparent"
             property int iconSide: width * .60
+            property string selectColor: "#44DDDDDD"
+
             Rectangle {
                 id: lightBulbRect
                 anchors.top: parent.top
                 width: parent.width; height: parent.height * (1/3)
                 radius: 20
-                color: "#99EEEEEE"
+                color: menuRect.selectColor
                 Image {
                     height: menuRect.iconSide
                     width: menuRect.iconSide
@@ -42,7 +45,7 @@ AppInterface {
                     anchors.fill: parent
                     onClicked: {
                         deselectMenu()
-                        parent.color = "#99EEEEEE"
+                        parent.color = menuRect.selectColor
                         lights.visible = true
                     }
                 }
@@ -63,7 +66,7 @@ AppInterface {
                     anchors.fill: parent
                     onClicked: {
                         deselectMenu()
-                        parent.color = "#99EEEEEE"
+                        parent.color = menuRect.selectColor
                         temp.visible = true;
                     }
                 }
@@ -84,7 +87,7 @@ AppInterface {
                     anchors.fill: parent
                     onClicked: {
                         deselectMenu()
-                        parent.color = "#99EEEEEE"
+                        parent.color = menuRect.selectColor
                         security.visible = true
                     }
                 }

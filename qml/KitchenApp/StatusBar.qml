@@ -4,10 +4,14 @@ Rectangle {
     id: mainRect
     width: parent.width
     height: parent.height * .1    // Only take up 10% of space
-    color: "#44AAAA"
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
     visible: true
+
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "#7b7b85" }
+        GradientStop { position: 1.0; color: "#26242a" }
+    }
 
     property string usrName: ""
     property string usrPicSource: ""
@@ -48,7 +52,7 @@ Rectangle {
                     onClicked: {
                         if(notificationRect.visible === false) {
                             notificationRect.visible = true
-                            picBackground.color = "#CC777777"
+                            picBackground.color = "#CC666666"
                         }
                         else {
                             notificationRect.visible = false
@@ -66,6 +70,7 @@ Rectangle {
             font.family: fontFamily
             font.pointSize: 14
             text: usrName
+            color: "#36c60f"
         }
         // Notification Rectangle
         Rectangle {
@@ -88,11 +93,10 @@ Rectangle {
                 verticalLayoutDirection: ListView.BottomToTop
                 clip: true
                 model: notificationModel
-             //   spacing: 5
                 delegate: NotificationItemDelegate {
                     notificationText: title + ": " + message;
                     functor: func
-                    ListView.onAdd: picBackground.color = "orange"
+                    ListView.onAdd: picBackground.color = "#36C60F"
                 }
             }
             onVisibleChanged: {
@@ -116,6 +120,7 @@ Rectangle {
             font.family: fontFamily
             font.pointSize: 20
             text: currentScreenTitle
+            color: "#36c60f"
         }
     }
 
@@ -134,6 +139,7 @@ Rectangle {
             anchors.rightMargin: 20
             font.family: fontFamily
             font.pointSize: 14
+            color: "#36c60f"
         }
         Image {
             id: settingsImg

@@ -5,6 +5,7 @@ Rectangle {
     Component.onCompleted: {
         var func1 = "function doIt() {console.log('hey from first notification')}"
         var func2 = "function doIt() {console.log('hey from second notification')}"
+        statusBar.setCurrentScreenTitle("Qitchen Hub")
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
     }
@@ -63,7 +64,6 @@ Rectangle {
         y: parent.height * 0.1
         width: parent.width - dock.x
         height: parent.height - dock.y
-
     }
     StatusBar {
         id: statusBar

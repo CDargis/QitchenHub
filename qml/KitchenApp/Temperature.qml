@@ -16,6 +16,7 @@ Rectangle {
             anchors.centerIn: parent
             font.family: fontFamily
             font.pointSize: 30
+            color: "#36C60F"
             text: "Climate Control"
         }
     }
@@ -30,6 +31,14 @@ Rectangle {
             border.color: "black"
             border.width: 1
             color: "transparent"
+            Image {
+                id: currentTrendImage
+                width: parent.width * .05; height: parent.width * .05
+                anchors.right: currentTemp.left
+                anchors.rightMargin: 100
+                anchors.verticalCenter: currentTemp.verticalCenter
+            }
+
             Text {
                 id: currentTemp
                 anchors.centerIn: parent
@@ -88,6 +97,15 @@ Rectangle {
                 font.pixelSize: 40
                 font.family: fontFamily
                 anchors.centerIn: parent
+                onTextChanged: {
+                    var trend = getTrend()
+                    if(trend === 1)
+                        currentTrendImage.source = "qrc:/images/upArrow.png"
+                    else if(trend === -1)
+                        currentTrendImage.source = "qrc:/images/downArrow.png"
+                    else
+                        currentTrendImage.source = ""
+                }
             }
             Image {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -120,6 +138,7 @@ Rectangle {
             height: parent.height; width: parent.width /2
             color: "transparent"
             anchors.left: tempSetRect.right
+            property string selectColor: "#44DDDDDD"
             Rectangle {
                 id: coolRect
                 height: parent.height * (1/4); width: parent.width * (1/4)
@@ -130,13 +149,14 @@ Rectangle {
                     font.family: fontFamily
                     font.pixelSize: 30
                     text: "Cool"
+                    color: "#36C60F"
                     anchors.centerIn: parent
                 }
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
                         modeRect.deselectModes()
-                        parent.color = "#99EEEEEE"
+                        parent.color = modeRect.selectColor
                         thermostatState = "Cool"
                     }
                 }
@@ -153,13 +173,14 @@ Rectangle {
                     font.family: fontFamily
                     font.pixelSize: 30
                     text: "Heat"
+                    color: "#36C60F"
                     anchors.centerIn: parent
                 }
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
                         modeRect.deselectModes()
-                        parent.color = "#99EEEEEE"
+                        parent.color = modeRect.selectColor
                         thermostatState = "Heat"
                     }
                 }
@@ -171,18 +192,19 @@ Rectangle {
                 anchors.top: coolRect.bottom
                 anchors.topMargin: 15
                 radius: 20
-                color: "#99EEEEEE"
+                color: modeRect.selectColor
                 Text {
                     font.family: fontFamily
                     font.pixelSize: 30
                     text: "Off"
+                    color: "#36C60F"
                     anchors.centerIn: parent
                 }
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
                         modeRect.deselectModes()
-                        parent.color = "#99EEEEEE"
+                        parent.color = modeRect.selectColor
                         thermostatState = "Off"
                     }
                 }
