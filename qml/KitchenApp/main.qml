@@ -10,9 +10,19 @@ Rectangle {
     }
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
+<<<<<<< HEAD
     id:appRect
     //width: 1280
     //height: 768
+=======
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+           //Qt.quit();
+      }
+    }
+>>>>>>> master
 
 
     // temporary placeholder defining the area containing buttons
@@ -37,7 +47,7 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 // make sure you put the name of your qml as an argument
-                onClicked: launch("AppInterface.qml")
+                onClicked: launch("HomeAutomation.qml")
             }
 
         }
@@ -104,9 +114,12 @@ Rectangle {
     function launch(qmlComp)
     {
         var component = Qt.createComponent(qmlComp);
-        var app = component.createObject(appStack);
+        if(component.status === Component.Ready) {
+            var app = component.createObject(appStack);
 
-        // register an app with the dock
-        app.callWidget.connect(dock.createWidget);
+            // register an app with the dock
+            app.callWidget.connect(dock.createWidget);
+        }
+        else console.log(component.errorString());
     }
 }

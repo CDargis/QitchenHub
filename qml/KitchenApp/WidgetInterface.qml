@@ -17,7 +17,8 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: "#007722"
+        //color: "#007722"
+        color: "transparent"
     }
 
     MouseArea {
