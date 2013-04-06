@@ -24,3 +24,5 @@ OTHER_FILES += \
 
 RESOURCES += \
     Resources.qrc
+
+TRANSLATIONS = qitchenapp_pl.ts
