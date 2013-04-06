@@ -12,8 +12,12 @@ Rectangle {
     Text {
         id: bText
         anchors.centerIn: parent     // Center the text in the button
+        horizontalAlignment: Text.AlignHCenter
+        width: parent.width
         text: buttonText
         font.pointSize: pointSize
+        wrapMode: Text.WordWrap
+
     }
     Image {
         id: icon
@@ -39,4 +43,5 @@ Rectangle {
     function setPointSize(ps) {
         pointSize = ps
     }
+
 }
