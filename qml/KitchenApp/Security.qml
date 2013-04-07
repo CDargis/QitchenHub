@@ -25,7 +25,7 @@ Rectangle {
             font.family: fontFamily
             font.pointSize: 30
             color: "#36C60F"
-            text: qsTr("Home Security")
+            text: qsTr("Home Security") + tr.emptyString
         }
     }
     Rectangle {
@@ -55,6 +55,14 @@ Rectangle {
                 font.family: fontFamily
                 font.pixelSize: 20
                 anchors.centerIn: parent
+                text: qsTr("Armed") + tr.emptyString
+            }
+            Text {
+                id: unarmed
+                font.family: fontFamily
+                font.pixelSize: 20
+                anchors.centerIn: parent
+                text: qsTr("Unarmed") + tr.emptyString
             }
             MouseArea {
                 anchors.fill: parent
@@ -75,7 +83,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 20
-            sensorTitle: qsTr("Front Door")
+            sensorTitle: qsTr("Front Door") + tr.emptyString
         }
         Sensor {
             id: backDoorSensor
@@ -84,7 +92,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: frontDoorSensor.bottom
             anchors.topMargin: 10
-            sensorTitle: qsTr("Back Door")
+            sensorTitle: qsTr("Back Door") + tr.emptyString
         }
         Sensor {
             id: basementDoorSensor
@@ -93,7 +101,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: backDoorSensor.bottom
             anchors.topMargin: 10
-            sensorTitle: qsTr("Basement Door")
+            sensorTitle: qsTr("Basement Door") + tr.emptyString
         }
         Sensor {
             id: garageDoorSensor
@@ -102,7 +110,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: basementDoorSensor.bottom
             anchors.topMargin: 10
-            sensorTitle: qsTr("Garage Door")
+            sensorTitle: qsTr("Garage Door") + tr.emptyString
         }
     }
 
@@ -112,7 +120,8 @@ Rectangle {
     function unLock() {
         locked = false
         theLock.source = "qrc:/images/unlock.png"
-        armed.text = qsTr("Unarmed")
+        armed.visible = false
+        unarmed.visible = true
         armedBackground.color = "#AAFF0000"
     }
 
@@ -120,7 +129,8 @@ Rectangle {
     function lock() {
         locked = true
         theLock.source = "qrc:/images/lock.png"
-        armed.text = qsTr("Armed")
+        armed.visible = true
+        unarmed.visible = false
         armedBackground.color = "#AA2CFF14"
     }
 

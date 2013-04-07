@@ -29,3 +29,5 @@ RESOURCES += \
 
 HEADERS += \
     translationhandler.h
+
+TRANSLATIONS = lang_pl.ts

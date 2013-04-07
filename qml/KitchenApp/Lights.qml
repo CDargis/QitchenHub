@@ -16,7 +16,7 @@ Rectangle {
             font.family: fontFamily
             font.pointSize: 30
             color: "#36C60F"
-            text: qsTr("Lighting")
+            text: qsTr("Lighting") + tr.emptyString
         }
     }
     Column {
@@ -36,7 +36,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: qsTr("Kitchen")
+                    text: qsTr("Kitchen") + tr.emptyString
                 }
             }
             Rectangle {
@@ -68,7 +68,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: qsTr("Living Room")
+                    text: qsTr("Living Room") + tr.emptyString
                 }
             }
             Rectangle {
@@ -100,7 +100,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: qsTr("Family Room")
+                    text: qsTr("Family Room") + tr.emptyString
                 }
             }
             Rectangle {
@@ -132,7 +132,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: qsTr("Front Hallway")
+                    text: qsTr("Front Hallway") + tr.emptyString
                 }
             }
             Rectangle {
@@ -164,7 +164,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: qsTr("Office")
+                    text: qsTr("Office") + tr.emptyString
                 }
             }
             Rectangle {
@@ -196,7 +196,7 @@ Rectangle {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pointSize: 14
-                    text: qsTr("Garage")
+                    text: qsTr("Garage") + tr.emptyString
                 }
             }
             Rectangle {

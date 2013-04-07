@@ -6,7 +6,7 @@ AppInterface {
     widgetSrc: "HomeAutomationWidget.qml"
 
     Component.onCompleted: {
-        statusBar.setCurrentScreenTitle(qsTr("Home Automation"))
+        statusBar.setCurrentScreenTitle(qsTr("Home Automation") + tr.emptyString)
         security.unLock()
     }
 
