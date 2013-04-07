@@ -31,8 +31,6 @@ Rectangle {
         Button {
             id: button
             anchors.centerIn: parent
-            width: 125
-            height: 125
             pointSize: 18
             buttonText: qsTr("button") + tr.emptyString
 
