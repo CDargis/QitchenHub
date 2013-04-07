@@ -31,6 +31,8 @@ Flickable {
 
 
     property Item indicator
+    property Item hint
+
 
     MouseArea {
         id: dragArea
@@ -44,6 +46,7 @@ Flickable {
 
         onPressAndHold: {
             root.interactive = true;
+            putHint(mouseX, mouseY);
         }
 
         onReleased: {
@@ -187,5 +190,18 @@ Flickable {
     function dropIndication() {
         if (indicator != null)
             indicator.destroy();
+    }
+
+    function putHint(x, y) {
+        var component = Qt.createComponent("AppHint.qml");
+
+        while (component.status === Component.Loading);
+
+        hint = component.createObject(root);
+
+        hint.x = x;
+        hint.y = y;
+
+
     }
 }

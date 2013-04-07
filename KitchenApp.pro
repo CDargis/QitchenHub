@@ -21,7 +21,9 @@ qtcAddDeployment()
 
 OTHER_FILES += \
     qml/KitchenApp/AppInterface.qml \
-    qml/KitchenApp/WidgetInterface.qml
+    qml/KitchenApp/WidgetInterface.qml \
+    qml/KitchenApp/Indicator/Indicator.qml \
+    qml/KitchenApp/Indicator/AppHint.qml
 
 RESOURCES += \
     Resources.qrc
@@ -32,3 +34,5 @@ HEADERS += \
     voice.h
 
 QT += qml quick
+
+SUBDIRS += qml/Kitchen/Indicator
