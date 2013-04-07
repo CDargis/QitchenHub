@@ -3,7 +3,7 @@ import QtQuick 2.0
 Rectangle {
     id: notificationDelegate
     width: parent.width
-    height: img.height + sirLine.height + 6
+    height: img.height + sirLine.height + 10
     anchors.left: parent.left
     color: "transparent"
     property string notificationText: ""
@@ -30,7 +30,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 2
-        width: parent.width * (1/22); height: parent.width * (1/22)
+        width: parent.width * (1/25); height: parent.width * (1/25)
         source: "qrc:/images/ex1.png"
     }
 

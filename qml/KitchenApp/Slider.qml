@@ -40,7 +40,7 @@ Item {
         anchors.verticalCenter: slider.verticalCenter
         width: slider.height * 2.5; height: slider.height * 2.5;
         radius: 50
-        border.width: 1     // Masking off the shitty blending job Qt does
+        border.width: 1     // Masking off the bad blending job Qt does
         border.color: "gray"
         ConicalGradient {
             anchors.fill: parent

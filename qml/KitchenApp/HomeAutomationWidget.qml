@@ -46,7 +46,7 @@ WidgetInterface {
                 anchors.horizontalCenter: temp.horizontalCenter
                 font.family: fontFamily
                 font.pixelSize: temp.font.pixelSize * (1/7)
-                text: "Cool"
+                text: qsTr("Cool") + tr.emptyString
             }
             Text {
                 id: heat
@@ -55,7 +55,7 @@ WidgetInterface {
                 anchors.rightMargin: 10
                 font.family: fontFamily
                 font.pixelSize: temp.font.pixelSize * (1/7)
-                text: "Heat"
+                text: qsTr("Heat") + tr.emptyString
             }
             Text {
                 id: off
@@ -64,7 +64,7 @@ WidgetInterface {
                 anchors.leftMargin: 10
                 font.family: fontFamily
                 font.pixelSize: temp.font.pixelSize * (1/7)
-                text: "Off"
+                text: qsTr("Off") + tr.emptyString
             }
             // Trend image
             Image {
@@ -89,7 +89,7 @@ WidgetInterface {
             color: "transparent"
             Rectangle {
                 id: securityStatusRect
-                width: parent.width * .55; height: parent.height * .5
+                width: parent.width * .65; height: parent.height * .5
                 anchors.centerIn: parent
                 radius: 10
                 color: "transparent"
@@ -98,7 +98,7 @@ WidgetInterface {
                     anchors.centerIn: parent
                     font.family: fontFamily
                     font.pixelSize: parent.height * .35
-                    text: "Unarmed"
+                    text: qsTr("Unarmed") + tr.emptyString
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -146,11 +146,11 @@ WidgetInterface {
         // If locked
         if(app.getSecurityStatus() === true) {
             securityStatusRect.color = "#AA2CFF14"
-            seucrityStatusText.text = "Locked"
+            seucrityStatusText.text = qsTr("Locked") + tr.emptyString
         }
         else {
             securityStatusRect.color = "#AAFF0000"
-            seucrityStatusText.text = "Unlocked"
+            seucrityStatusText.text = qsTr("Unlocked") + tr.emptyString
         }
     }
 }

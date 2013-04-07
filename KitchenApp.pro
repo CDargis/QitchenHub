@@ -12,7 +12,9 @@ QML_IMPORT_PATH =
 # MOBILITY +=
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    voice.cpp \
+    translationhandler.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
@@ -20,7 +22,20 @@ qtcAddDeployment()
 
 OTHER_FILES += \
     qml/KitchenApp/AppInterface.qml \
-    qml/KitchenApp/WidgetInterface.qml
+    qml/KitchenApp/WidgetInterface.qml \
+    qml/KitchenApp/Indicator/Indicator.qml \
+    qml/KitchenApp/Indicator/AppHint.qml
 
 RESOURCES += \
-    Resources.qrc
+    Resources.qrc \
+    Languages.qrc
+
+TRANSLATIONS = lang_pl.ts
+
+HEADERS += \
+    voice.h \
+    translationhandler.h
+
+QT += qml quick
+
+SUBDIRS += qml/Kitchen/Indicator
