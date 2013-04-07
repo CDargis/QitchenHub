@@ -10,6 +10,39 @@
     </message>
 </context>
 <context>
+    <name>HomeAutomationWidget</name>
+    <message>
+        <location filename="../qml/KitchenApp/HomeAutomationWidget.qml" line="49"/>
+        <source>Cool</source>
+        <translation type="unfinished">Chłodny</translation>
+    </message>
+    <message>
+        <location filename="../qml/KitchenApp/HomeAutomationWidget.qml" line="58"/>
+        <source>Heat</source>
+        <translation type="unfinished">Ciepło</translation>
+    </message>
+    <message>
+        <location filename="../qml/KitchenApp/HomeAutomationWidget.qml" line="67"/>
+        <source>Off</source>
+        <translation type="unfinished">Poza</translation>
+    </message>
+    <message>
+        <location filename="../qml/KitchenApp/HomeAutomationWidget.qml" line="101"/>
+        <source>Unarmed</source>
+        <translation type="unfinished">Bezbronny</translation>
+    </message>
+    <message>
+        <location filename="../qml/KitchenApp/HomeAutomationWidget.qml" line="149"/>
+        <source>Locked</source>
+        <translation type="unfinished">Zamknięty</translation>
+    </message>
+    <message>
+        <location filename="../qml/KitchenApp/HomeAutomationWidget.qml" line="153"/>
+        <source>Unlocked</source>
+        <translation type="unfinished">Odblokowany</translation>
+    </message>
+</context>
+<context>
     <name>Lights</name>
     <message>
         <location filename="../qml/KitchenApp/Lights.qml" line="19"/>
