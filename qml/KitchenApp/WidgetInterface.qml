@@ -10,6 +10,8 @@ Item {
     id: root
     width: parent.width
 
+    property Item indicator
+
 
     // default height
     // you should readjust it if needed in your qml subcomponent
@@ -24,16 +26,45 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
+
+        onPressed: {
+            putIndication(mouseX, mouseY);
+        }
 
         onPressAndHold: {
             app.show();
             root.parent.destroy();
         }
 
+        onReleased: {
+            dropIndication();
+        }
+
+        onExited: {
+            dropIndication();
+        }
+
+        onCanceled: {
+            dropIndication();
+        }
+
     }
 
     Component.onCompleted: {
         app.setWidgetRef(root);
+    }
+
+    function putIndication(x, y) {
+        var component = Qt.createComponent("Indicator.qml");
+        indicator = component.createObject(root);
+        indicator.x = x - indicator.width * 0.5;
+        indicator.y = y - indicator.height * 0.5;
+    }
+
+    function dropIndication() {
+        if (indicator != null)
+            indicator.destroy();
     }
 
 }

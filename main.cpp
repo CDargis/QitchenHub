@@ -12,7 +12,9 @@ int main(int argc, char *argv[])
     //QtQuick2ApplicationViewer viewer;
     QQuickView view;
     view.setSource(QUrl("qml/KitchenApp/main.qml"));
-    view.show();
+    view.setResizeMode(QQuickView::SizeRootObjectToView);
+    view.showFullScreen();
+    //view.show();
 
     return app.exec();
 }

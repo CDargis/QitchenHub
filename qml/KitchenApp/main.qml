@@ -3,9 +3,6 @@ import TTSVoice 1.0
 
 Rectangle {
 
-    width: 1360
-    height: 768
-
     Component.onCompleted: {
         var func1 = "function doIt() {console.log('hey from first notification')}"
         var func2 = "function doIt() {console.log('hey from second notification')}"
@@ -48,14 +45,17 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("HomeAutomation.qml")
+                    onClicked: {
+                        speaker.say("app open");
+                        launch("HomeAutomation.qml");
+                    }
                 }
 
             }
-            Button {
-                width: 125
-                height: 125
+            Indicator {
+
             }
+
             Button {
                 width: 125
                 height: 125

@@ -1,24 +1,32 @@
 #include "voice.h"
 
+#include <QDebug>
+
 CVoice::CVoice(QObject *parent) :
     QObject(parent)
 {
-    m_proc = new QProcess();
-    connect(m_proc, SIGNAL(finished(int)), this, SLOT(cleanUp()));
+    m_echo.setStandardOutputProcess(&m_festival);
+}
+
+CVoice::~CVoice()
+{
+    m_festival.close();
 }
 
 void CVoice::say(const QString& sentence)
 {
+    if (m_echo.state() == QProcess::Running)
+        m_echo.close();
+    if (m_festival.state() == QProcess::Running)
+        m_festival.close();
 
-    QString program("/bin/sh");
-    QStringList args;
+    QStringList argsEcho;
+    argsEcho << "\"" + sentence + "\"";
 
-    //args << "\"" + sentence + "\"" << "|" << "festival" << "--tts";
-    args << "-c" << "echo \"" + sentence + "\" | festival --tts";
+    QStringList argsFest;
+    argsFest << "--tts";
 
-    m_proc->start(program, args);
-}
+    m_festival.start(QString("festival"), argsFest);
+    m_echo.start(QString("echo"), argsEcho);
 
-void CVoice::cleanUp()
-{
 }

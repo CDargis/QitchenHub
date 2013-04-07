@@ -29,22 +29,32 @@ Flickable {
     property bool moving: false
     property variant state
 
+
+    property Item indicator
+
     MouseArea {
         id: dragArea
         anchors.fill: parent
         propagateComposedEvents: true
         drag.axis: Drag.XAxis
+
+        onPressed: {
+            putIndication(mouseX, mouseY);
+        }
+
         onPressAndHold: {
             root.interactive = true;
         }
 
         onReleased: {
             root.interactive = false;
+            dropIndication();
         }
     }
 
     onFlickStarted: {
         console.debug("flickstarted");
+        dropIndication();
     }
 
     onFlickEnded: {
@@ -62,6 +72,7 @@ Flickable {
         console.debug("movestarted");
         console.debug(root.flickDeceleration);
         moving = true;
+        dropIndication();
     }
 
     onMovementEnded: {
@@ -70,46 +81,45 @@ Flickable {
 
     boundsBehavior: Flickable.DragOverBounds
 
-
-
-
     Rectangle {
         color: "#002277"
         anchors.fill: parent
         z: 0
+    }
 
-        Image {
-            id: backArrow
-            source: "qrc:/images/backArrow.png"
-            anchors.left: parent.left
-            anchors.leftMargin: parent.height*0.01
-            anchors.top: parent.top
-            anchors.topMargin: parent.height*0.01
-            signal clicked
-            width: parent.width*.05
-            height: parent.width*.05
-            smooth: true
-            MouseArea {
-              anchors.fill: parent
-              onClicked: hide()
-            }
+    Image {
+        id: backArrow
+        source: "qrc:/images/backArrow.png"
+        anchors.left: parent.left
+        anchors.leftMargin: parent.height*0.01
+        anchors.top: parent.top
+        anchors.topMargin: parent.height*0.01
+        z: 100
+        signal clicked
+        width: parent.width*.05
+        height: parent.width*.05
+        smooth: true
+        MouseArea {
+          anchors.fill: parent
+          onClicked: hide()
         }
+    }
 
-        Image {
-            id: terminate
-            source: "qrc:/images/delete.png"
-            anchors.right: parent.right
-            anchors.rightMargin: parent.height*0.01
-            anchors.top: parent.top
-            anchors.topMargin: parent.height*0.01
-            signal clicked
-            width: parent.width*.05
-            height: parent.width*.05
-            smooth: true
-            MouseArea {
-              anchors.fill: parent
-              onClicked: root.destroy()
-            }
+    Image {
+        id: terminate
+        source: "qrc:/images/delete.png"
+        anchors.right: parent.right
+        anchors.rightMargin: parent.height*0.01
+        anchors.top: parent.top
+        anchors.topMargin: parent.height*0.01
+        z: 100
+        signal clicked
+        width: parent.width*.05
+        height: parent.width*.05
+        smooth: true
+        MouseArea {
+          anchors.fill: parent
+          onClicked: root.destroy()
         }
     }
 
@@ -165,5 +175,17 @@ Flickable {
 
     function test() {
         console.debug("App here!");
+    }
+
+    function putIndication(x, y) {
+        var component = Qt.createComponent("Indicator.qml");
+        indicator = component.createObject(root);
+        indicator.x = x - indicator.width * 0.5;
+        indicator.y = y - indicator.height * 0.5;
+    }
+
+    function dropIndication() {
+        if (indicator != null)
+            indicator.destroy();
     }
 }

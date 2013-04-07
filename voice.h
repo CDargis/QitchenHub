@@ -9,6 +9,7 @@ class CVoice : public QObject
     Q_OBJECT
 public:
     explicit CVoice(QObject *parent = 0);
+    ~CVoice();
 
     void registerTypes(const char *uri);
 
@@ -18,12 +19,9 @@ signals:
     
 public slots:
 
-private slots:
-    void cleanUp();
-
-
 private:
-    QProcess* m_proc;
+    QProcess m_festival;
+    QProcess m_echo;
     
 };
 
