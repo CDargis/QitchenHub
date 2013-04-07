@@ -17,7 +17,7 @@ Rectangle {
             font.family: fontFamily
             font.pointSize: 30
             color: "#36C60F"
-            text: "Climate Control"
+            text: qsTr("Climate Control") + tr.emptyString
         }
     }
     // Get out of using columns and rows, the positioners suck
@@ -141,14 +141,14 @@ Rectangle {
             property string selectColor: "#44DDDDDD"
             Rectangle {
                 id: coolRect
-                height: parent.height * (1/4); width: parent.width * (1/4)
+                height: parent.height * (1/4); width: parent.width * (1/4) + 10
                 anchors.centerIn: parent
                 radius: 20
                 color: "transparent"
                 Text {
                     font.family: fontFamily
                     font.pixelSize: 30
-                    text: "Cool"
+                    text: qsTr("Cool") + tr.emptyString
                     color: "#36C60F"
                     anchors.centerIn: parent
                 }
@@ -163,7 +163,7 @@ Rectangle {
             }
             Rectangle {
                 id: heatRect
-                height: parent.height * (1/4); width: parent.width * (1/4)
+                height: parent.height * (1/4); width: parent.width * (1/4) + 10
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: coolRect.top
                 anchors.bottomMargin: 15
@@ -172,7 +172,7 @@ Rectangle {
                 Text {
                     font.family: fontFamily
                     font.pixelSize: 30
-                    text: "Heat"
+                    text: qsTr("Heat") + tr.emptyString
                     color: "#36C60F"
                     anchors.centerIn: parent
                 }
@@ -187,7 +187,7 @@ Rectangle {
             }
             Rectangle {
                 id: offRect
-                height: parent.height * (1/4); width: parent.width * (1/4)
+                height: parent.height * (1/4); width: parent.width * (1/4) + 10
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: coolRect.bottom
                 anchors.topMargin: 15
@@ -196,7 +196,7 @@ Rectangle {
                 Text {
                     font.family: fontFamily
                     font.pixelSize: 30
-                    text: "Off"
+                    text: qsTr("Off") + tr.emptyString
                     color: "#36C60F"
                     anchors.centerIn: parent
                 }
@@ -226,5 +226,4 @@ Rectangle {
     }
 
     function getTemp() { return currentTemp.text }
-
 }
