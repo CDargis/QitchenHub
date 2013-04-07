@@ -18,6 +18,7 @@
         <file>unlock.png</file>
         <file>green_light.png</file>
         <file>red_light.png</file>
-        <file>arrow.png</file>
+        <file>arrowl.png</file>
+        <file>arrowr.png</file>
     </qresource>
 </RCC>

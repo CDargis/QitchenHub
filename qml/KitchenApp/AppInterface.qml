@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "Indicator"
 
 
 /***********************************************************************
@@ -29,7 +30,8 @@ Flickable {
     property bool moving: false
     property variant state
 
-
+    // consider the to be hidden
+    // for interior use only
     property Item indicator
     property Item hint
 
@@ -37,7 +39,7 @@ Flickable {
     MouseArea {
         id: dragArea
         anchors.fill: parent
-        propagateComposedEvents: true
+        //propagateComposedEvents: true
         drag.axis: Drag.XAxis
 
         onPressed: {
@@ -56,30 +58,32 @@ Flickable {
     }
 
     onFlickStarted: {
-        console.debug("flickstarted");
         dropIndication();
     }
 
     onFlickEnded: {
-        console.debug("flickended");
-        callWidget(widgetSrc, root);
-        console.debug(root.state);
-        root.state = "HIDDEN";
-
-        console.debug(root.state);
-        console.debug(root.opacity);
-        root.interactive = false;
     }
 
     onMovementStarted: {
-        console.debug("movestarted");
-        console.debug(root.flickDeceleration);
         moving = true;
         dropIndication();
     }
 
     onMovementEnded: {
-        console.debug("moveended");
+    }
+
+    onDragEnded: {
+        // if flickable move more than 200px to the right
+        if (root.contentX < -200) {
+            callWidget(widgetSrc, root);
+            root.state = "HIDDEN";
+            root.interactive = false;
+        }
+        // else more than 200px to the left
+        else if (root.contentX > 200)
+        {
+            root.destroy();
+        }
     }
 
     boundsBehavior: Flickable.DragOverBounds
@@ -181,7 +185,7 @@ Flickable {
     }
 
     function putIndication(x, y) {
-        var component = Qt.createComponent("Indicator.qml");
+        var component = Qt.createComponent("Indicator/Indicator.qml");
         indicator = component.createObject(root);
         indicator.x = x - indicator.width * 0.5;
         indicator.y = y - indicator.height * 0.5;
@@ -190,18 +194,15 @@ Flickable {
     function dropIndication() {
         if (indicator != null)
             indicator.destroy();
+        if (hint != null)
+            hint.destroy();
     }
 
     function putHint(x, y) {
-        var component = Qt.createComponent("AppHint.qml");
-
-        while (component.status === Component.Loading);
-
+        var component = Qt.createComponent("Indicator/AppHint.qml");
         hint = component.createObject(root);
 
-        hint.x = x;
-        hint.y = y;
-
-
+        hint.x = x - hint.width * 0.5;
+        hint.y = y - hint.height;
     }
 }

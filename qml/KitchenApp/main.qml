@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import TTSVoice 1.0
+import "Indicator"
 
 Rectangle {
 
@@ -8,7 +9,7 @@ Rectangle {
         var func2 = "function doIt() {console.log('hey from second notification')}"
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
-        speaker.say("Welcome! how can i serve you?")
+        speaker.say("You're on thin fucking ice my pedigree chums!")
     }
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
@@ -56,10 +57,10 @@ Rectangle {
 
             }
 
-            Button {
-                width: 125
-                height: 125
+            AppHint {
+
             }
+
             Button {
                 width: 125
                 height: 125
