@@ -2,17 +2,14 @@ import QtQuick 2.0
 Flickable {
     id: root
     flickableDirection: Flickable.VerticalFlick
-
     clip: true
     contentHeight: column.height
-
 
     Column {
         id: column
         width: parent.width
         height: childrenRect.height
         spacing: 5
-
     }
 
     function createWidget(source, app) {

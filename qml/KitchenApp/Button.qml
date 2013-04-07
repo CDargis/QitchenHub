@@ -2,8 +2,14 @@ import QtQuick 2.0
 
 Rectangle {
     id: mainRect
-    radius: 5  // Rounded corners
-    color: "#FF777777"
+    radius: 15  // Rounded corners
+    width: 100; height: 50
+    border.color: "black"
+    border.width: 1
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "#36C60F" }
+        GradientStop { position: 1.0; color: "#2B950A" }
+    }
 
     property string buttonText: ""
     property int pointSize: 14

@@ -13,7 +13,8 @@ QML_IMPORT_PATH =
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    voice.cpp
+    voice.cpp \
+    translationhandler.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
@@ -26,12 +27,14 @@ OTHER_FILES += \
     qml/KitchenApp/Indicator/AppHint.qml
 
 RESOURCES += \
-    Resources.qrc
+    Resources.qrc \
+    Languages.qrc
 
-TRANSLATIONS = qitchenapp_pl.ts
+TRANSLATIONS = lang_pl.ts
 
 HEADERS += \
-    voice.h
+    voice.h \
+    translationhandler.h
 
 QT += qml quick
 

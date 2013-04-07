@@ -7,12 +7,16 @@ Rectangle {
     Component.onCompleted: {
         var func1 = "function doIt() {console.log('hey from first notification')}"
         var func2 = "function doIt() {console.log('hey from second notification')}"
+        statusBar.setCurrentScreenTitle("Qitchen Hub")
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
         speaker.say("You're on thin fucking ice my pedigree chums!")
     }
+
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
+
+    signal changeLangSignal(string lang)   // Signal for changing the language
 
     // apps are parented to this item so they are able to use anchors
     Item {
@@ -37,22 +41,30 @@ Rectangle {
             // and it better be that all buttons have the same size
             Button {
                 id: button
-                width: 150
-                height: 125
+                width: 200
+                height: 200
                 pointSize: 18
-                buttonText: "Home Automation"
-
+                buttonText: qsTr("button") + tr.emptyString
 
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: {
-                        speaker.say("app open");
-                        launch("HomeAutomation.qml");
-                    }
+                    onClicked: launch("HomeAutomation.qml")
                 }
-
             }
+
+            ToggleSwitch {
+                //anchors.left: button.right
+                //anchors.leftMargin: 25
+                //anchors.verticalCenter: button.verticalCenter
+                isOn: false
+                onIsOnChanged: {
+                    if (isOn)
+                        tr.changeTranslation("pl");
+                    else tr.changeTranslation("en");
+                }
+            }
+
             Indicator {
 
             }
@@ -90,6 +102,7 @@ Rectangle {
                 height: 125
             }
         }
+
         /************* dynamic layer *************************/
         // just an abstract placeholder but as a matter of fact
         // all apps end up right here
@@ -101,13 +114,12 @@ Rectangle {
         y: parent.height * 0.1
         width: parent.width - dock.x
         height: parent.height - dock.y
-
     }
     StatusBar {
         id: statusBar
         usrName: "Chris"
         usrPicSource: "qrc:/images/user.png"
-        currentScreenTitle: "Title of Current Screen"
+        currentScreenTitle: "QitchenHub"
     }
 
     //************* launch an app ******************/
