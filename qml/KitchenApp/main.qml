@@ -32,7 +32,6 @@ Rectangle {
         // placeholder defining the area containing buttons
         AppGrid {
             id: appgrid
-
             /******************** static layer **************************/
             // if a button is meant to launch an app, make sure it behaves
             // like the template right below
@@ -125,13 +124,19 @@ Rectangle {
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
     function launch(qmlComp)
     {
-        var component = Qt.createComponent(qmlComp);
-        if(component.status === Component.Ready) {
-            var app = component.createObject(desktop);
+        if(appgrid.activeList[0] === 0){
+            var component = Qt.createComponent(qmlComp);
+            if(component.status === Component.Ready) {
+                var app = component.createObject(desktop);
 
-            // register an app with the dock
-            app.callWidget.connect(dock.createWidget);
+                // register an app with the dock
+                app.callWidget.connect(dock.createWidget);
+                appgrid.activeList[0] = app;
+            }
+            else console.log(component.errorString());
         }
-        else console.log(component.errorString());
+        else{
+            appgrid.activeList[0].show();
+        }
     }
 }
