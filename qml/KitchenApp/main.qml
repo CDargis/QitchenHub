@@ -10,7 +10,7 @@ Rectangle {
         statusBar.setCurrentScreenTitle("Qitchen Hub")
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
-        speaker.say("You're on thin fucking ice my pedigree chums!")
+        speaker.say("Welcome my pedigree chums!")
     }
 
     // Define globals here ... at least for now
