@@ -67,6 +67,10 @@ Item {
             indicator.destroy();
     }
 
+    function terminate() {
+        root.parent.destroy();
+    }
+
 }
 
 
