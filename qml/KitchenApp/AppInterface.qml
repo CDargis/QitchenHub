@@ -16,6 +16,7 @@ Flickable {
     flickableDirection: Flickable.HorizontalFlick
     interactive: false
     flickDeceleration: 20
+    property int index
 
     signal callWidget(string source, Item app)
 
@@ -74,7 +75,7 @@ Flickable {
 
     onDragEnded: {
         // if flickable move more than 200px to the right
-        if (root.contentX < -200) {
+        if (root.contentX < -200 && root.widget == null) {
             callWidget(widgetSrc, root);
             root.state = "HIDDEN";
             root.interactive = false;
@@ -82,7 +83,9 @@ Flickable {
         // else more than 200px to the left
         else if (root.contentX > 200)
         {
+            //root.widget.terminate();
             root.destroy();
+            appgrid.terminateIndex(index);
         }
     }
 
@@ -98,8 +101,8 @@ Flickable {
         id: backArrow
         z: 100
         source: "qrc:/images/backArrow.png"
-        anchors.left: parent.left
-        anchors.leftMargin: parent.height*0.01
+        anchors.right: parent.right
+        anchors.rightMargin: parent.height*0.01
         anchors.top: parent.top
         anchors.topMargin: parent.height*0.01
         signal clicked
@@ -111,25 +114,6 @@ Flickable {
           onClicked: hide()
         }
     }
-
-    Image {
-        id: terminate
-        z: 100
-        source: "qrc:/images/delete.png"
-        anchors.right: parent.right
-        anchors.rightMargin: parent.height*0.01
-        anchors.top: parent.top
-        anchors.topMargin: parent.height*0.01
-        signal clicked
-        width: parent.width*.05
-        height: parent.width*.05
-        smooth: true
-        MouseArea {
-          anchors.fill: parent
-          onClicked: root.destroy()
-        }
-    }
-
     states: [
         State {
             name: "HIDDEN"
@@ -166,6 +150,10 @@ Flickable {
 
         }
     ]
+
+    Component.onCompleted: {
+        setIndex();
+    }
 
     function show() {
         root.state = "";
@@ -204,5 +192,11 @@ Flickable {
 
         hint.x = x - hint.width * 0.5;
         hint.y = y - hint.height;
+    }
+
+    function setIndex() {
+        if(root.widgetSrc == "HomeAutomation.qml"){
+            root.index = 0;
+        }
     }
 }

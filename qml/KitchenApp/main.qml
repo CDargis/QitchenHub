@@ -10,7 +10,7 @@ Rectangle {
         statusBar.setCurrentScreenTitle("Qitchen Hub")
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
-        speaker.say("You're on thin fucking ice my pedigree chums!")
+        speaker.say("Welcome my pedigree chums!")
     }
 
     // Define globals here ... at least for now
@@ -32,7 +32,6 @@ Rectangle {
         // placeholder defining the area containing buttons
         AppGrid {
             id: appgrid
-
             /******************** static layer **************************/
             // if a button is meant to launch an app, make sure it behaves
             // like the template right below
@@ -116,13 +115,21 @@ Rectangle {
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
     function launch(qmlComp)
     {
-        var component = Qt.createComponent(qmlComp);
-        if(component.status === Component.Ready) {
-            var app = component.createObject(desktop);
+        if(appgrid.activeList[0] === 0){
+            var component = Qt.createComponent(qmlComp);
+            if(component.status === Component.Ready) {
+                var app = component.createObject(desktop);
 
-            // register an app with the dock
-            app.callWidget.connect(dock.createWidget);
+                // register an app with the dock
+                app.callWidget.connect(dock.createWidget);
+                appgrid.activeList[0] = app;
+            }
+            else console.log(component.errorString());
         }
-        else console.log(component.errorString());
+        else{
+            appgrid.activeList[0].show();
+            if (appgrid.activeList[0].widget != null)
+                appgrid.activeList[0].widget.terminate();
+        }
     }
 }

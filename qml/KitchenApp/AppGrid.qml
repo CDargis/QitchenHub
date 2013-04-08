@@ -11,6 +11,7 @@ Grid {
     rowSpacing: 20
     columnSpacing: 20
     z: 0
+    property var activeList: [0, 0, 0, 0]
 
     property int itemCount: root.children.length
     property int childWidth: 125
@@ -27,5 +28,9 @@ Grid {
         console.debug("children count: " + root.children.length);
         console.debug("child width: " + childWidth);
         console.debug("column count: " + root.columns);*/
+    }
+
+    function terminateIndex(index){
+        activeList[index] = 0;
     }
 }

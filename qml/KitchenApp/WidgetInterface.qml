@@ -56,7 +56,7 @@ Item {
     }
 
     function putIndication(x, y) {
-        var component = Qt.createComponent("Indicator.qml");
+        var component = Qt.createComponent("Indicator/Indicator.qml");
         indicator = component.createObject(root);
         indicator.x = x - indicator.width * 0.5;
         indicator.y = y - indicator.height * 0.5;
@@ -65,6 +65,10 @@ Item {
     function dropIndication() {
         if (indicator != null)
             indicator.destroy();
+    }
+
+    function terminate() {
+        root.parent.destroy();
     }
 
 }
