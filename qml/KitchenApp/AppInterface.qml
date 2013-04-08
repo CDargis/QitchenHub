@@ -83,7 +83,7 @@ Flickable {
         // else more than 200px to the left
         else if (root.contentX > 200)
         {
-            root.widget.terminate();
+            //root.widget.terminate();
             root.destroy();
             appgrid.terminateIndex(index);
         }
