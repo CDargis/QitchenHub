@@ -13,6 +13,7 @@ WidgetInterface {
 
     Component.onCompleted: loadUI()
 
+
     width: parent.width
     height: 200
 

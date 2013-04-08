@@ -18,6 +18,10 @@ Rectangle {
 
     signal changeLangSignal(string lang)   // Signal for changing the language
 
+    Organizer {
+
+    }
+
     // apps are parented to this item so they are able to use anchors
     Item {
         id: desktop

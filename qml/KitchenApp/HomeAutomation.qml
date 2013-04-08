@@ -8,6 +8,7 @@ AppInterface {
     Component.onCompleted: {
         statusBar.setCurrentScreenTitle(qsTr("Home Automation") + tr.emptyString)
         security.unLock()
+        speaker.say("done bitches!");
     }
 
     anchors.fill: parent
