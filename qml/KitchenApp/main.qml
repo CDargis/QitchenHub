@@ -21,8 +21,7 @@ Rectangle {
     // apps are parented to this item so they are able to use anchors
     Item {
         id: desktop
-        x: 0
-        y: parent.height * 0.1
+        anchors.top: statusBar.bottom
         width: parent.width * 0.85
         height: parent.height - desktop.y;
 
