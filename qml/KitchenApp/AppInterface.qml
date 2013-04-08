@@ -16,7 +16,7 @@ Flickable {
     flickableDirection: Flickable.HorizontalFlick
     interactive: false
     flickDeceleration: 20
-    property int index: setIndex();
+    property int index
 
     signal callWidget(string source, Item app)
 
@@ -75,7 +75,7 @@ Flickable {
 
     onDragEnded: {
         // if flickable move more than 200px to the right
-        if (root.contentX < -200) {
+        if (root.contentX < -200 && root.widget == null) {
             callWidget(widgetSrc, root);
             root.state = "HIDDEN";
             root.interactive = false;
@@ -83,6 +83,7 @@ Flickable {
         // else more than 200px to the left
         else if (root.contentX > 200)
         {
+            root.widget.terminate();
             root.destroy();
             appgrid.terminateIndex(index);
         }
@@ -149,6 +150,10 @@ Flickable {
 
         }
     ]
+
+    Component.onCompleted: {
+        setIndex();
+    }
 
     function show() {
         root.state = "";

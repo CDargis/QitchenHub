@@ -136,7 +136,6 @@ Rectangle {
             else console.log(component.errorString());
         }
         else{
-            appgrid.activeList[0].widget.terminate();
             appgrid.activeList[0].show();
         }
     }
