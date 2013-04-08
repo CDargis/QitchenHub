@@ -137,6 +137,7 @@ Rectangle {
         }
         else{
             appgrid.activeList[0].show();
+            appgrid.activeList[0].widget.terminate();
         }
     }
 }
