@@ -2,9 +2,8 @@ import QtQuick 2.0
 
 Rectangle {
     id: base
-    color: "transparent"
     property int iconSide: height * .12
-    property int headingSize: iconSide * .5
+    property int headingSize: 16
     property string selectColor: "#99DDDDDD"
 
     Text {

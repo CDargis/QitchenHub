@@ -17,6 +17,8 @@ Rectangle {
     LanguageSelect {
         id: langSelect
         height: parent.height; width: parent.width / 3
+        headingSize: width * (1/10)
+        color: "transparent"
     }
     Rectangle {
         id: div12
@@ -26,10 +28,11 @@ Rectangle {
         color: "#36C60F"
     }
     // Middle col placeholder
-    Rectangle {
+    UnitSelect {
         id: unitSelect
         anchors.left: div12.right
         height: parent.height; width: parent.width / 3
+        headingSize: width * (1/10)
         color: "transparent"
     }
     Rectangle {
@@ -40,10 +43,11 @@ Rectangle {
         color: "#36C60F"
     }
     // Last col placeholder
-    Rectangle {
-        id: lastcol
+    PictureSelect {
+        id: picSelect
         anchors.left: div23.right
         height: parent.height; width: parent.width / 3
+        headingSize: width * (1/10)
         color: "transparent"
     }
 }
