@@ -14,6 +14,12 @@ Rectangle {
     property string buttonText: ""
     property int pointSize: 14
     property string iconSource: ""
+    signal buttonClick()
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: buttonClick()
+    }
 
     Text {
         id: bText

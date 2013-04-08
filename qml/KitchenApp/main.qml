@@ -44,12 +44,8 @@ Rectangle {
                 height: 200
                 pointSize: 18
                 buttonText: qsTr("button") + tr.emptyString
-
-                MouseArea {
-                    anchors.fill: parent
-                    // make sure you put the name of your qml as an argument
-                    onClicked: launch("HomeAutomation.qml")
-                }
+                // make sure you put the name of your qml as an argument
+                onButtonClick: launch("HomeAutomation.qml")
             }
 
             ToggleSwitch {
@@ -57,11 +53,6 @@ Rectangle {
                 //anchors.leftMargin: 25
                 //anchors.verticalCenter: button.verticalCenter
                 isOn: false
-                onIsOnChanged: {
-                    if (isOn)
-                        tr.changeTranslation("pl");
-                    else tr.changeTranslation("en");
-                }
             }
 
             Indicator {

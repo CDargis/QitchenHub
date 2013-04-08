@@ -13,8 +13,8 @@ Rectangle {
         GradientStop { position: 1.0; color: "#2B950A" }
     }
 
-    property string onText: "ON"
-    property string offText: "OFF"
+    property string onText: qsTr("ON") + tr.emptyString
+    property string offText: qsTr("OFF") + tr.emptyString
     property bool isOn: true
     onIsOnChanged: {
         if(isOn)
