@@ -24,7 +24,8 @@ OTHER_FILES += \
     qml/KitchenApp/AppInterface.qml \
     qml/KitchenApp/WidgetInterface.qml \
     qml/KitchenApp/Indicator/Indicator.qml \
-    qml/KitchenApp/Indicator/AppHint.qml
+    qml/KitchenApp/Indicator/AppHint.qml \
+    qml/KitchenApp/Organizer/DayItem.qml
 
 RESOURCES += \
     Resources.qrc \

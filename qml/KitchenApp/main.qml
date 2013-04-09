@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import TTSVoice 1.0
 import "Indicator"
+import "Organizer"
 
 Rectangle {
 
@@ -17,10 +18,6 @@ Rectangle {
     property string fontFamily: "Sans";
 
     signal changeLangSignal(string lang)   // Signal for changing the language
-
-    Organizer {
-
-    }
 
     // apps are parented to this item so they are able to use anchors
     Item {
@@ -76,10 +73,19 @@ Rectangle {
             }
 
             Button {
-                width: 125
-                height: 125
+                id: buttonOrg
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Calendar") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    onClicked: launch("Organizer.qml")
+                }
             }
-            Button {
+            DayItem {
                 width: 125
                 height: 125
             }
