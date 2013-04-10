@@ -6,9 +6,13 @@ AppInterface {
     widgetSrc: "HomeAutomationWidget.qml"
 
     Component.onCompleted: {
-        statusBar.setCurrentScreenTitle(qsTr("Home Automation") + tr.emptyString)
+        languageChange(theMainApplication.language)  // Set the language
         security.unLock()
-        speaker.say("done bitches!");
+        speaker.say(qsTr("Home Automation"));
+    }
+
+    onLanguageChange: {
+        statusBar.currentScreenTitle = qsTr("Home Automation") + tr.emptyString
     }
 
     onChangeUnits: temp.setUnits(units)  // Propagate that call

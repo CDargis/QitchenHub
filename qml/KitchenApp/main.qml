@@ -23,10 +23,16 @@ Rectangle {
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
         tr.changeTranslation(language)
+         // Iterate through each active app, and let it know it changed languages
+        var index
+        for(index = 0; index < appgrid.activeList.length; index++) {
+            if(appgrid.activeList[index] !== 0)
+                appgrid.activeList[index].languageChange(language)
+        }
     }
 
     onCurrentUnitsChanged: {
-        // Iterate through each active app, and callthe change units signal
+        // Iterate through each active app, and call the change units signal
         var index
         for(index = 0; index < appgrid.activeList.length; index++) {
             if(appgrid.activeList[index] !== 0)

@@ -7,6 +7,10 @@ AppInterface {
     anchors.fill: parent
     property string title: "23"
 
+    onLanguageChange: {
+        statusBar.currentScreenTitle = qsTr("Organizer") + tr.emptyString
+    }
+
     Rectangle {
         anchors.fill: parent
         width: parent.width; height: parent.height
@@ -38,6 +42,9 @@ AppInterface {
     }
 
     Component.onCompleted: {
+        languageChange(theMainApplication.language)  // Set the language
+        speaker.say(qsTr("Organizer"));
+
         console.log(root.width);
         refresh();
     }

@@ -18,6 +18,7 @@ Flickable {
     flickDeceleration: 20
     property int index
 
+    signal languageChange(string lang) // Changing the language, dude
     signal changeUnits(string units) // Changing the units, man
     signal callWidget(string source, Item app)
 
