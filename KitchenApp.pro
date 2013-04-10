@@ -39,4 +39,5 @@ HEADERS += \
 
 QT += qml quick
 
-SUBDIRS += qml/Kitchen/Indicator
+SUBDIRS += qml/KitchenApp/Indicator \
+           qml/KitchenApp/Settings

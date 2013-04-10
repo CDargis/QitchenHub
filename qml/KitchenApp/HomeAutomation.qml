@@ -11,6 +11,8 @@ AppInterface {
         speaker.say("done bitches!");
     }
 
+    onChangeUnits: temp.setUnits(units)  // Propagate that call
+
     anchors.fill: parent
     width: parent.width; height: parent.height
 

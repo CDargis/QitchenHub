@@ -18,6 +18,7 @@ Flickable {
     flickDeceleration: 20
     property int index
 
+    signal changeUnits(string units) // Changing the units, man
     signal callWidget(string source, Item app)
 
     // set this to your widget component qml file

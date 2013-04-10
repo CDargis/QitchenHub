@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "Settings"
 
 Rectangle {
     id: mainRect
@@ -126,7 +127,7 @@ Rectangle {
 
     // Settings Rectangle
     Rectangle {
-        id: settingsRect
+        id: settingsTimeRect
         width: parent.width / 3
         height: parent.height
         color: "transparent"
@@ -147,6 +148,32 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             source: "qrc:/images/settingsTransparent.png"
             anchors.right: parent.right
+            MouseArea {
+                anchors.fill: parent
+                onClicked: settingsBG.visible = !settingsBG.visible
+            }
+        }
+    }
+
+    // Settings rectangle
+    Rectangle {
+        id: settingsBG
+        // Make it the size of the app
+        width: parent.parent.width; height: parent.parent.height - mainRect.height
+        anchors.top: mainRect.bottom
+        visible: false
+        color: "#CC000000"
+        // Rob the mouse everts from propogating through
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                settingsBG.visible = false
+            }
+        }
+        Settings {
+            id: theSettings
+            width: parent.width * .65; height: parent.height * .65
+            anchors.centerIn: parent
         }
     }
 

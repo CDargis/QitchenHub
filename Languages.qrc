@@ -2,4 +2,16 @@
     <qresource prefix="/tr">
         <file>languages/lang_pl.qm</file>
     </qresource>
+    <qresource prefix="/flags">
+        <file>languages/United States-01.png</file>
+        <file>languages/Poland-01.png</file>
+        <file>languages/Russia-01.png</file>
+        <file>languages/Lithuania-01.png</file>
+        <file>languages/France-01.png</file>
+        <file>languages/Germany-01.png</file>
+        <file>languages/Mexico-01.png</file>
+        <file>languages/Czech Republic-01.png</file>
+        <file>languages/Italy-01.png</file>
+        <file>languages/Jamaica-01.png</file>
+    </qresource>
 </RCC>
