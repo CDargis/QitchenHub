@@ -59,23 +59,30 @@ Rectangle {
             color: "#36C60F"
             text: qsTr("Name") + tr.emptyString
         }
-        Rectangle {
-            id: textInRect
+        VirtualInput {
+            id: nameIn
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: nameTitle.bottom
             anchors.topMargin: 10
-            border.color: "black"
-            border.width: 1
             width: parent.width * .75; height: width * .15
-            TextInput {
-                id: nameInput
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                font.family: fontFamily
-                font.pixelSize: nameTitle.font.pixelSize
-                text: statusBar.usrName
-            }
+            inputText: statusBar.usrName
+        }
+        Text {
+            id: locationTitle
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: nameIn.bottom
+            anchors.topMargin: 50
+            font.family: fontFamily
+            font.pixelSize: parent.width * 1/14
+            color: "#36C60F"
+            text: qsTr("Location") + tr.emptyString
+        }
+        VirtualInput {
+            id: locationIn
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: locationTitle.bottom
+            anchors.topMargin: 10
+            width: parent.width * .75; height: width * .15
         }
     }
 }
