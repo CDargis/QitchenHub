@@ -104,6 +104,19 @@ Rectangle {
                 height: 125
             }
             Button {
+                id: socialAppLauch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Social App") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    onClicked: launch("SocialFeed.qml",2)
+                }
+            }
+            Button {
                 width: 125
                 height: 125
             }

@@ -20,5 +20,9 @@
         <file>red_light.png</file>
         <file>arrowl.png</file>
         <file>arrowr.png</file>
+        <file>facebook.png</file>
+        <file>googleplus.png</file>
+        <file>rss.png</file>
+        <file>twitter.png</file>
     </qresource>
 </RCC>
