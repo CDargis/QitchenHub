@@ -16,31 +16,29 @@ Rectangle {
     }
 
     // Define globals here ... at least for now
-    property string fontFamily: "Sans";
+    property string fontFamily: "Sans"
     property string language: "en"
-    property string currentUnits: "us"  // "eu" for metric, "us" for imperial  // READ ONLY!!! USE setUnits()
+    property string currentUnits: "us"  // "eu" for metric, "us" for imperial
 
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
         tr.changeTranslation(language)
          // Iterate through each active app, and let it know it changed languages
         var index
-        for(index = 0; index < appgrid.activeList.length; index++) {
+        for(index = 0; index < appgrid.activeList.length; index++)
             if(appgrid.activeList[index] !== 0)
                 appgrid.activeList[index].languageChange(language)
-        }
     }
 
     onCurrentUnitsChanged: {
         // Iterate through each active app, and call the change units signal
         var index
-        for(index = 0; index < appgrid.activeList.length; index++) {
+        for(index = 0; index < appgrid.activeList.length; index++)
             if(appgrid.activeList[index] !== 0)
               appgrid.activeList[index].changeUnits(currentUnits)
-        }
     }
 
-    signal changeLangSignal(string lang)   // Signal for changing the language
+
 
     // apps are parented to this item so they are able to use anchors
     Item {
@@ -167,16 +165,6 @@ Rectangle {
     }
 
     // Function defintions -------------------------------------------------------
-
-    // Call all apps that have units to change their units
-    // This function ensures that we either go from celcius to FH, or FH to celcius
-    function setUnits(units) {
-        if(currentUnits.localeCompare(units) === 0)
-            return    // Return if the property isn't changing
-        if((units.localeCompare("eu") !== 0) && units.localeCompare("us") !== 0)
-            return   // Return if invalid
-        currentUnits = units
-    }
 
     // Convert Celcius to FH
     function celciusToFH(celcius)

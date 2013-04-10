@@ -45,7 +45,7 @@ Rectangle {
                     onClicked:  {
                         deselectMenu()
                         parent.color = selectColor
-                        theMainApplication.setUnits("eu")
+                        theMainApplication.currentUnits = "eu"
                     }
                 }
             }
@@ -68,7 +68,7 @@ Rectangle {
                     onClicked:  {
                         deselectMenu()
                         parent.color = selectColor
-                        theMainApplication.setUnits("us")
+                        theMainApplication.currentUnits = "us"
                     }
                 }
             }
