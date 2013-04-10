@@ -200,5 +200,8 @@ Flickable {
         if(root.widgetSrc == "HomeAutomation.qml"){
             root.index = 0;
         }
+        if(root.widgetSrc == "Organizer.qml"){
+            root.index = 1;
+        }
     }
 }

@@ -68,7 +68,7 @@ Rectangle {
                 pointSize: 18
                 buttonText: qsTr("Home Automation") + tr.emptyString
                 // make sure you put the name of your qml as an argument
-                onButtonClick: launch("HomeAutomation.qml")
+                onButtonClick: launch("HomeAutomation.qml",0)
             }
 
             ToggleSwitch {
@@ -96,7 +96,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("Organizer.qml")
+                    onClicked: launch("Organizer.qml",1)
                 }
             }
             DayItem {
@@ -146,23 +146,23 @@ Rectangle {
 
     //************* launch an app ******************/
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
-    function launch(qmlComp)
+    function launch(qmlComp,index)
     {
-        if(appgrid.activeList[0] === 0){
+        if(appgrid.activeList[index] === 0){
             var component = Qt.createComponent(qmlComp);
             if(component.status === Component.Ready) {
                 var app = component.createObject(desktop);
 
                 // register an app with the dock
                 app.callWidget.connect(dock.createWidget);
-                appgrid.activeList[0] = app;
+                appgrid.activeList[index] = app;
             }
             else console.log(component.errorString());
         }
         else{
-            appgrid.activeList[0].show();
-            if (appgrid.activeList[0].widget !== null)
-                appgrid.activeList[0].widget.terminate();
+            appgrid.activeList[index].show();
+            if (appgrid.activeList[index].widget !== null)
+                appgrid.activeList[index].widget.terminate();
         }
     }
 
