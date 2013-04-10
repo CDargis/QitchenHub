@@ -3,6 +3,7 @@ import TTSVoice 1.0
 import "Indicator"
 
 Rectangle {
+    id: theMainApplication  // For accessing globals, etc
 
     Component.onCompleted: {
         var func1 = "function doIt() {console.log('hey from first notification')}"
@@ -15,6 +16,22 @@ Rectangle {
 
     // Define globals here ... at least for now
     property string fontFamily: "Sans";
+    property string language: "en"
+    property string currentUnits: "us"  // "eu" for metric, "us" for imperial  // READ ONLY!!! USE setUnits()
+
+    onLanguageChanged: {
+        // Call the C++ handler to adjust the language
+        tr.changeTranslation(language)
+    }
+
+    onCurrentUnitsChanged: {
+        // Iterate through each active app, and callthe change units signal
+        var index
+        for(index = 0; index < appgrid.activeList.length; index++) {
+            if(appgrid.activeList[index] !== 0)
+              appgrid.activeList[index].changeUnits(currentUnits)
+        }
+    }
 
     signal changeLangSignal(string lang)   // Signal for changing the language
 
@@ -42,7 +59,7 @@ Rectangle {
                 width: 200
                 height: 200
                 pointSize: 18
-                buttonText: qsTr("button") + tr.emptyString
+                buttonText: qsTr("Home Automation") + tr.emptyString
                 // make sure you put the name of your qml as an argument
                 onButtonClick: launch("HomeAutomation.qml")
             }
@@ -128,8 +145,32 @@ Rectangle {
         }
         else{
             appgrid.activeList[0].show();
-            if (appgrid.activeList[0].widget != null)
+            if (appgrid.activeList[0].widget !== null)
                 appgrid.activeList[0].widget.terminate();
         }
+    }
+
+    // Function defintions -------------------------------------------------------
+
+    // Call all apps that have units to change their units
+    // This function ensures that we either go from celcius to FH, or FH to celcius
+    function setUnits(units) {
+        if(currentUnits.localeCompare(units) === 0)
+            return    // Return if the property isn't changing
+        if((units.localeCompare("eu") !== 0) && units.localeCompare("us") !== 0)
+            return   // Return if invalid
+        currentUnits = units
+    }
+
+    // Convert Celcius to FH
+    function celciusToFH(celcius)
+    {
+        return Math.round(((9/5)*celcius + 32));
+    }
+
+    // Convert FH to Celcius
+    function fHToCelcius(FH)
+    {
+        return Math.round(((5/9)*(FH - 32)));
     }
 }

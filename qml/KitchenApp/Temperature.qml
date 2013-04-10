@@ -1,6 +1,9 @@
 import QtQuick 2.0
 
 Rectangle {
+
+    // App starts in imperial
+
     color: "transparent"
     border.color: "black"
     border.width: 1
@@ -38,13 +41,12 @@ Rectangle {
                 anchors.rightMargin: 100
                 anchors.verticalCenter: currentTemp.verticalCenter
             }
-
             Text {
                 id: currentTemp
                 anchors.centerIn: parent
                 font.family: fontFamily
                 font.pixelSize: parent.width * (1/3)
-                text: "20"
+                text: "68"
             }
             Text {
                 id: degreeWhat
@@ -53,7 +55,7 @@ Rectangle {
                 anchors.topMargin: 30
                 font.family: fontFamily
                 font.pixelSize: parent.width * (1/10)
-                text: "°C"
+                text: "°F"
             }
         }
     }
@@ -93,7 +95,7 @@ Rectangle {
             }
             Text {
                 id: setCurrentTemp
-                text: "20°"
+                text: "68°"
                 font.pixelSize: 40
                 font.family: fontFamily
                 anchors.centerIn: parent
@@ -223,6 +225,21 @@ Rectangle {
         if(current < target) return 1
         else if(current > target) return -1
         else if(current === target) return 0
+    }
+
+    function setUnits(units) {
+        // Going from FH to celcius
+        if(units.localeCompare("eu") === 0) {
+            currentTemp.text = fHToCelcius(parseInt(currentTemp.text))
+            setCurrentTemp.text = fHToCelcius(parseInt(setCurrentTemp.text)) + "°"
+            degreeWhat.text = "°C"
+        }
+        // going from celcius to FH
+        if(units.localeCompare("us") === 0) {
+            currentTemp.text = celciusToFH(parseInt(currentTemp.text))
+            setCurrentTemp.text = celciusToFH(parseInt(setCurrentTemp.text)) + "°"
+            degreeWhat.text = "°F"
+        }
     }
 
     function getTemp() { return currentTemp.text }

@@ -49,7 +49,7 @@ Rectangle {
                 onClicked: {
                     deselectAll()
                     parent.color = selectColor
-                    tr.changeTranslation("en")
+                    theMainApplication.language = "en"
                 }
             }
         }
@@ -149,7 +149,7 @@ Rectangle {
                 onClicked: {
                     deselectAll()
                     parent.color = selectColor
-                    tr.changeTranslation("pl")
+                    theMainApplication.language = "pl"
                 }
             }
         }
