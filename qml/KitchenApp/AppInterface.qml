@@ -85,9 +85,8 @@ Flickable {
         // else more than 200px to the left
         else if (root.contentX > 200)
         {
-            //root.widget.terminate();
+            appgrid.terminateIndex(root.index);
             root.destroy();
-            appgrid.terminateIndex(index);
         }
     }
 
@@ -153,9 +152,11 @@ Flickable {
         }
     ]
 
+    /*
     Component.onCompleted: {
         setIndex();
     }
+    */
 
     function show() {
         root.state = "";
@@ -194,14 +195,5 @@ Flickable {
 
         hint.x = x - hint.width * 0.5;
         hint.y = y - hint.height;
-    }
-
-    function setIndex() {
-        if(root.widgetSrc == "HomeAutomation.qml"){
-            root.index = 0;
-        }
-        if(root.widgetSrc == "Organizer.qml"){
-            root.index = 1;
-        }
     }
 }

@@ -148,10 +148,11 @@ Rectangle {
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
     function launch(qmlComp,index)
     {
+        console.log(appgrid.activeList[index]);
         if(appgrid.activeList[index] === 0){
             var component = Qt.createComponent(qmlComp);
             if(component.status === Component.Ready) {
-                var app = component.createObject(desktop);
+                var app = component.createObject(desktop,{"index": index});
 
                 // register an app with the dock
                 app.callWidget.connect(dock.createWidget);
@@ -160,6 +161,7 @@ Rectangle {
             else console.log(component.errorString());
         }
         else{
+            console.log(appgrid.activeList[index].index);
             appgrid.activeList[index].show();
             if (appgrid.activeList[index].widget !== null)
                 appgrid.activeList[index].widget.terminate();
