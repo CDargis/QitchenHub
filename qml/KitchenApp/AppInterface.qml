@@ -93,9 +93,12 @@ Flickable {
     boundsBehavior: Flickable.DragOverBounds
 
     Rectangle {
-        color: "#002277"
         anchors.fill: parent
         z: 0
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#7C7C85" }
+            GradientStop { position: 1.0; color: "#25242A" }
+        }
     }
 
     Image {

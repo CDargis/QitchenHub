@@ -43,8 +43,8 @@ Rectangle {
         color: "#36C60F"
     }
     // Last col placeholder
-    PictureSelect {
-        id: picSelect
+    UserSettings {
+        id: userSettings
         anchors.left: div23.right
         height: parent.height; width: parent.width / 3
         headingSize: width * (1/10)
