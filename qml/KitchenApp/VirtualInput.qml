@@ -21,14 +21,13 @@ Rectangle {
 
     TextInput {
         id: theInput
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        height: parent.height; width: parent.width
+        anchors.centerIn: parent
+        height: inputContainer.height; width: inputContainer.width
         font.family: fontFamily
         font.pixelSize: height * .75
         selectByMouse: true
         autoScroll: true
+        clip: true
         text: inputText
         onFocusChanged: {
             if(focus) {
