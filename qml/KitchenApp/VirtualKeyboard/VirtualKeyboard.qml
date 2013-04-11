@@ -8,29 +8,49 @@ Item {
     property bool shift: false
     property bool special: false
     property int currentMode: 0  // 0 for English, 1 for Polish
-    property var boundTo     // Binding the keyboard to identifiers
 
+    // All bound to compoenents must handle the below signals!
+    property var target: null     // Binding the keyboard to identifiers
     signal keyPress(string key)
     signal spacebar()
-    signal returnKey()
     signal backspace()
+    signal returnKey()
     signal close()
     signal destroying()
 
     onKeyPress: {
-        console.log(key)
+        if(target !== null)
+            target.handleKeyPress(key)
     }
 
     onBackspace: {
-        console.log("backspace")
+        if(target !== null)
+            target.handleBackspace()
     }
 
     onSpacebar: {
-        console.log("spacebar")
+        if(target !== null)
+            target.handleSpacebar()
     }
 
     onReturnKey: {
-        console.log("return key")
+        if(target !== null)
+            target.handleReturnKey()
+    }
+
+    onClose: {
+        if(target !== null)
+            target.handleClose()
+        hideKeyboard()
+    }
+
+    onDestroying: {
+
+    }
+
+
+    onVisibleChanged: {
+
     }
 
     Component.onCompleted: buildTheKeyboard()
@@ -108,6 +128,16 @@ Item {
 
     // Function definitions -------------------------------------------------------------
 
+    function showKeyboard(theTarget) {
+        target = theTarget
+        root.visible = true
+    }
+
+    function hideKeyboard() {
+        target = null
+        root.visible = false
+    }
+
     function createKeys(lowerChars, upperChars, special, parent) {
         for(var i = 0; i < lowerChars.length; i++) {
             var component = Qt.createComponent("Key.qml");
@@ -118,6 +148,7 @@ Item {
     }
 
     function buildTheKeyboard() {
+        console.log("building the keyboard...")
         createKeys(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
                    ['Q', 'W', 'E', 'R', 'T', 'Y', 'Y', 'I', 'O', 'P'],
                    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], row1)
@@ -129,6 +160,7 @@ Item {
                    ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
                    [',', '.', '/', '\\', ':', ';', '?'], row3)
         makeBackspaceKey()
+        console.log("...keyboard built")
     }
 
     function makeShiftKey() {

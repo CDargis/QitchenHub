@@ -2,6 +2,7 @@ import QtQuick 2.0
 import TTSVoice 1.0
 import "Indicator"
 import "Organizer"
+import "VirtualKeyboard"
 
 Rectangle {
     id: theMainApplication  // For accessing globals, etc
@@ -138,6 +139,12 @@ Rectangle {
         usrName: "Chris"
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
+    }
+
+    VirtualKeyboard {
+        id: theKeyboard
+        parent: theMainApplication    // Explicitly set to fill the screen
+        visible: false
     }
 
     //************* launch an app ******************/

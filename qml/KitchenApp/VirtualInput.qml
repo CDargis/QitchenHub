@@ -2,7 +2,7 @@ import QtQuick 2.0
 import "VirtualKeyboard"
 
 Rectangle {
-    id: containingRect
+    id: inputContainer
     border.color: "black"
     border.width: 1
     property string inputText: ""
@@ -13,6 +13,10 @@ Rectangle {
             theInput.focus = true
             theInput.cursorPosition = theInput.text.length
         }
+        onDoubleClicked: {
+            theInput.focus = true
+            theInput.selectAll()
+        }
     }
 
     TextInput {
@@ -20,29 +24,68 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 10
+        height: parent.height; width: parent.width
         font.family: fontFamily
-        font.pixelSize: parent.height * .7
+        font.pixelSize: height * .75
         selectByMouse: true
+        autoScroll: true
         text: inputText
         onFocusChanged: {
             if(focus) {
-                theKeyboard.visible = true
+                theKeyboard.showKeyboard(inputContainer)
             }
             else {
-                theKeyboard.visible = false
+
             }
         }
     }
 
-    VirtualKeyboard {
-        id: theKeyboard
-        parent: theMainApplication    // Explicitly set to fill the screen
-        visible: false
-        onVisibleChanged: {
-            if(visible)
-                theInput.cursorVisible = true
-            else theInput.cursorVisible = false
+    // Function definitions ------------------------------------------------------
+
+    function handleKeyPress(key) {
+        var cursorPosition = theInput.cursorPosition
+        var i
+        var result = ""
+        for(i = 0; i < cursorPosition; i++) {
+            result += theInput.text.charAt(i)
         }
-        onClose: theInput.focus = false
+        result += key
+        for(i = cursorPosition; i < theInput.text.length; i++)
+            result += theInput.text.charAt(i)
+        theInput.text = result
+        theInput.cursorPosition = cursorPosition + 1
+    }
+
+    function handleSpacebar() {
+        var cursorPosition = theInput.cursorPosition
+        var i
+        var result = ""
+        for(i = 0; i < cursorPosition; i++) {
+            result += theInput.text.charAt(i)
+        }
+        result += " "
+        for(i = cursorPosition; i < theInput.text.length; i++)
+            result += theInput.text.charAt(i)
+        theInput.text = result
+        theInput.cursorPosition = cursorPosition + 1
+    }
+
+    function handleBackspace() {
+        var cursorPosition = theInput.cursorPosition
+        var length = theInput.text.length
+        var theText = theInput.text
+        var result = ""
+        result = theText.substring(0, cursorPosition - 1)
+        result += theText.substring(cursorPosition, theText.length)
+        theInput.text = result
+        theInput.cursorPosition = cursorPosition - 1
+    }
+
+    function handleReturnKey() {
+        console.log("return key")
+    }
+
+    function handleClose() {
+        theInput.focus = false
     }
 }
