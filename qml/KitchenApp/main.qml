@@ -38,8 +38,6 @@ Rectangle {
               appgrid.activeList[index].changeUnits(currentUnits)
     }
 
-
-
     // apps are parented to this item so they are able to use anchors
     Item {
         id: desktop

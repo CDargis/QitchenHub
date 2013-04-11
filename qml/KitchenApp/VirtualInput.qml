@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "VirtualKeyboard"
 
 Rectangle {
     id: containingRect
@@ -9,12 +10,13 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            nameInput.focus = true
+            theInput.focus = true
+            theInput.cursorPosition = theInput.text.length
         }
     }
 
     TextInput {
-        id: nameInput
+        id: theInput
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 10
@@ -23,7 +25,24 @@ Rectangle {
         selectByMouse: true
         text: inputText
         onFocusChanged: {
-            console.log("hey")
+            if(focus) {
+                theKeyboard.visible = true
+            }
+            else {
+                theKeyboard.visible = false
+            }
         }
+    }
+
+    VirtualKeyboard {
+        id: theKeyboard
+        parent: theMainApplication    // Explicitly set to fill the screen
+        visible: false
+        onVisibleChanged: {
+            if(visible)
+                theInput.cursorVisible = true
+            else theInput.cursorVisible = false
+        }
+        onClose: theInput.focus = false
     }
 }
