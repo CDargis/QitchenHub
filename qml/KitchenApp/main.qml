@@ -96,9 +96,14 @@ Rectangle {
                     onClicked: launch("Organizer.qml",1)
                 }
             }
-            DayItem {
-                width: 125
-                height: 125
+            Button {
+                id: buttonMus
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Music Player") + tr.emptyString
+                // make sure you put the name of your qml as an argument
+                onButtonClick: launch("MusicPlayer.qml",0)
             }
             Button {
                 width: 125
