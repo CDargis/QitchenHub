@@ -69,6 +69,11 @@ AppInterface {
         console.log("today: " + tdate.day  + " " + tdate.month + " " + tdate.year);
         console.log("day: " + tdate.todayDayOfMonth + " " + tdate.todayDayOfWeek + " " + tdate.todayDayOfYear);
 
+        console.log("dayOfWeek: " + tdate.dayOfWeek(13, 10, 2012));
+        console.log("dayOfYear: " + tdate.dayOfYear(1, 1, 2013));
+        console.log("daydifference: " + tdate.dayDifference(1, 1, 2000, 1, 1, 2002));
+        console.log("daysiinmonth: " + tdate.daysInMonth(12, 2001));
+        console.log("weekofyear: " + tdate.weekOfYear(1, 11, 2012));
 
         //console.log(tdate.year())
         Date.prototype.getWeek = function() {
@@ -221,11 +226,11 @@ AppInterface {
         odate.dayOfWeek = function(day, month, year) {
 
             var date = new Date();
-            date.setDate(day - 1);
+            date.setDate(day);
             date.setMonth(month - 1);
             date.setFullYear(year);
 
-            return date.getDay() + 1;
+            return date.getDay();
         };
 
         odate.dayDifference = function(day1, month1, year1, day2, month2, year2) {
@@ -234,11 +239,16 @@ AppInterface {
             if (odate.isLeap(year1))
                 ++daysyear1;
 
-            var daysLeftYear1 = daysyear1 - (odate.dayOfYear(day1, month1, year1));
+            var daysLeftYear1;
+
+            if (year1 == year2)
+                daysLeftYear1 = -1;
+            else
+                daysLeftYear1 = daysyear1 - (odate.dayOfYear(day1, month1, year1));
 
             var days = 0;
 
-            for (var i = year2; i > year1; --i) {
+            for (var i = year2; i > year1 + 1; --i) {
                 days += 365;
                 if (odate.isLeap(i))
                     ++days;
@@ -248,22 +258,22 @@ AppInterface {
         }
 
         odate.daysInMonth = function(month, year) {
-            if (month < 7) {
-                if (month == 1) {
-                    if (isLeap(year))
+            if (month < 8) {
+                if (month === 2) {
+                    if (odate.isLeap(year))
                         return 29;
                     else
                         return 28;
                 }
                 else {
-                    if (month % 2 == 0)
+                    if (month % 2 == 1)
                         return 31;
                     else
                         return 30;
                 }
             }
             else {
-                if (month % 2 == 1)
+                if (month % 2 == 0)
                     return 31;
                 else
                     return 30;
@@ -272,6 +282,7 @@ AppInterface {
 
         odate.weekOfYear = function(day, month, year) {
             var dayofyear = odate.dayOfYear(day, month, year);
+            dayofyear += odate.dayOfWeek(day, month, year) - 1;
             var week = Math.ceil(dayofyear / 7);
 
             return week;
