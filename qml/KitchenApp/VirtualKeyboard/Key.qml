@@ -8,6 +8,8 @@ Rectangle {
     property string lower: ""
     property string upper: ""
     property string special: ""
+    property string altLower: ""
+    property string altUpper: ""
     property var keyboard
     property string color1: "black"
     property string color2: "white"
@@ -23,8 +25,8 @@ Rectangle {
             if((keyboard !== 'undefined') && (keyboard.special))
                 special
             else if((keyboard !== 'undefined') && (keyboard.shift))
-                upper
-            else lower
+                (keyboard.alt && (altUpper.length === 1)) ? altUpper : upper
+            else (keyboard.alt && (altLower.length === 1)) ? altLower : lower
         }
     }
 
