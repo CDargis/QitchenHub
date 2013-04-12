@@ -25,7 +25,9 @@ OTHER_FILES += \
     qml/KitchenApp/WidgetInterface.qml \
     qml/KitchenApp/Indicator/Indicator.qml \
     qml/KitchenApp/Indicator/AppHint.qml \
-    qml/KitchenApp/Organizer/DayItem.qml
+    qml/KitchenApp/Organizer/DayItem.qml \
+    qml/KitchenApp/Settings/UserSettings.qml \
+    qml/KitchenApp/VirtualKeyboard/UniqueKey.qml
 
 RESOURCES += \
     Resources.qrc \

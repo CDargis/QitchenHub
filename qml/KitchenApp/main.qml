@@ -2,6 +2,7 @@ import QtQuick 2.0
 import TTSVoice 1.0
 import "Indicator"
 import "Organizer"
+import "VirtualKeyboard"
 
 Rectangle {
     id: theMainApplication  // For accessing globals, etc
@@ -16,31 +17,27 @@ Rectangle {
     }
 
     // Define globals here ... at least for now
-    property string fontFamily: "Sans";
+    property string fontFamily: "Sans"
     property string language: "en"
-    property string currentUnits: "us"  // "eu" for metric, "us" for imperial  // READ ONLY!!! USE setUnits()
+    property string currentUnits: "us"  // "eu" for metric, "us" for imperial
 
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
         tr.changeTranslation(language)
          // Iterate through each active app, and let it know it changed languages
         var index
-        for(index = 0; index < appgrid.activeList.length; index++) {
+        for(index = 0; index < appgrid.activeList.length; index++)
             if(appgrid.activeList[index] !== 0)
                 appgrid.activeList[index].languageChange(language)
-        }
     }
 
     onCurrentUnitsChanged: {
         // Iterate through each active app, and call the change units signal
         var index
-        for(index = 0; index < appgrid.activeList.length; index++) {
+        for(index = 0; index < appgrid.activeList.length; index++)
             if(appgrid.activeList[index] !== 0)
               appgrid.activeList[index].changeUnits(currentUnits)
-        }
     }
-
-    signal changeLangSignal(string lang)   // Signal for changing the language
 
     // apps are parented to this item so they are able to use anchors
     Item {
@@ -144,14 +141,21 @@ Rectangle {
         currentScreenTitle: "QitchenHub"
     }
 
+    VirtualKeyboard {
+        id: theKeyboard
+        parent: theMainApplication    // Explicitly set to fill the screen
+        visible: false
+    }
+
     //************* launch an app ******************/
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
     function launch(qmlComp,index)
     {
+        console.log(appgrid.activeList[index]);
         if(appgrid.activeList[index] === 0){
             var component = Qt.createComponent(qmlComp);
             if(component.status === Component.Ready) {
-                var app = component.createObject(desktop);
+                var app = component.createObject(desktop,{"index": index});
 
                 // register an app with the dock
                 app.callWidget.connect(dock.createWidget);
@@ -160,6 +164,7 @@ Rectangle {
             else console.log(component.errorString());
         }
         else{
+            console.log(appgrid.activeList[index].index);
             appgrid.activeList[index].show();
             if (appgrid.activeList[index].widget !== null)
                 appgrid.activeList[index].widget.terminate();
@@ -167,16 +172,6 @@ Rectangle {
     }
 
     // Function defintions -------------------------------------------------------
-
-    // Call all apps that have units to change their units
-    // This function ensures that we either go from celcius to FH, or FH to celcius
-    function setUnits(units) {
-        if(currentUnits.localeCompare(units) === 0)
-            return    // Return if the property isn't changing
-        if((units.localeCompare("eu") !== 0) && units.localeCompare("us") !== 0)
-            return   // Return if invalid
-        currentUnits = units
-    }
 
     // Convert Celcius to FH
     function celciusToFH(celcius)

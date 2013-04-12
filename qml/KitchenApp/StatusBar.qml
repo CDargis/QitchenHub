@@ -163,6 +163,16 @@ Rectangle {
         anchors.top: mainRect.bottom
         visible: false
         color: "#CC000000"
+        // Close button for settings
+        Button {
+            id: quitButton
+            anchors.top: theSettings.bottom
+            anchors.topMargin: 25
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 150
+            height: 75
+            buttonText: qsTr("Close") + tr.emptyString
+        }
         // Rob the mouse everts from propogating through
         MouseArea {
             anchors.fill: parent

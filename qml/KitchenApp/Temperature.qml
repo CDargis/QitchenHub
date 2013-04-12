@@ -2,13 +2,15 @@ import QtQuick 2.0
 
 Rectangle {
 
-    // App starts in imperial
+    // App starts in imperial, do a check to see if we are in different units
+    Component.onCompleted: setUnits(theMainApplication.currentUnits)
 
     color: "transparent"
     border.color: "black"
     border.width: 1
 
     property string thermostatState: "Off"
+    property string localUnits: "us"
 
     Rectangle {
         id: titleRect
@@ -228,17 +230,23 @@ Rectangle {
     }
 
     function setUnits(units) {
+        // Check to ensure we are actually changing units
+        if(localUnits.localeCompare(units) === 0)
+            return
+
         // Going from FH to celcius
         if(units.localeCompare("eu") === 0) {
             currentTemp.text = fHToCelcius(parseInt(currentTemp.text))
             setCurrentTemp.text = fHToCelcius(parseInt(setCurrentTemp.text)) + "°"
             degreeWhat.text = "°C"
+            localUnits = "eu"
         }
         // going from celcius to FH
         if(units.localeCompare("us") === 0) {
             currentTemp.text = celciusToFH(parseInt(currentTemp.text))
             setCurrentTemp.text = celciusToFH(parseInt(setCurrentTemp.text)) + "°"
             degreeWhat.text = "°F"
+            localUnits = "us"
         }
     }
 

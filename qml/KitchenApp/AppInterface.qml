@@ -85,18 +85,20 @@ Flickable {
         // else more than 200px to the left
         else if (root.contentX > 200)
         {
-            //root.widget.terminate();
+            appgrid.terminateIndex(root.index);
             root.destroy();
-            appgrid.terminateIndex(index);
         }
     }
 
     boundsBehavior: Flickable.DragOverBounds
 
     Rectangle {
-        color: "#002277"
         anchors.fill: parent
         z: 0
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#7C7C85" }
+            GradientStop { position: 1.0; color: "#25242A" }
+        }
     }
 
     Image {
@@ -153,9 +155,11 @@ Flickable {
         }
     ]
 
+    /*
     Component.onCompleted: {
         setIndex();
     }
+    */
 
     function show() {
         root.state = "";
@@ -194,14 +198,5 @@ Flickable {
 
         hint.x = x - hint.width * 0.5;
         hint.y = y - hint.height;
-    }
-
-    function setIndex() {
-        if(root.widgetSrc == "HomeAutomation.qml"){
-            root.index = 0;
-        }
-        if(root.widgetSrc == "Organizer.qml"){
-            root.index = 1;
-        }
     }
 }

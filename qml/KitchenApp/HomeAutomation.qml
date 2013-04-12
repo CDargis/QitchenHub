@@ -23,10 +23,7 @@ AppInterface {
     Rectangle {
         anchors.fill: parent
         width: parent.width; height: parent.height
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#7b7b85" }
-            GradientStop { position: 1.0; color: "#26242a" }
-        }
+        color: "transparent"
         Rectangle {
             id: menuRect
             width: parent.width * (1/4)
