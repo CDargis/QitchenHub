@@ -5,7 +5,9 @@ Rectangle {
     id: inputContainer
     border.color: "black"
     border.width: 1
-    property string inputText: ""
+    property string currentText
+    property string fontSize: height * .75
+    signal returnPressed(string theText) // Sends the current text with the signal
 
     MouseArea {
         anchors.fill: parent
@@ -24,11 +26,11 @@ Rectangle {
         anchors.centerIn: parent
         height: inputContainer.height; width: inputContainer.width
         font.family: fontFamily
-        font.pixelSize: height * .75
+        font.pixelSize: fontSize
         selectByMouse: true
         autoScroll: true
+        text: currentText
         clip: true
-        text: inputText
         onFocusChanged: {
             if(focus) {
                 theKeyboard.showKeyboard(inputContainer)
@@ -36,6 +38,10 @@ Rectangle {
             else {
 
             }
+        }
+        // For keyboard input!
+        onTextChanged: {
+            currentText = text
         }
     }
 
@@ -51,7 +57,7 @@ Rectangle {
         result += key
         for(i = cursorPosition; i < theInput.text.length; i++)
             result += theInput.text.charAt(i)
-        theInput.text = result
+        currentText = result
         theInput.cursorPosition = cursorPosition + 1
     }
 
@@ -65,7 +71,7 @@ Rectangle {
         result += " "
         for(i = cursorPosition; i < theInput.text.length; i++)
             result += theInput.text.charAt(i)
-        theInput.text = result
+        currentText = result
         theInput.cursorPosition = cursorPosition + 1
     }
 
@@ -76,12 +82,15 @@ Rectangle {
         var result = ""
         result = theText.substring(0, cursorPosition - 1)
         result += theText.substring(cursorPosition, theText.length)
-        theInput.text = result
+        currentText = result
         theInput.cursorPosition = cursorPosition - 1
     }
 
-    function handleReturnKey() {
-        console.log("return key")
+    function handleReturnKey(theText) {
+        console.log(currentText)
+        returnPressed(currentText)
+        theInput.focus = false
+        theKeyboard.hideKeyboard()
     }
 
     function handleClose() {

@@ -46,8 +46,6 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 25
-            //anchors.top: topMidDiv.bottom
-            //anchors.topMargin: 40
             font.family: fontFamily
             font.pixelSize: parent.width * 1/14
             color: "#36C60F"
@@ -58,8 +56,11 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: nameTitle.bottom
             anchors.topMargin: 10
+            currentText: statusBar.usrName
             width: parent.width * .75; height: width * .15
-            inputText: statusBar.usrName
+            onReturnPressed: {
+                statusBar.usrName = theText
+            }
         }
         Text {
             id: locationTitle
@@ -77,6 +78,7 @@ Rectangle {
             anchors.top: locationTitle.bottom
             anchors.topMargin: 10
             width: parent.width * .75; height: width * .15
+            currentText: "Chicago, IL"
         }
     }
 }
