@@ -7,6 +7,9 @@ AppInterface {
     anchors.fill: parent
     property string title: "23"
 
+    property date data
+
+
     onLanguageChange: {
         statusBar.currentScreenTitle = qsTr("Organizer") + tr.emptyString
     }
@@ -27,17 +30,27 @@ AppInterface {
         height: root.height * 0.9
         y: root.height * 0.1
 
-        Grid {
-            id: view
-            rows: 6
-            columns: 7
-            columnSpacing: 2
-            rowSpacing: 2
+        Row {
+            Column {
+                id: weeks
 
-            property int childWidth: (holder.width - ((columns - 1) * columnSpacing)) / columns
-            property int childHeight: (holder.height - ((rows - 1) * rowSpacing)) / rows
+                property int childWidth: 50
 
 
+            }
+
+            Grid {
+                id: days
+                rows: 6
+                columns: 7
+                columnSpacing: 2
+                rowSpacing: 2
+
+                property int childWidth: (holder.width - weeks.childWidth - ((columns - 1) * columnSpacing)) / columns;
+                property int childHeight: (holder.height - ((rows - 1) * rowSpacing)) / rows
+
+
+            }
         }
     }
 
@@ -50,14 +63,26 @@ AppInterface {
     }
 
     function refresh() {
-        var date = new Date();
 
-        var todayM = date.getDate();
-        var todayW = date.getDay();
-        var month = date.getMonth();
-        var year = date.getFullYear();
-        var todayY = dayOfYear(todayM, month, year);
-        var days = dayCount(month, year);
+        var tdate = getDateObject();
+
+        console.log("today: " + tdate.day  + " " + tdate.month + " " + tdate.year);
+        console.log("day: " + tdate.todayDayOfMonth + " " + tdate.todayDayOfWeek + " " + tdate.todayDayOfYear);
+
+
+        //console.log(tdate.year())
+        Date.prototype.getWeek = function() {
+        var onejan = new Date(this.getFullYear(),0,1);
+        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7) - 1;
+        }
+
+        var todayM = tdate.todayDayOfMonth;
+        var todayW = tdate.todayDayOfWeek;
+        var month = tdate.month;
+        console.log("month: " + month);
+        var year = tdate.year;
+        var todayY = tdate.dayOfYear(todayM, month, year);
+        var days = tdate.daysInMonth(month, year);
         var firstW = (todayM % 7) - todayW;
         var lastW = days % 7;
         var roomLeft = 7 * 6;
@@ -68,8 +93,10 @@ AppInterface {
             lastMonth = 11;
             lastYear = year - 1;
         }
-        var daysLastMonth = dayCount(lastMonth, lastYear);
+        var daysLastMonth = tdate.daysInMonth(lastMonth, lastYear);
 
+        var weekY = tdate.weekOfYear(todayM, month, year);
+        console.log("week: " + weekY);
 
         //*************************************************
         if (firstW == 0) {
@@ -95,80 +122,162 @@ AppInterface {
         }
         //************************************************
 
+        // weeks *****************************************
+        for (var i = 0; i < 7; ++i) {
+            createWeek(weekY);
+        }
 
         console.log(todayM + " " + todayW);
     }
 
-    function isLeap(year) {
-        if (year % 4 == 0) {
-            if (year % 100 == 0) {
-                if (year % 400 == 0)
-                    return true;
-                else
-                    return false;
-            }
-            else
-                return true;
-        }
-        else
-            return false;
-    }
 
-    function dayCount(month, year) {
 
-        if (month < 7) {
-            if (month == 1) {
-                if (isLeap(year))
-                    return 29;
-                else
-                    return 28;
-            }
-            else {
-                if (month % 2 == 0)
-                    return 31;
-                else
-                    return 30;
-            }
-        }
-        else {
-            if (month % 2 == 1)
-                return 31;
-            else
-                return 30;
-        }
-    }
 
-    function dayOfYear(day, month, year) {
-        var days = 0;
 
-        var selector = month - 1;
+    // pass today's date
 
-        switch (selector) {
-        case 10: days += 30;
-        case 9: days += 31;
-        case 8: days += 30;
-        case 7: days += 31;
-        case 6: days += 31;
-        case 5: days += 30;
-        case 4: days += 31;
-        case 3: days += 30;
-        case 2: days += 31;
-        case 1: days += 27;
-            if (isLeap(year))
-                days += 1;
-        case 0: days += 31;
-        }
 
-        days += day;
+    //function firstWeekOfMonth(month, year)
 
-        return days;
+    function firstweekDayOfYear(dateObject) {
+
     }
 
     function createDay(number, color) {
         var component = Qt.createComponent("Organizer/DayItem.qml");
 
-        var item = component.createObject(view, {"number": number, "color2": color});
-        item.width = view.childWidth;
-        item.height = view.childHeight;
+        var item = component.createObject(days, {"number": number, "color2": color});
+        item.width = days.childWidth;
+        item.height = days.childHeight;
     }
+
+    function createWeek(number) {
+        var component = Qt.createComponent("Organizer/WeekItem.qml");
+
+        var item = component.createObject(weeks, {"number": number});
+        item.width = weeks.childWidth;
+        item.height = days.childHeight;
+    }
+
+
+    function getDateObject() {
+
+
+        var date = new Date();
+        var odate = new Object();
+
+
+        odate.isLeap = function(year) {
+            if (year % 4 == 0) {
+                if (year % 100 == 0) {
+                    if (year % 400 == 0)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                    return true;
+            }
+            else
+                return false;
+        }
+
+        // 1 - 365 or 366 if leap
+        odate.dayOfYear = function(day, month, year) {
+
+            var days = 0;
+
+            var selector = month - 1;
+
+            switch (selector) {
+            case 11: days += 30;
+            case 10: days += 31;
+            case 9: days += 30;
+            case 8: days += 31;
+            case 7: days += 31;
+            case 6: days += 30;
+            case 5: days += 31;
+            case 4: days += 30;
+            case 3: days += 31;
+            case 2: days += 28;
+                if (odate.isLeap(year))
+                    days += 1;
+            case 1: days += 31;
+            }
+
+            days += day;
+
+            return days;
+        }
+
+
+        odate.day = date.getDate();
+        odate.month = date.getMonth() + 1;
+        odate.year = date.getFullYear();
+        odate.todayDayOfMonth = odate.day;
+        odate.todayDayOfWeek = date.getDay();
+        odate.todayDayOfYear = odate.dayOfYear(odate.day, odate.month, odate.year);
+
+        odate.dayOfWeek = function(day, month, year) {
+
+            var date = new Date();
+            date.setDate(day - 1);
+            date.setMonth(month - 1);
+            date.setFullYear(year);
+
+            return date.getDay() + 1;
+        };
+
+        odate.dayDifference = function(day1, month1, year1, day2, month2, year2) {
+
+            var daysyear1 = 365;
+            if (odate.isLeap(year1))
+                ++daysyear1;
+
+            var daysLeftYear1 = daysyear1 - (odate.dayOfYear(day1, month1, year1));
+
+            var days = 0;
+
+            for (var i = year2; i > year1; --i) {
+                days += 365;
+                if (odate.isLeap(i))
+                    ++days;
+            }
+
+            return daysLeftYear1 + days + odate.dayOfYear(day2, month2, year2);
+        }
+
+        odate.daysInMonth = function(month, year) {
+            if (month < 7) {
+                if (month == 1) {
+                    if (isLeap(year))
+                        return 29;
+                    else
+                        return 28;
+                }
+                else {
+                    if (month % 2 == 0)
+                        return 31;
+                    else
+                        return 30;
+                }
+            }
+            else {
+                if (month % 2 == 1)
+                    return 31;
+                else
+                    return 30;
+            }
+        }
+
+        odate.weekOfYear = function(day, month, year) {
+            var dayofyear = odate.dayOfYear(day, month, year);
+            var week = Math.ceil(dayofyear / 7);
+
+            return week;
+        }
+
+        return odate;
+    }
+
 }
