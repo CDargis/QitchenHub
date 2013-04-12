@@ -22,8 +22,8 @@ Rectangle {
         color: "transparent"
         Image {
             id: usrSettingsImg
-            anchors.top: parent.top
-            anchors.topMargin: 25
+            anchors.top: locationIn.bottom
+            anchors.topMargin: 50
             anchors.right: middle.left
             anchors.rightMargin: 20
             width: parent.width * .25; height: parent.width * .25
@@ -41,19 +41,11 @@ Rectangle {
             anchors.verticalCenter: usrSettingsImg.verticalCenter
             buttonText: qsTr("Change Picture") + tr.emptyString
         }
-        Rectangle {
-            id: topMidDiv
-            height: 1; width: parent.width * .85
-            anchors.top: usrSettingsImg.bottom
-            anchors.topMargin: 20
-            anchors.horizontalCenter: parent.horizontalCenter
-            color: "#36C60F"
-        }
         Text {
             id: nameTitle
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: topMidDiv.bottom
-            anchors.topMargin: 40
+            anchors.top: parent.top
+            anchors.topMargin: 25
             font.family: fontFamily
             font.pixelSize: parent.width * 1/14
             color: "#36C60F"
@@ -64,8 +56,11 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: nameTitle.bottom
             anchors.topMargin: 10
+            currentText: statusBar.usrName
             width: parent.width * .75; height: width * .15
-            inputText: statusBar.usrName
+            onReturnPressed: {
+                statusBar.usrName = theText
+            }
         }
         Text {
             id: locationTitle
@@ -83,6 +78,7 @@ Rectangle {
             anchors.top: locationTitle.bottom
             anchors.topMargin: 10
             width: parent.width * .75; height: width * .15
+            currentText: "Chicago, IL"
         }
     }
 }

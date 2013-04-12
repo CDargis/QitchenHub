@@ -2,6 +2,7 @@ import QtQuick 2.0
 import TTSVoice 1.0
 import "Indicator"
 import "Organizer"
+import "VirtualKeyboard"
 
 Rectangle {
     id: theMainApplication  // For accessing globals, etc
@@ -37,8 +38,6 @@ Rectangle {
             if(appgrid.activeList[index] !== 0)
               appgrid.activeList[index].changeUnits(currentUnits)
     }
-
-
 
     // apps are parented to this item so they are able to use anchors
     Item {
@@ -153,6 +152,12 @@ Rectangle {
         usrName: "Chris"
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
+    }
+
+    VirtualKeyboard {
+        id: theKeyboard
+        parent: theMainApplication    // Explicitly set to fill the screen
+        visible: false
     }
 
     //************* launch an app ******************/
