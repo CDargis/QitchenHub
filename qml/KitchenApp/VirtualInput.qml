@@ -43,6 +43,12 @@ Rectangle {
         onTextChanged: {
             currentText = text
         }
+        onVisibleChanged: {
+            if((!visible) && (theKeyboard)) {
+                theKeyboard.hideKeyboard()
+                theInput.focus = false
+            }
+        }
     }
 
     // Function definitions ------------------------------------------------------
