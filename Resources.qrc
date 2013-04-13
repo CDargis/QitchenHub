@@ -24,5 +24,7 @@
         <file>googleplus.png</file>
         <file>rss.png</file>
         <file>twitter.png</file>
+        <file>rssSettings.png</file>
+        <file>rssBackArrow.png</file>
     </qresource>
 </RCC>
