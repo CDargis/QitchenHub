@@ -3,10 +3,11 @@ import "VirtualKeyboard"
 
 Rectangle {
     id: inputContainer
+    width: 150; height: 50
     border.color: "black"
     border.width: 1
     property string currentText
-    property string fontSize: height * .75
+    property int fontSize: 18
     signal returnPressed(string theText) // Sends the current text with the signal
 
     MouseArea {
@@ -21,27 +22,51 @@ Rectangle {
         }
     }
 
-    TextInput {
-        id: theInput
-        anchors.centerIn: parent
-        height: inputContainer.height; width: inputContainer.width
-        font.family: fontFamily
-        font.pixelSize: fontSize
-        selectByMouse: true
-        autoScroll: true
-        text: currentText
+    Flickable {
+        id: flick
+        anchors.fill: parent
+        flickableDirection: Flickable.VerticalFlick
+        contentWidth: theInput.width; contentHeight: theInput.height
         clip: true
-        onFocusChanged: {
-            if(focus) {
-                theKeyboard.showKeyboard(inputContainer)
-            }
-            else {
-
-            }
+        function ensureVisible(r)
+        {
+            if (contentY >= r.y)
+                contentY = r.y;
+            else if (contentY+height <= r.y+r.height)
+                contentY = r.y + r.height-height;
         }
-        // For keyboard input!
-        onTextChanged: {
-            currentText = text
+        TextInput {
+            id: theInput
+            width: inputContainer.width
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            font.family: fontFamily
+            font.pixelSize: fontSize
+            selectByMouse: true
+            text: currentText
+            clip: true
+            wrapMode: Text.Wrap
+            onCursorRectangleChanged: flick.ensureVisible(cursorRectangle)
+            onFocusChanged: {
+                if(focus) {
+                    theKeyboard.showKeyboard(inputContainer)
+                }
+                else {
+
+                }
+            }
+            // For keyboard input!
+            onTextChanged: {
+                currentText = text
+            }
+            onVisibleChanged: {
+                if((!visible) && (theKeyboard)) {
+                    theKeyboard.hideKeyboard()
+                    theInput.focus = false
+                }
+            }
         }
     }
 
