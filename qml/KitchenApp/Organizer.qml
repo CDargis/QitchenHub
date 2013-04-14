@@ -216,29 +216,29 @@ AppInterface {
         var name;
 
         switch (number) {
-        case 1: name = "January";
+        case 1: name = qsTr("January") + tr.emptyString;
             break;
-        case 2: name = "February";
+        case 2: name = qsTr("February") + tr.emptyString;
             break;
-        case 3: name = "March";
+        case 3: name = qsTr("March") + tr.emptyString;
             break;
-        case 4: name = "April";
+        case 4: name = qsTr("April") + tr.emptyString;
             break;
-        case 5: name = "May";
+        case 5: name = qsTr("May") + tr.emptyString;
             break;
-        case 6: name = "June";
+        case 6: name = qsTr("June") + tr.emptyString;
             break;
-        case 7: name = "July";
+        case 7: name = qsTr("July") + tr.emptyString;
             break;
-        case 8: name = "August";
+        case 8: name = qsTr("August") + tr.emptyString;
             break;
-        case 9: name = "September";
+        case 9: name = qsTr("September") + tr.emptyString;
             break;
-        case 10: name = "October";
+        case 10: name = qsTr("October") + tr.emptyString;
             break;
-        case 11: name = "November";
+        case 11: name = qsTr("November") + tr.emptyString;
             break;
-        case 12: name = "December";
+        case 12: name = qsTr("December") + tr.emptyString;
             break;
         }
 
@@ -254,9 +254,9 @@ AppInterface {
         console.log("hi say day " + day);
     }
 
-    function showEvents(day) {
+    function showEvents(day, month, year) {
         var component = Qt.createComponent("Organizer/EventMenu.qml");
-        component.createObject(root);
+        component.createObject(root, {"day": day, "month": month, "year": year, "parentItem": root});
     }
 
 }

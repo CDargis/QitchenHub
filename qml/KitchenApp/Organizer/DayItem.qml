@@ -7,6 +7,8 @@ Rectangle {
     radius: 5
 
     property int number: 0
+    property int month: 0
+    property int year: 0
     property string color1: "#000000"
     property string color2: "#000000"
 
@@ -30,7 +32,7 @@ Rectangle {
         anchors.fill: parent
         onClicked: {
             console.log("pressed");
-            organizer.showEvents(number);
+            organizer.showEvents(number, month, year);
         }
     }
 }

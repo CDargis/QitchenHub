@@ -321,19 +321,26 @@ Column {
         else
             firstWeek = tdate.weekOfYear(daysLastMonth - 1, lastMonth, lastYear);
 
+        var nextMonth = month + 1;
+        var nextYear = year;
+        if (nextMonth == 13) {
+            nextMonth = 1;
+            nextYear = year + 1;
+        }
+
 
         for (var i = daysOfPrevMonth - 1; i >= 0; --i) {
-            createDay(index, daysLastMonth - i, "#000000", "#000000");
+            createDay(index, daysLastMonth - i, lastMonth, lastYear, "#000000", "#000000");
             --roomLeft;
             ++index;
         }
         for (var i = 1; i <= daysThisMonth; ++i) {
-            createDay(index, i, "#333333", "#444444");
+            createDay(index, i, month, year, "#333333", "#444444");
             --roomLeft;
             ++index;
         }
         for (var i = 1; i <= roomLeft; ++i) {
-            createDay(index, i, "#000000", "#000000");
+            createDay(index, i, nextMonth, nextYear, "#000000", "#000000");
             ++index;
         }
         for (var i = 0; i < 6; ++i) {
@@ -345,11 +352,13 @@ Column {
 
 
 
-    function createDay(index, number, color1, color2) {
+    function createDay(index, number, month, year, color1, color2) {
         days.children[index].width = days.childWidth;
         days.children[index].height = days.childHeight;
 
         days.children[index].number = number;
+        days.children[index].month = month;
+        days.children[index].year = year;
         days.children[index].color1 = color1;
         days.children[index].color2 = color2;
     }
