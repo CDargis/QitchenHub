@@ -8,7 +8,12 @@ AppInterface {
     property string title: "23"
 
     property date data
+    property string currentMonth
+    property string currentYear
 
+    // for interior use only
+    property real contentYCache
+    property int pos: 0;
 
     onLanguageChange: {
         statusBar.currentScreenTitle = qsTr("Organizer") + tr.emptyString
@@ -24,47 +29,176 @@ AppInterface {
         }
     }
 
-    Column {
-        id: holder
+    Item {
+        width: root.width
+        height: root.height * 0.1
+
+        Text  {
+            anchors.centerIn: parent
+            font.pixelSize: 25
+            color: "#36c60f"
+            style: Text.Outline
+            styleColor: "#3f503a"
+            text: qsTr(currentMonth) + tr.emptyString + " " + currentYear;
+        }
+    }
+
+    ListView {
+        id: list
         width: root.width
         height: root.height * 0.9
         y: root.height * 0.1
+        snapMode: ListView.SnapOneItem
+        clip: true
+        cacheBuffer: list.height / 2;
+        pressDelay: 500
+        //anchors.fill: parent
+        model: model
+        delegate: MonthItem {
+            width: list.width
+            height: list.height
+        }
 
-        Row {
-            Column {
-                id: weeks
+        onDragStarted: {
+            contentYCache = contentY;
+        }
 
-                property int childWidth: 50
 
+        onDragEnded: {
+            /*var currentIndex = list.currentIndex;
+            var lastIndex = list.count - 1;
+
+            console.debug("current Index: " + currentIndex + " lastIndex: " + lastIndex);
+
+            var current = list.i;*/
+
+            console.log("currentPos " + pos);
+            console.log("coontentY: " + list.contentY + " cached: " + contentYCache);
+            // if up
+            if (list.contentY < contentYCache) {
+                --pos;
+
+                if (pos <= 2) {
+
+                    var first = model.get(0);
+                    var month = first.month;
+                    var year = first.year;
+
+                    if (month === 1)
+                        prependMonth(0, 12, year - 1);
+                    else
+                        prependMonth(0, month - 1, year);
+
+                    ++pos;
+                }
+            }
+            else {
+                ++pos;
+
+                if (pos >= list.count - 2) {
+
+                    var last = model.get(model.count - 1);
+                    var month = last.month;
+                    var year = last.year;
+
+                    if (month == 12)
+                        appendMonth(0, 1, year + 1);
+                    else
+                        appendMonth(0, month + 1, year);
+                }
 
             }
 
-            Grid {
-                id: days
-                rows: 6
-                columns: 7
-                columnSpacing: 2
-                rowSpacing: 2
+            var dMonth = model.get(pos).month;
+            var dYear = model.get(pos).year;
+            setDisplayDate(dMonth, dYear);
+        }
 
-                property int childWidth: (holder.width - weeks.childWidth - ((columns - 1) * columnSpacing)) / columns;
-                property int childHeight: (holder.height - ((rows - 1) * rowSpacing)) / rows
+        onCurrentIndexChanged: {
+            console.log("currentIndex: " + list.currentIndex + " itemsTotal: " + list.count);
+        }
 
+    }
 
+    ListModel {
+        id: model
+
+        onCountChanged: {
+            console.log("************  " + model.count + "  ********************");
+            for (var i = 0; i < model.count; ++i) {
+                console.log("position: " + i + " month: " + model.get(i).month + " year: " + model.get(i).year);
             }
+            console.log("************ END ********************");
         }
     }
+
+
 
     Component.onCompleted: {
         languageChange(theMainApplication.language)  // Set the language
         speaker.say(qsTr("Organizer"));
 
         console.log(root.width);
-        refresh();
+        //populate(new Date());
+
+        var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        currentMonth = monthFromNumber(month);
+        currentYear = year;
+
+        console.debug("today: " + day + " " + month + " " + year);
+
+        if (month == 1)  {
+            appendMonth(0, 11, year - 1);
+            appendMonth(0, 12, year - 1);
+        }
+        else if (month == 2) {
+            appendMonth(0, 12, year - 1);
+            appendMonth(0, 1, year);
+        }
+        else {
+            appendMonth(0, month - 2, year);
+            appendMonth(0, month - 1, year);
+        }
+
+        appendMonth(day, month, year);
+
+        if (month == 11) {
+            appendMonth(0, 12, year);
+            appendMonth(0, 1, year + 1);
+        }
+        else if (month == 12) {
+            appendMonth(0, 1, year + 1);
+            appendMonth(0, 2, year + 1);
+        }
+        else {
+            appendMonth(0, month + 1, year);
+            appendMonth(0, month + 2, year);
+        }
+
+        console.log("model count: " + model.count);
+        console.log("list count: " + model.count);
+
+        list.positionViewAtIndex(2, ListView.Beginning);
+        pos = 2;
+        list.currentIndex = 2;
     }
 
-    function refresh() {
+    function prependMonth(day, month, year) {
+        model.insert(0, {"day": day, "month": month, "year": year, "organizer": root});
+    }
 
-        var tdate = getDateObject();
+
+    function appendMonth(day, month, year) {
+        model.append({"day": day, "month": month, "year": year, "organizer": root});
+    }
+
+
+    /*
 
         console.log("today: " + tdate.day  + " " + tdate.month + " " + tdate.year);
         console.log("day: " + tdate.todayDayOfMonth + " " + tdate.todayDayOfWeek + " " + tdate.todayDayOfYear);
@@ -73,222 +207,56 @@ AppInterface {
         console.log("dayOfYear: " + tdate.dayOfYear(1, 1, 2013));
         console.log("daydifference: " + tdate.dayDifference(1, 1, 2000, 1, 1, 2002));
         console.log("daysiinmonth: " + tdate.daysInMonth(12, 2001));
-        console.log("weekofyear: " + tdate.weekOfYear(1, 11, 2012));
+        console.log("weekofyear: " + tdate.weekOfYear(20, 1, 2013));
 
-        //console.log(tdate.year())
-        Date.prototype.getWeek = function() {
-        var onejan = new Date(this.getFullYear(),0,1);
-        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7) - 1;
+    */
+
+    function monthFromNumber(number) {
+
+        var name;
+
+        switch (number) {
+        case 1: name = "January";
+            break;
+        case 2: name = "February";
+            break;
+        case 3: name = "March";
+            break;
+        case 4: name = "April";
+            break;
+        case 5: name = "May";
+            break;
+        case 6: name = "June";
+            break;
+        case 7: name = "July";
+            break;
+        case 8: name = "August";
+            break;
+        case 9: name = "September";
+            break;
+        case 10: name = "October";
+            break;
+        case 11: name = "November";
+            break;
+        case 12: name = "December";
+            break;
         }
 
-        var todayM = tdate.todayDayOfMonth;
-        var todayW = tdate.todayDayOfWeek;
-        var month = tdate.month;
-        console.log("month: " + month);
-        var year = tdate.year;
-        var todayY = tdate.dayOfYear(todayM, month, year);
-        var days = tdate.daysInMonth(month, year);
-        var firstW = (todayM % 7) - todayW;
-        var lastW = days % 7;
-        var roomLeft = 7 * 6;
-
-        var lastMonth = month - 1;
-        var lastYear = year;
-        if (month == 0) {
-            lastMonth = 11;
-            lastYear = year - 1;
-        }
-        var daysLastMonth = tdate.daysInMonth(lastMonth, lastYear);
-
-        var weekY = tdate.weekOfYear(todayM, month, year);
-        console.log("week: " + weekY);
-
-        //*************************************************
-        if (firstW == 0) {
-            for (var i = 6; i >= 0; --i) {
-                createDay(daysLastMonth - i, "#111111");
-                --roomLeft;
-            }
-        }
-        else {
-            for (var i = firstW; i > 0; --i) {
-                createDay(daysLastMonth - i, "#111111");
-                --roomLeft;
-            }
-        }
-        //************************************************
-        for (var i = 0; i < days; ++i) {
-            createDay(i+1, "#333333");
-            --roomLeft;
-        }
-        //************************************************
-        for (var i = 0; i < roomLeft; ++i) {
-            createDay(i+1, "#111111");
-        }
-        //************************************************
-
-        // weeks *****************************************
-        for (var i = 0; i < 7; ++i) {
-            createWeek(weekY);
-        }
-
-        console.log(todayM + " " + todayW);
+        return name;
     }
 
-
-
-
-
-    // pass today's date
-
-
-    //function firstWeekOfMonth(month, year)
-
-    function firstweekDayOfYear(dateObject) {
-
+    function setDisplayDate(month, year) {
+        currentMonth = monthFromNumber(month);
+        currentYear = year;
     }
 
-    function createDay(number, color) {
-        var component = Qt.createComponent("Organizer/DayItem.qml");
-
-        var item = component.createObject(days, {"number": number, "color2": color});
-        item.width = days.childWidth;
-        item.height = days.childHeight;
+    function sayHi(day) {
+        console.log("hi say day " + day);
     }
 
-    function createWeek(number) {
-        var component = Qt.createComponent("Organizer/WeekItem.qml");
-
-        var item = component.createObject(weeks, {"number": number});
-        item.width = weeks.childWidth;
-        item.height = days.childHeight;
-    }
-
-
-    function getDateObject() {
-
-
-        var date = new Date();
-        var odate = new Object();
-
-
-        odate.isLeap = function(year) {
-            if (year % 4 == 0) {
-                if (year % 100 == 0) {
-                    if (year % 400 == 0)
-                        return true;
-                    else
-                        return false;
-                }
-                else
-                    return true;
-            }
-            else
-                return false;
-        }
-
-        // 1 - 365 or 366 if leap
-        odate.dayOfYear = function(day, month, year) {
-
-            var days = 0;
-
-            var selector = month - 1;
-
-            switch (selector) {
-            case 11: days += 30;
-            case 10: days += 31;
-            case 9: days += 30;
-            case 8: days += 31;
-            case 7: days += 31;
-            case 6: days += 30;
-            case 5: days += 31;
-            case 4: days += 30;
-            case 3: days += 31;
-            case 2: days += 28;
-                if (odate.isLeap(year))
-                    days += 1;
-            case 1: days += 31;
-            }
-
-            days += day;
-
-            return days;
-        }
-
-
-        odate.day = date.getDate();
-        odate.month = date.getMonth() + 1;
-        odate.year = date.getFullYear();
-        odate.todayDayOfMonth = odate.day;
-        odate.todayDayOfWeek = date.getDay();
-        odate.todayDayOfYear = odate.dayOfYear(odate.day, odate.month, odate.year);
-
-        odate.dayOfWeek = function(day, month, year) {
-
-            var date = new Date();
-            date.setDate(day);
-            date.setMonth(month - 1);
-            date.setFullYear(year);
-
-            return date.getDay();
-        };
-
-        odate.dayDifference = function(day1, month1, year1, day2, month2, year2) {
-
-            var daysyear1 = 365;
-            if (odate.isLeap(year1))
-                ++daysyear1;
-
-            var daysLeftYear1;
-
-            if (year1 == year2)
-                daysLeftYear1 = -1;
-            else
-                daysLeftYear1 = daysyear1 - (odate.dayOfYear(day1, month1, year1));
-
-            var days = 0;
-
-            for (var i = year2; i > year1 + 1; --i) {
-                days += 365;
-                if (odate.isLeap(i))
-                    ++days;
-            }
-
-            return daysLeftYear1 + days + odate.dayOfYear(day2, month2, year2);
-        }
-
-        odate.daysInMonth = function(month, year) {
-            if (month < 8) {
-                if (month === 2) {
-                    if (odate.isLeap(year))
-                        return 29;
-                    else
-                        return 28;
-                }
-                else {
-                    if (month % 2 == 1)
-                        return 31;
-                    else
-                        return 30;
-                }
-            }
-            else {
-                if (month % 2 == 0)
-                    return 31;
-                else
-                    return 30;
-            }
-        }
-
-        odate.weekOfYear = function(day, month, year) {
-            var dayofyear = odate.dayOfYear(day, month, year);
-            dayofyear += odate.dayOfWeek(day, month, year) - 1;
-            var week = Math.ceil(dayofyear / 7);
-
-            return week;
-        }
-
-        return odate;
+    function showEvents(day) {
+        var component = Qt.createComponent("Organizer/EventMenu.qml");
+        component.createObject(root);
     }
 
 }

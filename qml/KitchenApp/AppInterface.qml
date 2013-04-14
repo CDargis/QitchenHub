@@ -76,14 +76,14 @@ Flickable {
     }
 
     onDragEnded: {
-        // if flickable move more than 200px to the right
-        if (root.contentX < -200 && root.widget == null) {
+        // if flickable move more than 100px to the right
+        if (root.contentX < -100 && root.widget == null) {
             callWidget(widgetSrc, root);
             root.state = "HIDDEN";
             root.interactive = false;
         }
-        // else more than 200px to the left
-        else if (root.contentX > 200)
+        // else more than 100px to the left
+        else if (root.contentX > 100)
         {
             appgrid.terminateIndex(root.index);
             root.destroy();
