@@ -7,7 +7,7 @@ Item {
     property int keyLength: 60  // Side of a key
     property bool shift: false
     property bool special: false
-    property int currentMode: 0  // 0 for English, 1 for Polish
+    property bool alt: false    // For special (Polish chars)
 
     // All bound to compoenents must handle the below signals!
     property var target: null     // Binding the keyboard to identifiers
@@ -102,6 +102,15 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 6
             UniqueKey {
+                id: theAltKey
+                height: keyLength; width: keyLength * 1.4
+                theText: "alt"
+                boldOnChecked: true
+                onCheckedChanged: {
+                    root.alt = checked
+                }
+            }
+            UniqueKey {
                 id: theSpecialKey
                 height: keyLength; width: keyLength * 1.4
                 theText: "123?"
@@ -138,12 +147,12 @@ Item {
         root.visible = false
     }
 
-    function createKeys(lowerChars, upperChars, special, parent) {
+    function createKeys(lowerChars, upperChars, special, altLower, altUpper, parent) {
         for(var i = 0; i < lowerChars.length; i++) {
             var component = Qt.createComponent("Key.qml");
             component.createObject(parent, {"height": keyLength, "width": keyLength, "lower": lowerChars[i]
-                                       , "upper": upperChars[i], "special": special[i], "keyboard": root,
-                                       "fontSize": 30})
+                                       , "upper": upperChars[i], "special": special[i], "keyboard": root
+                                       , "altLower":altLower[i], "altUpper": altUpper[i],  "fontSize": 30})
         }
     }
 
@@ -151,14 +160,20 @@ Item {
         console.log("building the keyboard...")
         createKeys(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
                    ['Q', 'W', 'E', 'R', 'T', 'Y', 'Y', 'I', 'O', 'P'],
-                   ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], row1)
+                   ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+                   ['' , '' , 'ę', '' , '' , '' , '' , '' , 'ó', '' ],
+                   ['' , '' , 'Ę', '' , '' , '' , '' , '' , 'Ó', '' ], row1)
         createKeys(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
                    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-                   ['!', '@', '#', '$', '%', '&', '*', '(', ')'], row2)
+                   ['!', '@', '#', '$', '%', '&', '*', '(', ')'],
+                   ['ą' , 'ś', '' , '' , '' , '' , '' , '', 'ł'],
+                   ['Ą' , 'Ś', '' , '' , '' , '' , '' , '', 'Ł' ], row2)
         makeShiftKey()
         createKeys(['z', 'x', 'c', 'v', 'b', 'n', 'm'],
                    ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-                   [',', '.', '/', '\\', ':', ';', '?'], row3)
+                   [',', '.', '/', '\\', ':', ';', '?'],
+                   ['ż', 'ź' ,'ć' , '' , '' , 'ń' , ''],
+                   ['Ż', 'Ź' ,'Ć' , '' , '' , 'Ń' , ''], row3)
         makeBackspaceKey()
         console.log("...keyboard built")
     }
