@@ -21,6 +21,15 @@ Rectangle {
         onClicked: buttonClick()
     }
 
+
+    Image {
+        id: icon
+        anchors.verticalCenter: parent.verticalCenter   // Center the picture in the button
+        anchors.right: bText.left;
+        source: iconSource
+        height: parent.height * 0.5; width: height  // Constrain the image
+    }
+
     Text {
         id: bText
         anchors.centerIn: parent     // Center the text in the button
@@ -30,14 +39,8 @@ Rectangle {
         font.pointSize: pointSize
         wrapMode: Text.WordWrap
 
-    }
-    Image {
-        id: icon
-        anchors.centerIn: parent   // Center the picture in the button
-        source: iconSource
-        width: parent.width * .5; height: parent.height * .5  // Constrain the image
-    }
 
+    }
     // Function definitions------------------------------------------------
 
     function setText(t) {

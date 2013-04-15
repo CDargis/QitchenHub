@@ -11,8 +11,6 @@
         <file>Temperature-256.png</file>
         <file>downArrow.png</file>
         <file>upArrow.png</file>
-        <file>up-arrow-icon.png</file>
-        <file>down-arrow-icon.png</file>
         <file>ex1.png</file>
         <file>lock.png</file>
         <file>unlock.png</file>
@@ -20,5 +18,8 @@
         <file>red_light.png</file>
         <file>arrowl.png</file>
         <file>arrowr.png</file>
+        <file>plus.png</file>
+        <file>down-arrow-icon.png</file>
+        <file>up-arrow-icon.png</file>
     </qresource>
 </RCC>
