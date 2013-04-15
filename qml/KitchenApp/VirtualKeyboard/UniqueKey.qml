@@ -35,6 +35,7 @@ Rectangle {
 
     // Logic for color inversions on unique keys
     MouseArea {
+        id: keyArea
         anchors.fill: parent
         onClicked: {
             parent.pressed()
@@ -51,20 +52,11 @@ Rectangle {
                 color2 = temp
             }
         }
-        // Invert colors when typing
-        onPressed: {
-            if(boldOnChecked)
-                return
-            var temp = color1
-            color1 = color2
-            color2 = temp
-        }
-        onReleased: {
-            if(boldOnChecked)
-                return
-            var temp = color1
-            color1 = color2
-            color2 = temp
-        }
+    }
+
+    // Snap the state back
+    function snapBack() {
+        if(boldOnChecked && checked)
+            keyArea.clicked(null)
     }
 }
