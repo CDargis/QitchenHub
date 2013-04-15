@@ -6,8 +6,8 @@ Column {
     width: 1000
     height: 1000
 
-    property bool done: false
-
+    property int firstIndex
+    property var allEvents
 
 
     Row {
@@ -278,15 +278,12 @@ Column {
     }
 
     Component.onCompleted: {
-        if (!done) {
-            var date = new Date();
-            date.setFullYear(year);
-            date.setMonth(month - 1);
-            if (day != 0)
-                date.setDate(day);
-            populate(date);
-            done = true;
-        }
+        var date = new Date();
+        date.setFullYear(year);
+        date.setMonth(month - 1);
+        if (day != 0)
+            date.setDate(day);
+        populate(date);
     }
 
     function populate(date) {
@@ -334,6 +331,10 @@ Column {
             --roomLeft;
             ++index;
         }
+
+        // mark the beginning of this month
+        firstIndex = -1 + index;
+
         for (var i = 1; i <= daysThisMonth; ++i) {
             createDay(index, i, month, year, "#333333", "#444444");
             --roomLeft;
@@ -376,5 +377,32 @@ Column {
 
     function getYear() {
         return year;
+    }
+
+
+
+    function applyEvents() {
+
+        var items = new Array;
+
+        for (var i = 0; i < allEvents.length; ++i) {
+
+            var index = firstIndex + parseInt(allEvents[i].day);
+            var item = days.children[index];
+
+
+            if (!item.dealtWith) {
+                item.clearEvents();
+                item.dealtWith = true;
+                items[items.length] = item;
+            }
+
+            days.children[index].addEvent(allEvents[i]);
+
+        }
+
+        for (var i = 0; i < items.length; ++i) {
+            items[i].dealtWith = false;
+        }
     }
 }

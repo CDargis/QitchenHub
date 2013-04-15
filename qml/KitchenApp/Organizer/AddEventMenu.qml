@@ -13,13 +13,15 @@ Item {
     property int year: 0
     property int hour: 1
     property int minute: 5
-    property int dayTo: day
-    property int monthTo: month
-    property int yearTo: year
-    property int hourTo: hour + 1
-    property int minuteTo: minute
+    property int dayTo
+    property int monthTo
+    property int yearTo
+    property int hourTo
+    property int minuteTo
 
-    property Item parentItem
+    property Item organizer
+
+    property var jsonDate
 
     Rectangle {
         anchors.fill: parent
@@ -41,13 +43,17 @@ Item {
         border.color: "#36c60f"
         border.width: 1
 
+        MouseArea {
+            anchors.fill: parent
+        }
+
 
         CommonText {
             id: windowTitle
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: window.top
             anchors.topMargin: 5
-            text: qsTr("New Event") + " " + parentItem.monthFromNumber(month) + " " + day + ", " + year + tr.emptyString
+            text: qsTr("New Event") + " " + organizer.monthFromNumber(month) + " " + day + ", " + year + tr.emptyString
         }
 
         CommonText {
@@ -135,7 +141,7 @@ Item {
                     }
                 }
                 CommonText {
-                    text: parentItem.monthFromNumber(month);
+                    text: organizer.monthFromNumber(month);
                 }
 
                 Image {
@@ -316,9 +322,11 @@ Item {
             anchors.horizontalCenter: window.horizontalCenter
             anchors.topMargin: 5
             width: window.width
+            height: to1.height
 
             //************ to month *******************************
             Column {
+                id: to1
                 x: parent.width * 1/10 - width/2;
                 Image {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -334,7 +342,7 @@ Item {
                     }
                 }
                 CommonText {
-                    text: parentItem.monthFromNumber(monthTo);
+                    text: organizer.monthFromNumber(monthTo);
                 }
 
                 Image {
@@ -490,10 +498,23 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            setToMinute(To - 5);
+                            setToMinute(minuteTo - 5);
                         }
                     }
                 }
+            }
+        }
+
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: to.bottom
+            anchors.topMargin: 15
+            buttonText: qsTr("Store") + tr.emptyString
+
+            onButtonClick: {
+                flushToJSON();
+                store();
+                root.destroy();
             }
         }
     }
@@ -508,6 +529,13 @@ Item {
 
         if (minute == 60)
             minute = 0;
+
+        // copy values instead of binding
+        dayTo = 0 + day.valueOf();
+        monthTo = 0 + month.valueOf();
+        yearTo = 0 + year.valueOf();
+        hourTo = 1 + hour.valueOf();
+        minuteTo = 0 + minute.valueOf();
     }
     //************************************* start time functions ******************************************
     function setFromMonth(newValue) {
@@ -606,5 +634,52 @@ Item {
             minuteTo = 0;
         else
             minuteTo = newValue;
+    }
+
+    //************************************************** core functions *************************************************
+
+    function flushToJSON() {
+
+        // fix numbers
+        var m = month.toString();
+        var d = day.toString();
+        var h = hour.toString();
+        var min = minute.toString();
+        var mTo = monthTo.toString();
+        var dTo = dayTo.toString();
+        var hTo = hourTo.toString();
+        var minTo = minuteTo.toString();
+
+        if (month < 10)
+            m = "0"+m;
+        if (day < 10)
+            d = "0"+d;
+        if (hour < 10)
+            h = "0"+h;
+        if (minute < 10)
+            min = "0"+min;
+        if (monthTo < 10)
+            mTo = "0"+mTo;
+        if (dayTo < 10)
+            dTo = "0"+dTo;
+        if (hourTo < 10)
+            hTo = "0"+hTo;
+        if (minuteTo < 10)
+            minTo = "0"+minTo;
+
+
+        jsonDate = {"uid": "",
+            "start_date": year+"-"+m+"-"+d,
+            "start_time": h+":"+min+":00",
+            "title": title.currentText,
+            "location": location.currentText,
+            "description": desc.currentText,
+            "end_date": yearTo+"-"+mTo+"-"+dTo,
+            "end_time": hTo+":"+minTo+":00"};
+
+    }
+
+    function store() {
+        organizer.storeEvent(jsonDate);
     }
 }

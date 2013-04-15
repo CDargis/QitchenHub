@@ -10,6 +10,8 @@ Item {
     property int year: 0
     property Item parentItem
 
+    property var eventData
+
     Rectangle {
         anchors.fill: parent
         color: "#000000"
@@ -30,7 +32,12 @@ Item {
         border.color: "#36c60f"
         border.width: 1
 
+        MouseArea {
+            anchors.fill: parent
+        }
+
         Column {
+            id: header
             width: window.width
             spacing: 2
             CommonText {
@@ -47,11 +54,45 @@ Item {
 
                 onButtonClick: {
                     var component = Qt.createComponent("AddEventMenu.qml");
-                    var object = component.createObject(root, {"windowHeight": window.height * 1.3, "day": day, "month": month, "year": year, "parentItem": parentItem});
+                    var object = component.createObject(root, {"windowHeight": window.height * 1.3, "day": day, "month": month, "year": year, "organizer": parentItem});
                 }
             }
         }
 
+        Flickable {
+            id: eventView
+            anchors.top: header.bottom
+            anchors.topMargin: 10
+            anchors.horizontalCenter: window.horizontalCenter
+            width: window.width - 20;
+            height: window.height - header.height - 15;
+            flickableDirection: Flickable.VerticalFlick
+            clip: true
+            contentHeight: viewPositioner.height
+
+            Column {
+                id: viewPositioner
+                width: eventView.width
+                spacing: 5
+            }
+        }
+    }
+
+    function showEvents() {
+
+        if (eventData === null)
+            return;
+
+        for (var i = 0; i < eventData.length; ++i) {
+
+            var component = Qt.createComponent("EventDelegate.qml");
+            var object = component.createObject(viewPositioner);
+
+            object.time = eventData[i].hour + ":" + eventData[i].minute;
+            object.desc = qsTr("Title") + ": " + eventData[i].title + "\n" +
+                    qsTr("Location") + ": " + eventData[i].location + "\n" +
+                    qsTr("Description") + ": " + eventData[i].description + tr.emptyString;
+        }
     }
 
 }

@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick.LocalStorage 2.0
 import "Organizer"
 
 AppInterface {
@@ -11,9 +10,13 @@ AppInterface {
     property string currentMonth
     property string currentYear
 
+    property var events
+
     // for interior use only
     property real contentYCache
+    property Item itemCache
     property int pos: 0;
+    property int posCache
 
     onLanguageChange: {
         statusBar.currentScreenTitle = qsTr("Organizer") + tr.emptyString
@@ -52,6 +55,7 @@ AppInterface {
         clip: true
         cacheBuffer: list.height / 2;
         pressDelay: 500
+        highlightFollowsCurrentItem: false
         //anchors.fill: parent
         model: model
         delegate: MonthItem {
@@ -60,58 +64,74 @@ AppInterface {
         }
 
         onDragStarted: {
+
             contentYCache = contentY;
+            var point = list.mapToItem(list.contentItem, list.width*0.5, list.height*0.5);
+            itemCache = list.itemAt(point.x, point.y);
+            posCache = pos;
+
         }
 
-
         onDragEnded: {
-            /*var currentIndex = list.currentIndex;
-            var lastIndex = list.count - 1;
 
-            console.debug("current Index: " + currentIndex + " lastIndex: " + lastIndex);
-
-            var current = list.i;*/
-
-            console.log("currentPos " + pos);
-            console.log("coontentY: " + list.contentY + " cached: " + contentYCache);
             // if up
-            if (list.contentY < contentYCache) {
+            if (list.contentY < contentYCache)
                 --pos;
-
-                if (pos <= 2) {
-
-                    var first = model.get(0);
-                    var month = first.month;
-                    var year = first.year;
-
-                    if (month === 1)
-                        prependMonth(0, 12, year - 1);
-                    else
-                        prependMonth(0, month - 1, year);
-
-                    ++pos;
-                }
-            }
-            else {
+            else
                 ++pos;
 
-                if (pos >= list.count - 2) {
+        }
 
-                    var last = model.get(model.count - 1);
-                    var month = last.month;
-                    var year = last.year;
+        onMovementEnded: {
 
-                    if (month == 12)
-                        appendMonth(0, 1, year + 1);
-                    else
-                        appendMonth(0, month + 1, year);
+            var point = list.mapToItem(list.contentItem, list.width*0.5, list.height*0.5);
+            var item = list.itemAt(point.x, point.y);
+
+            if (item != itemCache) {
+
+                // we went up
+                if (pos < posCache) {
+
+                    if (pos <= 2) {
+                        var first = model.get(0);
+                        var month = first.month;
+                        var year = first.year;
+
+                        if (month === 1)
+                            prependMonth(0, 12, year - 1);
+                        else
+                            prependMonth(0, month - 1, year);
+                        ++pos;
+                    }
+
+                }
+                else {  // we went down
+
+                    if (pos >= list.count - 2) {
+                        var last = model.get(model.count - 1);
+                        var month = last.month;
+                        var year = last.year;
+
+                        if (month == 12)
+                            appendMonth(0, 1, year + 1);
+                        else
+                            appendMonth(0, month + 1, year);
+                    }
+
                 }
 
-            }
+                var dMonth = model.get(pos).month;
+                var dYear = model.get(pos).year;
+                setDisplayDate(dMonth, dYear);
 
-            var dMonth = model.get(pos).month;
-            var dYear = model.get(pos).year;
-            setDisplayDate(dMonth, dYear);
+                item = applyEvents(pos);
+                item.applyEvents();
+            }
+            // we ended back at the same position
+            // roll back pos changes
+            else
+                pos = posCache;
+
         }
 
         onCurrentIndexChanged: {
@@ -138,8 +158,7 @@ AppInterface {
         languageChange(theMainApplication.language)  // Set the language
         speaker.say(qsTr("Organizer"));
 
-        console.log(root.width);
-        //populate(new Date());
+        retrieveEvents();
 
         var date = new Date();
 
@@ -186,6 +205,9 @@ AppInterface {
         list.positionViewAtIndex(2, ListView.Beginning);
         pos = 2;
         list.currentIndex = 2;
+
+        applyEvents(pos);
+        list.currentItem.applyEvents();
     }
 
     function prependMonth(day, month, year) {
@@ -254,9 +276,64 @@ AppInterface {
         console.log("hi say day " + day);
     }
 
-    function showEvents(day, month, year) {
+    function showEvents(day, month, year, events) {
         var component = Qt.createComponent("Organizer/EventMenu.qml");
-        component.createObject(root, {"day": day, "month": month, "year": year, "parentItem": root});
+        var object = component.createObject(root, {"day": day, "month": month, "year": year, "parentItem": root});
+        object.eventData = events;
+        object.showEvents();
+    }
+
+    function storeEvent(jsonDate) {
+        jsonDate.uid = statusBar.usrName;
+        lsproxy.storeEvent(jsonDate);
+    }
+
+    function retrieveEvents() {
+
+        lsproxy.readEvents();
+
+        var allEvents = lsproxy.events;
+        if (events !== null)
+            events = new Array;
+        var start = events.length;
+
+        for (var i = 0; i < allEvents.length; ++i) {
+            events[i+start] = allEvents[i];
+        }
+    }
+
+
+    function applyEvents(position) {
+
+        var point = list.mapToItem(list.contentItem, list.width*0.5, list.height*0.5);
+
+        console.debug(point.x + " " + point.y);
+
+        var item = list.itemAt(point.x, point.y);
+
+
+        console.log("current: " + item.getMonth());
+
+        if (list.currentItem.allEvents != undefined)
+            list.currentItem.allEvents = undefined;
+
+        var allEvents = new Array;
+        var index = 0;
+
+        for (var i = 0; i < events.length; ++i) {
+
+            var month = events[i].month;
+
+            console.debug("Month in position: " + model.get(position).month);
+
+            if (model.get(position).month == month) {
+                allEvents[index] = events[i];
+                ++index;
+            }
+        }
+        item.allEvents = allEvents;
+
+        return item;
     }
 
 }

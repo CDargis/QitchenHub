@@ -16,7 +16,7 @@ Flickable {
     flickableDirection: Flickable.HorizontalFlick
     interactive: false
     flickDeceleration: 20
-    property int index
+    property int appIndex
 
     signal languageChange(string lang) // Changing the language, dude
     signal changeUnits(string units) // Changing the units, man
@@ -85,7 +85,7 @@ Flickable {
         // else more than 100px to the left
         else if (root.contentX > 100)
         {
-            appgrid.terminateIndex(root.index);
+            appgrid.terminateIndex(root.appIndex);
             root.destroy();
         }
     }
