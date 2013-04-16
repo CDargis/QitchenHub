@@ -1,12 +1,15 @@
 import QtQuick 2.0
 import "Organizer"
+import "Organizer/DateObject.js" as DateSource
 
 AppInterface {
     id: root
     anchors.fill: parent
     property string title: "23"
 
-    property date data
+    widgetSrc: "Organizer/OrganizerWidget.qml"
+
+    property var oDate
     property string currentMonth
     property string currentYear
 
@@ -17,6 +20,10 @@ AppInterface {
     property Item itemCache
     property int pos: 0;
     property int posCache
+
+    // stores reference to eventMenu
+    // when it is open
+    property Item eventMenu
 
     onLanguageChange: {
         statusBar.currentScreenTitle = qsTr("Organizer") + tr.emptyString
@@ -125,7 +132,7 @@ AppInterface {
                 setDisplayDate(dMonth, dYear);
 
                 item = applyEvents(pos);
-                item.applyEvents();
+                //item.applyEvents();
             }
             // we ended back at the same position
             // roll back pos changes
@@ -161,6 +168,8 @@ AppInterface {
         retrieveEvents();
 
         var date = new Date();
+
+        oDate = DateSource.getDateObject(date);
 
         var day = date.getDate();
         var month = date.getMonth() + 1;
@@ -207,7 +216,7 @@ AppInterface {
         list.currentIndex = 2;
 
         applyEvents(pos);
-        list.currentItem.applyEvents();
+        //list.currentItem.applyEvents();
     }
 
     function prependMonth(day, month, year) {
@@ -267,6 +276,31 @@ AppInterface {
         return name;
     }
 
+    function dayFromNumber(number) {
+
+        var name;
+
+        switch (number) {
+        case 1: name = qsTr("Monday") + tr.emptyString;
+            break;
+        case 2: name = qsTr("Tuesday") + tr.emptyString;
+            break;
+        case 3: name = qsTr("Wednesday") + tr.emptyString;
+            break;
+        case 4: name = qsTr("Thursday") + tr.emptyString;
+            break;
+        case 5: name = qsTr("Friday") + tr.emptyString;
+            break;
+        case 6: name = qsTr("Saturday") + tr.emptyString;
+            break;
+        case 7: name = qsTr("Sunday") + tr.emptyString;
+            break;
+        }
+
+        return name;
+    }
+
+
     function setDisplayDate(month, year) {
         currentMonth = monthFromNumber(month);
         currentYear = year;
@@ -278,19 +312,22 @@ AppInterface {
 
     function showEvents(day, month, year, events) {
         var component = Qt.createComponent("Organizer/EventMenu.qml");
-        var object = component.createObject(root, {"day": day, "month": month, "year": year, "parentItem": root});
-        object.eventData = events;
-        object.showEvents();
+        eventMenu = component.createObject(root, {"day": day, "month": month, "year": year, "parentItem": root});
+        eventMenu.eventData = events;
+        eventMenu.showEvents();
     }
 
     function storeEvent(jsonDate) {
         jsonDate.uid = statusBar.usrName;
         lsproxy.storeEvent(jsonDate);
+        eventMenu.addEventToList(jsonDate);
+        retrieveEvents();
+        applyEvents(pos);
     }
 
     function retrieveEvents() {
 
-        lsproxy.readEvents();
+        //lsproxy.readEvents();
 
         var allEvents = lsproxy.events;
         if (events !== null)
@@ -333,7 +370,59 @@ AppInterface {
         }
         item.allEvents = allEvents;
 
+        item.applyEvents();
+
         return item;
+    }
+
+    function verifyDate(jsonDate) {
+
+        if (jsonDate.uid != undefined)
+            if (jsonDate.year != undefined)
+                if (jsonDate.month != undefined)
+                   if (jsonDate.day != undefined)
+                    if (jsonDate.hour != undefined)
+                        if (jsonDate.minute != undefined)
+                            if (jsonDate.title != undefined)
+                                if (jsonDate.location != undefined)
+                                    if (jsonDate.description != undefined)
+                                        if (jsonDate.yearTo != undefined)
+                                            if (jsonDate.monthTo != undefined)
+                                                if (jsonDate.dayTo != undefined)
+                                                    if (jsonDate.hourTo != undefined)
+                                                        if (jsonDate.minuteTo != undefined) {
+                                                            console.debug("Good!");
+                                                            return;
+                                                        }
+        console.log("********************************************************\n" +
+                    "********************* BROKE ******************************\n" +
+                    "**********************************************************");
+
+
+    }
+
+    function requestUpcoming() {
+
+        var upcoming = new Array;
+
+        var thisDay = oDate.day;
+        var thisMonth = oDate.month;
+        var thisYear = oDate.year;
+
+        for (var i = 0; i < events.length; ++i) {
+
+            var nextDay = parseInt(events[i].day);
+            var nextMonth = parseInt(events[i].month);
+            var nextYear = parseInt(events[i].year);
+
+            var diff = oDate.dayDifference(thisDay, thisMonth, thisYear, nextDay, nextMonth, nextYear);
+
+            if (diff >= 0 && diff <= 7) {
+                upcoming[upcoming.length] = events[i];
+            }
+        }
+
+        return upcoming;
     }
 
 }

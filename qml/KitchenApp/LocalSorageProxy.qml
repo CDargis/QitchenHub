@@ -86,13 +86,24 @@ Item {
     function addEventCallBack(tx) {
         tx.executeSql("insert into Events values(?, ?, ?, ?, ?, ?, ?, ?)",
                       [input.uid,
+                      input.year+"-"+input.month+"-"+input.day,
+                      input.hour+":"+input.minute+":00",
+                      input.title,
+                      input.location,
+                      input.description,
+                      input.yearTo+"-"+input.monthTo+"-"+input.dayTo,
+                      input.hourTo+":"+input.minuteTo+":00"]);
+
+
+
+                      /*[input.uid,
                       input.start_date,
                       input.start_time,
                       input.title,
                       input.location,
                       input.description,
                       input.end_date,
-                      input.end_time]);
+                      input.end_time]);*/
 
     }
 
@@ -113,10 +124,10 @@ Item {
     function readEventsCallBack(tx) {
         var response = tx.executeSql("select * from Events");
 
-        if (events == null)
-            events = new Array;
 
-        var end = events.length;
+        events = new Array;
+
+        //var end = events.length;
 
         for (var i = 0; i < response.rows.length; ++i) {
             var start_date = response.rows.item(i).start_date.split("-");
@@ -124,7 +135,7 @@ Item {
             var start_time = response.rows.item(i).start_time.split(":");
             var end_time = response.rows.item(i).end_time.split(":");
 
-            events[i+end] = {"uid": response.rows.item(i).uid,
+            events[i] = {"uid": response.rows.item(i).uid,
                 "day": start_date[2],
                 "month": start_date[1],
                 "year": start_date[0],
@@ -147,5 +158,11 @@ Item {
 
     function grabSecond(string) {
         return string.charAt(3) + "" + string.charAt(9);
+    }
+
+
+    Component.onCompleted: {
+        readEvents();
+        //dropEvents();
     }
 }

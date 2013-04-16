@@ -650,33 +650,47 @@ Item {
         var hTo = hourTo.toString();
         var minTo = minuteTo.toString();
 
-        if (month < 10)
+        if (parseInt(month < 10))
             m = "0"+m;
-        if (day < 10)
+        if (parseInt(day < 10))
             d = "0"+d;
-        if (hour < 10)
+        if (parseInt(hour < 10))
             h = "0"+h;
-        if (minute < 10)
+        if (parseInt(minute < 10))
             min = "0"+min;
-        if (monthTo < 10)
+        if (parseInt(monthTo < 10))
             mTo = "0"+mTo;
-        if (dayTo < 10)
+        if (parseInt(dayTo < 10))
             dTo = "0"+dTo;
-        if (hourTo < 10)
+        if (parseInt(hourTo < 10))
             hTo = "0"+hTo;
-        if (minuteTo < 10)
+        if (parseInt(minuteTo < 10))
             minTo = "0"+minTo;
 
 
-        jsonDate = {"uid": "",
+        /*jsonDate = {"uid": "",
             "start_date": year+"-"+m+"-"+d,
             "start_time": h+":"+min+":00",
             "title": title.currentText,
             "location": location.currentText,
             "description": desc.currentText,
             "end_date": yearTo+"-"+mTo+"-"+dTo,
-            "end_time": hTo+":"+minTo+":00"};
+            "end_time": hTo+":"+minTo+":00"};*/
 
+        jsonDate = {"uid": "",
+            "day": d,
+            "month": m,
+            "year": year,
+            "hour": h,
+            "minute": min,
+            "title": title.currentText,
+            "location": location.currentText,
+            "description": desc.currentText,
+            "dayTo": dTo,
+            "monthTo": mTo,
+            "yearTo": yearTo,
+            "hourTo": hTo,
+            "minuteTo": minTo};
     }
 
     function store() {

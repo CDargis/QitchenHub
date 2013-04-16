@@ -387,7 +387,10 @@ Column {
 
         for (var i = 0; i < allEvents.length; ++i) {
 
+            console.log("day: " + allEvents[i].day);
+
             var index = firstIndex + parseInt(allEvents[i].day);
+            console.debug("index:" + index);
             var item = days.children[index];
 
 

@@ -37,9 +37,9 @@ Rectangle {
     CommonText {
         anchors.left: box.right
         anchors.leftMargin: 5
-
+        wrapMode: Text.WordWrap
         height: (lineCount+1) * font.pixelSize
-        width: root.width
+        width: root.width - box.width
         text: desc
     }
 }

@@ -75,26 +75,33 @@ function getDateObject(date) {
 
     odate.dayDifference = function(day1, month1, year1, day2, month2, year2) {
 
-        var daysyear1 = 365;
-        if (odate.isLeap(year1))
-            ++daysyear1;
+        if (year1 <= year2)
+            if (month1 <= month2)
+                if (day1 <= day2) {
 
-        var daysLeftYear1;
+                    var daysyear1 = 365;
+                    if (odate.isLeap(year1))
+                        ++daysyear1;
 
-        if (year1 == year2)
-            daysLeftYear1 = -1;
-        else
-            daysLeftYear1 = daysyear1 - (odate.dayOfYear(day1, month1, year1));
+                    var daysLeftYear1;
 
-        var days = 0;
+                    if (year1 == year2)
+                        return odate.dayOfYear(day2, month2, year2) - odate.dayOfYear(day1, month1, year1);
 
-        for (var i = year2; i > year1 + 1; --i) {
-            days += 365;
-            if (odate.isLeap(i))
-                ++days;
-        }
+                    daysLeftYear1 = daysyear1 - odate.dayOfYear(day1, month1, year1);
 
-        return daysLeftYear1 + days + odate.dayOfYear(day2, month2, year2);
+                    var days = 0;
+
+                    for (var i = year2; i > year1 + 1; --i) {
+                        days += 365;
+                        if (odate.isLeap(i))
+                            ++days;
+                    }
+
+                    return daysLeftYear1 + days + odate.dayOfYear(day2, month2, year2);
+                }
+
+        return -1;
     }
 
     odate.daysInMonth = function(month, year) {

@@ -74,25 +74,44 @@ Item {
                 id: viewPositioner
                 width: eventView.width
                 spacing: 5
+
+                onChildrenChanged: {
+                    console.log(viewPositioner.children.length);
+                }
             }
         }
     }
 
     function showEvents() {
 
-        if (eventData === null)
+        if (eventData == null)
             return;
 
         for (var i = 0; i < eventData.length; ++i) {
-
-            var component = Qt.createComponent("EventDelegate.qml");
-            var object = component.createObject(viewPositioner);
-
-            object.time = eventData[i].hour + ":" + eventData[i].minute;
-            object.desc = qsTr("Title") + ": " + eventData[i].title + "\n" +
-                    qsTr("Location") + ": " + eventData[i].location + "\n" +
-                    qsTr("Description") + ": " + eventData[i].description + tr.emptyString;
+            showSingleEvent(eventData[i]);
         }
+    }
+
+    function showSingleEvent(event) {
+
+        var component = Qt.createComponent("EventDelegate.qml");
+        var object = component.createObject(viewPositioner);
+
+        object.time = event.hour + ":" + event.minute;
+        object.desc = qsTr("Title") + ": " + event.title + "\n" +
+                qsTr("Location") + ": " + event.location + "\n" +
+                qsTr("Description") + ": " + event.description + tr.emptyString;
+
+    }
+
+    function addEventToList(jsonDate) {
+
+        if (eventData == null)
+            eventData = new Array;
+
+        eventData[eventData.length] = jsonDate
+
+        showSingleEvent(eventData[eventData.length - 1]);
     }
 
 }
