@@ -21,6 +21,10 @@ Item {
     onKeyPress: {
         if(target !== null)
             target.handleKeyPress(key)
+        // "Snap" the keyboard back into place
+        theAltKey.snapBack()
+        theSpecialKey.snapBack()
+        row3.children[0].snapBack() // The shift key will be at the 0 index
     }
 
     onBackspace: {
