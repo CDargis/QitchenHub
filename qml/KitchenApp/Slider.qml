@@ -8,6 +8,8 @@ Item {
     property int sliderWidth: 50;
     property int sliderHeight: 10;
     property real value: 1
+    property bool canDrag: true
+    property bool showProgress: true
     onValueChanged: updatePos();
     property real maximum: 1
     property real minimum: 1
@@ -27,11 +29,24 @@ Item {
     }
 
     Rectangle {
+        id: background
         anchors.fill: parent
         border.color: "white"; border.width: 0; radius: 8
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#66343434" }
             GradientStop { position: 1.0; color: "#66000000" }
+        }
+    }
+    // Progress rect
+    Rectangle {
+        anchors.verticalCenter: background.verticalCenter
+        visible: showProgress
+        radius: 8
+        height: background.height
+        width: handle.x + (handle.width / 2)
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#36C60F" }
+            GradientStop { position: 1.0; color: "#2B950A" }
         }
     }
 
@@ -57,7 +72,7 @@ Item {
         MouseArea {
             id: mouse
             anchors.fill: parent; drag.target: parent
-            drag.axis: Drag.XAxis; drag.minimumX: 2; drag.maximumX: slider.xMax+2
+            drag.axis: (canDrag) ? Drag.XAxis : Drag.YAxis; drag.minimumX: 2; drag.maximumX: slider.xMax+2
             onPositionChanged: { value = (maximum - minimum) * (handle.x-2) / slider.xMax + minimum; }
         }
     }

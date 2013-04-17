@@ -13,7 +13,7 @@ Rectangle {
         statusBar.setCurrentScreenTitle("Qitchen Hub")
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
-        speaker.say("Welcome my pedigree chums!")
+       // speaker.say("Welcome my pedigree chums!")
     }
 
     // Define globals here ... at least for now
@@ -105,9 +105,14 @@ Rectangle {
                     onClicked: launch("Organizer.qml",1)
                 }
             }
-            DayItem {
-                width: 125
-                height: 125
+            Button {
+                id: buttonMus
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Music Player") + tr.emptyString
+                // make sure you put the name of your qml as an argument
+                onButtonClick: launch("MusicPlayer.qml",0)
             }
             Button {
                 width: 125

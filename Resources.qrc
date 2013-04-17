@@ -34,5 +34,8 @@
         <file>lcd/9.png</file>
         <file>lcd/dots.png</file>
         <file>wallpaper.jpg</file>
+        <file>next_track_button.png</file>
+        <file>pause_button.png</file>
+        <file>play_button.png</file>
     </qresource>
 </RCC>
