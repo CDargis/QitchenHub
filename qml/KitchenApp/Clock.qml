@@ -21,6 +21,8 @@ Rectangle {
         Image {
             id: dots
             anchors.centerIn: parent;
+            height: screen.height * 0.90
+            width: screen.width * 0.15
             source: "qrc:/images/lcd/dots.png"
 
             property bool shown: true
@@ -32,6 +34,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.right: dots.left
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
         Image {
@@ -41,6 +45,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.right: second.left
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
         Image {
@@ -50,6 +56,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.left: dots.right
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
         Image {
@@ -59,6 +67,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.left: third.right
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
 
