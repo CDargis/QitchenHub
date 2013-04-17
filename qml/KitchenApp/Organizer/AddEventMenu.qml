@@ -38,7 +38,7 @@ Item {
         id: window
         anchors.centerIn: parent
         width: root.width * 0.5
-        height: windowHeight
+        height: windowTitle.height + title.height + location.height + desc.height + startTime.height + from.height + endTime.height + to.height + storeButton.height + 98
         color: "#000000"
         border.color: "#36c60f"
         border.width: 1
@@ -506,10 +506,11 @@ Item {
         }
 
         Button {
+            id: storeButton
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: to.bottom
             anchors.topMargin: 15
-            buttonText: qsTr("Store") + tr.emptyString
+            buttonText: qsTr("Save") + tr.emptyString
 
             onButtonClick: {
                 flushToJSON();

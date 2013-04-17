@@ -4,7 +4,7 @@ Rectangle {
     id: root
     anchors.horizontalCenter: parent.horizontalCenter
     width: parent.width * 0.9
-    height: 90
+    height: width * 0.4
     radius: 10
     gradient: Gradient {
         GradientStop { position: 0.0; color: "#777777" }
@@ -17,10 +17,14 @@ Rectangle {
         width: parent.width * 0.9
         height: parent.height * 0.85
         color: "#000000"
+        border.width: 2
+        border.color: "#333333"
 
         Image {
             id: dots
             anchors.centerIn: parent;
+            height: screen.height * 0.90
+            width: screen.width * 0.15
             source: "qrc:/images/lcd/dots.png"
 
             property bool shown: true
@@ -32,6 +36,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.right: dots.left
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
         Image {
@@ -41,6 +47,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.right: second.left
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
         Image {
@@ -50,6 +58,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.left: dots.right
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
         Image {
@@ -59,6 +69,8 @@ Rectangle {
 
             anchors.top: dots.top
             anchors.left: third.right
+            height: screen.height * 0.90
+            width: screen.width * 0.2
             source: "qrc:/images/lcd/" + digit + ".png"
         }
 

@@ -31,6 +31,7 @@ WidgetInterface {
 
         CommonText {
             anchors.centerIn: parent
+            font.pixelSize: icon.height * 0.5
             text: day
         }
     }
@@ -55,7 +56,7 @@ WidgetInterface {
 
         Column {
             id: eventsContainer
-            spacing: 2
+            spacing: 0
         }
     }
 
