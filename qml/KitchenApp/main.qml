@@ -177,7 +177,7 @@ Rectangle {
         if(appgrid.activeList[index] === 0){
             var component = Qt.createComponent(qmlComp);
             if(component.status === Component.Ready) {
-                var app = component.createObject(desktop,{"index": index});
+                var app = component.createObject(desktop,{"appIndex": index});
 
                 // register an app with the dock
                 app.callWidget.connect(dock.createWidget);
