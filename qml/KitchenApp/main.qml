@@ -109,6 +109,7 @@ Rectangle {
                 width: 125
                 height: 125
             }
+
             Button {
                 id: socialAppLauch
                 width: 200
@@ -186,7 +187,6 @@ Rectangle {
             else console.log(component.errorString());
         }
         else{
-            console.log(appgrid.activeList[index].index);
             appgrid.activeList[index].show();
             if (appgrid.activeList[index].widget !== null)
                 appgrid.activeList[index].widget.terminate();
