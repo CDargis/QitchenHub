@@ -50,6 +50,11 @@ Rectangle {
         width: parent.width * 0.85
         height: parent.height - desktop.y;
 
+        Image {
+            anchors.fill: parent
+            source: "qrc:/images/wallpaper.jpg"
+        }
+
         Voice {
             id: speaker
         }

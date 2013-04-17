@@ -22,5 +22,17 @@
         <file>down-arrow-icon.png</file>
         <file>up-arrow-icon.png</file>
         <file>calendar-icon.png</file>
+        <file>lcd/0.png</file>
+        <file>lcd/1.png</file>
+        <file>lcd/2.png</file>
+        <file>lcd/3.png</file>
+        <file>lcd/4.png</file>
+        <file>lcd/5.png</file>
+        <file>lcd/6.png</file>
+        <file>lcd/7.png</file>
+        <file>lcd/8.png</file>
+        <file>lcd/9.png</file>
+        <file>lcd/dots.png</file>
+        <file>wallpaper.jpg</file>
     </qresource>
 </RCC>
