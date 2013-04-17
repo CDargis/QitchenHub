@@ -39,12 +39,21 @@ Rectangle {
               appgrid.activeList[index].changeUnits(currentUnits)
     }
 
+    LocalSorageProxy {
+        id: lsproxy
+    }
+
     // apps are parented to this item so they are able to use anchors
     Item {
         id: desktop
         anchors.top: statusBar.bottom
         width: parent.width * 0.85
         height: parent.height - desktop.y;
+
+        Image {
+            anchors.fill: parent
+            source: "qrc:/images/wallpaper.jpg"
+        }
 
         Voice {
             id: speaker

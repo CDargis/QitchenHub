@@ -1,11 +1,29 @@
 import QtQuick 2.0
-import QtQuick.LocalStorage 2.0
 import "Organizer"
+import "Organizer/DateObject.js" as DateSource
 
 AppInterface {
     id: root
     anchors.fill: parent
     property string title: "23"
+
+    widgetSrc: "Organizer/OrganizerWidget.qml"
+
+    property var oDate
+    property string currentMonth
+    property string currentYear
+
+    property var events
+
+    // for interior use only
+    property real contentYCache
+    property Item itemCache
+    property int pos: 0;
+    property int posCache
+
+    // stores reference to eventMenu
+    // when it is open
+    property Item eventMenu
 
     onLanguageChange: {
         statusBar.currentScreenTitle = qsTr("Organizer") + tr.emptyString
@@ -21,154 +39,390 @@ AppInterface {
         }
     }
 
-    Column {
-        id: holder
+    Item {
+        width: root.width
+        height: root.height * 0.1
+
+        Text  {
+            anchors.centerIn: parent
+            font.pixelSize: 25
+            color: "#36c60f"
+            style: Text.Outline
+            styleColor: "#3f503a"
+            text: qsTr(currentMonth) + tr.emptyString + " " + currentYear;
+        }
+    }
+
+    ListView {
+        id: list
         width: root.width
         height: root.height * 0.9
         y: root.height * 0.1
+        snapMode: ListView.SnapOneItem
+        clip: true
+        cacheBuffer: list.height / 2;
+        pressDelay: 500
+        highlightFollowsCurrentItem: false
+        //anchors.fill: parent
+        model: model
+        delegate: MonthItem {
+            width: list.width
+            height: list.height
+        }
 
-        Grid {
-            id: view
-            rows: 6
-            columns: 7
-            columnSpacing: 2
-            rowSpacing: 2
+        onDragStarted: {
 
-            property int childWidth: (holder.width - ((columns - 1) * columnSpacing)) / columns
-            property int childHeight: (holder.height - ((rows - 1) * rowSpacing)) / rows
-
+            contentYCache = contentY;
+            var point = list.mapToItem(list.contentItem, list.width*0.5, list.height*0.5);
+            itemCache = list.itemAt(point.x, point.y);
+            posCache = pos;
 
         }
+
+        onDragEnded: {
+
+            // if up
+            if (list.contentY < contentYCache)
+                --pos;
+            else
+                ++pos;
+
+        }
+
+        onMovementEnded: {
+
+            var point = list.mapToItem(list.contentItem, list.width*0.5, list.height*0.5);
+            var item = list.itemAt(point.x, point.y);
+
+            if (item != itemCache) {
+
+                // we went up
+                if (pos < posCache) {
+
+                    if (pos <= 2) {
+                        var first = model.get(0);
+                        var month = first.month;
+                        var year = first.year;
+
+                        if (month === 1)
+                            prependMonth(0, 12, year - 1);
+                        else
+                            prependMonth(0, month - 1, year);
+                        ++pos;
+                    }
+
+                }
+                else {  // we went down
+
+                    if (pos >= list.count - 2) {
+                        var last = model.get(model.count - 1);
+                        var month = last.month;
+                        var year = last.year;
+
+                        if (month == 12)
+                            appendMonth(0, 1, year + 1);
+                        else
+                            appendMonth(0, month + 1, year);
+                    }
+
+                }
+
+                var dMonth = model.get(pos).month;
+                var dYear = model.get(pos).year;
+                setDisplayDate(dMonth, dYear);
+
+                item = applyEvents(pos);
+                //item.applyEvents();
+            }
+            // we ended back at the same position
+            // roll back pos changes
+            else
+                pos = posCache;
+
+        }
+
+        onCurrentIndexChanged: {
+            console.log("currentIndex: " + list.currentIndex + " itemsTotal: " + list.count);
+        }
+
     }
+
+    ListModel {
+        id: model
+
+        onCountChanged: {
+            console.log("************  " + model.count + "  ********************");
+            for (var i = 0; i < model.count; ++i) {
+                console.log("position: " + i + " month: " + model.get(i).month + " year: " + model.get(i).year);
+            }
+            console.log("************ END ********************");
+        }
+    }
+
+
 
     Component.onCompleted: {
         languageChange(theMainApplication.language)  // Set the language
         speaker.say(qsTr("Organizer"));
 
-        console.log(root.width);
-        refresh();
-    }
+        retrieveEvents();
 
-    function refresh() {
         var date = new Date();
 
-        var todayM = date.getDate();
-        var todayW = date.getDay();
-        var month = date.getMonth();
+        oDate = DateSource.getDateObject(date);
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
         var year = date.getFullYear();
-        var todayY = dayOfYear(todayM, month, year);
-        var days = dayCount(month, year);
-        var firstW = (todayM % 7) - todayW;
-        var lastW = days % 7;
-        var roomLeft = 7 * 6;
 
-        var lastMonth = month - 1;
-        var lastYear = year;
-        if (month == 0) {
-            lastMonth = 11;
-            lastYear = year - 1;
+        currentMonth = monthFromNumber(month);
+        currentYear = year;
+
+        console.debug("today: " + day + " " + month + " " + year);
+
+        if (month == 1)  {
+            appendMonth(0, 11, year - 1);
+            appendMonth(0, 12, year - 1);
         }
-        var daysLastMonth = dayCount(lastMonth, lastYear);
-
-
-        //*************************************************
-        if (firstW == 0) {
-            for (var i = 6; i >= 0; --i) {
-                createDay(daysLastMonth - i, "#111111");
-                --roomLeft;
-            }
+        else if (month == 2) {
+            appendMonth(0, 12, year - 1);
+            appendMonth(0, 1, year);
         }
         else {
-            for (var i = firstW; i > 0; --i) {
-                createDay(daysLastMonth - i, "#111111");
-                --roomLeft;
-            }
+            appendMonth(0, month - 2, year);
+            appendMonth(0, month - 1, year);
         }
-        //************************************************
-        for (var i = 0; i < days; ++i) {
-            createDay(i+1, "#333333");
-            --roomLeft;
+
+        appendMonth(day, month, year);
+
+        if (month == 11) {
+            appendMonth(0, 12, year);
+            appendMonth(0, 1, year + 1);
         }
-        //************************************************
-        for (var i = 0; i < roomLeft; ++i) {
-            createDay(i+1, "#111111");
-        }
-        //************************************************
-
-
-        console.log(todayM + " " + todayW);
-    }
-
-    function isLeap(year) {
-        if (year % 4 == 0) {
-            if (year % 100 == 0) {
-                if (year % 400 == 0)
-                    return true;
-                else
-                    return false;
-            }
-            else
-                return true;
-        }
-        else
-            return false;
-    }
-
-    function dayCount(month, year) {
-
-        if (month < 7) {
-            if (month == 1) {
-                if (isLeap(year))
-                    return 29;
-                else
-                    return 28;
-            }
-            else {
-                if (month % 2 == 0)
-                    return 31;
-                else
-                    return 30;
-            }
+        else if (month == 12) {
+            appendMonth(0, 1, year + 1);
+            appendMonth(0, 2, year + 1);
         }
         else {
-            if (month % 2 == 1)
-                return 31;
-            else
-                return 30;
+            appendMonth(0, month + 1, year);
+            appendMonth(0, month + 2, year);
+        }
+
+        console.log("model count: " + model.count);
+        console.log("list count: " + model.count);
+
+        list.positionViewAtIndex(2, ListView.Beginning);
+        pos = 2;
+        list.currentIndex = 2;
+
+        applyEvents(pos);
+        //list.currentItem.applyEvents();
+    }
+
+    function prependMonth(day, month, year) {
+        model.insert(0, {"day": day, "month": month, "year": year, "organizer": root});
+    }
+
+
+    function appendMonth(day, month, year) {
+        model.append({"day": day, "month": month, "year": year, "organizer": root});
+    }
+
+
+    /*
+
+        console.log("today: " + tdate.day  + " " + tdate.month + " " + tdate.year);
+        console.log("day: " + tdate.todayDayOfMonth + " " + tdate.todayDayOfWeek + " " + tdate.todayDayOfYear);
+
+        console.log("dayOfWeek: " + tdate.dayOfWeek(13, 10, 2012));
+        console.log("dayOfYear: " + tdate.dayOfYear(1, 1, 2013));
+        console.log("daydifference: " + tdate.dayDifference(1, 1, 2000, 1, 1, 2002));
+        console.log("daysiinmonth: " + tdate.daysInMonth(12, 2001));
+        console.log("weekofyear: " + tdate.weekOfYear(20, 1, 2013));
+
+    */
+
+    function monthFromNumber(number) {
+
+        var name;
+
+        switch (number) {
+        case 1: name = qsTr("January") + tr.emptyString;
+            break;
+        case 2: name = qsTr("February") + tr.emptyString;
+            break;
+        case 3: name = qsTr("March") + tr.emptyString;
+            break;
+        case 4: name = qsTr("April") + tr.emptyString;
+            break;
+        case 5: name = qsTr("May") + tr.emptyString;
+            break;
+        case 6: name = qsTr("June") + tr.emptyString;
+            break;
+        case 7: name = qsTr("July") + tr.emptyString;
+            break;
+        case 8: name = qsTr("August") + tr.emptyString;
+            break;
+        case 9: name = qsTr("September") + tr.emptyString;
+            break;
+        case 10: name = qsTr("October") + tr.emptyString;
+            break;
+        case 11: name = qsTr("November") + tr.emptyString;
+            break;
+        case 12: name = qsTr("December") + tr.emptyString;
+            break;
+        }
+
+        return name;
+    }
+
+    function dayFromNumber(number) {
+
+        var name;
+
+        switch (number) {
+        case 1: name = qsTr("Monday") + tr.emptyString;
+            break;
+        case 2: name = qsTr("Tuesday") + tr.emptyString;
+            break;
+        case 3: name = qsTr("Wednesday") + tr.emptyString;
+            break;
+        case 4: name = qsTr("Thursday") + tr.emptyString;
+            break;
+        case 5: name = qsTr("Friday") + tr.emptyString;
+            break;
+        case 6: name = qsTr("Saturday") + tr.emptyString;
+            break;
+        case 7: name = qsTr("Sunday") + tr.emptyString;
+            break;
+        }
+
+        return name;
+    }
+
+
+    function setDisplayDate(month, year) {
+        currentMonth = monthFromNumber(month);
+        currentYear = year;
+    }
+
+    function sayHi(day) {
+        console.log("hi say day " + day);
+    }
+
+    function showEvents(day, month, year, events) {
+        var component = Qt.createComponent("Organizer/EventMenu.qml");
+        eventMenu = component.createObject(root, {"day": day, "month": month, "year": year, "parentItem": root});
+        eventMenu.eventData = events;
+        eventMenu.showEvents();
+    }
+
+    function storeEvent(jsonDate) {
+        jsonDate.uid = statusBar.usrName;
+        lsproxy.storeEvent(jsonDate);
+        eventMenu.addEventToList(jsonDate);
+        retrieveEvents();
+        applyEvents(pos);
+    }
+
+    function retrieveEvents() {
+
+        //lsproxy.readEvents();
+
+        var allEvents = lsproxy.events;
+        if (events !== null)
+            events = new Array;
+        var start = events.length;
+
+        for (var i = 0; i < allEvents.length; ++i) {
+            events[i+start] = allEvents[i];
         }
     }
 
-    function dayOfYear(day, month, year) {
-        var days = 0;
 
-        var selector = month - 1;
+    function applyEvents(position) {
 
-        switch (selector) {
-        case 10: days += 30;
-        case 9: days += 31;
-        case 8: days += 30;
-        case 7: days += 31;
-        case 6: days += 31;
-        case 5: days += 30;
-        case 4: days += 31;
-        case 3: days += 30;
-        case 2: days += 31;
-        case 1: days += 27;
-            if (isLeap(year))
-                days += 1;
-        case 0: days += 31;
+        var point = list.mapToItem(list.contentItem, list.width*0.5, list.height*0.5);
+
+        console.debug(point.x + " " + point.y);
+
+        var item = list.itemAt(point.x, point.y);
+
+
+        console.log("current: " + item.getMonth());
+
+        if (list.currentItem.allEvents != undefined)
+            list.currentItem.allEvents = undefined;
+
+        var allEvents = new Array;
+        var index = 0;
+
+        for (var i = 0; i < events.length; ++i) {
+
+            var month = events[i].month;
+
+            console.debug("Month in position: " + model.get(position).month);
+
+            if (model.get(position).month == month) {
+                allEvents[index] = events[i];
+                ++index;
+            }
+        }
+        item.allEvents = allEvents;
+
+        item.applyEvents();
+
+        return item;
+    }
+
+    function verifyDate(jsonDate) {
+
+        if (jsonDate.uid != undefined)
+            if (jsonDate.year != undefined)
+                if (jsonDate.month != undefined)
+                   if (jsonDate.day != undefined)
+                    if (jsonDate.hour != undefined)
+                        if (jsonDate.minute != undefined)
+                            if (jsonDate.title != undefined)
+                                if (jsonDate.location != undefined)
+                                    if (jsonDate.description != undefined)
+                                        if (jsonDate.yearTo != undefined)
+                                            if (jsonDate.monthTo != undefined)
+                                                if (jsonDate.dayTo != undefined)
+                                                    if (jsonDate.hourTo != undefined)
+                                                        if (jsonDate.minuteTo != undefined) {
+                                                            console.debug("Good!");
+                                                            return;
+                                                        }
+        console.log("********************************************************\n" +
+                    "********************* BROKE ******************************\n" +
+                    "**********************************************************");
+
+
+    }
+
+    function requestUpcoming() {
+
+        var upcoming = new Array;
+
+        var thisDay = oDate.day;
+        var thisMonth = oDate.month;
+        var thisYear = oDate.year;
+
+        for (var i = 0; i < events.length; ++i) {
+
+            var nextDay = parseInt(events[i].day);
+            var nextMonth = parseInt(events[i].month);
+            var nextYear = parseInt(events[i].year);
+
+            var diff = oDate.dayDifference(thisDay, thisMonth, thisYear, nextDay, nextMonth, nextYear);
+
+            if (diff >= 0 && diff <= 7) {
+                upcoming[upcoming.length] = events[i];
+            }
         }
 
-        days += day;
-
-        return days;
+        return upcoming;
     }
 
-    function createDay(number, color) {
-        var component = Qt.createComponent("Organizer/DayItem.qml");
-
-        var item = component.createObject(view, {"number": number, "color2": color});
-        item.width = view.childWidth;
-        item.height = view.childHeight;
-    }
 }

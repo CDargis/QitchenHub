@@ -11,8 +11,6 @@
         <file>Temperature-256.png</file>
         <file>downArrow.png</file>
         <file>upArrow.png</file>
-        <file>up-arrow-icon.png</file>
-        <file>down-arrow-icon.png</file>
         <file>ex1.png</file>
         <file>lock.png</file>
         <file>unlock.png</file>
@@ -20,6 +18,7 @@
         <file>red_light.png</file>
         <file>arrowl.png</file>
         <file>arrowr.png</file>
+<<<<<<< HEAD
         <file>facebook.png</file>
         <file>googleplus.png</file>
         <file>rss.png</file>
@@ -31,5 +30,23 @@
         <file>expand1.png</file>
         <file>collapse1.png</file>
         <file>openFeed.png</file>
+=======
+        <file>plus.png</file>
+        <file>down-arrow-icon.png</file>
+        <file>up-arrow-icon.png</file>
+        <file>calendar-icon.png</file>
+        <file>lcd/0.png</file>
+        <file>lcd/1.png</file>
+        <file>lcd/2.png</file>
+        <file>lcd/3.png</file>
+        <file>lcd/4.png</file>
+        <file>lcd/5.png</file>
+        <file>lcd/6.png</file>
+        <file>lcd/7.png</file>
+        <file>lcd/8.png</file>
+        <file>lcd/9.png</file>
+        <file>lcd/dots.png</file>
+        <file>wallpaper.jpg</file>
+>>>>>>> ff36b30a8e7d8a53fdc29928991b8521c7755524
     </qresource>
 </RCC>

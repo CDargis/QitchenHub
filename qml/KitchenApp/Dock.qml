@@ -10,6 +10,9 @@ Flickable {
         width: parent.width
         height: childrenRect.height
         spacing: 5
+
+        Clock {
+        }
     }
 
     function createWidget(source, app) {
