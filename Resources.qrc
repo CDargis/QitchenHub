@@ -26,5 +26,10 @@
         <file>twitter.png</file>
         <file>rssSettings.png</file>
         <file>rssBackArrow.png</file>
+        <file>collapse.png</file>
+        <file>expand.png</file>
+        <file>expand1.png</file>
+        <file>collapse1.png</file>
+        <file>openFeed.png</file>
     </qresource>
 </RCC>
