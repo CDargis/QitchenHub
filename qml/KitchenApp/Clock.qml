@@ -4,7 +4,7 @@ Rectangle {
     id: root
     anchors.horizontalCenter: parent.horizontalCenter
     width: parent.width * 0.9
-    height: 90
+    height: width * 0.4
     radius: 10
     gradient: Gradient {
         GradientStop { position: 0.0; color: "#777777" }
@@ -17,6 +17,8 @@ Rectangle {
         width: parent.width * 0.9
         height: parent.height * 0.85
         color: "#000000"
+        border.width: 2
+        border.color: "#333333"
 
         Image {
             id: dots

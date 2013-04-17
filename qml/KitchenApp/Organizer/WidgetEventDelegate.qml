@@ -16,14 +16,18 @@ Item {
         anchors.fill: parent
     }
 
-    CommonText {
+    Text {
         id: content
+        color: "#36c60f"
+        lineHeightMode: Text.FixedHeight
+        lineHeight: font.pixelSize
         anchors.left: parent.left
-        anchors.leftMargin: 5
-        font.pixelSize: 20
-        wrapMode: Text.WordWrap
+        anchors.leftMargin: 3
+        anchors.right: parent.right
+        anchors.rightMargin: 3
+        font.pixelSize: 18
+        wrapMode: Text.Wrap
         text: month + "/" + day + "  " + title
-        height: (lineCount+1) * font.pixelSize
-        width: 200
+        height: (lineCount) * (lineHeight)
     }
 }
