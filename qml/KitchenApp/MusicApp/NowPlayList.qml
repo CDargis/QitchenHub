@@ -12,8 +12,17 @@ Flickable {
 
     // Function Definitions ----------------------------------------------------
 
-    function addItem(song) {
+    function addSong(song) {
         var component = Qt.createComponent("PlayItem.qml")
-        component.createObject(theRow, { "height": 200, "width": 200, "picSource": song.picSource} )
+        component.createObject(theRow, { "height": 300, "width": 300, "picSource": song.picSource,
+                                   "title": song.title, "album": song.album, "artist": song.artist} )
+        theMusic.source = song.streamSource
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        border.color: "black"
+        border.width: 1
     }
 }

@@ -21,5 +21,8 @@
         <file>plus.png</file>
         <file>down-arrow-icon.png</file>
         <file>up-arrow-icon.png</file>
+        <file>next_track_button.png</file>
+        <file>pause_button.png</file>
+        <file>play_button.png</file>
     </qresource>
 </RCC>

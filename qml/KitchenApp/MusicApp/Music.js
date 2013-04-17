@@ -5,47 +5,49 @@ var user =  "chrisdargis"
 var pass = "qitchenhub"
 
 var session_key = "2f9748d20f64463e10821f88ffe0d2e0"
-var playList = []
+var playlist = []
 
 // Objects -----------------------------------------
 
-function Song(title, album, artist, streamSource, picSource) {
+var Song = function(title, album, artist, streamSource, picSource, duration) {
     this.title = title
     this.album = album
     this.artist = artist
     this.streamSource = streamSource
     this.picSource = picSource
+    this.duration = duration
+
+    Song.prototype.toString = function() {
+        return this.artist + ": " + this.title
+    }
 }
 
 // Function definions ----------------------------------------------------------
 
-function radioSearch() {
-    var request = rootURL + "?method=radio.search" + "&name=ozzy%20osbourne" + "&api_key="
-            + apiKey + "&format=json" + "&api_sig="
-            + getSignature("api_key", apiKey, "method", "radio.search", "name", "ozzy osbourne")
-    makeRequest("POST", request, function(json) { printJSON(json) })
+function nextTrack() {
+    var callback = function() { nowPlaying.addSong(playlist.shift()); theMusic.play() }
+    // Refresh the playlist if needed
+    if(playlist.length === 0)
+        getPlaylist(callback)
+    else callback()
 }
 
-
-function getPlaylist() {
+function getPlaylist(callBack) {
     var request = rootURL + "?method=radio.getPlaylist" + "&api_key=" + apiKey
             + "&sk=" + session_key + "&format=json" + "&api_sig=" +
             getSignature("api_key", apiKey, "method", "radio.getPlaylist", "sk", session_key)
     makeRequest("POST", request, function(json) {
-        /**
-        nowPlaying.currentArtist = json.playlist.trackList.track[0].creator
-        nowPlaying.currentTitle = json.playlist.trackList.track[0].title
-        nowPlaying.currentAlbum = json.playlist.trackList.track[0].album
-        nowPlaying.currentPicSource = json.playlist.trackList.track[0].image
-        */
-        var song = new Song(json.playlist.trackList.track[0].title,
-                            json.playlist.trackList.track[0].album,
-                            json.playlist.trackList.track[0].creator,
-                            json.playlist.trackList.track[0].location,
-                            json.playlist.trackList.track[0].image)
-        nowPlaying.addItem(song)
-        theMusic.source = json.playlist.trackList.track[0].location
-        theMusic.play()
+        for(var track in json.playlist.trackList.track) {
+            var song = new Song(json.playlist.trackList.track[track].title,
+                                json.playlist.trackList.track[track].album,
+                                json.playlist.trackList.track[track].creator,
+                                json.playlist.trackList.track[track].location,
+                                json.playlist.trackList.track[track].image,
+                                json.playlist.trackList.track[track].duration)
+            playlist.push(song)
+        }
+        if(callBack && (callBack !== undefined))
+            callBack()
     });
 }
 
@@ -111,3 +113,19 @@ function addSpaceEncoding(str) {
 function removeSpaceEncoding(str) {
     return str.replace(/%20/g, ' ')
 }
+
+// For debug
+function printPlaylist() {
+    for(var song in playlist)
+        console.log(playlist[song].toString())
+}
+
+// Currently not useful!
+/**
+function radioSearch() {
+    var request = rootURL + "?method=radio.search" + "&name=ozzy%20osbourne" + "&api_key="
+            + apiKey + "&format=json" + "&api_sig="
+            + getSignature("api_key", apiKey, "method", "radio.search", "name", "ozzy osbourne")
+    makeRequest("POST", request, function(json) { printJSON(json) })
+}
+*/

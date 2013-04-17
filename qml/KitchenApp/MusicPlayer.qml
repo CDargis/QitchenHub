@@ -9,41 +9,36 @@ AppInterface {
     Audio {
         id: theMusic
         autoPlay: false
-    }
+        onPlaybackStateChanged: {
+            // Update timer
+            if(theMusic.playbackState === Audio.PlayingState) {
+                progressTimer.running = true
+            }
+            else if(theMusic.playbackState === Audio.StoppedState) {
+                progressTimer.running = false
+            }
+            else if(theMusic.playbackState === Audio.PausedState) {
+                progressTimer.running = false
+            }
+        }
 
-    Button {
-        id: auth
-        buttonText: "Auth"
-        onButtonClick: Music.authenticate()
+        function nextTrack() { Music.nextTrack() }
     }
-
-    Button {
-        id: center
-        anchors.left: auth.right
-        anchors.leftMargin: 10
-        width: 200
-        height: 100
-        buttonText: "Tune"
-        onButtonClick: {
-            Music.tune("user", "chrisdargis", "mix")
+    // Tell the player the progress
+    Timer {
+        id: progressTimer
+        interval: 500
+        repeat: true
+        running: false
+        onTriggered: {
+            nowPlaying.updateProgress(theMusic.position)
         }
     }
-    Button {
-        id: right
-        anchors.left: center.right
-        anchors.leftMargin: 10
-        anchors.verticalCenter: center.verticalCenter
-        width: 200
-        height: 100
-        buttonText: "Get Playlist"
-        onButtonClick: {
-            Music.getPlaylist()
-        }
-    }
+
     NowPlaying {
         id: nowPlaying
         width: parent.width
-        height: parent.height * (3/4)
-        anchors.bottom: parent.bottom
+        height: parent.height
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 }
