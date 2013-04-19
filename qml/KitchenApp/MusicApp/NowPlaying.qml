@@ -25,6 +25,16 @@ Rectangle {
         width: parent.width * .4; height: parent.height * .4
     }
 
+    Text {
+        id: songTextProgress
+        anchors.verticalCenter: songProgress.verticalCenter
+        anchors.right: songProgress.left
+        anchors.rightMargin: 10
+        font.family: fontFamily
+        font.pixelSize: 14
+        color: "#36C60F"
+    }
+
     Slider {
         id: songProgress
         anchors.top: nowPlayList.bottom
@@ -33,6 +43,16 @@ Rectangle {
         canDrag: false
         sliderWidth: nowPlayList.width
         sliderHeight: 6
+    }
+
+    Text {
+        id: songLength
+        anchors.verticalCenter: songProgress.verticalCenter
+        anchors.left: songProgress.right
+        anchors.leftMargin: 10
+        font.family: fontFamily
+        font.pixelSize: 14
+        color: "#36C60F"
     }
 
     Text {
@@ -51,9 +71,17 @@ Rectangle {
         currentTitle = song.title;
         songProgress.maximum = song.duration
         nowPlayList.addSong(song)
+        songLength.text = secondsToMinuteString(song.duration)
     }
 
     function updateProgress(progress) {
         songProgress.value = progress
+        songTextProgress.text = secondsToMinuteString(progress)
+    }
+
+    function secondsToMinuteString(miliseconds) {
+        var minutes = Math.floor((miliseconds / 1000) / 60)
+        var seconds = Math.round((miliseconds / 1000) % 60)
+        return minutes + ":" + ((seconds < 10) ? ("0" + seconds) : seconds)
     }
 }
