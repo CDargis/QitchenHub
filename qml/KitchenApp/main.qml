@@ -76,7 +76,19 @@ Rectangle {
                 // make sure you put the name of your qml as an argument
                 onButtonClick: launch("HomeAutomation.qml",0)
             }
+            Button {
+                id: buttonWeather
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Weather") + tr.emptyString
 
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    onClicked: launch("weather.qml",4)
+                }
+            }
             ToggleSwitch {
                 //anchors.left: button.right
                 //anchors.leftMargin: 25
@@ -121,6 +133,19 @@ Rectangle {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
                     onClicked: launch("SocialFeed.qml",2)
+                }
+            }
+            Button {
+                id: kitchenAppLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Kitchen") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    onClicked: launch("test.qml",3)
                 }
             }
             Button {
