@@ -79,6 +79,11 @@ Rectangle {
             anchors.topMargin: 10
             width: parent.width * .75; height: width * .15
             currentText: "Chicago, IL"
+            Binding {
+                target: theMainApplication;
+                property: "currentLocation"
+                value: locationIn.currentText
+            }
         }
     }
 }
