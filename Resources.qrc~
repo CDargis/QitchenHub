@@ -18,6 +18,7 @@
         <file>red_light.png</file>
         <file>arrowl.png</file>
         <file>arrowr.png</file>
+<<<<<<< HEAD
         <file>facebook.png</file>
         <file>googleplus.png</file>
         <file>rss.png</file>
@@ -29,6 +30,7 @@
         <file>expand1.png</file>
         <file>collapse1.png</file>
         <file>openFeed.png</file>
+=======
         <file>plus.png</file>
         <file>down-arrow-icon.png</file>
         <file>up-arrow-icon.png</file>
@@ -45,8 +47,6 @@
         <file>lcd/9.png</file>
         <file>lcd/dots.png</file>
         <file>wallpaper.jpg</file>
-        <file>next_track_button.png</file>
-        <file>pause_button.png</file>
-        <file>play_button.png</file>
+>>>>>>> ff36b30a8e7d8a53fdc29928991b8521c7755524
     </qresource>
 </RCC>
