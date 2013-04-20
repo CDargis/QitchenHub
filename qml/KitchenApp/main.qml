@@ -69,7 +69,7 @@ Rectangle {
             // also each button has to explicitly state it's size
             // and it better be that all buttons have the same size
             Button {
-                id: button
+                id: homeAutomationButton
                 width: 200
                 height: 200
                 pointSize: 18
@@ -77,22 +77,6 @@ Rectangle {
                 // make sure you put the name of your qml as an argument
                 onButtonClick: launch("HomeAutomation.qml",0)
             }
-
-            ToggleSwitch {
-                //anchors.left: button.right
-                //anchors.leftMargin: 25
-                //anchors.verticalCenter: button.verticalCenter
-                isOn: false
-            }
-
-            Indicator {
-
-            }
-
-            AppHint {
-
-            }
-
             Button {
                 id: buttonOrg
                 width: 200
@@ -106,11 +90,6 @@ Rectangle {
                     onClicked: launch("Organizer.qml",1)
                 }
             }
-            DayItem {
-                width: 125
-                height: 125
-            }
-
             Button {
                 id: socialAppLauch
                 width: 200
@@ -125,24 +104,69 @@ Rectangle {
                 }
             }
             Button {
-                width: 125
-                height: 125
+                id: musicPlayerLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Music Player") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
             Button {
-                width: 125
-                height: 125
+                id: weatherAppLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Weather") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
             Button {
-                width: 125
-                height: 125
+                id: kitchenAppLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Kitchen") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
             Button {
-                width: 125
-                height: 125
+                id: transitAppLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Transit") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
             Button {
-                width: 125
-                height: 125
+                id: pictureViewerLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Picture Viewer") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
         }
 
