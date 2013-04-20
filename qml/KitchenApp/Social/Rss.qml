@@ -4,6 +4,7 @@ import QtWebKit 3.0
 Rectangle{
     id: root
     property string activeFeed
+    color: "black"
     Rectangle{
         id: rssTitle
         anchors.top: parent.top
@@ -41,49 +42,74 @@ Rectangle{
             }
         }
     }
-    Rectangle{
-        id: rssContent
+
+    Flipable {
+        id: rssMain
         property var story;
         anchors.left: parent.left
         anchors.top: rssTitle.bottom
         height: parent.height*0.9
         width: parent.width
         visible: true
-        border.color: "#8b988b"
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#7C7C85" }
-            GradientStop { position: 1.0; color: "#25242A" }
-        }
-        clip: true
-        ListView {
-            focus: true
-            id: feeds
-            anchors.fill: parent
-            model: rssFeeds
-            delegate: SourceDelegate{}
+        property bool flipped: false
+        front:
+            Rectangle{
+            id: rssContent
+            property var story;
+            height: parent.height
+            width: parent.width
+            border.color: "#8b988b"
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#7C7C85" }
+                GradientStop { position: 1.0; color: "#25242A" }
+            }
             clip: true
+            ListView {
+                focus: true
+                id: feeds
+                anchors.fill: parent
+                model: rssFeeds
+                delegate: SourceDelegate{}
+                clip: true
+            }
+            function viewStory(){
+                rssMain.visible = false;
+                rssBackArrow.visible = true
+                page.state = "read";
+            }
+            MouseArea{
+                anchors.fill: parent
+                propagateComposedEvents: true
+            }
+        }
+        back:
+            RssSettings{
+            id: rssSettings
+            height: parent.height
+            width: parent.width
+        }
+        transform: Rotation {
+            id: rotation
+            origin.x: rssMain.width/2
+            origin.y: rssMain.height/2
+            axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
+            angle: 0    // the default angle
         }
 
-
-        function viewStory(){
-            rssContent.visible = false;
-            rssBackArrow.visible = true
-            page.state = "read";
+        states: State {
+            name: "back"
+            PropertyChanges { target: rotation; angle: 180 }
+            when: rssMain.flipped
         }
 
+        transitions: Transition {
+            NumberAnimation { target: rotation; property: "angle"; duration: 300}
+        }
     }
     Story{
         id: page
         visible: false
         anchors.top: rssTitle.bottom
-    }
-
-    RssSettings{
-        id: rssSettings
-        anchors.left: parent.left
-        anchors.top: rssTitle.bottom
-        height: parent.height*0.9
-        width: parent.width
     }
     Rectangle{
         id:rssBottom
@@ -108,12 +134,11 @@ Rectangle{
                 anchors.fill: parent
                 onClicked: {
                     rssSettings.resetState();
-                    rssSettings.visible = false
-                    rssContent.visible = true
+                    root.setCorrection();
                     rssBackArrow.visible = false
                     rssSettingsButton.visible = true
                     page.state = ""
-                    test.visible = false;
+                    webpage.visible = false;
                     webpage.url = "";
                 }
             }
@@ -132,12 +157,20 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    rssContent.visible = false
-                    rssSettings.visible = true
                     rssBackArrow.visible = true
                     rssSettingsButton.visible = false
+                    rssMain.flipped = true
                 }
             }
+        }
+    }
+    function setCorrection(){
+        if(rssMain.flipped == false && page.visible == true){
+            page.visible = false;
+            rssMain.visible = true;
+        }
+        else{
+            rssMain.flipped = false;
         }
     }
 }
