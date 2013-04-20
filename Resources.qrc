@@ -48,5 +48,7 @@
         <file>next_track_button.png</file>
         <file>pause_button.png</file>
         <file>play_button.png</file>
+        <file>volume_mute.png</file>
+        <file>volume.png</file>
     </qresource>
 </RCC>

@@ -22,7 +22,7 @@ Rectangle {
     NowPlayList {
         id: nowPlayList
         anchors.centerIn: parent
-        width: parent.width * .4; height: parent.height * .4
+        width: parent.width * .6; height: parent.height * .4
     }
 
     Text {
@@ -41,7 +41,7 @@ Rectangle {
         anchors.topMargin: 12
         anchors.horizontalCenter: nowPlayList.horizontalCenter
         canDrag: false
-        sliderWidth: nowPlayList.width
+        sliderWidth: nowPlayList.width - songTextProgress.width - songLength.width - 20
         sliderHeight: 6
     }
 
@@ -56,6 +56,7 @@ Rectangle {
     }
 
     Text {
+        id: titleDisplay
         anchors.top: songProgress.bottom
         anchors.topMargin: 12
         anchors.horizontalCenter: nowPlayList.horizontalCenter
@@ -65,10 +66,34 @@ Rectangle {
         color: "#36C60F"
     }
 
+    Text {
+        id: artistDisplay
+        anchors.top: titleDisplay.bottom
+        anchors.topMargin: 12
+        anchors.horizontalCenter: titleDisplay.horizontalCenter
+        font.pixelSize: 16
+        font.family: fontFamily
+        text: currentArtist
+        color: "#36C60F"
+    }
+
+    Text {
+        id: albumDisplay
+        anchors.top: artistDisplay.bottom
+        anchors.topMargin: 12
+        anchors.horizontalCenter: titleDisplay.horizontalCenter
+        font.pixelSize: 16
+        font.family: fontFamily
+        text: currentAlbum
+        color: "#36C60F"
+    }
+
     // Function definitions -------------------------------------------------
 
     function addSong(song) {
-        currentTitle = song.title;
+        currentTitle = song.title
+        currentArtist = song.artist
+        currentAlbum = song.album
         songProgress.maximum = song.duration
         nowPlayList.addSong(song)
         songLength.text = secondsToMinuteString(song.duration)
