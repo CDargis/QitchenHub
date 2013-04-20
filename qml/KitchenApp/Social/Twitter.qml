@@ -52,8 +52,9 @@ Rectangle{
         }
     }
 
-    RssSettings{
+    Rectangle{
         id: twitterSettings
+        visible: false
         anchors.left: parent.left
         anchors.top: twTitle.bottom
         height: parent.height*0.9

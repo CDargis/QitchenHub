@@ -44,17 +44,18 @@ Rectangle {
         id: lsproxy
     }
 
+    Image {
+        anchors.fill: parent
+        source: "qrc:/images/wallpaper.jpg"
+        width: parent.width
+    }
+
     // apps are parented to this item so they are able to use anchors
     Item {
         id: desktop
         anchors.top: statusBar.bottom
         width: parent.width * 0.85
         height: parent.height - desktop.y;
-
-        Image {
-            anchors.fill: parent
-            source: "qrc:/images/wallpaper.jpg"
-        }
 
         Voice {
             id: speaker
@@ -181,7 +182,16 @@ Rectangle {
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
     }
-
+    Rectangle{
+        id: dockBackGround
+        x: parent.width * 0.85
+        width: parent.width - parent.width * 0.85
+        height: parent.height+dock.contentHeight
+        anchors.top: statusBar.bottom
+        opacity: .45
+        border.color: "#00FF00"
+        color: "#25BA25"
+    }
     Dock {
         id: dock
         x: parent.width * 0.85

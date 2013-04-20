@@ -58,7 +58,6 @@ Item {
                 anchors.fill: parent
                 onClicked: {
                     webpage.visible = true
-                    //delegate.visible = false;
                 }
             }
         }

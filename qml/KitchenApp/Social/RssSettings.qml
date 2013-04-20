@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Rectangle{
     id: root
-    visible: false
+    visible: true
     color: "#36C60F"
     width: parent.width
     height: parent.height

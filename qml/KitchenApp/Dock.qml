@@ -4,12 +4,7 @@ Flickable {
     flickableDirection: Flickable.VerticalFlick
     clip: true
     contentHeight: column.height
-    Rectangle{
-        id: container
-        width: parent.width
-        height: parent.parent.height + column.height
-        border.color: "#8b988b"
-        color: "#36C60F"
+
     Column {
         id: column
         width: parent.width
@@ -19,7 +14,7 @@ Flickable {
         Clock {
         }
     }
-    }
+
 
     function createWidget(source, app) {
         var component;

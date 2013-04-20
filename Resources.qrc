@@ -4,7 +4,6 @@
         <file>settingsWhite.png</file>
         <file>tentacle.jpeg</file>
         <file>user.png</file>
-        <file>backArrow.png</file>
         <file>delete.png</file>
         <file>lightBulb.png</file>
         <file>security.png</file>
@@ -50,5 +49,6 @@
         <file>play_button.png</file>
         <file>volume_mute.png</file>
         <file>volume.png</file>
+        <file>backArrow.png</file>
     </qresource>
 </RCC>
