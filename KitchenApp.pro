@@ -14,7 +14,8 @@ QML_IMPORT_PATH =
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
     voice.cpp \
-    translationhandler.cpp
+    translationhandler.cpp \
+    webviewer.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
@@ -37,9 +38,10 @@ TRANSLATIONS = lang_pl.ts
 
 HEADERS += \
     voice.h \
-    translationhandler.h
+    translationhandler.h \
+    webviewer.h
 
-QT += qml quick
+QT += qml quick webkitwidgets
 
 SUBDIRS += qml/KitchenApp/Indicator \
            qml/KitchenApp/Settings

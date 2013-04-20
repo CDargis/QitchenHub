@@ -125,8 +125,17 @@ Rectangle {
                 }
             }
             Button {
-                width: 125
-                height: 125
+                id: buttonTransit
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Transit") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    onClicked: launch("Transit.qml",3)
+                }
             }
             Button {
                 width: 125
