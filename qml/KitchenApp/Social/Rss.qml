@@ -77,25 +77,6 @@ Rectangle{
         visible: false
         anchors.top: rssTitle.bottom
     }
-    Rectangle{
-        id: test
-        anchors.top: rssTitle.bottom
-        width: parent.width
-        height: parent.height*.9
-        border.color: "#8b988b"
-        visible: false
-        color: "black"
-        WebView {
-            id: webpage
-            anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.top: rssTitle.bottom
-            url: ""
-            width: parent.width
-            height: parent.height
-            smooth: false
-            //visible: false
-        }
-    }
 
     RssSettings{
         id: rssSettings

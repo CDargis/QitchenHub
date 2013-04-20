@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtWebKit 3.0
 import "Social"
 AppInterface{
     Rectangle{
@@ -32,6 +33,14 @@ AppInterface{
             width: parent.width*0.25
             height: parent.height
         }
+        WebView {
+            id: webpage
+            //anchors.top: rssTitle.bottom
+            url: ""
+            width: parent.width
+            height: parent.height
+            smooth: false
+            visible: false
+        }
     }
 }
-

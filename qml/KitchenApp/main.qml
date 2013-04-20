@@ -151,18 +151,19 @@ Rectangle {
         // all apps end up right here
     }
 
-    Dock {
-        id: dock
-        x: parent.width * 0.85
-        y: parent.height * 0.1
-        width: parent.width - dock.x
-        height: parent.height - dock.y
-    }
     StatusBar {
         id: statusBar
         usrName: "Chris"
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
+    }
+
+    Dock {
+        id: dock
+        x: parent.width * 0.85
+        anchors.top: statusBar.bottom
+        width: parent.width - dock.x
+        height: parent.height - dock.y
     }
 
     VirtualKeyboard {

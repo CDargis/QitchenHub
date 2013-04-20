@@ -57,8 +57,8 @@ Item {
             MouseArea{
                 anchors.fill: parent
                 onClicked: {
-                    test.visible = true
-                    delegate.visible = false;
+                    webpage.visible = true
+                    //delegate.visible = false;
                 }
             }
         }
