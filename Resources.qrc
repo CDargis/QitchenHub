@@ -4,7 +4,6 @@
         <file>settingsWhite.png</file>
         <file>tentacle.jpeg</file>
         <file>user.png</file>
-        <file>backArrow.png</file>
         <file>delete.png</file>
         <file>lightBulb.png</file>
         <file>security.png</file>
@@ -45,5 +44,6 @@
         <file>lcd/9.png</file>
         <file>lcd/dots.png</file>
         <file>wallpaper.jpg</file>
+        <file>backArrow.png</file>
     </qresource>
 </RCC>

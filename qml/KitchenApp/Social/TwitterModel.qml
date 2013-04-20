@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 
 Item {
-    id: wrapper
+    id: root
     property variant model: xmlModel
     property string from : ""
     property string to : ""
