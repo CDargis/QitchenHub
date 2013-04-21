@@ -16,7 +16,7 @@ var Song = function(title, album, artist, streamSource, picSource, duration, lov
     this.streamSource = streamSource
     this.picSource = picSource
     this.duration = duration
-    this.loved = loved
+    this.loved = (loved === "1") ? true : false
 
     Song.prototype.toString = function() {
         return this.artist + ": " + this.title
@@ -67,7 +67,7 @@ function getPlaylist(callBack) {
                                 json.playlist.trackList.track[track].location,
                                 json.playlist.trackList.track[track].image,
                                 json.playlist.trackList.track[track].duration,
-                                json.playlist.trackList.track[track].extension.loved === "1" ? true : false)
+                                json.playlist.trackList.track[track].extension.loved)
             playlist.push(song)
         }
         if(callBack && (callBack !== undefined))
