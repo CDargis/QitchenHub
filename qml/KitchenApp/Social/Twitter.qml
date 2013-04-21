@@ -39,26 +39,47 @@ Rectangle{
             }
         }
     }
-    Rectangle{
-        id: twContent
+    Flipable {
+        id: twMain
+        property var story;
         anchors.left: parent.left
         anchors.top: twTitle.bottom
         height: parent.height*0.9
         width: parent.width
-        border.color: "#8b988b"
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#7C7C85" }
-            GradientStop { position: 1.0; color: "#25242A" }
+        visible: true
+        property bool flipped: false
+        front:Rectangle{
+            id: twContent
+            height: parent.height
+            width: parent.width
+            border.color: "#8b988b"
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#7C7C85" }
+                GradientStop { position: 1.0; color: "#25242A" }
+            }
         }
-    }
+        back: TwitterSettings{
+            id: twitterSettings
+            height: parent.height
+            width: parent.width
+        }
+        transform: Rotation {
+            id: rotation
+            origin.x: twMain.width/2
+            origin.y: twMain.height/2
+            axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
+            angle: 0    // the default angle
+        }
 
-    Rectangle{
-        id: twitterSettings
-        visible: false
-        anchors.left: parent.left
-        anchors.top: twTitle.bottom
-        height: parent.height*0.9
-        width: parent.width
+        states: State {
+            name: "back"
+            PropertyChanges { target: rotation; angle: 180 }
+            when: twMain.flipped
+        }
+
+        transitions: Transition {
+            NumberAnimation { target: rotation; property: "angle"; duration: 300}
+        }
     }
 
     Rectangle{
@@ -82,7 +103,12 @@ Rectangle{
             visible: false
             MouseArea {
                 anchors.fill: parent
-                onClicked: hide()
+                onClicked:{
+                    twMain.flipped = false
+                    twSettings.visible = true
+                    twBackArrow.visible = false
+                }
+
             }
         }
         Image {
@@ -98,8 +124,9 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked:{
-                    twContent.visible = false
-                    twitterSettings.visible = true
+                   twMain.flipped = true
+                   twSettings.visible = false
+                   twBackArrow.visible = true
                 }
             }
         }

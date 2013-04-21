@@ -53,5 +53,6 @@
         <file>love.png</file>
         <file>ban.png</file>
         <file>love_glow.png</file>
+        <file>twUserHeader.png</file>
     </qresource>
 </RCC>
