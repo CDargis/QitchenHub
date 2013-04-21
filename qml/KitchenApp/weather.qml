@@ -291,13 +291,17 @@ AppInterface{
             font.pixelSize: 100
             font.family: font
             font.bold: true
-            anchors.top:parent.top
-            anchors.left: parent.left
+//            anchors.top:parent.top
+//            anchors.left: parent.left
 
-            anchors.topMargin: parent.height/3.5
-            anchors.leftMargin: parent.width/4
+
 
             anchors.margins: 10
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.topMargin: -weathericon.height
+            anchors.leftMargin: -2*weathericon.width
+
         }
         Image
         {
@@ -894,12 +898,13 @@ AppInterface{
             font.bold: true
 
 
-            anchors.top:parent.top
-            anchors.left: parent.left
-            anchors.margins: 10
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.topMargin: -weathericon.height
+            anchors.leftMargin: -2*weathericon.width
+
             opacity: 0
-            anchors.topMargin: parent.height/3.5
-            anchors.leftMargin: parent.width/4
+
         }
 
 
@@ -1905,10 +1910,10 @@ console.log(wc);
             font.pixelSize: 100
             font.family: font
             font.bold: true
-            anchors.top:parent.top
-            anchors.left: parent.left
- anchors.topMargin: parent.height/3.5
- anchors.leftMargin: parent.width/4
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.topMargin: -weathericon.height
+            anchors.leftMargin: -2*weathericon.width
 
             anchors.margins: 10
         }
@@ -1921,10 +1926,10 @@ console.log(wc);
             font.pixelSize: 100
             font.family: font
             font.bold: true
-            anchors.top:parent.top
-            anchors.left: parent.left
-            anchors.topMargin: parent.height/3.5
-            anchors.leftMargin: parent.width/4
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.topMargin: -weathericon.height
+            anchors.leftMargin: -2*weathericon.width
 
 
             anchors.margins: 10
