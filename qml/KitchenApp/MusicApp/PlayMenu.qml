@@ -85,8 +85,14 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                nowPlaying.loveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
-                nowPlaying.loved = true
+                if(!nowPlaying.loved) {
+                    nowPlaying.loveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
+                    nowPlaying.loved = true
+                }
+                else {
+                    nowPlaying.unLoveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
+                    nowPlaying.loved = false
+                }
             }
         }
     }

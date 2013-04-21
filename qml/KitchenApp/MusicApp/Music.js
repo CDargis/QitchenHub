@@ -25,6 +25,29 @@ var Song = function(title, album, artist, streamSource, picSource, duration, lov
 
 // Function definions ----------------------------------------------------------
 
+function getUsersArtists() {
+    var request = rootURL + "?method=library.getArtists" + "&user=" + user + "&format=json"
+            + "&api_key=" + apiKey
+    makeRequest("POST", request, function(json) {
+        var artists = []
+        for(var artist in json.artists.artist) {
+            artists.push(json.artists.artist[artist].name)
+        }
+        nowPlaying.setUsersArtists(artists)
+    })
+}
+
+function unLoveTrack(track, artist) {
+    var request = rootURL + "?method=track.unlove" + "&track=" + track
+            + "&artist=" + artist + "&api_key=" + apiKey + "&sk=" + session_key
+            + "&format=json" + "&api_sig=" + getSignature("api_key", apiKey, "artist", artist,
+                                                          "method", "track.unlove", "sk", session_key,
+                                                          "track", track)
+    makeRequest("POST", request, function(json) {
+        console.debug(json.status)
+    });
+}
+
 function loveTrack(track, artist) {
     var request = rootURL + "?method=track.love" + "&track=" + track
             + "&artist=" + artist + "&api_key=" + apiKey + "&sk=" + session_key
@@ -74,7 +97,6 @@ function getPlaylist(callBack) {
             callBack()
     });
 }
-
 
 function tune(type, resource, subtype) {
     var station = "lastfm://" + type + "/" + resource + "/" + subtype

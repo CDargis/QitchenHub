@@ -48,5 +48,13 @@ AppInterface {
         function loveTrack(track, artist) {
             Music.loveTrack(track, artist)
         }
+
+        function unLoveTrack(track, artist) {
+            Music.unLoveTrack(track, artist)
+        }
+    }
+
+    function setUsersArtists(artists) {
+        musicSettings.setUsersArtists(artists)
     }
 }
