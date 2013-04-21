@@ -6,6 +6,8 @@ AppInterface {
     property var googleMaps
     property var map
 
+    property string widgetSrc: "Places/PlacesWidget.qml"
+
     property string apiKey: "AIzaSyArvuWNnwVISUzZBG62o33Se2J2NBbQEYs"
 
 
@@ -54,7 +56,7 @@ AppInterface {
         //width: 500
         //height: 600
         //url: "Transit/main.html"
-        url: "http://maps.google.com"
+        url: "http://m.here.com"
 
 
 
@@ -67,6 +69,10 @@ AppInterface {
             property double lat: 0.0
             property double lng: 0.0
         }*/
+
+        onUrlChanged: {
+            console.log(url);
+        }
 
     }
 
@@ -84,14 +90,13 @@ AppInterface {
 
                 googleMaps = eval('(' + client.responseText + ')');
 
-                initialize();
+                //initialize();
             }
         }
 
-        client.open("GET", "https://maps.googleapis.com/maps/api/js?" +
+        client.open("GET", "http://maps.googleapis.com/maps/api/directions/json?origin=Chicago&destination=Indianapolis" +
                     "key=AIzaSyArvuWNnwVISUzZBG62o33Se2J2NBbQEYs" +
-                    "&sensor=false" +
-                    "&output=json");
+                    "&sensor=false");
 
         client.send();*/
 

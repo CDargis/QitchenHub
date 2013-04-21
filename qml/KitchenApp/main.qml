@@ -13,7 +13,7 @@ Rectangle {
         statusBar.setCurrentScreenTitle("Qitchen Hub")
         statusBar.addNotification({"title": "Notification 1", "message": "something happening", "func": func1})
         statusBar.addNotification({"title": "Notification 2", "message": "hi there!", "func": func2})
-        speaker.say("Welcome my pedigree chums!")
+        speaker.say("Welcome my pedigree chums!");
     }
 
     // Define globals here ... at least for now
@@ -125,16 +125,16 @@ Rectangle {
                 }
             }
             Button {
-                id: buttonTransit
+                id: buttonPlaces
                 width: 200
                 height: 200
                 pointSize: 18
-                buttonText: qsTr("Transit") + tr.emptyString
+                buttonText: qsTr("Places") + tr.emptyString
 
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("Transit.qml",3)
+                    onClicked: launch("Places.qml",3)
                 }
             }
             Button {
