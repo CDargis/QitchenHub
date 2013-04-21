@@ -45,5 +45,6 @@
         <file>lcd/dots.png</file>
         <file>wallpaper.jpg</file>
         <file>backArrow.png</file>
+        <file>twUserHeader.png</file>
     </qresource>
 </RCC>

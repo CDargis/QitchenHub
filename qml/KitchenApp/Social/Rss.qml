@@ -52,38 +52,12 @@ Rectangle{
         width: parent.width
         visible: true
         property bool flipped: false
-        front:
-            Rectangle{
+        front:RssContent{
             id: rssContent
-            property var story;
             height: parent.height
             width: parent.width
-            border.color: "#8b988b"
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#7C7C85" }
-                GradientStop { position: 1.0; color: "#25242A" }
-            }
-            clip: true
-            ListView {
-                focus: true
-                id: feeds
-                anchors.fill: parent
-                model: rssFeeds
-                delegate: SourceDelegate{}
-                clip: true
-            }
-            function viewStory(){
-                rssMain.visible = false;
-                rssBackArrow.visible = true
-                page.state = "read";
-            }
-            MouseArea{
-                anchors.fill: parent
-                propagateComposedEvents: true
-            }
         }
-        back:
-            RssSettings{
+        back:RssSettings{
             id: rssSettings
             height: parent.height
             width: parent.width
@@ -133,13 +107,15 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    rssSettings.resetState();
+                    rssContent.visible = true;
                     root.setCorrection();
+                    rssSettings.resetState();
                     rssBackArrow.visible = false
                     rssSettingsButton.visible = true
                     page.state = ""
                     webpage.visible = false;
                     webpage.url = "";
+                    rssSettings.visible = false;
                 }
             }
         }
@@ -157,9 +133,11 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                    rssSettings.visible = true
+                    rssMain.flipped = true
                     rssBackArrow.visible = true
                     rssSettingsButton.visible = false
-                    rssMain.flipped = true
+                    rssContent.visible = false
                 }
             }
         }

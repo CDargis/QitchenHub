@@ -4,17 +4,18 @@ Item {
     id: delegate
     width: delegate.ListView.view.width; height: delegate.ListView.view.height*.06
     property int collapseHeight: delegate.ListView.view.height*.06
+    property bool activeStatus: false
     ListModel {id: feedTitles}
     Rectangle {
         id: container
-        width: parent.width; height:collapseHeight; anchors.left: parent.left
+        width: parent.width; height:parent.height; anchors.left: parent.left
         color: "transparent"
         anchors.top: parent.top
         Rectangle{
             id: titleArea
             anchors.top: parent.top
             width: parent.width
-            height: parent.height
+            height: delegate.collapseHeight
             border.color: "#8b988b";
             color: delegate.ListView.isCurrentItem ? "#36C60F" : "black"
             radius: delegate.width*.03
@@ -42,19 +43,18 @@ Item {
             MouseArea {
                 anchors.fill: titleArea
                 onClicked: {
-                    rss.activeFeed = feed
                     delegate.ListView.view.currentIndex = index
                     changeState()
-                    console.log(container);
                 }
             }
         }
         ListView{
             id: feedView
+            property int trueHeight: collapseHeight*5
             width: parent.width
             height: 0
             anchors.left: parent.left
-            anchors.top: container.bottom
+            anchors.top: titleArea.bottom
             model: feedTitles
             opacity: 0
             delegate: FeedDelegate{}
@@ -71,13 +71,14 @@ Item {
             PropertyChanges {
                 target: feedView
                 opacity: 1.0
-                height: parent.height*5
+                height: expandHeight()
             }
             PropertyChanges {
                 target: delegate
                 opacity: 1.0
-                height: collapseHeight+feedView.height
+                height: feedView.height
             }
+            when: statusCheck()
         }
     ]
     transitions: [
@@ -88,20 +89,46 @@ Item {
     ]
 
     function changeState(){
-        if (delegate.state == "expanded")
+        if (delegate.state == "expanded" && delegate.ListView.isCurrentItem)
         {
             console.log(feedTitles.count);
-            delegate.state = "";
             feedTitles.clear();
             rss.activeFeed = ""
+            activeStatus = false;
             console.log("title collapsed");
         }
-        else
+        else if(delegate.state == "" && delegate.ListView.isCurrentItem)
         {
+            activeStatus = true;
+            rss.activeFeed = feed;
             discovery.temp = feedTitles;
             discovery.action = 1;
-            delegate.state = "expanded"
             console.log("tile expanded");
+        }
+    }
+    function statusCheck(){
+        if(delegate.ListView.isCurrentItem && activeStatus == true){
+            return true;
+        }
+        else{
+            delegate.activeStatus = false;
+            return false;
+        }
+    }
+    function expandHeight(){
+        var feedHeight = (feedView.trueHeight*.15)*feedView.count;
+        var needHeight = collapseHeight*(feeds.count);
+        if(feedHeight > rssContent.height){
+            return rssContent.height - needHeight;
+        }
+        else if(feedView.count == 0){
+            return (feedView.trueHeight)*.15 + collapseHeight
+        }
+        else if(feedHeight < rssContent.height && feedHeight < needHeight){
+            return feedHeight;
+        }
+        else{
+            return rssContent.height - feedHeight - (feedView.trueHeight*.15) ;
         }
     }
 }

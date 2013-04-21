@@ -3,6 +3,7 @@ import QtWebKit 3.0
 import "Social"
 AppInterface{
     id: root
+    anchors.fill: parent
     Rectangle{
         id:main
         width: parent.width
@@ -16,6 +17,7 @@ AppInterface{
         }
         Twitter{
             id: twitter
+            ListModel { id: twUsers }
             anchors.left: facebook.right
             width: parent.width*0.25
             height: parent.height
