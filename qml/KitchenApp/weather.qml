@@ -1,10 +1,14 @@
 import QtQuick 2.0
 
 AppInterface{
+    widgetSrc: "weatherWidget.qml"
     width: parent.width; height: parent.height
     property string font:"Helvetica"
     property int bottommar: -7
     property int yValue: 365
+    property int currentTemp;
+    property string iconURL;
+    property string stateCurrent;
 
     function showRequestInfo(text) {
 
@@ -13,6 +17,7 @@ AppInterface{
     function showDegree(text) {//Display temp
 
         log1.text = log1.text + "\n" + text + "°" + "F"
+        currentTemp = text
 
 
     }
@@ -160,7 +165,7 @@ AppInterface{
         console.log("dSF")
         console.log(wc);
 
-        //Decide background image and weather icon aacording to weather description
+        //Decide background image and weather icon according to weather description
         if(jsonObject.data.current_condition[0].weatherCode == 116)
         {if(condnight == 1)
             {weathericon1.source = "images/weathericons/PartlyCloudyNight.png"
@@ -296,7 +301,7 @@ AppInterface{
 
 
 
-            anchors.margins: 10
+            anchors.margins: 20
             anchors.top:weathericon1.top
             anchors.left: weathericon1.left
             anchors.topMargin: -weathericon.height
@@ -902,7 +907,7 @@ AppInterface{
             anchors.left: weathericon1.left
             anchors.topMargin: -weathericon.height
             anchors.leftMargin: -2*weathericon.width
-
+anchors.margins: 20
             opacity: 0
 
         }
@@ -1335,7 +1340,7 @@ console.log(wc);
             {weathericon.source = "images/weathericons/23.png"
                 image1.source = "images/Mist.png"}
 
-
+iconURL = weathericon.source;
             showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
             showDetailsC("High/Low : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
             showDetailsfr("Haut/Bas : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
@@ -1915,7 +1920,7 @@ console.log(wc);
             anchors.topMargin: -weathericon.height
             anchors.leftMargin: -2*weathericon.width
 
-            anchors.margins: 10
+            anchors.margins: 20
         }
         Text {
             id: logC;
@@ -1932,7 +1937,7 @@ console.log(wc);
             anchors.leftMargin: -2*weathericon.width
 
 
-            anchors.margins: 10
+            anchors.margins: 20
             opacity: 0
         }
         Image
@@ -2167,9 +2172,11 @@ console.log(wc);
                 //homerec.state == "" ? homerec.state = "changeloc" : homerec.state = ""
                 if(homerec.state == "")
                 {homerec.state = "changeloc";
+                    stateCurrent = 1;
                     /*homerec.state = "newin"*/}
                 else
-                {homerec.state = ""}
+                {homerec.state = ""
+                stateCurrent = 0;}
 
 
 
