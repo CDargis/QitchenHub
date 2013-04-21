@@ -9,13 +9,14 @@ var playlist = []
 
 // Objects -----------------------------------------
 
-var Song = function(title, album, artist, streamSource, picSource, duration) {
+var Song = function(title, album, artist, streamSource, picSource, duration, loved) {
     this.title = title
     this.album = album
     this.artist = artist
     this.streamSource = streamSource
     this.picSource = picSource
     this.duration = duration
+    this.loved = loved
 
     Song.prototype.toString = function() {
         return this.artist + ": " + this.title
@@ -23,6 +24,28 @@ var Song = function(title, album, artist, streamSource, picSource, duration) {
 }
 
 // Function definions ----------------------------------------------------------
+
+function loveTrack(track, artist) {
+    var request = rootURL + "?method=track.love" + "&track=" + track
+            + "&artist=" + artist + "&api_key=" + apiKey + "&sk=" + session_key
+            + "&format=json" + "&api_sig=" + getSignature("api_key", apiKey, "artist", artist,
+                                                          "method", "track.love", "sk", session_key,
+                                                          "track", track)
+    makeRequest("POST", request, function(json) {
+        console.debug(json.status)
+    });
+}
+
+function banTrack(track, artist) {
+    var request = rootURL + "?method=track.ban" + "&track=" + track
+            + "&artist=" + artist + "&api_key=" + apiKey + "&sk=" + session_key
+            + "&format=json" + "&api_sig=" + getSignature("api_key", apiKey, "artist", artist,
+                                                          "method", "track.ban", "sk", session_key,
+                                                          "track", track)
+    makeRequest("POST", request, function(json) {
+        console.debug(json.status)
+    });
+}
 
 function nextTrack() {
     var callback = function() { nowPlaying.addSong(playlist.shift()); theMusic.play() }
@@ -43,7 +66,8 @@ function getPlaylist(callBack) {
                                 json.playlist.trackList.track[track].creator,
                                 json.playlist.trackList.track[track].location,
                                 json.playlist.trackList.track[track].image,
-                                json.playlist.trackList.track[track].duration)
+                                json.playlist.trackList.track[track].duration,
+                                json.playlist.trackList.track[track].extension.loved === "1" ? true : false)
             playlist.push(song)
         }
         if(callBack && (callBack !== undefined))

@@ -16,6 +16,13 @@ Item {
     property int xMax: width - handle.width - 4
     onXMaxChanged: updatePos();
     onMinimumChanged: updatePos();
+    property bool enabled: true
+    onEnabledChanged: {
+        if(enabled)
+            opacity = .4
+        else opacity = 1
+        canDrag = !enabled
+    }
 
     function updatePos() {
         if (maximum > minimum) {

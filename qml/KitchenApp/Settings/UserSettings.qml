@@ -22,8 +22,8 @@ Rectangle {
         color: "transparent"
         Image {
             id: usrSettingsImg
-            anchors.top: locationIn.bottom
-            anchors.topMargin: 50
+            anchors.top: nameIn.bottom
+            anchors.topMargin: 100
             anchors.right: middle.left
             anchors.rightMargin: 20
             width: parent.width * .25; height: parent.width * .25
@@ -45,7 +45,7 @@ Rectangle {
             id: nameTitle
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 25
+            anchors.topMargin: 60
             font.family: fontFamily
             font.pixelSize: parent.width * 1/14
             color: "#36C60F"
@@ -60,29 +60,6 @@ Rectangle {
             width: parent.width * .75; height: width * .15
             onReturnPressed: {
                 statusBar.usrName = theText
-            }
-        }
-        Text {
-            id: locationTitle
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: nameIn.bottom
-            anchors.topMargin: 50
-            font.family: fontFamily
-            font.pixelSize: parent.width * 1/14
-            color: "#36C60F"
-            text: qsTr("Location") + tr.emptyString
-        }
-        VirtualInput {
-            id: locationIn
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: locationTitle.bottom
-            anchors.topMargin: 10
-            width: parent.width * .75; height: width * .15
-            currentText: "Chicago, IL"
-            Binding {
-                target: theMainApplication;
-                property: "currentLocation"
-                value: locationIn.currentText
             }
         }
     }

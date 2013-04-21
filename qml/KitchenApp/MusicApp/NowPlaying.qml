@@ -9,10 +9,11 @@ Rectangle {
     property string currentTitle: ""
     property string currentAlbum: ""
     property string currentArtist: ""
+    property bool loved: false
 
     PlayMenu {
         id: playMenu
-        width: parent.width; height: 125
+        width: nowPlayList.width; height: 125
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: nowPlayList.top
@@ -25,6 +26,13 @@ Rectangle {
         width: parent.width * .6; height: parent.height * .4
     }
 
+    Rectangle {
+        anchors.fill: nowPlayList
+        color: "transparent"
+        border.color: "black"
+        border.width: 1
+    }
+
     Text {
         id: songTextProgress
         anchors.verticalCenter: songProgress.verticalCenter
@@ -33,12 +41,13 @@ Rectangle {
         font.family: fontFamily
         font.pixelSize: 14
         color: "#36C60F"
+        text: "0:00"
     }
 
     Slider {
         id: songProgress
         anchors.top: nowPlayList.bottom
-        anchors.topMargin: 12
+        anchors.topMargin: 20
         anchors.horizontalCenter: nowPlayList.horizontalCenter
         canDrag: false
         sliderWidth: nowPlayList.width - songTextProgress.width - songLength.width - 20
@@ -53,6 +62,7 @@ Rectangle {
         font.family: fontFamily
         font.pixelSize: 14
         color: "#36C60F"
+        text: "0:00"
     }
 
     Text {
@@ -94,6 +104,7 @@ Rectangle {
         currentTitle = song.title
         currentArtist = song.artist
         currentAlbum = song.album
+        loved = song.loved
         songProgress.maximum = song.duration
         nowPlayList.addSong(song)
         songLength.text = secondsToMinuteString(song.duration)

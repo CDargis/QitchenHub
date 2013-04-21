@@ -50,5 +50,8 @@
         <file>volume_mute.png</file>
         <file>volume.png</file>
         <file>backArrow.png</file>
+        <file>love.png</file>
+        <file>ban.png</file>
+        <file>love_glow.png</file>
     </qresource>
 </RCC>

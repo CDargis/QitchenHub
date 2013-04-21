@@ -5,6 +5,7 @@ Flickable {
     flickableDirection: Flickable.HorizontalFlick
     contentWidth: theRow.width + (250 / 2); contentHeight: theRow.height
     clip: true
+    anchors.centerIn: parent
     property int albumCenterX: 0
     onAlbumCenterXChanged: {
         flick.state = "newSong"
@@ -23,6 +24,7 @@ Flickable {
         id: theRow
         spacing: 40
     }
+
     onContentWidthChanged: {
         // Song is being added!
         dimAlbumArt(theRow.children[theRow.children.length - 2])
@@ -60,7 +62,7 @@ Flickable {
     function dimAlbumArt(obj) {
         if(obj === undefined)
             return
-        obj.opacity = .3
+        obj.opacity = .2
     }
 
     function ensureVisible(obj) {
@@ -69,6 +71,8 @@ Flickable {
         if(obj.x > contentX) {
            // albumCenterX = obj.x
         }
+        if(obj.x + obj.width > width)
+            albumCenterX = obj.x - 325
     }
 
     function addSong(song) {

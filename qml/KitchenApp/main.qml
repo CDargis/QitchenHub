@@ -20,7 +20,6 @@ Rectangle {
     property string fontFamily: "Sans"
     property string language: "en"
     property string currentUnits: "us"  // "eu" for metric, "us" for imperial
-    property string currentLocaton: ""
 
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
@@ -178,7 +177,7 @@ Rectangle {
 
     StatusBar {
         id: statusBar
-        usrName: "Chris"
+        usrName: "Steve"
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
     }

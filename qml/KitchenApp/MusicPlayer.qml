@@ -40,5 +40,13 @@ AppInterface {
         width: parent.width
         height: parent.height
         anchors.horizontalCenter: parent.horizontalCenter
+
+        function banTrack(track, artist) {
+            Music.banTrack(track, artist)
+        }
+
+        function loveTrack(track, artist) {
+            Music.loveTrack(track, artist)
+        }
     }
 }
