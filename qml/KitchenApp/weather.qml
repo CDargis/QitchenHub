@@ -291,9 +291,11 @@ AppInterface{
             font.pixelSize: 100
             font.family: font
             font.bold: true
-            x:310
-            y:240
+            anchors.top:parent.top
+            anchors.left: parent.left
 
+            anchors.topMargin: parent.height/3.5
+            anchors.leftMargin: parent.width/4
 
             anchors.margins: 10
         }
@@ -890,12 +892,14 @@ AppInterface{
             font.pixelSize: 100
             font.family: font
             font.bold: true
-            x:310
-            y:240
 
 
+            anchors.top:parent.top
+            anchors.left: parent.left
             anchors.margins: 10
             opacity: 0
+            anchors.topMargin: parent.height/3.5
+            anchors.leftMargin: parent.width/4
         }
 
 
@@ -909,9 +913,10 @@ AppInterface{
             font.family: font
             font.bold: true
 
-            x:745
-            y:yValue
-
+            anchors.top:parent.top
+            anchors.right: parent.right
+            anchors.topMargin: parent.height/2.3
+            anchors.rightMargin: parent.width/4.15
 
 
 
@@ -925,8 +930,11 @@ AppInterface{
             font.family: font
             font.bold: true
 
-            x:745
-            y:yValue
+
+            anchors.top:parent.top
+            anchors.right: parent.right
+            anchors.topMargin: parent.height/2.3
+            anchors.rightMargin: parent.width/4.15
 
             opacity: 0
 
@@ -1002,8 +1010,10 @@ AppInterface{
         }
         Image{ id:tempicon1
             source:"images/thermometer.png"
-            x:710
-            y:358 + 25
+          anchors.top:detail1.top
+          anchors.right: detail1.right
+          anchors.rightMargin: detail.width/1.005
+          anchors.topMargin: detail1.height/2.1
             width:30
             height:30
 
@@ -1895,9 +1905,10 @@ console.log(wc);
             font.pixelSize: 100
             font.family: font
             font.bold: true
-            x:310
-            y:240
-
+            anchors.top:parent.top
+            anchors.left: parent.left
+ anchors.topMargin: parent.height/3.5
+ anchors.leftMargin: parent.width/4
 
             anchors.margins: 10
         }
@@ -1910,8 +1921,10 @@ console.log(wc);
             font.pixelSize: 100
             font.family: font
             font.bold: true
-            x:310
-            y:240
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.topMargin: parent.height/3.5
+            anchors.leftMargin: parent.width/4
 
 
             anchors.margins: 10
@@ -1935,8 +1948,11 @@ console.log(wc);
             font.family: font
             font.bold: true
 
-            x:745
-            y:yValue
+      anchors.top:parent.top
+      anchors.right: parent.right
+      anchors.topMargin: parent.height/2.3
+      anchors.rightMargin: parent.width/4.15
+
 
 
 
@@ -1951,8 +1967,10 @@ console.log(wc);
             font.family: font
             font.bold: true
 
-            x:745
-            y:yValue
+            anchors.top:parent.top
+            anchors.right: parent.right
+            anchors.topMargin: parent.height/2.3
+            anchors.rightMargin: parent.width/4.15
 
             opacity: 0
 
@@ -2015,8 +2033,10 @@ console.log(wc);
             font.family: font
             font.bold: true
             text:city_label.text
-            x:745
-            y:420
+            anchors.top:detail.top
+            anchors.right: detail.right
+            anchors.rightMargin: detail.width/2.1
+           anchors.topMargin: 1.2*detail.height
 
 
 
@@ -2085,8 +2105,10 @@ console.log(wc);
         }
         Image{ id:tempicon
             source:"images/thermometer.png"
-            x:710
-            y:360+25
+            anchors.top:detail.top
+            anchors.right: detail.right
+            anchors.rightMargin: detail.width/1.005
+            anchors.topMargin: detail1.height/2.1
             width:30
             height:30
 
