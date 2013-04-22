@@ -1830,14 +1830,7 @@ iconURL = weathericon.source;
             //     anchors.horizontalCenter: parent.right
             //     anchors.horizontalCenterOffset: -25
             Image {
-                //         id: settingicon
-                //         source: "images/system_config_services.png"
-                //         width:40
-                //         height:40
-                //         parent:switcher2
-                //         anchors.verticalCenter: parent.verticalCenter
-                //         anchors.horizontalCenter: parent.horizontalCenter
-                //         anchors.horizontalCenterOffset: -4
+
                 id: alertimage
                 source: "images/alert.png"
 
