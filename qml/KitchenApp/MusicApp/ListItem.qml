@@ -35,8 +35,9 @@ Item {
             anchors.left: image.right
             anchors.leftMargin: 10
             anchors.verticalCenter: image.verticalCenter
+            width: parent.width - image.width - 10
             font.family: fontFamily
-            font.pixelSize: 16
+            font.pixelSize: 12
             wrapMode: Text.Wrap
         }
     }

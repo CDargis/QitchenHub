@@ -135,11 +135,21 @@ Rectangle {
         onIsOnChanged: theMainApplication.playMusicOnStartup = isOn
     }
 
+    Rectangle {
+        height: parent.height - otherSettingsHeader.height
+        width: parent.width / 3
+        anchors.top: otherSettingsHeader.bottom
+        anchors.left: banListRect.right
+        color: "transparent"
+        border.color: "black"
+        border.width: 1
+    }
+
     function setUsersArtists(artists) {
-        artistFlick.addItems(artists)
+        artistFlick.addItems(artists, true)
     }
 
     function setBanList(banList) {
-        bannedFlick.addItems(banList)
+        bannedFlick.addItems(banList, false)
     }
 }

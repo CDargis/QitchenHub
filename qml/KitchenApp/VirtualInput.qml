@@ -121,4 +121,8 @@ Rectangle {
     function handleClose() {
         theInput.focus = false
     }
+
+    function forceFocus() {
+        theInput.focus = true
+    }
 }
