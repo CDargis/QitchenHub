@@ -138,7 +138,7 @@ AppInterface{
 
 
     function loaded(jsonObject)
-    { showCloudcover(jsonObject.data.current_condition[0].cloudcover);
+    {
         showHumidity(jsonObject.data.current_condition[0].humidity + "%");
         showTime();
         showprecip("Precipitation : " + jsonObject.data.current_condition[0].precipMM + " mm");
@@ -351,8 +351,12 @@ AppInterface{
             font.family: font
             font.bold: true
 
-            x:745
-            y:430
+            anchors.top:image21.top
+            anchors.left:image21.left
+            anchors.topMargin: image21.height/1.86
+            anchors.leftMargin: image21.width/1.45
+
+
 
         }
 
@@ -374,8 +378,10 @@ AppInterface{
 
         Image{ id:precicon1
             source:"images/weathericons/12.png"
-            x:717
-            y:455
+            anchors.top:image21.top
+      anchors.right: image21.right
+anchors.rightMargin: image21.width/3.15
+  anchors.topMargin: image21.height/1.62
             width:20
             height:20
 
@@ -384,7 +390,8 @@ AppInterface{
         Image{ id:locicon1
             source:"images/lunapic_136037864284841_2.png"
          anchors.top:image21.top
-         anchors.left: image21.left
+     x:tempicon1.x
+         anchors.topMargin: image21.height/2
 
 
         }
@@ -856,21 +863,7 @@ AppInterface{
             opacity:0
 
         }
-        Text
-        {id:cloudcover1
-            text: "Cloud Cover"
-            parent:footbar1
 
-            color:"#FFFFFF"
-            anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
-            font.bold: true
-            font.pixelSize:15
-            anchors.verticalCenterOffset: -28
-            anchors.left: footbar1.left
-            anchors.leftMargin: 1125
-
-        }
         Text
         {id:cloudcoverfr1
             text: "Couverture Nuageuse"
@@ -992,8 +985,7 @@ anchors.margins: 20
             font.family: font
             font.bold: true
             opacity: 0
-            x:745
-            y:430
+
 
         }
 
@@ -1226,7 +1218,7 @@ anchors.margins: 20
 
         function loaded(jsonObject)
         {
-            showCloudcover(jsonObject.data.current_condition[0].cloudcover);
+
             showHumidity(jsonObject.data.current_condition[0].humidity + "%");
             showTime();
             showprecip("Precipitation : " + jsonObject.data.current_condition[0].precipMM + " mm");
@@ -1863,21 +1855,7 @@ iconURL = weathericon.source;
 
         //     onClicked: alertdetail.visible = "true"}
 
-        Text
-        {id:cloudcover
-            text: "Cloud Cover"
-            parent:footbar
 
-            color:"#FFFFFF"
-            anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
-            font.bold: true
-            font.pixelSize:15
-            anchors.verticalCenterOffset: -28
-            anchors.left: footbar.left
-            anchors.leftMargin: 1125
-
-        }
         Text
         {id:cloudcoverfr
             text: "Couverture Nuageuse"
@@ -2058,8 +2036,10 @@ iconURL = weathericon.source;
             font.family: font
             font.bold: true
 
-            x:745
-            y:430
+            anchors.top:image2.top
+            anchors.left:image2.left
+            anchors.topMargin: image2.height/1.86
+            anchors.leftMargin: image2.width/1.45
 
         }
 
@@ -2124,8 +2104,11 @@ iconURL = weathericon.source;
         }
         Image{ id:precicon
             source:"images/weathericons/12.png"
-            x:717
-            y:455
+            anchors.top:image2.top
+      anchors.right: image2.right
+anchors.rightMargin: image2.width/3.15
+            anchors.topMargin: image2.height/1.62
+
             width:20
             height:20
 
@@ -2133,9 +2116,9 @@ iconURL = weathericon.source;
         }
         Image{ id:locicon
             source:"images/lunapic_136037864284841_2.png"
-            x:713
-            y:420
-
+            anchors.top:image2.top
+        x:tempicon.x
+            anchors.topMargin: image2.height/2
 
 
         }
