@@ -384,7 +384,7 @@ AppInterface{
         Image{ id:locicon1
             source:"images/lunapic_136037864284841_2.png"
          anchors.top:image21.top
-         anchors.left: image21.left
+         anchors.right: image21.right
 
 
         }

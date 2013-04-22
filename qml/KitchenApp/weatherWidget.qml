@@ -37,6 +37,7 @@ anchors.centerIn: parent
          source: url
          width:48
          height:48
+
      }
  }
 }

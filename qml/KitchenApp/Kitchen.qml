@@ -160,9 +160,9 @@ color: "#ffffff"
 width:150
 height:30
 radius:4
-anchors.top: parent.top
+anchors.bottom: parent.bottom
 anchors.right: parent.right
-anchors.topMargin: 20
+anchors.bottomMargin: 20
 anchors.rightMargin: 20
 TextInput
 {
@@ -187,16 +187,14 @@ Flickable {
     id:recipeHome
 opacity:1
 
-
+anchors.top: parent.top
+anchors.topMargin: parent.height*0.1
    // Component.onCompleted: {opacity:1}
-    width: parent.width ; height: parent.height
+    width: parent.width ; height: parent.height*0.9
     contentWidth: 1350; contentHeight: r1.height
     flickableDirection: Flickable.HorizontalFlick
     clip: true
-    //boundsBehavior: Flickable.DragAndOvershootBounds
-//    Image { id: image; source: "flickable.gif" }
-//    Image { id: image2; source: "flickable.gif"
-//    x:image.x + 300}
+
 
 Rectangle{
     Rectangle{id: r1
@@ -438,7 +436,7 @@ function launch(cat)
         }
     }
 
-    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=4943a64e&_app_key=66f7668e38c94348fdf8c422fd023adf&q=" + cat  +"&requirePictures=true");
+    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf&q=" + cat  +"&requirePictures=true");
 
     //doc.open("GET", "http://api.yummly.com/v1/api/recipe/recipe-id")
     doc.send();

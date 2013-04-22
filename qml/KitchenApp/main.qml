@@ -146,7 +146,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("test.qml",3)
+                    onClicked: launch("Kitchen.qml",3)
                 }
             }
             Button {
