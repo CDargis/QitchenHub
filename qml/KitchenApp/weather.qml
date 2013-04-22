@@ -335,8 +335,10 @@ AppInterface{
             font.family: font
             font.bold: true
             text:city.text
-            x:745
-            y:420
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.leftMargin: 1.6*weathericon1.width
+           anchors.topMargin: weathericon1.height/2
 
 
 
@@ -351,10 +353,10 @@ AppInterface{
             font.family: font
             font.bold: true
 
-            anchors.top:image21.top
-            anchors.left:image21.left
-            anchors.topMargin: image21.height/1.86
-            anchors.leftMargin: image21.width/1.45
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.leftMargin: 1.6*weathericon1.width
+           anchors.topMargin: weathericon1.height/1.8
 
 
 
@@ -378,20 +380,22 @@ AppInterface{
 
         Image{ id:precicon1
             source:"images/weathericons/12.png"
-            anchors.top:image21.top
-      anchors.right: image21.right
-anchors.rightMargin: image21.width/3.15
-  anchors.topMargin: image21.height/1.62
-            width:20
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.leftMargin: 1.4*weathericon1.width
+           anchors.topMargin: weathericon1.height/1.3
+
+                       width:20
             height:20
 
 
         }
         Image{ id:locicon1
             source:"images/lunapic_136037864284841_2.png"
-         anchors.top:image21.top
-     x:tempicon1.x
-         anchors.topMargin: image21.height/2
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.leftMargin:1.37*weathericon1.width
+            anchors.topMargin: weathericon1.height/2
 
 
         }
@@ -913,13 +917,10 @@ anchors.margins: 20
             font.family: font
             font.bold: true
 
-            anchors.top:parent.top
-            anchors.right: parent.right
-            anchors.topMargin: parent.height/2.3
-            anchors.rightMargin: parent.width/4.15
-
-
-
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.leftMargin:1.6*weathericon1.width
+            anchors.topMargin: weathericon1.height/15
 
         }
         Text {//hi lo temp
@@ -931,10 +932,10 @@ anchors.margins: 20
             font.bold: true
 
 
-            anchors.top:parent.top
-            anchors.right: parent.right
-            anchors.topMargin: parent.height/2.3
-            anchors.rightMargin: parent.width/4.15
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.leftMargin:1.6*weathericon1.width
+            anchors.topMargin: weathericon1.height/15
 
             opacity: 0
 
@@ -1007,12 +1008,14 @@ anchors.margins: 20
 
 
         }
-        Image{ id:tempicon1
+        Image
+        {
+            id:tempicon1
             source:"images/thermometer.png"
-          anchors.top:detail1.top
-          anchors.right: detail1.right
-          anchors.rightMargin: detail.width/1.005
-          anchors.topMargin: detail1.height/2.1
+            anchors.top:weathericon1.top
+            anchors.left: weathericon1.left
+            anchors.leftMargin:1.37*weathericon1.width
+            anchors.topMargin: weathericon1.height/4.4
             width:30
             height:30
 
@@ -1944,7 +1947,8 @@ iconURL = weathericon.source;
 
 
         }
-        Text {//hi lo temp
+        Text
+        {//hi lo temp
             id: detailc
 
             color: "#FFFFFF"
@@ -1952,11 +1956,10 @@ iconURL = weathericon.source;
             font.family: font
             font.bold: true
 
-            anchors.top:parent.top
-            anchors.right: parent.right
-            anchors.topMargin: parent.height/2.3
-            anchors.rightMargin: parent.width/4.15
-
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.leftMargin:1.6*weathericon.width
+            anchors.topMargin: weathericon.height/15
             opacity: 0
 
 
@@ -2018,10 +2021,10 @@ iconURL = weathericon.source;
             font.family: font
             font.bold: true
             text:city_label.text
-            anchors.top:detail.top
-            anchors.right: detail.right
-            anchors.rightMargin: detail.width/2.1
-           anchors.topMargin: 1.2*detail.height
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.leftMargin: 1.6*weathericon.width
+           anchors.topMargin: weathericon.height/2
 
 
 
@@ -2036,11 +2039,11 @@ iconURL = weathericon.source;
             font.family: font
             font.bold: true
 
-            anchors.top:image2.top
-            anchors.left:image2.left
-            anchors.topMargin: image2.height/1.86
-            anchors.leftMargin: image2.width/1.45
 
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.leftMargin: 1.6*weathericon.width
+           anchors.topMargin: weathericon.height/1.8
         }
 
         Text{//preciptation
@@ -2092,10 +2095,10 @@ iconURL = weathericon.source;
         }
         Image{ id:tempicon
             source:"images/thermometer.png"
-            anchors.top:detail.top
-            anchors.right: detail.right
-            anchors.rightMargin: detail.width/1.005
-            anchors.topMargin: detail1.height/2.1
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.leftMargin:1.37*weathericon.width
+            anchors.topMargin: weathericon.height/4.4
             width:30
             height:30
 
@@ -2104,10 +2107,10 @@ iconURL = weathericon.source;
         }
         Image{ id:precicon
             source:"images/weathericons/12.png"
-            anchors.top:image2.top
-      anchors.right: image2.right
-anchors.rightMargin: image2.width/3.15
-            anchors.topMargin: image2.height/1.62
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.leftMargin: 1.4*weathericon.width
+           anchors.topMargin: weathericon.height/1.3
 
             width:20
             height:20
@@ -2116,9 +2119,10 @@ anchors.rightMargin: image2.width/3.15
         }
         Image{ id:locicon
             source:"images/lunapic_136037864284841_2.png"
-            anchors.top:image2.top
-        x:tempicon.x
-            anchors.topMargin: image2.height/2
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.leftMargin:1.37*weathericon.width
+            anchors.topMargin: weathericon.height/2
 
 
         }
