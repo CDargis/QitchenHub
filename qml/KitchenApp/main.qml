@@ -20,7 +20,8 @@ Rectangle {
     property string fontFamily: "Sans"
     property string language: "en"
     property string currentUnits: "us"  // "eu" for metric, "us" for imperial
-    property string currentLocation: ""
+    property bool playMusicOnStartup: true
+    property bool musicRecommendations: true
 
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
@@ -114,7 +115,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    //onClicked: launch(".qml",3)
+                    onClicked: launch("MusicPlayer.qml",3)
                 }
             }
             Button {
@@ -178,7 +179,7 @@ Rectangle {
 
     StatusBar {
         id: statusBar
-        usrName: "Chris"
+        usrName: "Steve"
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
     }
