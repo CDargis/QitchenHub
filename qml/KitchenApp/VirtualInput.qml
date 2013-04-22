@@ -9,6 +9,7 @@ Rectangle {
     property string currentText
     property int fontSize: 18
     signal returnPressed(string theText) // Sends the current text with the signal
+    signal keyboardIsVisible()
 
     MouseArea {
         anchors.fill: parent
