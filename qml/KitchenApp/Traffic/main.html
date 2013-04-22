@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=7; IE=EmulateIE9; IE=EmulateIE10;"/>
+		<base href="http://developer.here.com/apiexplorer/examples/api-for-js/map/panning-the-map.html" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<title>Nokia Maps API</title>
+		<meta name="description" content="Panning the map up, down, left, right and setting it to a particular location"/>
+		<meta name="keywords" content="moving, map essentials, pan, drag"/>
+		<meta name=viewport content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="http://developer.here.com/apiexplorer/examples/templates/js/exampleHelpers.css"/>
+		<script type="text/javascript" charset="UTF-8" src="http://api.maps.nokia.com/2.2.4/jsl.js?with=all"></script>
+		<script type="text/javascript" charset="UTF-8" src="http://developer.here.com/apiexplorer/examples/templates/js/exampleHelpers.js"></script>
+		<style type="text/css">
+			html {
+				overflow:hidden;
+			}
+			
+			body {
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+			}
+			
+			#mapContainer {
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="uiContainer">
+		</div>
+		<div id="mapContainer"></div>
+
+		<script type="text/javascript" id="exampleJsSource">
+/*	Set authentication token and appid 
+*	WARNING: this is a demo-only key
+*	please register on http://api.developer.nokia.com/ 
+*	and obtain your own developer's API key 
+*/
+nokia.Settings.set("appId", "_peU-uCkp-j8ovkzFGNU"); 
+nokia.Settings.set("authenticationToken", "gBoUkAMoxoqIWfxWA5DuMQ");
+
+// Get the DOM node to which we will append the map
+var mapContainer = document.getElementById("mapContainer");
+// Create a map inside the map container DOM node
+var map = new nokia.maps.map.Display(mapContainer, {
+	// Initial center and zoom level of the map
+	center: [41.87811, -87.62980],
+	zoomLevel: 10,
+	components: [
+		// We add the behavior component to allow panning / zooming of the map
+		new nokia.maps.map.component.Behavior(),
+		// ZoomBar provides a UI to zoom the map in & out
+		new nokia.maps.map.component.ZoomBar(),
+		// Creates a toggle button to show/hide traffic information on the map
+		new nokia.maps.map.component.Traffic(),
+		new nokia.maps.map.component.panning.Click()
+	]
+});
+
+// Enable traffic layer
+map.overlays.add(nokia.maps.map.Display.TRAFFIC);
+
+
+// Set observers to update center and zoomlevel elements
+map.addObserver("center", function () {
+	centerUiElt.innerHTML = "<b>Center:</b> " + map.center;
+});
+map.addObserver("zoomLevel", function () {
+	zoomlevelUiElt.innerHTML = "<b>Current zoomlevel:</b> " + map.zoomLevel;
+});
+
+// Set start values for center and zoomlevel elements
+centerUiElt.innerHTML = "<b>Center:</b> "+ map.center;
+zoomlevelUiElt.innerHTML = "<b>Current zoomlevel:</b> " + map.zoomLevel;
+
+
+		</script>
+	</body>
+</html>

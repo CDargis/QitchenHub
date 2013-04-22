@@ -4,6 +4,7 @@ Rectangle {
     width: 50
     height: 62
     border.width: 1
+    radius: 5
 
     property int number: 0
 

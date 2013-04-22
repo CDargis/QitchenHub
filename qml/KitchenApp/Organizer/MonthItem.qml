@@ -16,30 +16,37 @@ Column {
         height: 50
         spacing: 2
         Rectangle {
-            width: weeks.childWidth
+            width: weeks.childWidth - 2
             height: parent.height
             opacity: 0.0
         }
         WeekDayItem {
             txt: qsTr("Mon") + tr.emptyString;
+            width: days.childWidth
         }
         WeekDayItem {
             txt: qsTr("Tue") + tr.emptyString;
+            width: days.childWidth
         }
         WeekDayItem {
             txt: qsTr("Wed") + tr.emptyString;
+            width: days.childWidth
         }
         WeekDayItem {
             txt: qsTr("Thu") + tr.emptyString;
+            width: days.childWidth
         }
         WeekDayItem {
             txt: qsTr("Fri") + tr.emptyString;
+            width: days.childWidth
         }
         WeekDayItem {
             txt: qsTr("Sat") + tr.emptyString;
+            width: days.childWidth
         }
         WeekDayItem {
             txt: qsTr("Sun") + tr.emptyString;
+            width: days.childWidth
         }
 
     }
@@ -334,9 +341,8 @@ Column {
 
         // mark the beginning of this month
         firstIndex = -1 + index;
-
         for (var i = 1; i <= daysThisMonth; ++i) {
-            createDay(index, i, month, year, "#333333", "#444444");
+            createDay(index, i, month, year, "#7C7C85", "#25242A");
             --roomLeft;
             ++index;
         }

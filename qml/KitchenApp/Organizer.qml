@@ -33,10 +33,12 @@ AppInterface {
         anchors.fill: parent
         width: parent.width; height: parent.height
         z: 0
-        gradient: Gradient {
+        color: "transparent"
+        border.width: 1
+        /*gradient: Gradient {
             GradientStop { position: 0.0; color: "#333333" }
             GradientStop { position: 1.0; color: "#111111" }
-        }
+        }*/
     }
 
     Item {
