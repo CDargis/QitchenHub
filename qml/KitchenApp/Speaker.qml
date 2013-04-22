@@ -7,7 +7,7 @@ Item {
     height: 100
 
     property int xSpacing: width / 8
-    property int ySpacing: 20
+    property int ySpacing: height / 5
 
     property int maxY: root.height - ySpacing
     property int travelLength: root.height - 2 * ySpacing
@@ -136,7 +136,7 @@ Item {
     Image {
         id: c1
         source: "qrc:/images/circle1.png"
-        width: 10
+        width: ySpacing
         height: width
         x: p1.x - width * 0.5
         y: p1.y - height * 0.5
@@ -145,7 +145,7 @@ Item {
     Image {
         id: c2
         source: "qrc:/images/circle2.png"
-        width: 30
+        width: 1.5 * ySpacing
         height: width
         x: p2.x - width * 0.5
         y: p2.y - height * 0.5
@@ -154,7 +154,7 @@ Item {
     Image {
         id: c3
         source: "qrc:/images/circle3.png"
-        width: 40
+        width: 2 * ySpacing
         height: width
         x: p3.x - width * 0.5
         y: p3.y - height * 0.5
@@ -163,7 +163,7 @@ Item {
     Image {
         id: c4
         source: "qrc:/images/circle4.png"
-        width: 15
+        width: 1.25 * ySpacing
         height: width
         x: p4.x - width * 0.5
         y: p4.y - height * 0.5
@@ -172,7 +172,7 @@ Item {
     Image {
         id: c5
         source: "qrc:/images/circle2.png"
-        width: 20
+        width: 1.5 * ySpacing
         height: width
         x: p5.x - width * 0.5
         y: p5.y - height * 0.5
@@ -181,7 +181,7 @@ Item {
     Image {
         id: c6
         source: "qrc:/images/circle1.png"
-        width: 35
+        width: 1.75 * ySpacing
         height: width
         x: p6.x - width * 0.5
         y: p6.y - height * 0.5
@@ -190,7 +190,7 @@ Item {
     Image {
         id: c7
         source: "qrc:/images/circle3.png"
-        width: 10
+        width: ySpacing
         height: width
         x: p7.x - width * 0.5
         y: p7.y - height * 0.5
