@@ -16,17 +16,13 @@ Rectangle{
         model: rssFeeds
         delegate: SourceDelegate{}
         clip: true
-        interactive: false
-        MouseArea{
-            propagateComposedEvents: true
-            onClicked:{
-                mouse.accepted = false
-            }
-        }
     }
     function viewStory(){
         rssMain.visible = false;
         rssBackArrow.visible = true
         page.state = "read";
+    }
+    function setInteractive(inter){
+        feeds.interactive = inter
     }
 }

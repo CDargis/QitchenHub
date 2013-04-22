@@ -44,7 +44,15 @@
         <file>lcd/9.png</file>
         <file>lcd/dots.png</file>
         <file>wallpaper.jpg</file>
+        <file>next_track_button.png</file>
+        <file>pause_button.png</file>
+        <file>play_button.png</file>
+        <file>volume_mute.png</file>
+        <file>volume.png</file>
         <file>backArrow.png</file>
+        <file>love.png</file>
+        <file>ban.png</file>
+        <file>love_glow.png</file>
         <file>twUserHeader.png</file>
         <file>circle1.png</file>
         <file>circle2.png</file>

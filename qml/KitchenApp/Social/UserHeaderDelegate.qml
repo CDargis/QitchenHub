@@ -64,7 +64,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             text: location
             color: "white"
-            //font.bold: true
+            font.bold: true
             font.family: "Sans"
             font.pixelSize: parent.height*.06
         }
@@ -73,7 +73,7 @@ Rectangle {
         id: miscInfo
         color: "white"
         width: parent.width
-        height: parent.height*.25
+        height: parent.height*.22
         anchors.top: userInfo.bottom
         Rectangle{
             id: tweetInfo
