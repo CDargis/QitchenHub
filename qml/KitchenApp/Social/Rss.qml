@@ -4,7 +4,6 @@ import QtWebKit 3.0
 Rectangle{
     id: root
     property string activeFeed
-    color: "black"
     Rectangle{
         id: rssTitle
         anchors.top: parent.top
@@ -107,6 +106,7 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                    rssContent.setInteractive(true)
                     rssContent.visible = true;
                     root.setCorrection();
                     rssSettings.resetState();
@@ -133,6 +133,7 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                    rssContent.setInteractive(false)
                     rssSettings.visible = true
                     rssMain.flipped = true
                     rssBackArrow.visible = true

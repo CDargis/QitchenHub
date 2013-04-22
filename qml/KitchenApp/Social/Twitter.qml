@@ -48,11 +48,12 @@ Rectangle{
         width: parent.width
         visible: true
         property bool flipped: false
-        front:Rectangle{
+        front:TwitterContent{
             id: twContent
             height: parent.height
             width: parent.width
             border.color: "#8b988b"
+            color: "white"
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "#7C7C85" }
                 GradientStop { position: 1.0; color: "#25242A" }
@@ -104,6 +105,7 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked:{
+                    twContent.setActive(true)
                     twMain.flipped = false
                     twSettings.visible = true
                     twBackArrow.visible = false
@@ -124,9 +126,10 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked:{
-                   twMain.flipped = true
-                   twSettings.visible = false
-                   twBackArrow.visible = true
+                    twContent.setActive(false);
+                    twMain.flipped = true
+                    twSettings.visible = false
+                    twBackArrow.visible = true
                 }
             }
         }

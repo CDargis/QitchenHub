@@ -64,7 +64,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             text: location
             color: "white"
-            //font.bold: true
+            font.bold: true
             font.family: "Sans"
             font.pixelSize: parent.height*.06
         }

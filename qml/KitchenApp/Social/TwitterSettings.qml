@@ -6,7 +6,7 @@ Rectangle{
     color: "#36C60F"
     anchors.fill: parent
     border.color: "#8b988b"
-    property string user: "stephenasmith"
+    property string user: "Peters1Dan"
     ListView {
         id: userInfo
         width: parent.width
@@ -14,44 +14,36 @@ Rectangle{
         model: TwitterUserModel{}
         delegate: UserHeaderDelegate{}
     }
-    Rectangle{
-        id: seperator
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: userInfo.bottom
-        anchors.topMargin: parent.height*.1
-        color: "black"
-        width: parent.width*.95
-        height: parent.height*.003
-    }
-
     Text{
         id: userLabel
         font.bold: true
-        font.pixelSize: parent.height*.03
-        anchors.top: seperator.bottom
-        anchors.topMargin: parent.height*.03
-        anchors.horizontalCenter: parent.horizontalCenter
+        font.pixelSize: parent.height*.02
+        anchors.top: userInfo.bottom
+        anchors.topMargin: parent.height*.1
+        anchors.left: parent.left
+        anchors.leftMargin: parent.width*.025
         color: "black"
         font.family: "Sans"
-        text: "User Name:"
+        text: qsTr("User Name:") + tr.emptyString
     }
     Rectangle{
         id: userBox
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: parent.width*.015
         anchors.top: userLabel.bottom
         anchors.topMargin: parent.height*.02
         height: parent.height*.06
-        width: parent.width*.55
+        width: parent.width*.5
         color: "black"
-        border.color: "#8b988b"
         border.width: height*.03
+        border.color: "#8b988b"
         TextInput{
             id: userInput
             anchors.left: parent.left
-            anchors.leftMargin: parent.width*.02
+            anchors.leftMargin: parent.width*.01
             anchors.verticalCenter: parent.verticalCenter
-            font.family: "DejaVu Serif"
-            font.pixelSize: parent.height*0.4
+            font.family: "Sans"
+            font.pixelSize: parent.height*0.5
             maximumLength: 15
             color: "white"
             text: user + tr.emptyString
@@ -65,13 +57,59 @@ Rectangle{
             }
         }
     }
+
+    Text{
+        id: passLabel
+        font.bold: true
+        font.pixelSize: parent.height*.025
+        anchors.top: userBox.bottom
+        anchors.topMargin: parent.height*.03
+        anchors.left: parent.left
+        anchors.leftMargin: parent.width*.015
+        color: "black"
+        font.family: "Sans"
+        text: qsTr("Password:") + tr.emptyString
+    }
+    Rectangle{
+        id: passBox
+        anchors.left: parent.left
+        anchors.leftMargin: parent.width*.015
+        anchors.top: passLabel.bottom
+        anchors.topMargin: parent.height*.02
+        height: parent.height*.06
+        width: parent.width*.5
+        color: "black"
+        border.width: height*.03
+        border.color: "#8b988b"
+        TextInput{
+            id: passwordInput
+            anchors.left: parent.left
+            anchors.leftMargin: parent.width*.02
+            anchors.verticalCenter: parent.verticalCenter
+            font.family: "Sans"
+            font.pixelSize: parent.height*0.5
+            maximumLength: 15
+            color: "white"
+            text: "**********"
+            smooth:true
+            echoMode: TextInput.Password
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                passwordInput.text = ""
+                passwordInput.forceActiveFocus();
+            }
+        }
+    }
     Rectangle{
         id: addButton
         anchors.top: userBox.bottom
         anchors.topMargin: parent.height*.02
-        anchors.horizontalCenter: parent.horizontalCenter
-        height: parent.width*.1
-        width: addText.paintedWidth + parent.width*.06
+        anchors.right: parent.right
+        anchors.rightMargin: parent.width*.01
+        height: parent.width*.13
+        width: addText.paintedWidth + parent.width*.08
         radius: width*.04
         color: "black"
         border.color: "#8b988b"
@@ -80,8 +118,9 @@ Rectangle{
             id: addText
             anchors.centerIn: parent
             color: "white"
+            font.family: "Sans"
             font.pixelSize: parent.height*.55
-            text: qsTr("Change User") + tr.emptyString
+            text: qsTr("Sign in") + tr.emptyString
         }
         MouseArea{
             anchors.fill: parent
@@ -94,7 +133,7 @@ Rectangle{
     Rectangle{
         id: seperator2
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: addButton.bottom
+        anchors.top: passBox.bottom
         anchors.topMargin: parent.height*.04
         color: "black"
         width: parent.width*.95
@@ -117,5 +156,8 @@ Rectangle{
         anchors.top: refresh.bottom
         anchors.topMargin: parent.height*.03
         isOn: false
+    }
+    function setInteractive(inter){
+        userInfo.interactive = inter
     }
 }
