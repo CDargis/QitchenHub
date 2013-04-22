@@ -32,7 +32,7 @@ Rectangle{
         anchors.leftMargin: parent.width*.015
         anchors.top: userLabel.bottom
         anchors.topMargin: parent.height*.02
-        height: parent.height*.06
+        height: parent.height*.05
         width: parent.width*.5
         color: "black"
         border.width: height*.03
@@ -76,7 +76,7 @@ Rectangle{
         anchors.leftMargin: parent.width*.015
         anchors.top: passLabel.bottom
         anchors.topMargin: parent.height*.02
-        height: parent.height*.06
+        height: parent.height*.05
         width: parent.width*.5
         color: "black"
         border.width: height*.03
@@ -110,7 +110,7 @@ Rectangle{
         anchors.rightMargin: parent.width*.01
         height: parent.width*.13
         width: addText.paintedWidth + parent.width*.08
-        radius: width*.04
+        radius: width*.06
         color: "black"
         border.color: "#8b988b"
         border.width: height*.03

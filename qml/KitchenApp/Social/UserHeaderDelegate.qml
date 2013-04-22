@@ -73,7 +73,7 @@ Rectangle {
         id: miscInfo
         color: "white"
         width: parent.width
-        height: parent.height*.25
+        height: parent.height*.22
         anchors.top: userInfo.bottom
         Rectangle{
             id: tweetInfo
