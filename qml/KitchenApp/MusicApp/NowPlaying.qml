@@ -13,57 +13,47 @@ Rectangle {
 
     PlayMenu {
         id: playMenu
-        width: flip.width; height: 125
+        width: playSettingsRect.width; height: 125
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: flip.top
+        anchors.bottom: playSettingsRect.top
         anchors.bottomMargin: 20
     }
 
-    Flipable {
-        id: flip
+    Rectangle {
+        id: playSettingsRect
         anchors.centerIn: parent
         property bool flipped: false
+        color: "transparent"
         width: parent.width * .6; height: parent.height * .4
-        front: NowPlayList {
+        NowPlayList {
             id: nowPlayList
             anchors.fill: parent
+            visible: !playSettingsRect.flipped
         }
-        back: MusicSettings {
+        MusicSettings {
             id: musicSettings
-            anchors.fill: parent
+            height: parent.height - musicSettingsImg.height
+            width: parent.width
+            visible: playSettingsRect.flipped
         }
         Image {
-            anchors.right: flip.right
-            anchors.bottom: flip.bottom
+            id: musicSettingsImg
+            anchors.right: playSettingsRect.right
+            anchors.bottom: playSettingsRect.bottom
             width: 35; height: 35
-            source: (flip.flipped) ? "qrc:/images/rssBackArrow.png" : "qrc:/images/rssSettings.png"
+            source: (playSettingsRect.flipped) ?
+                        "qrc:/images/rssBackArrow.png" : "qrc:/images/rssSettings.png"
             MouseArea {
                 anchors.fill: parent
-                onClicked: flip.flipped = !flip.flipped
+                onClicked: playSettingsRect.flipped
+                           = !playSettingsRect.flipped
             }
         }
-        transform: Rotation {
-                 id: rotation
-                 origin.x: flip.width/2
-                 origin.y: flip.height/2
-                 axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
-                 angle: 0    // the default angle
-             }
-
-             states: State {
-                 name: "back"
-                 PropertyChanges { target: rotation; angle: 180 }
-                 when: flip.flipped
-             }
-
-             transitions: Transition {
-                 NumberAnimation { target: rotation; property: "angle"; duration: 1000 }
-             }
     }
 
     Rectangle {
-        anchors.fill: flip
+        anchors.fill: playSettingsRect
         color: "transparent"
         border.color: "black"
         border.width: 1
@@ -82,11 +72,11 @@ Rectangle {
 
     Slider {
         id: songProgress
-        anchors.top: flip.bottom
+        anchors.top: playSettingsRect.bottom
         anchors.topMargin: 20
-        anchors.horizontalCenter: flip.horizontalCenter
+        anchors.horizontalCenter: playSettingsRect.horizontalCenter
         canDrag: false
-        sliderWidth: flip.width - songTextProgress.width - songLength.width - 20
+        sliderWidth: playSettingsRect.width - songTextProgress.width - songLength.width - 20
         sliderHeight: 6
     }
 
@@ -105,7 +95,7 @@ Rectangle {
         id: titleDisplay
         anchors.top: songProgress.bottom
         anchors.topMargin: 12
-        anchors.horizontalCenter: flip.horizontalCenter
+        anchors.horizontalCenter: playSettingsRect.horizontalCenter
         font.pixelSize: 22
         font.family: fontFamily
         text: currentTitle
@@ -148,6 +138,10 @@ Rectangle {
 
     function setUsersArtists(artists) {
         musicSettings.setUsersArtists(artists)
+    }
+
+    function setBanList(banList) {
+        musicSettings.setBanList(banList)
     }
 
     function updateProgress(progress) {

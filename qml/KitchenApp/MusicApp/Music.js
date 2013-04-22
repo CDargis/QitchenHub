@@ -25,6 +25,22 @@ var Song = function(title, album, artist, streamSource, picSource, duration, lov
 
 // Function definions ----------------------------------------------------------
 
+function getBanList() {
+    var request = rootURL + "?method=user.getBannedTracks" + "&user=" + user + "&format=json"
+                    + "&api_key=" + apiKey
+    makeRequest("POST", request, function(json) {
+       // printJSON(json)
+        var banList = []
+        for(var track in json.bannedtracks) {
+            console.log(json.bannedtracks[track].name)
+           // if(json.bannedtracks[track].name !== undefined)
+             //   banList.push(json.bannedtracks[track].name + " - "
+               //              + json.bannedtracks[track].artist.name)
+        }
+       // nowPlaying.setBanList(banList)
+    })
+}
+
 function getUsersArtists() {
     var request = rootURL + "?method=library.getArtists" + "&user=" + user + "&format=json"
             + "&api_key=" + apiKey

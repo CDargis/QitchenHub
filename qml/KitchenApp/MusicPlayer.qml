@@ -6,6 +6,12 @@ import "MusicApp"
 AppInterface {
     id: theMusicPlayerApp
     anchors.fill: parent
+
+    Component.onCompleted: {
+        getUsersArtists()
+        getBanList()
+    }
+
     Audio {
         id: theMusic
         autoPlay: false
@@ -42,16 +48,27 @@ AppInterface {
         anchors.horizontalCenter: parent.horizontalCenter
 
         function banTrack(track, artist) {
-            Music.banTrack(track, artist)
+            if(theMusic.playbackState === Audio.PlayingState)
+                Music.banTrack(track, artist)
         }
 
         function loveTrack(track, artist) {
-            Music.loveTrack(track, artist)
+            if(theMusic.playbackState === Audio.PlayingState)
+                Music.loveTrack(track, artist)
         }
 
         function unLoveTrack(track, artist) {
-            Music.unLoveTrack(track, artist)
+            if(theMusic.playbackState === Audio.PlayingState)
+                Music.unLoveTrack(track, artist)
         }
+    }
+
+    function getBanList() {
+        Music.getBanList()
+    }
+
+    function getUsersArtists() {
+        Music.getUsersArtists()
     }
 
     function setUsersArtists(artists) {

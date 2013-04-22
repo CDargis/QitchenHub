@@ -109,6 +109,7 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 nowPlaying.banTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
+                theMusicPlayerApp.getBanList()
                 theMusic.nextTrack()
             }
         }
