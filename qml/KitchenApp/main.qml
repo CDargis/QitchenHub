@@ -20,7 +20,7 @@ Rectangle {
     property string fontFamily: "Sans"
     property string language: "en"
     property string currentUnits: "us"  // "eu" for metric, "us" for imperial
-    property string currentLocaton: ""
+    property string currentLocation: ""
 
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
@@ -44,17 +44,18 @@ Rectangle {
         id: lsproxy
     }
 
+    Image {
+        anchors.fill: parent
+        source: "qrc:/images/wallpaper.jpg"
+        width: parent.width
+    }
+
     // apps are parented to this item so they are able to use anchors
     Item {
         id: desktop
         anchors.top: statusBar.bottom
         width: parent.width * 0.85
         height: parent.height - desktop.y;
-
-        Image {
-            anchors.fill: parent
-            source: "qrc:/images/wallpaper.jpg"
-        }
 
         Voice {
             id: speaker
@@ -69,7 +70,7 @@ Rectangle {
             // also each button has to explicitly state it's size
             // and it better be that all buttons have the same size
             Button {
-                id: button
+                id: homeAutomationButton
                 width: 200
                 height: 200
                 pointSize: 18
@@ -77,22 +78,6 @@ Rectangle {
                 // make sure you put the name of your qml as an argument
                 onButtonClick: launch("HomeAutomation.qml",0)
             }
-
-            ToggleSwitch {
-                //anchors.left: button.right
-                //anchors.leftMargin: 25
-                //anchors.verticalCenter: button.verticalCenter
-                isOn: false
-            }
-
-            Indicator {
-
-            }
-
-            AppHint {
-
-            }
-
             Button {
                 id: buttonOrg
                 width: 200
@@ -106,11 +91,6 @@ Rectangle {
                     onClicked: launch("Organizer.qml",1)
                 }
             }
-            DayItem {
-                width: 125
-                height: 125
-            }
-
             Button {
                 id: socialAppLauch
                 width: 200
@@ -125,33 +105,69 @@ Rectangle {
                 }
             }
             Button {
-                id: buttonPlaces
+                id: musicPlayerLaunch
                 width: 200
                 height: 200
                 pointSize: 18
-                buttonText: qsTr("Places") + tr.emptyString
+                buttonText: qsTr("Music Player") + tr.emptyString
 
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("Places.qml",3)
+                    //onClicked: launch(".qml",3)
                 }
             }
             Button {
-                width: 125
-                height: 125
+                id: weatherAppLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Weather") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
             Button {
-                width: 125
-                height: 125
+                id: kitchenAppLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Kitchen") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
             Button {
-                width: 125
-                height: 125
+                id: transitAppLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Traffic") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    onClicked: launch("Traffic.qml",3)
+                }
             }
             Button {
-                width: 125
-                height: 125
+                id: pictureViewerLaunch
+                width: 200
+                height: 200
+                pointSize: 18
+                buttonText: qsTr("Picture Viewer") + tr.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    // make sure you put the name of your qml as an argument
+                    //onClicked: launch(".qml",3)
+                }
             }
         }
 
@@ -160,18 +176,29 @@ Rectangle {
         // all apps end up right here
     }
 
-    Dock {
-        id: dock
-        x: parent.width * 0.85
-        y: parent.height * 0.1
-        width: parent.width - dock.x
-        height: parent.height - dock.y
-    }
     StatusBar {
         id: statusBar
         usrName: "Chris"
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
+    }
+    Rectangle{
+        id: dockBackGround
+        x: parent.width * 0.85
+        width: parent.width - parent.width * 0.85
+        height: parent.height+dock.contentHeight
+        anchors.top: statusBar.bottom
+        opacity: .45
+        border.color: "#00FF00"
+        color: "#25BA25"
+    }
+    Dock {
+        id: dock
+        x: parent.width * 0.85
+        anchors.top: statusBar.bottom
+        anchors.topMargin: 2
+        width: parent.width - dock.x
+        height: parent.height - dock.y
     }
 
     VirtualKeyboard {

@@ -2,11 +2,11 @@ import QtQuick 2.0
 
 Rectangle{
     id: root
-    visible: false
+    visible: true
     color: "#36C60F"
     width: parent.width
     height: parent.height
-    border.color: "black"
+    border.color: "#8b988b"
     Rectangle{
         id: addArea
         anchors.left: parent.left
@@ -197,8 +197,7 @@ Rectangle{
         */
         ListView{
             id: listFeeds
-            width: parent.width
-            height: parent.height
+            anchors.fill: parent
             model: rssFeeds
             clip: true
             delegate: SettingsDelegate{}
