@@ -86,12 +86,16 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 if(!nowPlaying.loved) {
-                    nowPlaying.loveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
-                    nowPlaying.loved = true
+                    if(theMusic.playbackState === Audio.PlayingState) {
+                        nowPlaying.loveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
+                        nowPlaying.loved = true
+                    }
                 }
                 else {
-                    nowPlaying.unLoveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
-                    nowPlaying.loved = false
+                    if(theMusic.playbackState === Audio.PlayingState) {
+                        nowPlaying.unLoveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
+                        nowPlaying.loved = false
+                    }
                 }
             }
         }
@@ -108,9 +112,11 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                nowPlaying.banTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
-                theMusicPlayerApp.getBanList()
-                theMusic.nextTrack()
+                if(theMusic.playbackState === Audio.PlayingState) {
+                    nowPlaying.banTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
+                    theMusicPlayerApp.getBanList()
+                    theMusic.nextTrack()
+                }
             }
         }
     }

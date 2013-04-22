@@ -29,15 +29,14 @@ function getBanList() {
     var request = rootURL + "?method=user.getBannedTracks" + "&user=" + user + "&format=json"
                     + "&api_key=" + apiKey
     makeRequest("POST", request, function(json) {
-       // printJSON(json)
         var banList = []
-        for(var track in json.bannedtracks) {
-            console.log(json.bannedtracks[track].name)
-           // if(json.bannedtracks[track].name !== undefined)
-             //   banList.push(json.bannedtracks[track].name + " - "
-               //              + json.bannedtracks[track].artist.name)
+        for(var track in json.bannedtracks.track) {
+            if(json.bannedtracks.track[track].name !== undefined) {
+                banList.push(json.bannedtracks.track[track].name + " - " +
+                             json.bannedtracks.track[track].artist.name)
+            }
         }
-       // nowPlaying.setBanList(banList)
+        nowPlaying.setBanList(banList)
     })
 }
 
@@ -69,6 +68,17 @@ function loveTrack(track, artist) {
             + "&artist=" + artist + "&api_key=" + apiKey + "&sk=" + session_key
             + "&format=json" + "&api_sig=" + getSignature("api_key", apiKey, "artist", artist,
                                                           "method", "track.love", "sk", session_key,
+                                                          "track", track)
+    makeRequest("POST", request, function(json) {
+        console.debug(json.status)
+    });
+}
+
+function unBanTrack(track, artist) {
+    var request = rootURL + "?method=track.unban" + "&track=" + track
+            + "&artist=" + artist + "&api_key=" + apiKey + "&sk=" + session_key
+            + "&format=json" + "&api_sig=" + getSignature("api_key", apiKey, "artist", artist,
+                                                          "method", "track.unban", "sk", session_key,
                                                           "track", track)
     makeRequest("POST", request, function(json) {
         console.debug(json.status)

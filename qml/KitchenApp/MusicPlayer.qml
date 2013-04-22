@@ -10,6 +10,11 @@ AppInterface {
     Component.onCompleted: {
         getUsersArtists()
         getBanList()
+        if(theMainApplication.playMusicOnStartup)
+            Music.nextTrack()
+        if(theMainApplication.musicRecommendations)
+            theMusic.turnOnRecommendations()
+        else theMusic.turnOffRecommendations()
     }
 
     Audio {
@@ -29,6 +34,14 @@ AppInterface {
         }
 
         function nextTrack() { Music.nextTrack() }
+
+        function turnOnRecommendations() {
+            Music.tune("user", Music.user, "mix")
+        }
+
+        function turnOffRecommendations() {
+            Music.tune("user", Music.user, "library")
+        }
     }
     // Tell the player the progress
     Timer {
@@ -48,18 +61,19 @@ AppInterface {
         anchors.horizontalCenter: parent.horizontalCenter
 
         function banTrack(track, artist) {
-            if(theMusic.playbackState === Audio.PlayingState)
-                Music.banTrack(track, artist)
+            Music.banTrack(track, artist)
+        }
+
+        function unBanTrack(track, artist) {
+            Music.unBanTrack(track, artist)
         }
 
         function loveTrack(track, artist) {
-            if(theMusic.playbackState === Audio.PlayingState)
-                Music.loveTrack(track, artist)
+            Music.loveTrack(track, artist)
         }
 
         function unLoveTrack(track, artist) {
-            if(theMusic.playbackState === Audio.PlayingState)
-                Music.unLoveTrack(track, artist)
+            Music.unLoveTrack(track, artist)
         }
     }
 

@@ -21,8 +21,10 @@ Item {
                 id: killArea
                 anchors.fill: parent
                 onClicked: {
-                    if(root.checked)
+                    if(root.checked) {
+                        root.parent.parent.parent.destroyingItem(root)
                         root.destroy()
+                    }
                     else root.checked = true
                 }
             }
