@@ -152,7 +152,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("Traffic.qml",3)
+                    onClicked: launch("Traffic.qml",4)
                 }
             }
             Button {
