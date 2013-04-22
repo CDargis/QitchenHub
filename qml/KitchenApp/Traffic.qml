@@ -7,10 +7,11 @@ AppInterface {
     property string currentLocation: theMainApplication.currentLocation
 
     CommonText {
+        id: title
         anchors.bottom: webView.top
         anchors.bottomMargin: 3
         anchors.horizontalCenter: parent.horizontalCenter
-        text: qsTr("Traffic information for") + ": " + currentLocation
+        text: qsTr("Traffic information for") + ": " + currentLocation + tr.emptyString
     }
 
 
@@ -21,6 +22,10 @@ AppInterface {
         width: parent.width
 
         url: "Traffic/main.html"
+    }
+
+    Component.onCompleted: {
+        speaker.say(title.text.toString());
     }
 
     function url() {

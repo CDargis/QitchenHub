@@ -46,5 +46,9 @@
         <file>wallpaper.jpg</file>
         <file>backArrow.png</file>
         <file>twUserHeader.png</file>
+        <file>circle1.png</file>
+        <file>circle2.png</file>
+        <file>circle3.png</file>
+        <file>circle4.png</file>
     </qresource>
 </RCC>

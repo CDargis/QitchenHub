@@ -27,8 +27,7 @@ OTHER_FILES += \
     qml/KitchenApp/Indicator/AppHint.qml \
     qml/KitchenApp/Organizer/DayItem.qml \
     qml/KitchenApp/Settings/UserSettings.qml \
-    qml/KitchenApp/VirtualKeyboard/UniqueKey.qml \
-    qml/KitchenApp/Places.qml
+    qml/KitchenApp/VirtualKeyboard/UniqueKey.qml
 
 RESOURCES += \
     Resources.qrc \

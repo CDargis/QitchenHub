@@ -33,7 +33,7 @@ Flickable {
     property bool moving: false
     property variant state
 
-    // consider the to be hidden
+    // consider these to be hidden
     // for interior use only
     property Item indicator
     property Item hint
@@ -197,7 +197,10 @@ Flickable {
         hint = component.createObject(root);
 
         hint.x = x - hint.width * 0.5;
-        hint.y = y - hint.height;
+        if (y < 60)
+            hint.y = y + hint.height * 0.5;
+        else
+            hint.y = y - hint.height;
     }
 
     function hideBackButton(){

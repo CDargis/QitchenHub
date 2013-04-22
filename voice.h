@@ -16,6 +16,7 @@ public:
     Q_INVOKABLE void say(const QString& sentence);
     
 signals:
+    void finished();
     
 public slots:
 

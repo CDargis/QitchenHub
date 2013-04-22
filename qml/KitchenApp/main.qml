@@ -21,6 +21,7 @@ Rectangle {
     property string language: "en"
     property string currentUnits: "us"  // "eu" for metric, "us" for imperial
     property string currentLocation: ""
+    property Item speaker: statusBar.speakerRef()
 
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
@@ -56,10 +57,6 @@ Rectangle {
         anchors.top: statusBar.bottom
         width: parent.width * 0.85
         height: parent.height - desktop.y;
-
-        Voice {
-            id: speaker
-        }
 
         // placeholder defining the area containing buttons
         AppGrid {

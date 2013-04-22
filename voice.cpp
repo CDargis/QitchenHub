@@ -6,6 +6,7 @@ CVoice::CVoice(QObject *parent) :
     QObject(parent)
 {
     m_echo.setStandardOutputProcess(&m_festival);
+    connect(&m_festival, SIGNAL(finished(int)), this, SIGNAL(finished()));
 }
 
 CVoice::~CVoice()

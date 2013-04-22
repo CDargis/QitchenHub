@@ -122,6 +122,14 @@ Rectangle {
         }
     }
 
+    MouseArea {
+        anchors.fill: parent
+
+        onPressed: {
+            sayTime();
+        }
+    }
+
     Component.onCompleted: {
 
         var date = new Date;
@@ -142,5 +150,9 @@ Rectangle {
 
         seconds.start();
         timer.start();
+    }
+
+    function sayTime() {
+        speaker.say("The time now is: " + first.digit + second.digit + ":" + third.digit + fourth.digit);
     }
 }
