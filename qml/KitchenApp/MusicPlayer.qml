@@ -7,6 +7,8 @@ AppInterface {
     id: theMusicPlayerApp
     anchors.fill: parent
 
+    widgetSrc: "MusicApp/MusicPlayerWidget.qml"
+
     Component.onCompleted: {
         getUsersArtists()
         getBanList()
