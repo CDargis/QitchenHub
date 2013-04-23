@@ -21,7 +21,7 @@ Rectangle {
             anchors.centerIn: parent
             font.family: fontFamily
             font.pointSize: 30
-            color: "#36C60F"
+            color: "white"
             text: qsTr("Climate Control") + tr.emptyString
         }
     }
@@ -153,7 +153,7 @@ Rectangle {
                     font.family: fontFamily
                     font.pixelSize: 30
                     text: qsTr("Cool") + tr.emptyString
-                    color: "#36C60F"
+                    color: "black"
                     anchors.centerIn: parent
                 }
                 MouseArea {
@@ -177,7 +177,7 @@ Rectangle {
                     font.family: fontFamily
                     font.pixelSize: 30
                     text: qsTr("Heat") + tr.emptyString
-                    color: "#36C60F"
+                    color: "black"
                     anchors.centerIn: parent
                 }
                 MouseArea {
@@ -201,7 +201,7 @@ Rectangle {
                     font.family: fontFamily
                     font.pixelSize: 30
                     text: qsTr("Off") + tr.emptyString
-                    color: "#36C60F"
+                    color: "black"
                     anchors.centerIn: parent
                 }
                 MouseArea {
