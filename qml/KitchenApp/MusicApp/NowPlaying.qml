@@ -17,7 +17,6 @@ Rectangle {
         color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: playSettingsRect.top
-        anchors.bottomMargin: 20
     }
 
     Rectangle {
@@ -25,6 +24,8 @@ Rectangle {
         anchors.centerIn: parent
         property bool flipped: false
         color: "transparent"
+        border.color: "black"
+        border.width: 1
         width: parent.width * .6; height: parent.height * .4
         NowPlayList {
             id: nowPlayList
@@ -37,11 +38,21 @@ Rectangle {
             width: parent.width
             visible: playSettingsRect.flipped
         }
+    }
+
+    Rectangle {
+        id: musicSettingsRect
+        width: playSettingsRect.width; height: 30
+        anchors.right: playSettingsRect.right
+        anchors.bottom: playSettingsRect.bottom
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#000000" }
+            GradientStop { position: 1.0; color: "#222222" }
+        }
         Image {
             id: musicSettingsImg
-            anchors.right: playSettingsRect.right
-            anchors.bottom: playSettingsRect.bottom
-            width: 35; height: 35
+            anchors.right: parent.right
+            width: 30; height: 30
             source: (playSettingsRect.flipped) ?
                         "qrc:/images/rssBackArrow.png" : "qrc:/images/rssSettings.png"
             MouseArea {
@@ -50,13 +61,40 @@ Rectangle {
                            = !playSettingsRect.flipped
             }
         }
-    }
-
-    Rectangle {
-        anchors.fill: playSettingsRect
-        color: "transparent"
-        border.color: "black"
-        border.width: 1
+        Image {
+            id: volumeImg
+            anchors.left: parent.left
+            width: musicSettingsImg.width; height: musicSettingsImg.height
+            source: theMusic.muted ? "qrc:/images/volume_mute.png" : "qrc:/images/volume.png"
+            smooth: true
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    theMusic.muted = !theMusic.muted
+                }
+            }
+        }
+        Slider {
+            id: volume
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: volumeImg.right
+            anchors.leftMargin: 3
+            sliderWidth: 100
+            sliderHeight: 5
+            minimum: 0
+            maximum: 1
+            value: 0
+            Binding {
+                target: theMusic
+                property: "volume"
+                value: volume.value
+            }
+            Binding {
+                target: volume
+                property: "enabled"
+                value: theMusic.muted
+            }
+        }
     }
 
     Text {

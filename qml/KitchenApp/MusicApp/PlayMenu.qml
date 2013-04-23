@@ -5,9 +5,10 @@ import "../"
 Rectangle {
     Image {
         id: playPauseImg
-        width: parent.height; height: parent.height
-        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.height * .55; height: parent.height * .55
         anchors.verticalCenter: parent.verticalCenter
+        anchors.right: nextTrackImg.left
+        anchors.rightMargin: 10
         source: (theMusic.playbackState === Audio.PausedState)
                 ? "qrc:/images/pause_button.png" : "qrc:/images/play_button.png"
         smooth: true
@@ -20,8 +21,9 @@ Rectangle {
     }
     Image {
         id: nextTrackImg
-        width: playPauseImg.height * .75; height: playPauseImg.height * .75
-        anchors.left: playPauseImg.right
+        width: playPauseImg.height; height: playPauseImg.height
+        anchors.right: parent.right
+        anchors.rightMargin: 10
         anchors.verticalCenter: playPauseImg.verticalCenter
         source: "qrc:/images/next_track_button.png"
         smooth: true
@@ -34,46 +36,9 @@ Rectangle {
     }
 
     Image {
-        id: volumeImg
-        anchors.left: nextTrackImg.right
-        width: playPauseImg.height * .5; height: playPauseImg.height * .5
-        anchors.verticalCenter: playPauseImg.verticalCenter
-        source: theMusic.muted ? "qrc:/images/volume_mute.png" : "qrc:/images/volume.png"
-        smooth: true
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                theMusic.muted = !theMusic.muted
-            }
-        }
-    }
-
-    Slider {
-        id: volume
-        anchors.verticalCenter: nextTrackImg.verticalCenter
-        anchors.left: volumeImg.right
-        anchors.leftMargin: 3
-        sliderWidth: playPauseImg.width * .9
-        sliderHeight: 5
-        minimum: 0
-        maximum: 1
-        value: 0
-        Binding {
-            target: theMusic
-            property: "volume"
-            value: volume.value
-        }
-        Binding {
-            target: volume
-            property: "enabled"
-            value: theMusic.muted
-        }
-    }
-
-    Image {
         id: loveImg
         anchors.right: playPauseImg.left
-        anchors.rightMargin: 40
+        anchors.rightMargin: 10
         anchors.verticalCenter: playPauseImg.verticalCenter
         height: nextTrackImg.height; width: nextTrackImg.height
         source: nowPlaying.loved ? "qrc:/images/love_glow.png" : "qrc:/images/love.png"
@@ -100,7 +65,7 @@ Rectangle {
     Image {
         id: banImg
         anchors.right: loveImg.left
-        anchors.rightMargin: 40
+        anchors.rightMargin: 10
         anchors.verticalCenter: playPauseImg.verticalCenter
         height: nextTrackImg.height; width: nextTrackImg.height
         source: "qrc:/images/ban.png"
