@@ -13,10 +13,10 @@ Rectangle {
 
     PlayMenu {
         id: playMenu
-        width: playSettingsRect.width; height: 125
-        color: "transparent"
+        width: playSettingsRect.width; height: 100
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: playSettingsRect.top
+        anchors.bottomMargin: 20
     }
 
     Rectangle {

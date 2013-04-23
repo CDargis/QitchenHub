@@ -3,9 +3,13 @@ import QtMultimedia 5.0
 import "../"
 
 Rectangle {
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "#000000" }
+        GradientStop { position: 1.0; color: "#222222" }
+    }
     Image {
         id: playPauseImg
-        width: parent.height * .55; height: parent.height * .55
+        width: parent.height * .65; height: parent.height * .65
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: nextTrackImg.left
         anchors.rightMargin: 10
@@ -79,6 +83,23 @@ Rectangle {
                     theMusic.nextTrack()
                 }
             }
+        }
+    }
+
+
+    Text {
+        id: currentStationText
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.verticalCenter: parent.verticalCenter
+        font.family: fontFamily
+        font.pixelSize: 22
+        color: "white"
+        text: {
+            statusBar.usrName + "'s " +
+                    ((theMainApplication.musicRecommendations) ?
+                        qsTr("Mix Radio") : qsTr("Library Radio"))
+                    + tr.emptyString
         }
     }
 }

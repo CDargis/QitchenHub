@@ -33,16 +33,24 @@ AppInterface {
     Component.onCompleted: {
         getUsersArtists()
         getBanList()
-        if(theMainApplication.playMusicOnStartup)
-            Music.nextTrack()
-        if(theMainApplication.musicRecommendations)
-            theMusic.turnOnRecommendations()
-        else theMusic.turnOffRecommendations()
+        if(theMainApplication.playMusicOnStartup) {
+            if(theMainApplication.musicRecommendations)
+                theMusic.turnOnRecommendations()
+            else theMusic.turnOffRecommendations()
+        }
+        else {
+
+        }
     }
 
     Audio {
         id: theMusic
         autoPlay: false
+        onStatusChanged: {
+            if(status === Audio.EndOfMedia)
+                nextTrack()
+        }
+
         onPlaybackStateChanged: {
             // Update timer
             if(theMusic.playbackState === Audio.PlayingState) {

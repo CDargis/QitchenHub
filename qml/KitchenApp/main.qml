@@ -22,7 +22,7 @@ Rectangle {
     property string currentUnits: "us"  // "eu" for metric, "us" for imperial
     property string currentLocation: ""
     property Item speaker: statusBar.speakerRef()
-    property bool playMusicOnStartup: true
+    property bool playMusicOnStartup: false
     property bool musicRecommendations: true
 
     onLanguageChanged: {
