@@ -14,11 +14,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                if(theMusic.playbackState === Audio.PausedState)
-                    theMusic.play()
-                else if(theMusic.playbackState === Audio.PlayingState)
-                    theMusic.pause()
-                else theMusic.nextTrack()
+                theMusicPlayerApp.playPauseSignal()
             }
         }
     }
@@ -32,7 +28,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                theMusic.nextTrack()
+                theMusicPlayerApp.nextSignal()
             }
         }
     }
@@ -61,7 +57,7 @@ Rectangle {
         sliderHeight: 5
         minimum: 0
         maximum: 1
-        value: 1
+        value: 0
         Binding {
             target: theMusic
             property: "volume"
@@ -79,7 +75,7 @@ Rectangle {
         anchors.right: playPauseImg.left
         anchors.rightMargin: 40
         anchors.verticalCenter: playPauseImg.verticalCenter
-        height: playPauseImg.height * .55; width: playPauseImg.height * .55
+        height: nextTrackImg.height; width: nextTrackImg.height
         source: nowPlaying.loved ? "qrc:/images/love_glow.png" : "qrc:/images/love.png"
         smooth: true
         MouseArea {
@@ -106,7 +102,7 @@ Rectangle {
         anchors.right: loveImg.left
         anchors.rightMargin: 40
         anchors.verticalCenter: playPauseImg.verticalCenter
-        height: playPauseImg.height * .55; width: playPauseImg.height * .55
+        height: nextTrackImg.height; width: nextTrackImg.height
         source: "qrc:/images/ban.png"
         smooth: true
         MouseArea {

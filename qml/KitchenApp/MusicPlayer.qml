@@ -9,6 +9,27 @@ AppInterface {
 
     widgetSrc: "MusicApp/MusicPlayerWidget.qml"
 
+    property string currentTitle: nowPlaying.currentTitle
+    property string currentArtist: nowPlaying.currentArtist
+    property int currentSongLength
+    property int currentProgress
+    property bool isPlaying: {
+        (theMusic.playbackState === Audio.PlayingState) ? true : false
+    }
+
+    signal playPauseSignal()
+    onPlayPauseSignal: {
+        if(theMusic.playbackState === Audio.PausedState)
+            theMusic.play()
+        else if(theMusic.playbackState === Audio.PlayingState)
+            theMusic.pause()
+        else theMusic.nextTrack()
+    }
+    signal nextSignal()
+    onNextSignal: {
+        theMusic.nextTrack()
+    }
+
     Component.onCompleted: {
         getUsersArtists()
         getBanList()
@@ -89,5 +110,9 @@ AppInterface {
 
     function setUsersArtists(artists) {
         musicSettings.setUsersArtists(artists)
+    }
+
+    function secondsToMinuteString(miliseconds) {
+        return nowPlaying.secondsToMinuteString(miliseconds)
     }
 }

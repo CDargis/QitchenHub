@@ -66,7 +66,7 @@ Rectangle {
         anchors.rightMargin: 10
         font.family: fontFamily
         font.pixelSize: 14
-        color: "#36C60F"
+        color: "white"
         text: "0:00"
     }
 
@@ -78,6 +78,16 @@ Rectangle {
         canDrag: false
         sliderWidth: playSettingsRect.width - songTextProgress.width - songLength.width - 20
         sliderHeight: 6
+        Binding {
+            target: theMusicPlayerApp
+            property: "currentSongLength"
+            value: songProgress.maximum
+        }
+        Binding {
+            target: theMusicPlayerApp
+            property: "currentProgress"
+            value: songProgress.value
+        }
     }
 
     Text {
@@ -87,19 +97,19 @@ Rectangle {
         anchors.leftMargin: 10
         font.family: fontFamily
         font.pixelSize: 14
-        color: "#36C60F"
+        color: "white"
         text: "0:00"
     }
 
     Text {
         id: titleDisplay
         anchors.top: songProgress.bottom
-        anchors.topMargin: 12
+        anchors.topMargin: 20
         anchors.horizontalCenter: playSettingsRect.horizontalCenter
         font.pixelSize: 22
         font.family: fontFamily
         text: currentTitle
-        color: "#36C60F"
+        color: "white"
     }
 
     Text {
@@ -110,7 +120,7 @@ Rectangle {
         font.pixelSize: 16
         font.family: fontFamily
         text: currentArtist
-        color: "#36C60F"
+        color: "white"
     }
 
     Text {
@@ -121,7 +131,7 @@ Rectangle {
         font.pixelSize: 16
         font.family: fontFamily
         text: currentAlbum
-        color: "#36C60F"
+        color: "white"
     }
 
     // Function definitions -------------------------------------------------
