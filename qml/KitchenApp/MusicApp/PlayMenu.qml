@@ -86,6 +86,20 @@ Rectangle {
         }
     }
 
+    Image {
+        id: searchImg
+        anchors.right: banImg.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: playPauseImg.verticalCenter
+        height: nextTrackImg.height; width: nextTrackImg.height
+        source: "qrc:/images/search.png"
+        smooth: true
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+            }
+        }
+    }
 
     Text {
         id: currentStationText

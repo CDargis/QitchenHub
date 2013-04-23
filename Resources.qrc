@@ -58,5 +58,6 @@
         <file>circle2.png</file>
         <file>circle3.png</file>
         <file>circle4.png</file>
+        <file>search.png</file>
     </qresource>
 </RCC>
