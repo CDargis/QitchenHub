@@ -97,6 +97,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                nowPlaying.headerFlipped = true
             }
         }
     }
