@@ -83,7 +83,7 @@ Rectangle {
             sliderHeight: 5
             minimum: 0
             maximum: 1
-            value: 0
+            value: 1
             Binding {
                 target: theMusic
                 property: "volume"

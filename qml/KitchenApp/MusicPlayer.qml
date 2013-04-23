@@ -33,14 +33,11 @@ AppInterface {
     Component.onCompleted: {
         getUsersArtists()
         getBanList()
-        if(theMainApplication.playMusicOnStartup) {
-            if(theMainApplication.musicRecommendations)
-                theMusic.turnOnRecommendations()
-            else theMusic.turnOffRecommendations()
-        }
-        else {
-
-        }
+        if(theMainApplication.musicRecommendations)
+            theMusic.turnOnRecommendations()
+        else theMusic.turnOffRecommendations()
+        if(theMainApplication.playMusicOnStartup)
+            theMusic.nextTrack()
     }
 
     Audio {
