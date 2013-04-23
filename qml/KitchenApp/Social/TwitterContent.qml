@@ -13,7 +13,7 @@ Rectangle {
         border.color: "#8b988b"
         Text{
             id: tweetLabel
-            text: qsTr("Tweets") + tr.emptyString
+            text: qsTr("Timeline") + tr.emptyString
             anchors.horizontalCenter: parent.horizontalCenter
             color: "white"
             font.bold: true

@@ -4,6 +4,7 @@ import QtWebKit 3.0
 Rectangle{
     id: root
     property string activeFeed
+    color: "black"
     Rectangle{
         id: rssTitle
         anchors.top: parent.top
