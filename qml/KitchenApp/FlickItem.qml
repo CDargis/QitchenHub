@@ -1,23 +1,18 @@
 import QtQuick 2.0
 import QtWebKit 3.0
-<<<<<<< HEAD
-=======
-import QtGraphicalEffects 1.0
+//import QtGraphicalEffects 1.0
 
->>>>>>> master
 Rectangle {
    id: name
    signal send (string notice)
 opacity: 0
 
-<<<<<<< HEAD
-=======
-function set(g)
-{appFull.widText = g
 
+function set(g)
+{
+    appFull.widText = g
 }
 
->>>>>>> master
 property string title: ""
 property string xpos: ""
 property string ypos: ""
@@ -28,10 +23,9 @@ property string src: ""
 property string ingredients: ""
 property string time:""
 property string rating:""
-<<<<<<< HEAD
-=======
+
 property string test: ""
->>>>>>> master
+
 Flipable {
     id: flipable
 width:240
@@ -58,14 +52,12 @@ height:240
 
 
         }
-<<<<<<< HEAD
-=======
 //        Image {
 //            id: image
 //            anchors.fill: parent
 //            source:
 //        }
-        DropShadow {
+       /* DropShadow {
             id: shadow
             anchors.fill: recipeimages
             horizontalOffset: 7
@@ -73,19 +65,15 @@ height:240
             radius: 12
             samples: 24
             color: "#77000000"
-            source: recipeimages
+            //source: recipeimages
             opacity: 0.5
-        }
->>>>>>> master
+        }*/
 
 
         MouseArea{anchors.fill: recipeimages
      onClicked:{
-<<<<<<< HEAD
-=======
          var a = 3;
 
->>>>>>> master
          var component2 = Qt.createComponent("Loading.qml");
      var il=0;
          component2.createObject(wall);
@@ -94,16 +82,9 @@ height:240
          var component = Qt.createComponent("Webs.qml");
 
          component.createObject(wall,{"url":url});/*,"count":);*/
-<<<<<<< HEAD
-
-
-         console.log(xframe)
-         console.log(xpos)
-=======
 set(ingredients)
 
 
->>>>>>> master
 
      }
         }
@@ -169,7 +150,13 @@ set(ingredients)
         Rectangle{id:ing
             width:240
         height:110
-       gradient:parent.gradient
+       gradient: Gradient {
+           GradientStop {
+               position: 0.0; color: "#7c7c85" }
+
+           GradientStop {
+               position: 1.0; color: "#7f7878" }
+       }
 
         Text {
 
@@ -212,7 +199,13 @@ maximumLineCount: 5
             anchors.bottom: parent.bottom
             width:80
         height:50
-       gradient:parent.gradient
+       gradient: Gradient {
+           GradientStop {
+               position: 0.0; color: "#7c7c85" }
+
+           GradientStop {
+               position: 1.0; color: "#7f7878" }
+       }
 
        Text {
 
@@ -242,7 +235,13 @@ maximumLineCount: 5
         height:50
         x:80
         anchors.bottom: parent.bottom
-         gradient:parent.gradient
+         gradient: Gradient {
+             GradientStop {
+                 position: 0.0; color: "#7c7c85" }
+
+             GradientStop {
+                 position: 1.0; color: "#7f7878" }
+         }
 
         Text {
 
@@ -273,7 +272,13 @@ maximumLineCount: 5
         height:50
         x:160
         anchors.bottom: parent.bottom
-         gradient:parent.gradient
+         gradient: Gradient {
+             GradientStop {
+                 position: 0.0; color: "#7c7c85" }
+
+             GradientStop {
+                 position: 1.0; color: "#7f7878" }
+         }
 
         Text {
 
@@ -427,9 +432,3 @@ maximumLineCount: 5
 
 
 }
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> master

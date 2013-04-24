@@ -53,8 +53,6 @@ WidgetInterface
         font.family: "Helvetica"
           wrapMode: Text.Wrap
 
-
-
     }
    }
 }

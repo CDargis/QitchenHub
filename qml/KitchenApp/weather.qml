@@ -3,7 +3,7 @@ import QtQuick 2.0
 AppInterface{
     widgetSrc: "weatherWidget.qml"
     width: parent.width; height: parent.height
-    property string font:"Helvetica"
+    property string fontFamily:"Helvetica"
     property int bottommar: -7
     property int yValue: 365
     property int currentTemp;
@@ -277,11 +277,8 @@ AppInterface{
             anchors.centerIn: parent
 
             source: "images/CenterLabel.png"
-<<<<<<< HEAD
-            width:700
-=======
+
             width:parent.width/1.4
->>>>>>> master
             height: 292
         }
         Image
@@ -298,7 +295,7 @@ AppInterface{
 
             color: "#FFFFFF"
             font.pixelSize: 100
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
 
@@ -321,7 +318,7 @@ AppInterface{
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             x:745
@@ -336,7 +333,7 @@ AppInterface{
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             text:city.text
             anchors.top:weathericon1.top
@@ -354,7 +351,7 @@ AppInterface{
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             anchors.top:weathericon1.top
@@ -371,20 +368,14 @@ AppInterface{
 
             //anchors.centerIn: weathericon
             // anchors.bottom: weathericon.bottom
-<<<<<<< HEAD
-            anchors.horizontalCenter: image21.horizontalCenter
-            y:450
-=======
             anchors.bottom: weathericon.bottom
            anchors.horizontalCenter: image2.horizontalCenter
 
-
-
            anchors.bottomMargin: -weathericon.width/5
->>>>>>> master
+
             color: "#FFFFFF"
             font.pixelSize: 20
-            font.family: font
+            font.family: fontFamily
             //font.bold: true
 
 
@@ -416,14 +407,9 @@ AppInterface{
         Rectangle
         {
             id:switcher1
-<<<<<<< HEAD
-            y:50
-            x:50
-=======
           anchors.top: parent.top
           anchors.left: parent.left
           anchors.topMargin: parent.height/10
->>>>>>> master
             width:170
             border.color: "white"
             color: "black"
@@ -431,7 +417,7 @@ AppInterface{
 
             Text{id:switchtext1
                 text:"<<Back"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize: 18
                 font.bold: true
 
@@ -461,7 +447,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -476,7 +462,7 @@ AppInterface{
             opacity:0
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -491,7 +477,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -506,7 +492,7 @@ AppInterface{
             opacity: 0
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -521,7 +507,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -535,7 +521,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -551,7 +537,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -565,7 +551,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -581,7 +567,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -597,7 +583,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -611,7 +597,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -625,7 +611,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize:31
             anchors.left: footbar1.left
@@ -640,7 +626,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -656,7 +642,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -672,7 +658,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -688,7 +674,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -704,7 +690,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -719,7 +705,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -735,7 +721,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -750,7 +736,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -766,7 +752,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -782,7 +768,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -799,7 +785,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -815,7 +801,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -831,7 +817,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -846,7 +832,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -862,7 +848,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -877,7 +863,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -894,7 +880,7 @@ AppInterface{
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar1.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -912,7 +898,7 @@ AppInterface{
 
             color: "#FFFFFF"
             font.pixelSize: 100
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
 
@@ -933,7 +919,7 @@ anchors.margins: 20
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             anchors.top:weathericon1.top
@@ -947,7 +933,7 @@ anchors.margins: 20
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
 
@@ -966,7 +952,7 @@ anchors.margins: 20
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             x:745
@@ -982,7 +968,7 @@ anchors.margins: 20
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             x:745
@@ -1002,7 +988,7 @@ anchors.margins: 20
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             opacity: 0
 
@@ -1021,7 +1007,7 @@ anchors.margins: 20
             y:450
             color: "#FFFFFF"
             font.pixelSize: 20
-            font.family: font
+            font.family: fontFamily
             //font.bold: true
 
 
@@ -1380,7 +1366,7 @@ iconURL = weathericon.source;
         }
         //icons
         Image{id:thermometer
-            source:"images/Thermometer.png"
+            source:"images/thermometer.png"
             parent: footbar
             y:360+25
             anchors.left: footbar.left
@@ -1405,7 +1391,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -1420,7 +1406,7 @@ iconURL = weathericon.source;
             opacity:0
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -1435,7 +1421,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -1450,7 +1436,7 @@ iconURL = weathericon.source;
             opacity: 0
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize: 15
             anchors.verticalCenterOffset: -28
@@ -1465,7 +1451,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1479,7 +1465,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1495,7 +1481,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1509,7 +1495,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1525,7 +1511,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1541,7 +1527,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1555,7 +1541,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1569,7 +1555,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize:31
             anchors.left: footbar.left
@@ -1584,7 +1570,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1601,7 +1587,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1617,7 +1603,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1634,7 +1620,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
 
             font.pixelSize: 31
 
@@ -1650,7 +1636,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1665,7 +1651,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1681,7 +1667,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1696,7 +1682,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1712,7 +1698,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1728,7 +1714,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1745,7 +1731,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1761,7 +1747,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1777,7 +1763,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1792,7 +1778,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1808,7 +1794,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1823,7 +1809,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1878,7 +1864,7 @@ iconURL = weathericon.source;
 
             color:"#FFFFFF"
             anchors.verticalCenter: footbar.verticalCenter
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             font.pixelSize:15
             anchors.verticalCenterOffset: -28
@@ -1893,11 +1879,8 @@ iconURL = weathericon.source;
             anchors.centerIn: parent
 
             source: "images/CenterLabel.png"
-<<<<<<< HEAD
-            width:700
-=======
+
             width:parent.width/1.4
->>>>>>> master
             height: 292
         }
         Text {
@@ -1907,7 +1890,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 100
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             anchors.top:weathericon.top
             anchors.left: weathericon.left
@@ -1923,7 +1906,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 100
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             anchors.top:weathericon.top
             anchors.left: weathericon.left
@@ -1949,20 +1932,13 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
-<<<<<<< HEAD
-      anchors.top:parent.top
-      anchors.right: parent.right
-      anchors.topMargin: parent.height/2.3
-      anchors.rightMargin: parent.width/4.15
-=======
             anchors.top:weathericon.top
             anchors.left: weathericon.left
             anchors.leftMargin:1.6*weathericon.width
             anchors.topMargin: weathericon.height/15
->>>>>>> master
 
 
 
@@ -1976,7 +1952,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             anchors.top:weathericon.top
@@ -1993,7 +1969,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             x:745
@@ -2009,7 +1985,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             x:745
@@ -2026,7 +2002,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
             x:745
@@ -2041,7 +2017,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             text:city_label.text
             anchors.top:weathericon.top
@@ -2059,7 +2035,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
 
 
@@ -2074,7 +2050,7 @@ iconURL = weathericon.source;
 
             color: "#FFFFFF"
             font.pixelSize: 18
-            font.family: font
+            font.family: fontFamily
             font.bold: true
             opacity: 0
             x:745
@@ -2086,18 +2062,6 @@ iconURL = weathericon.source;
         {id: desc
 
             //anchors.centerIn: weathericon
-<<<<<<< HEAD
-            // anchors.bottom: weathericon.bottom
-            anchors.horizontalCenter: image2.horizontalCenter
-
-
-            y:450
-            color: "#FFFFFF"
-            font.pixelSize: 20
-            font.family: font
-            //font.bold: true
-
-=======
              anchors.bottom: weathericon.bottom
             anchors.horizontalCenter: image2.horizontalCenter
 
@@ -2106,9 +2070,8 @@ iconURL = weathericon.source;
             anchors.bottomMargin: -weathericon.width/5
             color: "#FFFFFF"
             font.pixelSize: 20
-            font.family: font
+            font.family: fontFamily
             //font.bold: tr
->>>>>>> master
 
 
         }
@@ -2123,7 +2086,7 @@ iconURL = weathericon.source;
             y:450
             color: "#FFFFFF"
             font.pixelSize: 20
-            font.family: font
+            font.family: fontFamily
             //font.bold: true
 
 
@@ -2167,14 +2130,10 @@ iconURL = weathericon.source;
         Rectangle
         {
             id:switcher
-<<<<<<< HEAD
-            y:400
-            x:1000
-=======
            anchors.bottom: parent.bottom
            anchors.right: parent.right
            anchors.bottomMargin: parent.height/8
->>>>>>> master
+
             width:200
             border.color: "white"
             color: "black"
@@ -2182,7 +2141,7 @@ iconURL = weathericon.source;
 
             Text{id:switchtext
                 text:"Switch Location >>"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize: 18
                 font.bold: true
 
@@ -2342,7 +2301,7 @@ iconURL = weathericon.source;
 
         Text{id:unitsystem
             text:"Units: "
-            font.family: font
+            font.family: fontFamily
             font.pixelSize: 18
             parent:settingsbox
             anchors.left: settingsbox.left
@@ -2354,7 +2313,7 @@ iconURL = weathericon.source;
         }
         Text{id:unitsystemfr
             text:"Unité:"
-            font.family: font
+            font.family: fontFamily
             font.pixelSize: 18
             parent:settingsbox
             anchors.left: settingsbox.left
@@ -2369,7 +2328,7 @@ iconURL = weathericon.source;
             text: "Settings"
             parent:settingsbox
             anchors.horizontalCenter: settingsbox.horizontalCenter
-            font.family: font
+            font.family: fontFamily
             font.pixelSize: 24
             color:"white"
             font.bold: true
@@ -2378,7 +2337,7 @@ iconURL = weathericon.source;
             text: "Paramètres"
             parent:settingsbox
             anchors.horizontalCenter: settingsbox.horizontalCenter
-            font.family: font
+            font.family: fontFamily
             font.pixelSize: 24
             color:"white"
             font.bold: true
@@ -2391,7 +2350,7 @@ iconURL = weathericon.source;
             anchors.rightMargin: 10
             anchors.top:settingsbox.top
             anchors.topMargin: 10
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:15
             color:"white"
 
@@ -2403,7 +2362,7 @@ iconURL = weathericon.source;
             anchors.rightMargin: 10
             anchors.top:settingsbox.top
             anchors.topMargin: 10
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:15
             color:"white"
             opacity: 0
@@ -2417,7 +2376,7 @@ iconURL = weathericon.source;
         }
         Text{id:citylabel
             text:"Second Location: "
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:18
             parent:settingsbox
             anchors.left: settingsbox.left
@@ -2429,7 +2388,7 @@ iconURL = weathericon.source;
         }
         Text{id:citylabelfr
             text:"Lieu deuxième:"
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:18
             parent:settingsbox
             anchors.left: settingsbox.left
@@ -2443,7 +2402,7 @@ iconURL = weathericon.source;
         TextInput
         {id:city
 
-            font.family: font
+            font.family: fontFamily
             width: 75
             height: 20
             font.pixelSize: 18
@@ -2474,7 +2433,7 @@ iconURL = weathericon.source;
             color: "black"
             Text{id:unitsystem1
                 text:"Metric"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize: 18
                 font.bold: true
                 parent: ur1
@@ -2485,7 +2444,7 @@ iconURL = weathericon.source;
             }
             Text{id:unitsystem1fr
                 text:" Métrique"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize: 18
                 font.bold: true
                 parent: ur1
@@ -2512,7 +2471,7 @@ iconURL = weathericon.source;
             color:"black"
             Text{id:unitsystem2
                 text:"Imperial"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize: 18
                 font.bold: true
                 parent:ur2
@@ -2521,7 +2480,7 @@ iconURL = weathericon.source;
             }
             Text{id:unitsystem2fr
                 text:"Impérial"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize: 18
                 font.bold: true
                 parent:ur2
@@ -2636,7 +2595,7 @@ iconURL = weathericon.source;
             color: "black"
             Text{id:lngselect1
                 text:"French"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize:18
                 font.bold: true
                 parent: lng1
@@ -2659,7 +2618,7 @@ iconURL = weathericon.source;
             color:"black"
             Text{id:lngselect2
                 text:"English"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize:18
                 font.bold: true
                 parent:lng2
@@ -2681,7 +2640,7 @@ iconURL = weathericon.source;
             color:"black"
             Text{id:lngselect3
                 text:"German"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize:18
                 font.bold: true
                 parent:lng3
@@ -2703,7 +2662,7 @@ iconURL = weathericon.source;
             color:"black"
             Text{id:lngselect4
                 text:"Italian"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize:18
                 font.bold: true
                 parent:lng4
@@ -2725,7 +2684,7 @@ iconURL = weathericon.source;
             color:"black"
             Text{id:lngselect5
                 text:"Swahili"
-                font.family: font
+                font.family: fontFamily
                 font.pixelSize:18
                 font.bold: true
                 parent:lng5
@@ -2969,7 +2928,7 @@ iconURL = weathericon.source;
             }}
         Text{id:language
             text:"Language: "
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:18
             parent:settingsbox
             anchors.left: settingsbox.left
@@ -2981,7 +2940,7 @@ iconURL = weathericon.source;
         }
         Text{id:languagefr
             text:"Langue: "
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:18
             parent:settingsbox
             anchors.left: settingsbox.left
@@ -3040,7 +2999,7 @@ iconURL = weathericon.source;
             anchors.centerIn: alertdetail
             color:"white"
             font.pixelSize: 30
-            font.family: font
+            font.family: fontFamily
         }
         Text {
             id: alertextfr
@@ -3048,7 +3007,7 @@ iconURL = weathericon.source;
             anchors.centerIn: alertdetail
             color:"white"
             font.pixelSize: 30
-            font.family: font
+            font.family: fontFamily
             opacity: 0
         }
         Text{id:closealert
@@ -3058,7 +3017,7 @@ iconURL = weathericon.source;
             anchors.rightMargin: 10
             anchors.top:parent.top
             anchors.topMargin: 10
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:15
             color:"white"
 
@@ -3070,7 +3029,7 @@ iconURL = weathericon.source;
             anchors.rightMargin: 10
             anchors.top:parent.top
             anchors.topMargin: 10
-            font.family: font
+            font.family: fontFamily
             font.pixelSize:15
             color:"white"
             opacity: 0

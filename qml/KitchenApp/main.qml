@@ -77,37 +77,7 @@ Rectangle {
                 // make sure you put the name of your qml as an argument
                 onButtonClick: launch("HomeAutomation.qml",0)
             }
-<<<<<<< HEAD
-            Button {
-                id: buttonWeather
-                width: 200
-                height: 200
-                pointSize: 18
-                buttonText: qsTr("Weather") + tr.emptyString
 
-                MouseArea {
-                    anchors.fill: parent
-                    // make sure you put the name of your qml as an argument
-                    onClicked: launch("weather.qml",4)
-                }
-            }
-            ToggleSwitch {
-                //anchors.left: button.right
-                //anchors.leftMargin: 25
-                //anchors.verticalCenter: button.verticalCenter
-                isOn: false
-            }
-
-            Indicator {
-
-            }
-
-            AppHint {
-
-            }
-
-=======
->>>>>>> master
             Button {
                 id: buttonOrg
                 width: 200
@@ -135,34 +105,17 @@ Rectangle {
                 }
             }
             Button {
-<<<<<<< HEAD
-                id: kitchenAppLaunch
-                width: 200
-                height: 200
-                pointSize: 18
-                buttonText: qsTr("Kitchen") + tr.emptyString
-=======
                 id: musicPlayerLaunch
                 width: 200
                 height: 200
                 pointSize: 18
                 buttonText: qsTr("Music Player") + tr.emptyString
->>>>>>> master
 
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-<<<<<<< HEAD
-                    onClicked: launch("Kitchen.qml",3)
-                }
-            }
-            Button {
-                width: 125
-                height: 125
-=======
                     onClicked: launch("MusicPlayer.qml",3)
                 }
->>>>>>> master
             }
             Button {
                 id: weatherAppLaunch
