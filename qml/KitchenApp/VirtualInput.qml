@@ -51,7 +51,7 @@ Rectangle {
             wrapMode: Text.Wrap
             onCursorRectangleChanged: flick.ensureVisible(cursorRectangle)
             onFocusChanged: {
-                if(focus) {
+                if(focus) {z
                     theKeyboard.showKeyboard(inputContainer)
                 }
                 else {

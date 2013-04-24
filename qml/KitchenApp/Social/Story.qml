@@ -21,6 +21,7 @@ Item {
                 id: titleText
                 color: "white"
                 text: ""; width: parent.width; wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
                 font { bold: true; family: "Helvetica"; pointSize: 16 }
             }
             Rectangle{

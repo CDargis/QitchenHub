@@ -62,6 +62,10 @@ Rectangle{
         width: parent.width
         anchors.top: labelArea.bottom
         anchors.topMargin: parent.height*.0011
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#7C7C85" }
+            GradientStop { position: 1.0; color: "#25242A" }
+        }
         GoogleContent{id: gpCol; width: parent.width;height: parent.height}
     }
     Rectangle{

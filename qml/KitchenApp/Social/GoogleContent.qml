@@ -386,7 +386,7 @@ Flickable {
                 anchors.leftMargin: parent.width*.03
                 font.family: "Sans"
                 font.pixelSize: parent.height*.12
-                text: "Looking ahead, I see bad, bad things ahead not just for Windows 8.x but for Windows period."
+                text: "I know a lot of you may think I hate Windows, however I just don't like fact that they break easily and need to be cleaned every week."
                 width: parent.width - parent.width*.03
                 wrapMode: Text.WordWrap
             }

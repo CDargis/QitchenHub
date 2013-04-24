@@ -40,16 +40,34 @@ Rectangle{
         }
     }
     Rectangle{
-        id: fbContent
-        anchors.left: parent.left
+        id: labelArea
+        color: "black"
+        width: parent.width
+        height: parent.height*.03
+        border.color: "#8b988b"
         anchors.top: fbTitle.bottom
+        Text{
+            id: timeLine
+            text: qsTr("Timeline") + tr.emptyString
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "white"
+            font.bold: true
+            font.family: "Sans"
+            font.pixelSize: parent.height
+        }
+    }
+    Rectangle {
+        id: fbContent
         height: parent.height*0.9
         width: parent.width
-        border.color: "#8b988b"
+        anchors.top: labelArea.bottom
+        anchors.topMargin: parent.height*.0011
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#7C7C85" }
             GradientStop { position: 1.0; color: "#25242A" }
         }
+        border.color: "#8b988b"
+        FacebookContent{id: fbCol; width: parent.width;height: parent.height}
     }
     Rectangle{
         id:fbBottom

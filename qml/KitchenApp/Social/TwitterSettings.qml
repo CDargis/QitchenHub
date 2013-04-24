@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "../"
 
 Rectangle{
     id: root
@@ -19,7 +20,7 @@ Rectangle{
         id: seperator
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: userInfo.bottom
-        anchors.topMargin: parent.height*.1
+        anchors.topMargin: parent.height*.09
         color: "black"
         width: parent.width*.95
         height: parent.height*.003
@@ -30,42 +31,27 @@ Rectangle{
         font.bold: true
         font.pixelSize: parent.height*.025
         anchors.top: seperator.bottom
-        anchors.topMargin: parent.height*.05
-        anchors.left: parent.left
-        anchors.leftMargin: parent.width*.025
+        anchors.topMargin: parent.height*.02
+        anchors.horizontalCenter: parent.horizontalCenter
         color: "black"
         font.family: "Sans"
         text: qsTr("User Name:") + tr.emptyString
     }
-    Rectangle{
-        id: userBox
-        anchors.left: parent.left
-        anchors.leftMargin: parent.width*.015
+    VirtualInput{
+        id: userInput
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: userLabel.bottom
         anchors.topMargin: parent.height*.02
         height: parent.height*.05
         width: parent.width*.5
-        color: "black"
+        color: "white"
         border.width: height*.03
         border.color: "#8b988b"
-        TextInput{
-            id: userInput
-            anchors.left: parent.left
-            anchors.leftMargin: parent.width*.01
-            anchors.verticalCenter: parent.verticalCenter
-            font.family: "Sans"
-            font.pixelSize: parent.height*0.5
-            maximumLength: 15
-            color: "white"
-            text: user + tr.emptyString
-            smooth:true
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                userInput.text = ""
-                userInput.forceActiveFocus();
-            }
+        fontSize: height*0.5
+        currentText: user
+        onKeyboardIsVisible: {
+            if(currentText === user)
+                currentText = ""
         }
     }
 
@@ -73,52 +59,31 @@ Rectangle{
         id: passLabel
         font.bold: true
         font.pixelSize: parent.height*.025
-        anchors.top: userBox.bottom
-        anchors.topMargin: parent.height*.03
-        anchors.left: parent.left
-        anchors.leftMargin: parent.width*.015
+        anchors.top: userInput.bottom
+        anchors.topMargin: parent.height*.02
+        anchors.horizontalCenter: parent.horizontalCenter
         color: "black"
         font.family: "Sans"
         text: qsTr("Password:") + tr.emptyString
     }
-    Rectangle{
-        id: passBox
-        anchors.left: parent.left
-        anchors.leftMargin: parent.width*.015
+    VirtualInput{
+        id: passwordInput
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: passLabel.bottom
         anchors.topMargin: parent.height*.02
         height: parent.height*.05
         width: parent.width*.5
-        color: "black"
+        color: "white"
         border.width: height*.03
         border.color: "#8b988b"
-        TextInput{
-            id: passwordInput
-            anchors.left: parent.left
-            anchors.leftMargin: parent.width*.02
-            anchors.verticalCenter: parent.verticalCenter
-            font.family: "Sans"
-            font.pixelSize: parent.height*0.5
-            maximumLength: 15
-            color: "white"
-            text: "**********"
-            smooth:true
-            echoMode: TextInput.Password
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                passwordInput.text = ""
-                passwordInput.forceActiveFocus();
-            }
-        }
+        fontSize: height*0.5
+        //echoMode: TextInput.Password
     }
     Rectangle{
-        id: addButton
-        anchors.top: userBox.bottom
+        id: signin
+        anchors.top: passwordInput.bottom
         anchors.topMargin: parent.height*.02
-        anchors.right: parent.right
-        anchors.rightMargin: parent.width*.01
+        anchors.horizontalCenter: parent.horizontalCenter
         height: parent.width*.13
         width: addText.paintedWidth + parent.width*.08
         radius: width*.06
@@ -136,7 +101,9 @@ Rectangle{
         MouseArea{
             anchors.fill: parent
             onClicked: {
-                root.user = userInput.text
+                checkUser()
+                passwordInput.currentText = ""
+
             }
         }
     }
@@ -144,8 +111,8 @@ Rectangle{
     Rectangle{
         id: seperator2
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: passBox.bottom
-        anchors.topMargin: parent.height*.04
+        anchors.top: signin.bottom
+        anchors.topMargin: parent.height*.02
         color: "black"
         width: parent.width*.95
         height: parent.height*.003
@@ -171,4 +138,23 @@ Rectangle{
     function setInteractive(inter){
         userInfo.interactive = inter
     }
+    function checkUser(){
+        if (addText.text == "Sign out"){
+            root.user = ""
+        }
+        else{
+            root.user = userInput.currentText
+        }
+    }
+
+    states: [
+        State {
+            name: "expanded"
+            PropertyChanges {
+                target: addText
+                text: "Sign out"
+            }
+            when: root.user != ""
+        }
+    ]
 }

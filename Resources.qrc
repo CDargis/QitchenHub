@@ -64,5 +64,6 @@
         <file>feed1.png</file>
         <file>google1Arrow.png</file>
         <file>comment.png</file>
+        <file>forward.png</file>
     </qresource>
 </RCC>
