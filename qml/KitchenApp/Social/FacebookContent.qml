@@ -8,7 +8,7 @@ Flickable {
     contentHeight: column.height
     Column{
         id: column
-        height: childrenRect.height
+        //height: childrenRect.height
         width: parent.width
         Rectangle{
             id: item1
@@ -54,7 +54,7 @@ Flickable {
                 anchors.right: arrow1.left
                 font.family: "Sans"
                 font.pixelSize: parent.width*.05
-                text: "A bunch of random text, just to see how this plays i raelly want odklsdf woi wonder dhd. But thats all"
+                text: "A bunch of random text, a bunch of reaaaaaaaaally loooooooooong test. Trying to get length"
                 wrapMode: Text.WordWrap
             }
             Image{
