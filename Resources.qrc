@@ -165,5 +165,7 @@
         <file>avi9.jpg</file>
         <file>socialwidget.png</file>
         <file>search.png</file>
+        <file>upArrow_white.png</file>
+        <file>downArrow_white.png</file>
     </qresource>
 </RCC>
