@@ -117,11 +117,7 @@ Flickable {
             smooth: true
         }
 
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
+
 
         //post 2
         Rectangle{
@@ -230,11 +226,7 @@ Flickable {
             smooth: true
         }
 
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
+
 
         //post3
         Rectangle{
@@ -341,12 +333,6 @@ Flickable {
             height: width*.13
             source: "qrc:/images/comment.png"
             smooth: true
-        }
-
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
         }
 
         //post 4
@@ -456,11 +442,6 @@ Flickable {
             smooth: true
         }
         Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
-        Rectangle{
             id: item5
             color: "white"
             border.color: "#8b988b"
@@ -540,11 +521,7 @@ Flickable {
                 anchors.rightMargin: width*2.4
             }
         }
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
+
         //post 6
         Rectangle{
             id: item6

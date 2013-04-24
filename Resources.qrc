@@ -65,5 +65,15 @@
         <file>google1Arrow.png</file>
         <file>comment.png</file>
         <file>forward.png</file>
+        <file>avi1.jpg</file>
+        <file>avi2.jpg</file>
+        <file>avi3.jpg</file>
+        <file>avi4.jpg</file>
+        <file>avi5.jpg</file>
+        <file>avi6.jpg</file>
+        <file>avi7.jpg</file>
+        <file>avi8.jpg</file>
+        <file>avi9.jpg</file>
+        <file>socialwidget.png</file>
     </qresource>
 </RCC>

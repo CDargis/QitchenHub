@@ -32,8 +32,9 @@ Rectangle{
             anchors.top: feed.bottom
             height: parent.height*.20
             width: parent.width*.97
-            color: "white"
+            color: "black"
             border.color: "#8b988b"
+            fontColor: "white"
             border.width: height*.03
             fontSize: height*.5
             currentText: qsTr("i.e news.yahoo.com/rss/world") + tr.emptyString
@@ -61,7 +62,10 @@ Rectangle{
             height: parent.height*.20
             width: parent.width*.97
             currentText: qsTr("feed title here...") + tr.emptyString
-            color: "white"
+            color: "black"
+            fontColor: "white"
+            maxLength: 25
+            isInteractive: false
             border.color: "#8b988b"
             border.width: height*.03
             fontSize: height*.5

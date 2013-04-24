@@ -44,7 +44,8 @@ Rectangle{
         anchors.topMargin: parent.height*.02
         height: parent.height*.05
         width: parent.width*.5
-        color: "white"
+        color: "black"
+        fontColor: "white"
         border.width: height*.03
         border.color: "#8b988b"
         fontSize: height*0.5
@@ -73,8 +74,10 @@ Rectangle{
         anchors.topMargin: parent.height*.02
         height: parent.height*.05
         width: parent.width*.5
-        color: "white"
+        fontColor: "white"
         border.width: height*.03
+        color: "black"
+        isPassword: true
         border.color: "#8b988b"
         fontSize: height*0.5
         //echoMode: TextInput.Password
@@ -138,14 +141,25 @@ Rectangle{
     function setInteractive(inter){
         userInfo.interactive = inter
     }
+    function setUser(){
+        root.user = "Peters1Dan"
+        console.log(root.user)
+    }
+    function getStatus(){
+        return addText.text
+    }
+
     function checkUser(){
         if (addText.text == "Sign out"){
             root.user = ""
+            userInput.currentText = ""
         }
         else{
             root.user = userInput.currentText
         }
     }
+
+
 
     states: [
         State {
