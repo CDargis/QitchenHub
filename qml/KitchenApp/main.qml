@@ -20,7 +20,7 @@ Rectangle {
     property string fontFamily: "Sans"
     property string language: "en"
     property string currentUnits: "us"  // "eu" for metric, "us" for imperial
-    property string currentLocation: ""
+    property string currentLocation: "Chicago, IL"
     property Item speaker: statusBar.speakerRef()
     property bool playMusicOnStartup: true
     property bool musicRecommendations: true
