@@ -19,7 +19,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                theMusicPlayerApp.playPauseSignal()
+                if(!nowPlaying.headerFlipped)
+                    theMusicPlayerApp.playPauseSignal()
             }
         }
     }
@@ -34,7 +35,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                theMusicPlayerApp.nextSignal()
+                if(!nowPlaying.headerFlipped)
+                    theMusicPlayerApp.nextSignal()
             }
         }
     }
@@ -50,6 +52,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                if(nowPlaying.headerFlipped)
+                    return
                 if(!nowPlaying.loved) {
                     if(theMusic.playbackState === Audio.PlayingState) {
                         nowPlaying.loveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
@@ -77,6 +81,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                if(nowPlaying.headerFlipped)
+                    return
                 if(theMusic.playbackState === Audio.PlayingState) {
                     nowPlaying.banTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
                     theMusicPlayerApp.getBanList()
@@ -97,7 +103,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                nowPlaying.headerFlipped = true
+                if(!nowPlaying.headerFlipped)
+                    nowPlaying.headerFlipped = true
             }
         }
     }

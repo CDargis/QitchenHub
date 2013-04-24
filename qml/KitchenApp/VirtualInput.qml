@@ -68,12 +68,6 @@ Rectangle {
                     theInput.focus = false
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    forceFocus()
-                }
-            }
         }
     }
 

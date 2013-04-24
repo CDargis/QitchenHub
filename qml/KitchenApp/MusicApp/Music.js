@@ -25,6 +25,14 @@ var Song = function(title, album, artist, streamSource, picSource, duration, lov
 
 // Function definions ----------------------------------------------------------
 
+function artistSearch(artist, successHandler) {
+    var request = rootURL + "?method=artist.search" + "&artist=" + artist + "&api_key=" + apiKey
+            + "&format=json"
+    makeRequest("POST", request, function(json) {
+        successHandler(json.results.artistmatches.artist[0].name)
+    })
+}
+
 function getBanList() {
     var request = rootURL + "?method=user.getBannedTracks" + "&user=" + user + "&format=json"
                     + "&api_key=" + apiKey
@@ -40,12 +48,37 @@ function getBanList() {
     })
 }
 
+function addArtist(artist) {
+    var requeset = rootURL + "?method=library.addArtist" + "&artist=" + artist + "&api_key="
+            + apiKey + "&sk=" + session_key + "&format=json" + "&api_sig=" +
+            getSignature("api_key", apiKey, "artist", artist, "method", "library.addArtist",
+                         "sk", session_key)
+    makeRequest("POST", requeset, function(json) {
+        if(json.status === "ok")
+            console.log("saved " + artist)
+        else console.log("couldn't add " + artist)
+    })
+}
+
+function removeArtist(artist) {
+    var requeset = rootURL + "?method=library.removeArtist" + "&artist=" + artist + "&api_key="
+            + apiKey + "&sk=" + session_key + "&format=json" + "&api_sig=" +
+            getSignature("api_key", apiKey, "artist", artist, "method", "library.removeArtist",
+                         "sk", session_key)
+    makeRequest("POST", requeset, function(json) {
+        if(json.status === "ok")
+            console.log("removed " + artist)
+        else console.log("couldn't remove " + artist)
+    })
+}
+
 function getUsersArtists() {
     var request = rootURL + "?method=library.getArtists" + "&user=" + user + "&format=json"
             + "&api_key=" + apiKey
     makeRequest("POST", request, function(json) {
         var artists = []
         for(var artist in json.artists.artist) {
+            //console.log(json.artists.artist[artist].name)
             artists.push(json.artists.artist[artist].name)
         }
         nowPlaying.setUsersArtists(artists)
