@@ -20,16 +20,18 @@ SOURCES += main.cpp \
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
 
-OTHER_FILES += \
+OTHER_FILES += qml/KitchenApp/*.qml \
+    qml/KitchenApp/Organizer.qml \
     qml/KitchenApp/AppInterface.qml \
     qml/KitchenApp/WidgetInterface.qml \
-    qml/KitchenApp/Indicator/Indicator.qml \
-    qml/KitchenApp/Indicator/AppHint.qml \
-    qml/KitchenApp/Organizer/DayItem.qml \
-    qml/KitchenApp/Settings/UserSettings.qml \
-    qml/KitchenApp/VirtualKeyboard/UniqueKey.qml \
-    qml/KitchenApp/Traffic/TrafficWidget.qml \
-    qml/KitchenApp/MusicApp/ListItem.qml
+    qml/KitchenApp/Indicator/*.qml \
+    qml/KitchenApp/Organizer/*.qml \
+    qml/KitchenApp/Settings/*.qml \
+    qml/KitchenApp/VirtualKeyboard/*.qml \
+    qml/KitchenApp/Traffic/*.qml \
+    qml/KitchenApp/MusicApp/*.qml
+
+QML_IMPORT_PATH += qml/KitchenApp/
 
 
 RESOURCES += \
