@@ -19,7 +19,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                theMusicPlayerApp.playPauseSignal()
+                if(!nowPlaying.headerFlipped)
+                    theMusicPlayerApp.playPauseSignal()
             }
         }
     }
@@ -34,7 +35,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                theMusicPlayerApp.nextSignal()
+                if(!nowPlaying.headerFlipped)
+                    theMusicPlayerApp.nextSignal()
             }
         }
     }
@@ -50,6 +52,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                if(nowPlaying.headerFlipped)
+                    return
                 if(!nowPlaying.loved) {
                     if(theMusic.playbackState === Audio.PlayingState) {
                         nowPlaying.loveTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
@@ -77,6 +81,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                if(nowPlaying.headerFlipped)
+                    return
                 if(theMusic.playbackState === Audio.PlayingState) {
                     nowPlaying.banTrack(nowPlaying.currentTitle, nowPlaying.currentArtist)
                     theMusicPlayerApp.getBanList()
@@ -86,6 +92,22 @@ Rectangle {
         }
     }
 
+    Image {
+        id: searchImg
+        anchors.right: banImg.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: playPauseImg.verticalCenter
+        height: nextTrackImg.height; width: nextTrackImg.height
+        source: "qrc:/images/search.png"
+        smooth: true
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if(!nowPlaying.headerFlipped)
+                    nowPlaying.headerFlipped = true
+            }
+        }
+    }
 
     Text {
         id: currentStationText

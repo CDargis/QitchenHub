@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 Rectangle{
     id: twitter
+    property string status: twitterSettings.getStatus()
     Rectangle{
         id: twTitle
         anchors.top: parent.top
@@ -133,5 +134,11 @@ Rectangle{
                 }
             }
         }
+    }
+    function widgetFunction(){
+        twitterSettings.checkUser()
+    }
+    function setUser1(){
+        twitterSettings.setUser()
     }
 }

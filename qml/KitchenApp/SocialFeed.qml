@@ -3,6 +3,7 @@ import QtWebKit 3.0
 import "Social"
 AppInterface{
     id: root
+    widgetSrc: "Social/SocialWidget.qml"
     anchors.fill: parent
     Rectangle{
         id:main
@@ -48,5 +49,17 @@ AppInterface{
                 hideBackButton();
             }
         }
+    }
+    function count(){
+        return rssFeeds.count
+    }
+    function twUser(){
+        twitter.widgetFunction()
+    }
+    function twUser2(){
+        twitter.setUser1()
+    }
+    function twUser3(){
+       return twitter.status
     }
 }

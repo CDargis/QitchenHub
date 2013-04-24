@@ -117,11 +117,7 @@ Flickable {
             smooth: true
         }
 
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
+
 
         //post 2
         Rectangle{
@@ -230,11 +226,7 @@ Flickable {
             smooth: true
         }
 
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
+
 
         //post3
         Rectangle{
@@ -343,12 +335,6 @@ Flickable {
             smooth: true
         }
 
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
-
         //post 4
         Rectangle{
             id: item4
@@ -386,7 +372,7 @@ Flickable {
                 anchors.leftMargin: parent.width*.03
                 font.family: "Sans"
                 font.pixelSize: parent.height*.12
-                text: "Looking ahead, I see bad, bad things ahead not just for Windows 8.x but for Windows period."
+                text: "I know a lot of you may think I hate Windows, however I just don't like fact that they break easily and need to be cleaned every week."
                 width: parent.width - parent.width*.03
                 wrapMode: Text.WordWrap
             }
@@ -454,11 +440,6 @@ Flickable {
             height: width*.13
             source: "qrc:/images/comment.png"
             smooth: true
-        }
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
         }
         Rectangle{
             id: item5
@@ -540,11 +521,7 @@ Flickable {
                 anchors.rightMargin: width*2.4
             }
         }
-        Rectangle{
-            height: pHeight*.02;
-            width: parent.width
-            color: "gray"
-        }
+
         //post 6
         Rectangle{
             id: item6

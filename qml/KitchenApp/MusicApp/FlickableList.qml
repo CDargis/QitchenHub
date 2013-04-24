@@ -15,6 +15,7 @@ Flickable {
     }
 
     onInputAddingItem: {
+        theMusicPlayerApp.addArtist(item)
         addItem(item)
     }
 

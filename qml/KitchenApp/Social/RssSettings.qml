@@ -1,4 +1,6 @@
 import QtQuick 2.0
+import "../"
+
 
 Rectangle{
     id: root
@@ -24,47 +26,28 @@ Rectangle{
             font.pixelSize: parent.height*.09
             color: "black"
         }
-        Rectangle{
-            id: feedInputBox
+        VirtualInput{
+            id: feedInput
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: feed.bottom
             height: parent.height*.20
             width: parent.width*.97
             color: "black"
             border.color: "#8b988b"
+            fontColor: "white"
             border.width: height*.03
-            TextInput{
-                id: feedInput
-                width: parent.width*.97
-                anchors.left: parent.left
-                anchors.leftMargin: parent.width*.02
-                anchors.verticalCenter: parent.verticalCenter
-                font.italic: true
-                font.family: "DejaVu Serif"
-                font.pixelSize: parent.height*0.5
-                maximumLength: 100
-                color: "white"
-                text: qsTr("i.e news.yahoo.com/rss/world") + tr.emptyString
-                smooth:true
-                clip: true
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    feedInputBox.state = "active1"
-                    feedInput.state = "active1"
-                    feedInput.text = ""
-                    titleInputBox.state = ""
-                    titleInput.state = ""
-                    feedInput.forceActiveFocus();
-                }
+            fontSize: height*.5
+            currentText: qsTr("i.e news.yahoo.com/rss/world") + tr.emptyString
+            onKeyboardIsVisible: {
+                if(currentText === "i.e news.yahoo.com/rss/world")
+                    currentText = ""
             }
         }
         Text{
             id: title
             anchors.horizontalCenter: parent.horizontalCenter
             //anchors.leftMargin: parent.width*.023
-            anchors.top: feedInputBox.bottom
+            anchors.top: feedInput.bottom
             anchors.topMargin: parent.height*.05
             text: qsTr("Insert the RSS feed title:") + tr.emptyString
             font.bold: true
@@ -72,43 +55,28 @@ Rectangle{
             font.pixelSize: parent.height*.09
             color: "black"
         }
-        Rectangle{
-            id: titleInputBox
+        VirtualInput{
+            id: titleInput
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: title.bottom
             height: parent.height*.20
             width: parent.width*.97
+            currentText: qsTr("feed title here...") + tr.emptyString
             color: "black"
+            fontColor: "white"
+            maxLength: 25
+            isInteractive: false
             border.color: "#8b988b"
             border.width: height*.03
-            TextInput{
-                id: titleInput
-                anchors.left: parent.left
-                anchors.leftMargin: parent.width*.02
-                anchors.verticalCenter: parent.verticalCenter
-                font.italic: true
-                font.family: "DejaVu Serif"
-                font.pixelSize: parent.height*0.5
-                maximumLength: 25
-                color: "white"
-                text: qsTr("feed title here...") + tr.emptyString
-                smooth:true
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    titleInputBox.state = "active2"
-                    titleInput.state = "active2"
-                    titleInput.text = ""
-                    feedInputBox.state = ""
-                    feedInput.state = ""
-                    titleInput.forceActiveFocus();
-                }
+            fontSize: height*.5
+            onKeyboardIsVisible: {
+                if(currentText === "feed title here...")
+                    currentText = ""
             }
         }
         Rectangle{
             id: addButton
-            anchors.top: titleInputBox.bottom
+            anchors.top: titleInput.bottom
             anchors.topMargin: parent.height*.05
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.width*.1
@@ -118,6 +86,7 @@ Rectangle{
             border.color: "gray"
             border.width: height*.03
             Text{
+                id: addText
                 anchors.centerIn: parent
                 color: "white"
                 font.pixelSize: parent.height*.55
@@ -126,8 +95,10 @@ Rectangle{
             MouseArea{
                 anchors.fill: parent
                 onClicked: {
-                    addFeed(feedInput.text,titleInput.text)
+                    addText.color = "#36C60F"
+                    addFeed(feedInput.currentText,titleInput.currentText)
                     resetState()
+                    addText.color = "white"
                 }
             }
         }
@@ -233,14 +204,14 @@ Rectangle{
     }
 
     function resetState(){
-        feedInputBox.state = "";
-        feedInput.state = ""
-        titleInputBox.state = "";
-        titleInput.state = ""
+        feedInput.state = "";
+        titleInput.state = "";
+        addText.state = "";
+        addButton.state = "";
     }
     function addFeed(source,title){
-        titleInput.text = ""
-        feedInput.text = ""
+        titleInput.currentText = ""
+        feedInput.currentText = ""
         rssFeeds.append({name: title, feed: source});
         console.log(rssFeeds)
         if(rss.activeFeed === null){
