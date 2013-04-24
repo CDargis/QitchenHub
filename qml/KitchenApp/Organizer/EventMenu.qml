@@ -41,6 +41,7 @@ Item {
             width: window.width
             spacing: 2
             CommonText {
+                id: title
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Events for") + " " + parentItem.monthFromNumber(month) + " " + day + ", " + year + tr.emptyString
             }
@@ -80,6 +81,10 @@ Item {
                 }
             }
         }
+    }
+
+    Component.onCompleted: {
+        speaker.say(title.text.toString());
     }
 
     function showEvents() {

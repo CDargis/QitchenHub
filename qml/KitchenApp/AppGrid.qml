@@ -11,7 +11,11 @@ Grid {
     rowSpacing: 20
     columnSpacing: 20
     z: 0
+<<<<<<< HEAD
     property var activeList: [0, 0, 0, 0, 0]
+=======
+    property var activeList: [0, 0, 0, 0, 0, 0, 0, 0]
+>>>>>>> master
 
     property int itemCount: root.children.length
     property int childWidth: 125

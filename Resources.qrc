@@ -4,7 +4,6 @@
         <file>settingsWhite.png</file>
         <file>tentacle.jpeg</file>
         <file>user.png</file>
-        <file>backArrow.png</file>
         <file>delete.png</file>
         <file>lightBulb.png</file>
         <file>security.png</file>
@@ -45,6 +44,7 @@
         <file>lcd/9.png</file>
         <file>lcd/dots.png</file>
         <file>wallpaper.jpg</file>
+<<<<<<< HEAD
         <file>Beef.jpg</file>
         <file>images/weatherImages/.DS_Store</file>
         <file>images/weatherImages/105__300x400_location-icon.png</file>
@@ -134,5 +134,21 @@
         <file>images/weatherImages/weathericons/PartlyCloudyDay.png</file>
         <file>images/weatherImages/weathericons/PartlyCloudyNight.png</file>
         <file>qml/KitchenApp/Beef.jpg</file>
+=======
+        <file>next_track_button.png</file>
+        <file>pause_button.png</file>
+        <file>play_button.png</file>
+        <file>volume_mute.png</file>
+        <file>volume.png</file>
+        <file>backArrow.png</file>
+        <file>love.png</file>
+        <file>ban.png</file>
+        <file>love_glow.png</file>
+        <file>twUserHeader.png</file>
+        <file>circle1.png</file>
+        <file>circle2.png</file>
+        <file>circle3.png</file>
+        <file>circle4.png</file>
+>>>>>>> master
     </qresource>
 </RCC>

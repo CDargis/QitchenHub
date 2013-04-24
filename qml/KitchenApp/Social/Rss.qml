@@ -41,68 +41,48 @@ Rectangle{
             }
         }
     }
-    Rectangle{
-        id: rssContent
+
+    Flipable {
+        id: rssMain
         property var story;
         anchors.left: parent.left
         anchors.top: rssTitle.bottom
         height: parent.height*0.9
         width: parent.width
         visible: true
-        border.color: "#8b988b"
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#7C7C85" }
-            GradientStop { position: 1.0; color: "#25242A" }
+        property bool flipped: false
+        front:RssContent{
+            id: rssContent
+            height: parent.height
+            width: parent.width
         }
-        clip: true
-        ListView {
-            focus: true
-            id: feeds
-            anchors.fill: parent
-            model: rssFeeds
-            delegate: SourceDelegate{}
-            clip: true
+        back:RssSettings{
+            id: rssSettings
+            height: parent.height
+            width: parent.width
         }
-
-
-        function viewStory(){
-            rssContent.visible = false;
-            rssBackArrow.visible = true
-            page.state = "read";
+        transform: Rotation {
+            id: rotation
+            origin.x: rssMain.width/2
+            origin.y: rssMain.height/2
+            axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
+            angle: 0    // the default angle
         }
 
+        states: State {
+            name: "back"
+            PropertyChanges { target: rotation; angle: 180 }
+            when: rssMain.flipped
+        }
+
+        transitions: Transition {
+            NumberAnimation { target: rotation; property: "angle"; duration: 300}
+        }
     }
     Story{
         id: page
         visible: false
         anchors.top: rssTitle.bottom
-    }
-    Rectangle{
-        id: test
-        anchors.top: rssTitle.bottom
-        width: parent.width
-        height: parent.height*.9
-        border.color: "#8b988b"
-        visible: false
-        color: "black"
-        WebView {
-            id: webpage
-            anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.top: rssTitle.bottom
-            url: ""
-            width: parent.width
-            height: parent.height
-            smooth: false
-            //visible: false
-        }
-    }
-
-    RssSettings{
-        id: rssSettings
-        anchors.left: parent.left
-        anchors.top: rssTitle.bottom
-        height: parent.height*0.9
-        width: parent.width
     }
     Rectangle{
         id:rssBottom
@@ -126,14 +106,16 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                    rssContent.setInteractive(true)
+                    rssContent.visible = true;
+                    root.setCorrection();
                     rssSettings.resetState();
-                    rssSettings.visible = false
-                    rssContent.visible = true
                     rssBackArrow.visible = false
                     rssSettingsButton.visible = true
                     page.state = ""
-                    test.visible = false;
+                    webpage.visible = false;
                     webpage.url = "";
+                    rssSettings.visible = false;
                 }
             }
         }
@@ -151,12 +133,23 @@ Rectangle{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    rssContent.visible = false
+                    rssContent.setInteractive(false)
                     rssSettings.visible = true
+                    rssMain.flipped = true
                     rssBackArrow.visible = true
                     rssSettingsButton.visible = false
+                    rssContent.visible = false
                 }
             }
+        }
+    }
+    function setCorrection(){
+        if(rssMain.flipped == false && page.visible == true){
+            page.visible = false;
+            rssMain.visible = true;
+        }
+        else{
+            rssMain.flipped = false;
         }
     }
 }

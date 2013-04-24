@@ -1,12 +1,23 @@
+<<<<<<< HEAD
 
 import QtQuick 2.0
+=======
+import QtQuick 2.0
+import "testVal.js" as Script1
+
+>>>>>>> master
 
 
 
 AppInterface
 {
     property Item wall;
+<<<<<<< HEAD
 
+=======
+    property string widText;
+    widgetSrc : "kitchenWidget.qml"
+>>>>>>> master
     function flickWall() {
         var component2 = Qt.createComponent("Loading.qml");
 
@@ -145,11 +156,19 @@ function loaded2(jsonObject2,i,sources,jsonObject,url,calories,ingredients,time,
 }
 Image
 {
+<<<<<<< HEAD
     anchors.top:parent.top
     anchors.right: parent.right
     anchors.topMargin: 20
     anchors.rightMargin: 180
     source:"qrc:/images/images/searchWhite.png"
+=======
+    anchors.bottom:parent.bottom
+    anchors.right: parent.right
+    anchors.bottomMargin: 20
+    anchors.rightMargin: 180
+    source:"images/searchWhite.png"
+>>>>>>> master
     height: 30
     width:30
 }
@@ -205,11 +224,19 @@ Rectangle{
             color:"black"
             Image {
                 anchors.fill: parent
+<<<<<<< HEAD
                 source: "qrc:/images/images/Beef.jpg"
             }
             Image {
                 anchors.fill: parent
                 source: "qrc:/images/images/BlackGradient.png"
+=======
+                source: "images/Beef.png"
+            }
+            Image {
+                anchors.fill: parent
+                source: "images/BlackGradient.png"
+>>>>>>> master
             }
             Text{
                 color: "#ffffff"
@@ -246,11 +273,19 @@ horizontalAlignment: Text.AlignHCenter
 
             Image {
                 anchors.fill: parent
+<<<<<<< HEAD
                 source: "qrc:/images/images/Steak.jpg"
             }
             Image {
                 anchors.fill: parent
                 source: "qrc:/images/images/BlackGradient.png"
+=======
+                source: "images/Steak.png"
+            }
+            Image {
+                anchors.fill: parent
+                source: "images/BlackGradient.png"
+>>>>>>> master
             }
             Text{
                 color: "#ffffff"
@@ -285,11 +320,19 @@ horizontalAlignment: Text.AlignHCenter
             anchors.fill: parent
             Image {
                 anchors.fill: parent
+<<<<<<< HEAD
                 source: "qrc:/images/images/Chicken.jpg"
             }
             Image {
                 anchors.fill: parent
                 source: "qrc:/images/images/BlackGradient.png"
+=======
+                source: "images/Chicken.png"
+            }
+            Image {
+                anchors.fill: parent
+                source: "images/BlackGradient.png"
+>>>>>>> master
             }
             Text{
                 color: "#ffffff"
@@ -318,11 +361,19 @@ horizontalAlignment: Text.AlignHCenter
             color:"black"
             Image {
                 anchors.fill: parent
+<<<<<<< HEAD
                 source: "qrc:/images/images/Vegetarian.jpg"
             }
             Image {
                 anchors.fill: parent
                 source: "qrc:/images/images/BlackGradient.png"
+=======
+                source: "images/Vegetarian.png"
+            }
+            Image {
+                anchors.fill: parent
+                source: "images/BlackGradient.png"
+>>>>>>> master
             }
             Text{
                 color: "#ffffff"
@@ -353,11 +404,19 @@ horizontalAlignment: Text.AlignHCenter
             color:"black"
             Image {
                 anchors.fill: parent
+<<<<<<< HEAD
                 source: "qrc:/images/images/Healthy.jpg"
             }
             Image {
                 anchors.fill: parent
                 source: "qrc:/images/images/BlackGradient.png"
+=======
+                source: "images/Healthy.png"
+            }
+            Image {
+                anchors.fill: parent
+                source: "images/BlackGradient.png"
+>>>>>>> master
             }
             Text{
                 color: "#ffffff"
@@ -389,11 +448,19 @@ horizontalAlignment: Text.AlignHCenter
 
             Image {
                 anchors.fill: parent
+<<<<<<< HEAD
                 source: "qrc:/images/images/Drinks.jpg"
             }
             Image {
                 anchors.fill: parent
                 source: "qrc:/images/images/BlackGradient.png"
+=======
+                source: "images/Drinks.png"
+            }
+            Image {
+                anchors.fill: parent
+                source: "images/BlackGradient.png"
+>>>>>>> master
             }
             Text{
                 color: "#ffffff"
@@ -436,7 +503,11 @@ function launch(cat)
         }
     }
 
+<<<<<<< HEAD
     doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf&q=" + cat  +"&requirePictures=true");
+=======
+    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67&q=" + cat  +"&requirePictures=true");
+>>>>>>> master
 
     //doc.open("GET", "http://api.yummly.com/v1/api/recipe/recipe-id")
     doc.send();
@@ -449,7 +520,11 @@ function launch2(rid,i,sources,jsonObject,rname,url,calories,ingredients,time,ra
 
     var doc2 = new XMLHttpRequest();
 
+<<<<<<< HEAD
     doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf");
+=======
+    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67");
+>>>>>>> master
     doc2.send();
     doc2.onreadystatechange = function() {
         if (doc2.readyState == XMLHttpRequest.DONE) {
@@ -459,6 +534,11 @@ function launch2(rid,i,sources,jsonObject,rname,url,calories,ingredients,time,ra
 
 
             loaded2(jsonObject2,i,sources,jsonObject,url,calories,ingredients,time,rating);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
             //console.log(test);
 //}
 
@@ -494,8 +574,13 @@ gradient: Gradient {
 }
 Image{
     id:goback
+<<<<<<< HEAD
     source:"qrc:/images/images/Back.png"
     anchors.top:parent.top
+=======
+    source:"images/Back.png"
+    anchors.bottom:parent.bottom
+>>>>>>> master
     anchors.left: parent.left
     width:480/3
     height:320/3
@@ -505,7 +590,11 @@ opacity: 0
 }
 MouseArea{
 anchors.fill: goback
+<<<<<<< HEAD
 onClicked: {console.log(appFull.state)
+=======
+onClicked: {wall.destroy();
+>>>>>>> master
     if(appFull.state == "load")
                                     {appFull.state = "";
                                       }}
@@ -551,3 +640,7 @@ transitions: [
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master

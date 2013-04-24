@@ -33,7 +33,7 @@ Flickable {
     property bool moving: false
     property variant state
 
-    // consider the to be hidden
+    // consider these to be hidden
     // for interior use only
     property Item indicator
     property Item hint
@@ -103,15 +103,15 @@ Flickable {
 
     Image {
         id: backArrow
-        z: 100
+        z: 99
         source: "qrc:/images/backArrow.png"
-        anchors.right: parent.right
-        anchors.rightMargin: parent.height*0.01
+        anchors.left: parent.left
+        anchors.leftMargin: parent.height*0.01
         anchors.top: parent.top
         anchors.topMargin: parent.height*0.01
         signal clicked
-        width: parent.width*.05
-        height: parent.width*.05
+        height: parent.width*.04
+        width: height*2.76
         smooth: true
         MouseArea {
           anchors.fill: parent
@@ -197,6 +197,13 @@ Flickable {
         hint = component.createObject(root);
 
         hint.x = x - hint.width * 0.5;
-        hint.y = y - hint.height;
+        if (y < 60)
+            hint.y = y + hint.height * 0.5;
+        else
+            hint.y = y - hint.height;
+    }
+
+    function hideBackButton(){
+        backArrow.visible = false;
     }
 }

@@ -15,6 +15,7 @@ Flickable {
         }
     }
 
+
     function createWidget(source, app) {
         var component;
         var widgetNum;

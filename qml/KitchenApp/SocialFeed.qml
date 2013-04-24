@@ -1,6 +1,9 @@
 import QtQuick 2.0
+import QtWebKit 3.0
 import "Social"
 AppInterface{
+    id: root
+    anchors.fill: parent
     Rectangle{
         id:main
         width: parent.width
@@ -32,6 +35,18 @@ AppInterface{
             width: parent.width*0.25
             height: parent.height
         }
+        WebView {
+            id: webpage
+            z: 100
+            signal hideArrow
+            url: ""
+            width: parent.width
+            height: parent.height*.95
+            smooth: false
+            visible: false
+            Component.onCompleted: {
+                hideBackButton();
+            }
+        }
     }
 }
-

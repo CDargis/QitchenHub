@@ -14,8 +14,8 @@ XmlListModel {
                 var item = get(i);
                 rssFeeds.append({title: item.title, feed: url});
                 //rssSett.resetState();
-                console.log(rssFeeds.get(0).title + "i1");
-                console.log(rssFeeds.get(1).title + "i2");
+                //console.log(rssFeeds.get(0).title + "i1");
+                //console.log(rssFeeds.get(1).title + "i2");
                 //console.log(rssFeeds.get(3).title + "i3");
             }
         }

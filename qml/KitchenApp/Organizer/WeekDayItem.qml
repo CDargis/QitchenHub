@@ -4,6 +4,7 @@ Rectangle {
     width: days.childWidth
     height: parent.height
     radius: 5
+    border.width: 1
 
     property string txt
 

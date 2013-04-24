@@ -277,7 +277,11 @@ AppInterface{
             anchors.centerIn: parent
 
             source: "images/CenterLabel.png"
+<<<<<<< HEAD
             width:700
+=======
+            width:parent.width/1.4
+>>>>>>> master
             height: 292
         }
         Image
@@ -367,8 +371,17 @@ AppInterface{
 
             //anchors.centerIn: weathericon
             // anchors.bottom: weathericon.bottom
+<<<<<<< HEAD
             anchors.horizontalCenter: image21.horizontalCenter
             y:450
+=======
+            anchors.bottom: weathericon.bottom
+           anchors.horizontalCenter: image2.horizontalCenter
+
+
+
+           anchors.bottomMargin: -weathericon.width/5
+>>>>>>> master
             color: "#FFFFFF"
             font.pixelSize: 20
             font.family: font
@@ -403,8 +416,14 @@ AppInterface{
         Rectangle
         {
             id:switcher1
+<<<<<<< HEAD
             y:50
             x:50
+=======
+          anchors.top: parent.top
+          anchors.left: parent.left
+          anchors.topMargin: parent.height/10
+>>>>>>> master
             width:170
             border.color: "white"
             color: "black"
@@ -1874,7 +1893,11 @@ iconURL = weathericon.source;
             anchors.centerIn: parent
 
             source: "images/CenterLabel.png"
+<<<<<<< HEAD
             width:700
+=======
+            width:parent.width/1.4
+>>>>>>> master
             height: 292
         }
         Text {
@@ -1929,10 +1952,17 @@ iconURL = weathericon.source;
             font.family: font
             font.bold: true
 
+<<<<<<< HEAD
       anchors.top:parent.top
       anchors.right: parent.right
       anchors.topMargin: parent.height/2.3
       anchors.rightMargin: parent.width/4.15
+=======
+            anchors.top:weathericon.top
+            anchors.left: weathericon.left
+            anchors.leftMargin:1.6*weathericon.width
+            anchors.topMargin: weathericon.height/15
+>>>>>>> master
 
 
 
@@ -2056,6 +2086,7 @@ iconURL = weathericon.source;
         {id: desc
 
             //anchors.centerIn: weathericon
+<<<<<<< HEAD
             // anchors.bottom: weathericon.bottom
             anchors.horizontalCenter: image2.horizontalCenter
 
@@ -2066,6 +2097,18 @@ iconURL = weathericon.source;
             font.family: font
             //font.bold: true
 
+=======
+             anchors.bottom: weathericon.bottom
+            anchors.horizontalCenter: image2.horizontalCenter
+
+
+
+            anchors.bottomMargin: -weathericon.width/5
+            color: "#FFFFFF"
+            font.pixelSize: 20
+            font.family: font
+            //font.bold: tr
+>>>>>>> master
 
 
         }
@@ -2124,8 +2167,14 @@ iconURL = weathericon.source;
         Rectangle
         {
             id:switcher
+<<<<<<< HEAD
             y:400
             x:1000
+=======
+           anchors.bottom: parent.bottom
+           anchors.right: parent.right
+           anchors.bottomMargin: parent.height/8
+>>>>>>> master
             width:200
             border.color: "white"
             color: "black"

@@ -115,13 +115,20 @@ Rectangle {
         color: "transparent"
         anchors.left: userInfo.right
         anchors.verticalCenter: parent.verticalCenter
-        Text {
+        /*Text {
             id: csText
             anchors.centerIn: parent
             font.family: fontFamily
             font.pointSize: 20
             text: currentScreenTitle
             color: "#36c60f"
+        }*/
+
+        Speaker {
+            id: voice
+            height: parent.height
+            width: height * 3
+            anchors.centerIn: parent
         }
     }
 
@@ -199,5 +206,9 @@ Rectangle {
     }
     function setCurrentScreenTitle(title) {
         currentScreenTitle = title;
+    }
+
+    function speakerRef() {
+        return voice;
     }
 }

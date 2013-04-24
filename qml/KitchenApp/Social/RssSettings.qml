@@ -2,11 +2,11 @@ import QtQuick 2.0
 
 Rectangle{
     id: root
-    visible: false
+    visible: true
     color: "#36C60F"
     width: parent.width
     height: parent.height
-    border.color: "black"
+    border.color: "#8b988b"
     Rectangle{
         id: addArea
         anchors.left: parent.left
@@ -31,7 +31,7 @@ Rectangle{
             height: parent.height*.20
             width: parent.width*.97
             color: "black"
-            border.color: "gray"
+            border.color: "#8b988b"
             border.width: height*.03
             TextInput{
                 id: feedInput
@@ -79,7 +79,7 @@ Rectangle{
             height: parent.height*.20
             width: parent.width*.97
             color: "black"
-            border.color: "gray"
+            border.color: "#8b988b"
             border.width: height*.03
             TextInput{
                 id: titleInput
@@ -197,8 +197,7 @@ Rectangle{
         */
         ListView{
             id: listFeeds
-            width: parent.width
-            height: parent.height
+            anchors.fill: parent
             model: rssFeeds
             clip: true
             delegate: SettingsDelegate{}
@@ -247,5 +246,8 @@ Rectangle{
         if(rss.activeFeed === null){
             rss.activeFeed = source;
         }
+    }
+    function setInteractive(inter){
+        listFeeds.interactive = inter
     }
 }
