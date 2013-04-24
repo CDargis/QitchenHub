@@ -167,5 +167,6 @@
         <file>search.png</file>
         <file>upArrow_white.png</file>
         <file>downArrow_white.png</file>
+        <file>home.png</file>
     </qresource>
 </RCC>

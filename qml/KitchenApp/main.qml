@@ -178,7 +178,7 @@ Rectangle {
 
     StatusBar {
         id: statusBar
-        usrName: "Steve"
+        usrName: "Dan"
         usrPicSource: "qrc:/images/user.png"
         currentScreenTitle: "QitchenHub"
     }
