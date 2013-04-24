@@ -75,5 +75,6 @@
         <file>avi8.jpg</file>
         <file>avi9.jpg</file>
         <file>socialwidget.png</file>
+        <file>search.png</file>
     </qresource>
 </RCC>

@@ -70,6 +70,14 @@ AppInterface {
         function turnOffRecommendations() {
             Music.tune("user", Music.user, "library")
         }
+
+        function tuneToArtist(artist) {
+            addArtist(artist)
+            Music.playlist = []
+            Music.tune("artist", artist, "similarartists")
+            nextTrack()
+            getUsersArtists()
+        }
     }
     // Tell the player the progress
     Timer {
@@ -105,12 +113,24 @@ AppInterface {
         }
     }
 
+    function artistSearch(name, success) {
+        Music.artistSearch(name, success)
+    }
+
     function getBanList() {
         Music.getBanList()
     }
 
     function getUsersArtists() {
         Music.getUsersArtists()
+    }
+
+    function addArtist(artist) {
+        Music.addArtist(artist)
+    }
+
+    function removeArtist(artist) {
+        Music.removeArtist(artist)
     }
 
     function setUsersArtists(artists) {
