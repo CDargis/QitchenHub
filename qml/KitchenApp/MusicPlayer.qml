@@ -9,19 +9,45 @@ AppInterface {
 
     widgetSrc: "MusicApp/MusicPlayerWidget.qml"
 
+    property string currentTitle: nowPlaying.currentTitle
+    property string currentArtist: nowPlaying.currentArtist
+    property int currentSongLength
+    property int currentProgress
+    property bool isPlaying: {
+        (theMusic.playbackState === Audio.PlayingState) ? true : false
+    }
+
+    signal playPauseSignal()
+    onPlayPauseSignal: {
+        if(theMusic.playbackState === Audio.PausedState)
+            theMusic.play()
+        else if(theMusic.playbackState === Audio.PlayingState)
+            theMusic.pause()
+        else theMusic.nextTrack()
+    }
+    signal nextSignal()
+    onNextSignal: {
+        theMusic.nextTrack()
+    }
+
     Component.onCompleted: {
         getUsersArtists()
         getBanList()
-        if(theMainApplication.playMusicOnStartup)
-            Music.nextTrack()
         if(theMainApplication.musicRecommendations)
             theMusic.turnOnRecommendations()
         else theMusic.turnOffRecommendations()
+        if(theMainApplication.playMusicOnStartup)
+            theMusic.nextTrack()
     }
 
     Audio {
         id: theMusic
         autoPlay: false
+        onStatusChanged: {
+            if(status === Audio.EndOfMedia)
+                nextTrack()
+        }
+
         onPlaybackStateChanged: {
             // Update timer
             if(theMusic.playbackState === Audio.PlayingState) {
@@ -89,5 +115,9 @@ AppInterface {
 
     function setUsersArtists(artists) {
         musicSettings.setUsersArtists(artists)
+    }
+
+    function secondsToMinuteString(miliseconds) {
+        return nowPlaying.secondsToMinuteString(miliseconds)
     }
 }

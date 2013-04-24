@@ -54,7 +54,8 @@ Item {
 
 
     onVisibleChanged: {
-
+        if(visible)
+            target.keyboardIsVisible()
     }
 
     Component.onCompleted: buildTheKeyboard()

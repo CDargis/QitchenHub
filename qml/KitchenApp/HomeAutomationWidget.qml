@@ -18,11 +18,11 @@ WidgetInterface {
     height: 200
 
     Rectangle {
-        radius: 30
+        radius: 10
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#8C8C8C" }
-            GradientStop { position: 1.0; color: "#545454" }
+            GradientStop { position: 0.0; color: "#222222" }
+            GradientStop { position: 1.0; color: "#444444" }
         }
         Rectangle {
             id: climateRect
@@ -46,7 +46,7 @@ WidgetInterface {
                 anchors.top: temp.bottom
                 anchors.horizontalCenter: temp.horizontalCenter
                 font.family: fontFamily
-                font.pixelSize: temp.font.pixelSize * (1/7)
+                font.pixelSize:  temp.font.pixelSize * (1/6)
                 text: qsTr("Cool") + tr.emptyString
             }
             Text {
@@ -55,7 +55,7 @@ WidgetInterface {
                 anchors.right: cool.left
                 anchors.rightMargin: 10
                 font.family: fontFamily
-                font.pixelSize: temp.font.pixelSize * (1/7)
+                font.pixelSize: temp.font.pixelSize * (1/6)
                 text: qsTr("Heat") + tr.emptyString
             }
             Text {
@@ -64,7 +64,7 @@ WidgetInterface {
                 anchors.left: cool.right
                 anchors.leftMargin: 10
                 font.family: fontFamily
-                font.pixelSize: temp.font.pixelSize * (1/7)
+                font.pixelSize: temp.font.pixelSize * (1/6)
                 text: qsTr("Off") + tr.emptyString
             }
             // Trend image
@@ -80,9 +80,10 @@ WidgetInterface {
         Rectangle {
             id: sep
             width:parent.width * .85; height: 1
-            color: "black"
+            color: "#36C60F"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: climateRect.bottom
+            anchors.topMargin: 10
         }
         Rectangle {
             width: parent.width; height: parent.height / 2
@@ -125,16 +126,25 @@ WidgetInterface {
             heat.font.bold = true
             cool.font.bold = false
             off.font.bold = false
+            heat.font.underline = true
+            cool.font.underline = false
+            off.font.bold = false
         }
         else if(thermostatState === "Cool") {
             cool.font.bold = true
             off.font.bold = false
             heat.font.bold = false
+            heat.font.underline = false
+            cool.font.underline = true
+            off.font.bold = false
         }
         else if(thermostatState === "Off") {
             off.font.bold = true
             cool.font.bold = false
             heat.font.bold = false
+            heat.font.underline = false
+            cool.font.underline = false
+            off.font.bold = true
         }
         switch(app.getTempTrend()) {
         case 1: trendImg.source = "qrc:/images/upArrow.png"; break;

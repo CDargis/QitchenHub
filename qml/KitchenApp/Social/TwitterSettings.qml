@@ -14,12 +14,23 @@ Rectangle{
         model: TwitterUserModel{}
         delegate: UserHeaderDelegate{}
     }
+
+    Rectangle{
+        id: seperator
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: userInfo.bottom
+        anchors.topMargin: parent.height*.1
+        color: "black"
+        width: parent.width*.95
+        height: parent.height*.003
+    }
+
     Text{
         id: userLabel
         font.bold: true
-        font.pixelSize: parent.height*.02
-        anchors.top: userInfo.bottom
-        anchors.topMargin: parent.height*.1
+        font.pixelSize: parent.height*.025
+        anchors.top: seperator.bottom
+        anchors.topMargin: parent.height*.05
         anchors.left: parent.left
         anchors.leftMargin: parent.width*.025
         color: "black"

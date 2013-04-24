@@ -130,7 +130,9 @@ function tune(type, resource, subtype) {
             + "&sk=" + session_key + "&format=json" + "&api_sig=" +
             getSignature("api_key", apiKey, "method", "radio.tune", "sk", session_key,
                          "station", station)
-    makeRequest("POST", request)
+    makeRequest("POST", request, function(json) {
+        console.log(json.station.name)
+    })
 }
 
 function authenticate() {

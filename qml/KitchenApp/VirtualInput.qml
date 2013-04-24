@@ -8,7 +8,14 @@ Rectangle {
     border.width: 1
     property string currentText
     property int fontSize: 18
+    property bool isPassword: false
+    property bool isInteractive: true
+    property int maxLength: 32767    // Defaults to TextInput default
+    property string fontColor: "black"
+    property bool italicFont: false
+    property bool boldFont: false
     signal returnPressed(string theText) // Sends the current text with the signal
+    signal keyboardIsVisible()
 
     MouseArea {
         anchors.fill: parent
@@ -27,6 +34,7 @@ Rectangle {
         anchors.fill: parent
         flickableDirection: Flickable.VerticalFlick
         contentWidth: theInput.width; contentHeight: theInput.height
+        interactive: isInteractive
         clip: true
         function ensureVisible(r)
         {
@@ -42,8 +50,13 @@ Rectangle {
             anchors.topMargin: 5
             anchors.left: parent.left
             anchors.leftMargin: 5
+            maximumLength: maxLength
+            echoMode: inputContainer.isPassword ? TextInput.Password : TextInput.Normal
+            color: fontColor
             font.family: fontFamily
             font.pixelSize: fontSize
+            font.bold: boldFont
+            font.italic: italicFont
             selectByMouse: true
             text: currentText
             clip: true

@@ -13,8 +13,7 @@ Rectangle {
 
     PlayMenu {
         id: playMenu
-        width: playSettingsRect.width; height: 125
-        color: "transparent"
+        width: playSettingsRect.width; height: 100
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: playSettingsRect.top
         anchors.bottomMargin: 20
@@ -25,6 +24,8 @@ Rectangle {
         anchors.centerIn: parent
         property bool flipped: false
         color: "transparent"
+        border.color: "black"
+        border.width: 1
         width: parent.width * .6; height: parent.height * .4
         NowPlayList {
             id: nowPlayList
@@ -37,11 +38,21 @@ Rectangle {
             width: parent.width
             visible: playSettingsRect.flipped
         }
+    }
+
+    Rectangle {
+        id: musicSettingsRect
+        width: playSettingsRect.width; height: 30
+        anchors.right: playSettingsRect.right
+        anchors.bottom: playSettingsRect.bottom
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#000000" }
+            GradientStop { position: 1.0; color: "#222222" }
+        }
         Image {
             id: musicSettingsImg
-            anchors.right: playSettingsRect.right
-            anchors.bottom: playSettingsRect.bottom
-            width: 35; height: 35
+            anchors.right: parent.right
+            width: 30; height: 30
             source: (playSettingsRect.flipped) ?
                         "qrc:/images/rssBackArrow.png" : "qrc:/images/rssSettings.png"
             MouseArea {
@@ -50,13 +61,40 @@ Rectangle {
                            = !playSettingsRect.flipped
             }
         }
-    }
-
-    Rectangle {
-        anchors.fill: playSettingsRect
-        color: "transparent"
-        border.color: "black"
-        border.width: 1
+        Image {
+            id: volumeImg
+            anchors.left: parent.left
+            width: musicSettingsImg.width; height: musicSettingsImg.height
+            source: theMusic.muted ? "qrc:/images/volume_mute.png" : "qrc:/images/volume.png"
+            smooth: true
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    theMusic.muted = !theMusic.muted
+                }
+            }
+        }
+        Slider {
+            id: volume
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: volumeImg.right
+            anchors.leftMargin: 3
+            sliderWidth: 100
+            sliderHeight: 5
+            minimum: 0
+            maximum: 1
+            value: 1
+            Binding {
+                target: theMusic
+                property: "volume"
+                value: volume.value
+            }
+            Binding {
+                target: volume
+                property: "enabled"
+                value: theMusic.muted
+            }
+        }
     }
 
     Text {
@@ -66,7 +104,7 @@ Rectangle {
         anchors.rightMargin: 10
         font.family: fontFamily
         font.pixelSize: 14
-        color: "#36C60F"
+        color: "white"
         text: "0:00"
     }
 
@@ -78,6 +116,16 @@ Rectangle {
         canDrag: false
         sliderWidth: playSettingsRect.width - songTextProgress.width - songLength.width - 20
         sliderHeight: 6
+        Binding {
+            target: theMusicPlayerApp
+            property: "currentSongLength"
+            value: songProgress.maximum
+        }
+        Binding {
+            target: theMusicPlayerApp
+            property: "currentProgress"
+            value: songProgress.value
+        }
     }
 
     Text {
@@ -87,19 +135,19 @@ Rectangle {
         anchors.leftMargin: 10
         font.family: fontFamily
         font.pixelSize: 14
-        color: "#36C60F"
+        color: "white"
         text: "0:00"
     }
 
     Text {
         id: titleDisplay
         anchors.top: songProgress.bottom
-        anchors.topMargin: 12
+        anchors.topMargin: 20
         anchors.horizontalCenter: playSettingsRect.horizontalCenter
         font.pixelSize: 22
         font.family: fontFamily
         text: currentTitle
-        color: "#36C60F"
+        color: "white"
     }
 
     Text {
@@ -110,7 +158,7 @@ Rectangle {
         font.pixelSize: 16
         font.family: fontFamily
         text: currentArtist
-        color: "#36C60F"
+        color: "white"
     }
 
     Text {
@@ -121,7 +169,7 @@ Rectangle {
         font.pixelSize: 16
         font.family: fontFamily
         text: currentAlbum
-        color: "#36C60F"
+        color: "white"
     }
 
     // Function definitions -------------------------------------------------

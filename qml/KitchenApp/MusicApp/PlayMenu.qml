@@ -3,83 +3,48 @@ import QtMultimedia 5.0
 import "../"
 
 Rectangle {
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "#000000" }
+        GradientStop { position: 1.0; color: "#222222" }
+    }
     Image {
         id: playPauseImg
-        width: parent.height; height: parent.height
-        anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.height * .65; height: parent.height * .65
         anchors.verticalCenter: parent.verticalCenter
+        anchors.right: nextTrackImg.left
+        anchors.rightMargin: 10
         source: (theMusic.playbackState === Audio.PausedState)
                 ? "qrc:/images/pause_button.png" : "qrc:/images/play_button.png"
         smooth: true
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                if(theMusic.playbackState === Audio.PausedState)
-                    theMusic.play()
-                else if(theMusic.playbackState === Audio.PlayingState)
-                    theMusic.pause()
-                else theMusic.nextTrack()
+                theMusicPlayerApp.playPauseSignal()
             }
         }
     }
     Image {
         id: nextTrackImg
-        width: playPauseImg.height * .75; height: playPauseImg.height * .75
-        anchors.left: playPauseImg.right
+        width: playPauseImg.height; height: playPauseImg.height
+        anchors.right: parent.right
+        anchors.rightMargin: 10
         anchors.verticalCenter: playPauseImg.verticalCenter
         source: "qrc:/images/next_track_button.png"
         smooth: true
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                theMusic.nextTrack()
+                theMusicPlayerApp.nextSignal()
             }
-        }
-    }
-
-    Image {
-        id: volumeImg
-        anchors.left: nextTrackImg.right
-        width: playPauseImg.height * .5; height: playPauseImg.height * .5
-        anchors.verticalCenter: playPauseImg.verticalCenter
-        source: theMusic.muted ? "qrc:/images/volume_mute.png" : "qrc:/images/volume.png"
-        smooth: true
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                theMusic.muted = !theMusic.muted
-            }
-        }
-    }
-
-    Slider {
-        id: volume
-        anchors.verticalCenter: nextTrackImg.verticalCenter
-        anchors.left: volumeImg.right
-        anchors.leftMargin: 3
-        sliderWidth: playPauseImg.width * .9
-        sliderHeight: 5
-        minimum: 0
-        maximum: 1
-        value: 1
-        Binding {
-            target: theMusic
-            property: "volume"
-            value: volume.value
-        }
-        Binding {
-            target: volume
-            property: "enabled"
-            value: theMusic.muted
         }
     }
 
     Image {
         id: loveImg
         anchors.right: playPauseImg.left
-        anchors.rightMargin: 40
+        anchors.rightMargin: 10
         anchors.verticalCenter: playPauseImg.verticalCenter
-        height: playPauseImg.height * .55; width: playPauseImg.height * .55
+        height: nextTrackImg.height; width: nextTrackImg.height
         source: nowPlaying.loved ? "qrc:/images/love_glow.png" : "qrc:/images/love.png"
         smooth: true
         MouseArea {
@@ -104,9 +69,9 @@ Rectangle {
     Image {
         id: banImg
         anchors.right: loveImg.left
-        anchors.rightMargin: 40
+        anchors.rightMargin: 10
         anchors.verticalCenter: playPauseImg.verticalCenter
-        height: playPauseImg.height * .55; width: playPauseImg.height * .55
+        height: nextTrackImg.height; width: nextTrackImg.height
         source: "qrc:/images/ban.png"
         smooth: true
         MouseArea {
@@ -118,6 +83,23 @@ Rectangle {
                     theMusic.nextTrack()
                 }
             }
+        }
+    }
+
+
+    Text {
+        id: currentStationText
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.verticalCenter: parent.verticalCenter
+        font.family: fontFamily
+        font.pixelSize: 22
+        color: "white"
+        text: {
+            statusBar.usrName + "'s " +
+                    ((theMainApplication.musicRecommendations) ?
+                        qsTr("Mix Radio") : qsTr("Library Radio"))
+                    + tr.emptyString
         }
     }
 }
