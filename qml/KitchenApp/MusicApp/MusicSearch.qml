@@ -50,7 +50,6 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                //nowPlaying.headerFlipped = false
                 theMusicPlayerApp.artistSearch(vInput.currentText, searchSuccessHandler)
             }
         }
@@ -59,7 +58,9 @@ Rectangle {
     // Function defintions -------------------------------------------------------------
 
     function searchSuccessHandler(artist) {
-        if(artist !== undefined)
+        if(artist !== undefined) {
             theMusic.tuneToArtist(artist)
+            nowPlaying.headerFlipped = false
+        }
     }
 }
