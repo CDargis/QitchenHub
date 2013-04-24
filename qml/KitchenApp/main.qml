@@ -77,6 +77,7 @@ Rectangle {
                 // make sure you put the name of your qml as an argument
                 onButtonClick: launch("HomeAutomation.qml",0)
             }
+
             Button {
                 id: buttonOrg
                 width: 200
@@ -126,7 +127,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    //onClicked: launch(".qml",3)
+                    onClicked: launch("weather.qml",4)
                 }
             }
             Button {
@@ -139,7 +140,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    //onClicked: launch(".qml",3)
+                    onClicked: launch("Kitchen.qml",5)
                 }
             }
             Button {
@@ -152,7 +153,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("Traffic.qml",4)
+                    onClicked: launch("Traffic.qml",6)
                 }
             }
             Button {
