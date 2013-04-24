@@ -30,10 +30,12 @@ Rectangle {
         color: "transparent"
         border.color: "black"
         border.width: 1
+        property bool isAdding: false
         FlickableList {
             id: artistFlick
             onDestroyingItem: {
-                console.log(item.name)
+                if(!artistRect.isAdding)
+                    theMusicPlayerApp.removeArtist(item.name)
             }
         }
     }
@@ -146,7 +148,9 @@ Rectangle {
     }
 
     function setUsersArtists(artists) {
+        artistRect.isAdding = true
         artistFlick.addItems(artists, true)
+        artistRect.isAdding = false
     }
 
     function setBanList(banList) {

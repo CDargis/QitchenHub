@@ -2,6 +2,7 @@ import QtQuick 2.0
 import "../"
 
 Rectangle {
+    id: root
     border.color: "black"
     border.width: 1
     color: "transparent"
@@ -10,14 +11,42 @@ Rectangle {
     property string currentAlbum: ""
     property string currentArtist: ""
     property bool loved: false
+    property bool headerFlipped: false
 
-    PlayMenu {
-        id: playMenu
+    Flipable {
+        id: header
         width: playSettingsRect.width; height: 100
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: playSettingsRect.top
         anchors.bottomMargin: 20
+        front: PlayMenu {
+            id: playMenu
+            anchors.fill: parent
+        }
+        back: MusicSearch {
+            id: musicSearch
+            anchors.fill: parent
+        }
+
+        transform: Rotation {
+            id: rotation
+            origin.x: header.width / 2
+            origin.y: header.height / 2
+            axis.x: 0; axis.y: 1; axis.z: 0
+            angle: 0
+        }
+
+        states: State {
+            name: "back"
+            PropertyChanges { target: rotation; angle: 180 }
+            when: root.headerFlipped
+        }
+
+        transitions: Transition {
+            NumberAnimation { target: rotation; property: "angle"; duration: 1000 }
+        }
     }
+
 
     Rectangle {
         id: playSettingsRect
