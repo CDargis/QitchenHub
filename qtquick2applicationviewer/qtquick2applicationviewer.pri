@@ -26,7 +26,7 @@ for(deploymentfolder, DEPLOYMENTFOLDERS) {
     }
     $$itemsources = $$eval($${deploymentfolder}.source)
     itempath = $${item}.path
-    $$itempath= $$eval($${deploymentfolder}.target)
+    $$itempath = $$eval($${deploymentfolder}.target)
     export($$itemsources)
     export($$itempath)
     DEPLOYMENT += $$item

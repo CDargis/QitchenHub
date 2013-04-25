@@ -3,8 +3,6 @@ import "../"
 
 Rectangle {
     id: root
-    border.color: "black"
-    border.width: 1
     color: "transparent"
 
     property string currentTitle: ""
@@ -53,8 +51,6 @@ Rectangle {
         anchors.centerIn: parent
         property bool flipped: false
         color: "transparent"
-        border.color: "black"
-        border.width: 1
         width: parent.width * .6; height: parent.height * .4
         NowPlayList {
             id: nowPlayList

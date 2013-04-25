@@ -102,16 +102,16 @@ Flickable {
     }
 
     Image {
-        id: backArrow
+        id: homeButton
         z: 99
-        source: "qrc:/images/backArrow.png"
+        source: "qrc:/images/home.png"
         anchors.left: parent.left
         anchors.leftMargin: parent.height*0.01
         anchors.top: parent.top
         anchors.topMargin: parent.height*0.01
         signal clicked
-        height: parent.width*.04
-        width: height*2.76
+        height: 40
+        width: 60
         smooth: true
         MouseArea {
           anchors.fill: parent

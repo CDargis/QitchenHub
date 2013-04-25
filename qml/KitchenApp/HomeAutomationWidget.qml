@@ -15,7 +15,7 @@ WidgetInterface {
 
 
     width: parent.width
-    height: 200
+    height: 250
 
     Rectangle {
         radius: 10
@@ -24,89 +24,95 @@ WidgetInterface {
             GradientStop { position: 0.0; color: "#222222" }
             GradientStop { position: 1.0; color: "#444444" }
         }
-        Rectangle {
-            id: climateRect
-            width: parent.width; height: parent.height / 2
-            anchors.top: parent.top
-            color: "transparent"
-            Text {
-                id: temp
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.family: fontFamily
-                font.pixelSize: parent.width * .35
-            }
-            Text {
-                anchors.left: temp.right
-                font.family: fontFamily
-                font.pixelSize: parent.width * .3
-                text: "°"
-            }
-            Text {
-                id: cool
-                anchors.top: temp.bottom
-                anchors.horizontalCenter: temp.horizontalCenter
-                font.family: fontFamily
-                font.pixelSize:  temp.font.pixelSize * (1/6)
-                text: qsTr("Cool") + tr.emptyString
-            }
-            Text {
-                id: heat
-                anchors.top: temp.bottom
-                anchors.right: cool.left
-                anchors.rightMargin: 10
-                font.family: fontFamily
-                font.pixelSize: temp.font.pixelSize * (1/6)
-                text: qsTr("Heat") + tr.emptyString
-            }
-            Text {
-                id: off
-                anchors.top: temp.bottom
-                anchors.left: cool.right
-                anchors.leftMargin: 10
-                font.family: fontFamily
-                font.pixelSize: temp.font.pixelSize * (1/6)
-                text: qsTr("Off") + tr.emptyString
-            }
-            // Trend image
-            Image {
-                id: trendImg
-                anchors.right: temp.left
-                anchors.rightMargin: 20
-                anchors.verticalCenter: temp.verticalCenter
-                width: parent.width * .05; height: parent.width * .05
-            }
+
+        Text {
+            id: temp
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.family: fontFamily
+            font.pixelSize: parent.width * .35
+            color: "white"
         }
-        // Black line
+        Text {
+            anchors.left: temp.right
+            font.family: fontFamily
+            font.pixelSize: parent.width * .3
+            text: "°"
+            color: "white"
+        }
         Rectangle {
-            id: sep
+            id: topSep
             width:parent.width * .85; height: 1
             color: "#36C60F"
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: climateRect.bottom
-            anchors.topMargin: 10
+            anchors.top: temp.bottom
+            anchors.topMargin: 5
+        }
+        Text {
+            id: cool
+            anchors.top: topSep.bottom
+            anchors.topMargin: 15
+            anchors.horizontalCenter: temp.horizontalCenter
+            font.family: fontFamily
+            font.pixelSize:  temp.font.pixelSize * (1/5)
+            text: qsTr("Cool") + tr.emptyString
+            color: "white"
+        }
+        Text {
+            id: heat
+            anchors.top: cool.bottom
+            anchors.topMargin: 5
+            anchors.horizontalCenter: temp.horizontalCenter
+            font.family: fontFamily
+            font.pixelSize: temp.font.pixelSize * (1/5)
+            text: qsTr("Heat") + tr.emptyString
+            color: "white"
+        }
+        Text {
+            id: off
+            anchors.top: heat.bottom
+            anchors.topMargin: 5
+            anchors.horizontalCenter: temp.horizontalCenter
+            font.family: fontFamily
+            font.pixelSize: temp.font.pixelSize * (1/5)
+            text: qsTr("Off") + tr.emptyString
+            color: "white"
+        }
+        // Trend image
+        Image {
+            id: trendImg
+            anchors.right: temp.left
+            anchors.rightMargin: 20
+            anchors.verticalCenter: temp.verticalCenter
+            width: parent.width * .05; height: parent.width * .05
+        }
+        // Black line
+        Rectangle {
+            id: bottomSep
+            width:parent.width * .85; height: 1
+            color: "#36C60F"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: off.bottom
+            anchors.topMargin: 15
         }
         Rectangle {
-            width: parent.width; height: parent.height / 2
-            anchors.top: sep.bottom
+            id: securityStatusRect
+            width: parent.width * .65; height: parent.height * .2
+            anchors.top: bottomSep.bottom
+            anchors.topMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            radius: 10
             color: "transparent"
-            Rectangle {
-                id: securityStatusRect
-                width: parent.width * .65; height: parent.height * .5
+            Text {
+                id: seucrityStatusText
                 anchors.centerIn: parent
-                radius: 10
-                color: "transparent"
-                Text {
-                    id: seucrityStatusText
-                    anchors.centerIn: parent
-                    font.family: fontFamily
-                    font.pixelSize: parent.height * .35
-                    text: qsTr("Unarmed") + tr.emptyString
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        app.toggleSecurity()
-                    }
+                font.family: fontFamily
+                font.pixelSize: parent.height * .35
+                text: qsTr("Unarmed") + tr.emptyString
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.toggleSecurity()
                 }
             }
         }
@@ -144,11 +150,11 @@ WidgetInterface {
             heat.font.bold = false
             heat.font.underline = false
             cool.font.underline = false
-            off.font.bold = true
+            off.font.underline = true
         }
         switch(app.getTempTrend()) {
-        case 1: trendImg.source = "qrc:/images/upArrow.png"; break;
-        case -1: trendImg.source = "qrc:/images/downArrow.png"; break;
+        case 1: trendImg.source = "qrc:/images/upArrow_white.png"; break;
+        case -1: trendImg.source = "qrc:/images/downArrow_white.png"; break;
         default: trendImg.source = ""
         }
     }

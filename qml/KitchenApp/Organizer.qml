@@ -10,8 +10,8 @@ AppInterface {
     widgetSrc: "Organizer/OrganizerWidget.qml"
 
     property var oDate
-    property string currentMonth
-    property string currentYear
+    property int currentMonth
+    property int currentYear
 
     property var events
 
@@ -51,7 +51,7 @@ AppInterface {
             color: "#36c60f"
             style: Text.Outline
             styleColor: "#3f503a"
-            text: qsTr(currentMonth) + tr.emptyString + " " + currentYear;
+            text: monthFromNumber(currentMonth) + tr.emptyString + " " + currentYear;
         }
     }
 
@@ -177,7 +177,7 @@ AppInterface {
         var month = date.getMonth() + 1;
         var year = date.getFullYear();
 
-        currentMonth = monthFromNumber(month);
+        currentMonth = month;
         currentYear = year;
 
         console.debug("today: " + day + " " + month + " " + year);
@@ -304,7 +304,7 @@ AppInterface {
 
 
     function setDisplayDate(month, year) {
-        currentMonth = monthFromNumber(month);
+        currentMonth = month;
         currentYear = year;
     }
 
