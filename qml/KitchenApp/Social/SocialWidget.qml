@@ -113,7 +113,7 @@ WidgetInterface {
             color: "white"
             font.family: "Sans"
             font.pixelSize: parent.height*.55
-            text: app.count() + " of feeds"
+            text: app.count() + " feeds"
         }
     }
     function checkUser(txt){
