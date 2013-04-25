@@ -118,20 +118,20 @@ WidgetInterface {
     }
     function checkUser(txt){
         if (txt.text == "Sign out"){
-            txt.text = "Sign in"
+            txt.text = qsTr("Sign in")
             app.twUser()
         }
         else if(txt.text == "Sign in"){
-            txt.text = "Sign out"
+            txt.text = qsTr("Sign out")
             app.twUser2();
         }
     }
     function checkUser1(txt){
         if (txt.text == "Sign out"){
-            txt.text = "Sign in"
+            txt.text = qsTr("Sign in")
         }
         else if(txt.text == "Sign in"){
-            txt.text = "Sign out"
+            txt.text = qsTr("Sign out")
         }
     }
 }

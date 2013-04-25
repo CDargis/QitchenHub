@@ -8,7 +8,7 @@ AppInterface{
     Rectangle{
         id: iContainer
         height: parent.height*.1
-        width: parent.width*.5
+        width: parent.width
         border.color: "#36C60F"
         Text{
             id: imageGallery
@@ -18,23 +18,9 @@ AppInterface{
             text: qsTr("Gallery") + tr.emptyString
         }
     }
-    Rectangle{
-        id: gContainer
-        anchors.left: iContainer.right
-        height: parent.height*.1
-        width: parent.width*.5
-        border.color: "#36C60F"
-        Text{
-            id: googleSearch
-            anchors.centerIn: parent
-            color: "#36C60F"
-            font.pixelSize: parent.height*.5
-            text: qsTr("Google Search") + tr.emptyString
-        }
-    }
     Flipable{
         id: imageView
-        anchors.top: gContainer.bottom
+        anchors.top: iContainer.bottom
         height: parent.height*0.95
         width: parent.width
         visible: true

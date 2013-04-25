@@ -43,7 +43,7 @@ Rectangle{
         id: labelArea
         color: "black"
         width: parent.width
-        height: parent.height*.03
+        height: timeLine.paintedHeight
         border.color: "#8b988b"
         anchors.top: gpTitle.bottom
         Text{
@@ -53,7 +53,7 @@ Rectangle{
             color: "white"
             font.bold: true
             font.family: "Sans"
-            font.pixelSize: parent.height
+            font.pixelSize: parent.width*.065
         }
     }
     Rectangle {

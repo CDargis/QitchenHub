@@ -143,7 +143,6 @@ Rectangle{
     }
     function setUser(){
         root.user = "Peters1Dan"
-        console.log(root.user)
     }
     function getStatus(){
         return addText.text
@@ -166,7 +165,7 @@ Rectangle{
             name: "expanded"
             PropertyChanges {
                 target: addText
-                text: "Sign out"
+                text: qsTr("Sign out")
             }
             when: root.user != ""
         }

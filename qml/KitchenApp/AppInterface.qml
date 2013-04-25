@@ -204,6 +204,6 @@ Flickable {
     }
 
     function hideBackButton(){
-        backArrow.visible = false;
+        homeButton.visible = false;
     }
 }

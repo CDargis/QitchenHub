@@ -127,11 +127,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-<<<<<<< HEAD
-                    //onClicked: launch(".qml",4)
-=======
                     onClicked: launch("weather.qml",4)
->>>>>>> 3a88a231e989d6336565d54c541f1bed8ad2ce42
                 }
             }
             Button {
@@ -144,11 +140,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-<<<<<<< HEAD
-                    //onClicked: launch(".qml",5)
-=======
-                    onClicked: launch("Kitchen.qml",5)
->>>>>>> 3a88a231e989d6336565d54c541f1bed8ad2ce42
+                     onClicked: launch("Kitchen.qml",5)
                 }
             }
             Button {

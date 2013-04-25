@@ -80,7 +80,7 @@ Rectangle{
             anchors.topMargin: parent.height*.05
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.width*.1
-            width: parent.width*.29
+            width: addText.paintedWidth
             radius: width*.05
             color: "black"
             border.color: "gray"
@@ -145,27 +145,6 @@ Rectangle{
         border.color: "gray"
         width: parent.width*.9
         height: parent.height*.4
-        //radius: parent.width*.05
-        /*
-        Image {
-            id: upArrow
-            anchors.right: parent.right
-            anchors.top: parent.top
-            source: "qrc:/images/up-arrow-icon.png"
-            width: parent.width*.15
-            height: parent.width*.15
-            smooth: true
-        }
-        Image {
-            id: downArrow
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            source: "qrc:/images/down-arrow-icon.png"
-            width: parent.width*.15
-            height: parent.width*.15
-            smooth: true
-        }
-        */
         ListView{
             id: listFeeds
             anchors.fill: parent
