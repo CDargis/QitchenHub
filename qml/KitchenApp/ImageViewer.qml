@@ -3,7 +3,7 @@ import "Image"
 
 AppInterface{
     id: root
-    //widgetSrc: "Social/SocialWidget.qml"
+    widgetSrc: "Image/ImageWidget.qml"
     anchors.fill: parent
     Rectangle{
         id: iContainer
@@ -63,5 +63,8 @@ AppInterface{
         else{
             return grid.model.get(grid.currentIndex).icon;
         }
+    }
+    function setSource22(){
+            return grid.model.get(grid.currentIndex).icon;
     }
 }
