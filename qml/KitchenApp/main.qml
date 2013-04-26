@@ -43,6 +43,48 @@ Rectangle {
               appgrid.activeList[index].changeUnits(currentUnits)
     }
 
+    MouseArea {
+        id: mouseDetection
+        anchors.fill: parent
+        preventStealing: true
+        onClicked: {
+            console.log("click")
+        }
+    }
+
+    Timer {
+        id: inactivityTimer
+        running: false
+        repeat: false
+        interval: 10000  // 10 seconds
+        onTriggered: idleScreen.visible = true
+    }
+
+
+    Timer {
+        id: inactivityCheck
+        running: true
+        repeat: true
+        interval: 100
+        property int lastX
+        property int lastY
+        onTriggered: {
+            var currentX = mouseDetection.mouseX
+            var currentY = mouseDetection.mouseY
+            if(lastX === currentX || lastY === currentY) {
+                if(inactivityTimer.running !== true) {
+                    inactivityTimer.start()
+                }
+            }
+            else {
+                inactivityTimer.stop()
+                console.log("stopping timer")
+            }
+            lastX = currentX
+            lastY = currentY
+        }
+    }
+
     LocalSorageProxy {
         id: lsproxy
     }
@@ -208,7 +250,8 @@ Rectangle {
     }
 
     IdleScreen {
-        visible: false
+        id: idleScreen
+        visible: true
     }
 
 
