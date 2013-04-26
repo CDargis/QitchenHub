@@ -207,6 +207,11 @@ Rectangle {
         visible: false
     }
 
+    IdleScreen {
+        visible: false
+    }
+
+
     //************* launch an app ******************/
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
     function launch(qmlComp,index)
