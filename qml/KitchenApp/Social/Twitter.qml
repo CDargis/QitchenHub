@@ -19,8 +19,8 @@ Rectangle{
             color: "black"
             Image{
                 id: twitterImage
-                anchors.left: parent.left
-                anchors.leftMargin: parent.width*.005
+                anchors.right: parent.right
+                anchors.rightMargin: parent.width*.005
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width*.20
                 height: parent.width*.20
@@ -29,14 +29,38 @@ Rectangle{
             }
             Text{
                 id:twText
-                anchors.left: twitterImage.right
-                anchors.leftMargin: parent.width*.05
+                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: twitterImage.bottom
                 font.bold: true
                 font.family: "DejaVu Serif"
-                font.pointSize: 25;
+                font.pointSize: 21;
                 text: qsTr("Twitter") + tr.emptyString
                 color: "#36C60F"
+            }
+        }
+    }
+    Rectangle{
+        id: labelArea
+        color: "black"
+        width: parent.width
+        height: tweetLabel.paintedHeight
+        border.color: "#8b988b"
+        anchors.top: twTitle.bottom
+        property bool expand: true
+        Text{
+            id: tweetLabel
+            text: qsTr("Timeline") + tr.emptyString
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "white"
+            font.bold: true
+            font.family: "Sans"
+            font.pixelSize: parent.width*.065
+        }
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                labelArea.expand = !labelArea.expand
+                console.log(labelArea.expand)
             }
         }
     }
@@ -44,7 +68,7 @@ Rectangle{
         id: twMain
         property var story;
         anchors.left: parent.left
-        anchors.top: twTitle.bottom
+        anchors.top: labelArea.bottom
         height: parent.height*0.9
         width: parent.width
         visible: true

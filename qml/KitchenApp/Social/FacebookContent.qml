@@ -482,4 +482,20 @@ Flickable {
             }
         }
     }
+
+    states: [
+        State {
+            name: "collasped"
+            PropertyChanges {
+                target: fbCol
+                height: 0
+            }
+            when: labelArea.expand
+        }
+    ]
+    transitions: [
+        Transition {
+            NumberAnimation { target: fbCol; property: "height"; duration: 400 }
+        }
+    ]
 }

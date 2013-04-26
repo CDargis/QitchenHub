@@ -192,6 +192,7 @@ Rectangle{
         titleInput.currentText = ""
         feedInput.currentText = ""
         rssFeeds.append({name: title, feed: source});
+        speaker.say("Feed Added");
         console.log(rssFeeds)
         if(rss.activeFeed === null){
             rss.activeFeed = source;

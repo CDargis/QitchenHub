@@ -26,8 +26,13 @@ Item {
         width: listFeeds.width*.08
         height: listFeeds.width*.08
         smooth: true
-        MouseArea { anchors.fill:parent; onClicked: rssFeeds.remove(index) }
-
+        MouseArea {
+            anchors.fill:parent;
+            onClicked: {
+                rssFeeds.remove(index);
+                speaker.say("Full Image");
+            }
+        }
     }
     Rectangle {
         width: itemDelegate.width; height: 1; color: "#cccccc"

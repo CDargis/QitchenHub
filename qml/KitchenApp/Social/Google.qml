@@ -18,8 +18,8 @@ Rectangle{
             color: "black"
             Image{
                 id: googleImage
-                anchors.left: parent.left
-                anchors.leftMargin: parent.width*.005
+                anchors.right: parent.right
+                anchors.rightMargin: parent.width*.005
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width*.20
                 height: parent.width*.20
@@ -28,12 +28,11 @@ Rectangle{
             }
             Text{
                 id:gpText
-                anchors.left: googleImage.right
-                anchors.leftMargin: parent.width*.05
+                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: googleImage.bottom
                 font.bold: true
                 font.family: "DejaVu Serif"
-                font.pointSize: 25;
+                font.pointSize: 21;
                 text: qsTr("Google+") + tr.emptyString
                 color: "#36C60F"
             }
@@ -46,6 +45,7 @@ Rectangle{
         height: timeLine.paintedHeight
         border.color: "#8b988b"
         anchors.top: gpTitle.bottom
+        property bool expand: true
         Text{
             id: timeLine
             text: qsTr("Timeline") + tr.emptyString
@@ -55,18 +55,23 @@ Rectangle{
             font.family: "Sans"
             font.pixelSize: parent.width*.065
         }
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                labelArea.expand = !labelArea.expand
+            }
+        }
     }
     Rectangle {
         id: gpContent
         height: parent.height*0.9
         width: parent.width
         anchors.top: labelArea.bottom
-        anchors.topMargin: parent.height*.0011
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#7C7C85" }
             GradientStop { position: 1.0; color: "#25242A" }
         }
-        GoogleContent{id: gpCol; width: parent.width;height: parent.height}
+        GoogleContent{id: gpCol; width: parent.width;height: parent.height - gpBottom.height - labelArea.height + parent.width*.01}
     }
     Rectangle{
         id:gpBottom

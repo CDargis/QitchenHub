@@ -636,4 +636,19 @@ Flickable {
             smooth: true
         }
     }
+    states: [
+        State {
+            name: "collasped"
+            PropertyChanges {
+                target: gpCol
+                height: 0
+            }
+            when: labelArea.expand
+        }
+    ]
+    transitions: [
+        Transition {
+            NumberAnimation { target: gpCol; property: "height"; duration: 400 }
+        }
+    ]
 }
