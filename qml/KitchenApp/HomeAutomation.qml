@@ -7,8 +7,8 @@ AppInterface {
 
     Component.onCompleted: {
         languageChange(theMainApplication.language)  // Set the language
+        speaker.say(qsTr("Home Automation"));
         security.unLock()
-        speaker.say(qsTr("Home Automation. Lighting."));
     }
 
     onLanguageChange: {

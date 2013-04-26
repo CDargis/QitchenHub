@@ -161,6 +161,7 @@ Rectangle {
                     onClicked: {
                         modeRect.deselectModes()
                         parent.color = modeRect.selectColor
+                        speaker.say("Climate control set to cool")
                         thermostatState = "Cool"
                     }
                 }
@@ -185,6 +186,7 @@ Rectangle {
                     onClicked: {
                         modeRect.deselectModes()
                         parent.color = modeRect.selectColor
+                        speaker.say("Climate control set to heat")
                         thermostatState = "Heat"
                     }
                 }
@@ -209,6 +211,7 @@ Rectangle {
                     onClicked: {
                         modeRect.deselectModes()
                         parent.color = modeRect.selectColor
+                        speaker.say("Climate control turned off")
                         thermostatState = "Off"
                     }
                 }
