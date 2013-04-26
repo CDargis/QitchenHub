@@ -311,14 +311,15 @@ AppInterface{
             font.pixelSize: parent.width/12.24
             font.family: fontFamily
             font.bold: true
-
+x:parent.width/2
+y:parent.height/2
 
 
            // anchors.margins: 20
-            anchors.top:weathericon1.top
-            anchors.left: weathericon1.left
-            anchors.topMargin: -weathericon.height
-            anchors.leftMargin: -2*weathericon.width
+//            anchors.top:weathericon1.top
+//            anchors.left: weathericon1.left
+//            anchors.topMargin: -weathericon1.height
+//            anchors.leftMargin: -2*weathericon1.width
 
         }
         Image
