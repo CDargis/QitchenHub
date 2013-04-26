@@ -14,6 +14,11 @@ Rectangle {
     border.width: 1
 
     property bool locked: true
+    onLockedChanged: {
+        if(locked)
+            speaker.say("Your home is locked")
+        else speaker.say("Your home is unlocked")
+    }
 
     Rectangle {
         id: titleRect

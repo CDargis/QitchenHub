@@ -8,7 +8,7 @@ AppInterface {
     Component.onCompleted: {
         languageChange(theMainApplication.language)  // Set the language
         security.unLock()
-        speaker.say(qsTr("Home Automation"));
+        speaker.say(qsTr("Home Automation. Lighting."));
     }
 
     onLanguageChange: {
@@ -104,6 +104,10 @@ AppInterface {
             height: parent.height
             anchors.left: menuRect.right
             visible: true
+            onVisibleChanged: {
+                if(visible)
+                    speaker.say("Lighting")
+            }
         }
         Temperature {
             id: temp
@@ -111,6 +115,10 @@ AppInterface {
             height: parent.height
             anchors.left: menuRect.right
             visible: false
+            onVisibleChanged: {
+                if(visible)
+                    speaker.say("Climate Control")
+            }
         }
         Security {
             id: security
@@ -118,6 +126,10 @@ AppInterface {
             height: parent.height
             anchors.left: menuRect.right
             visible: false
+            onVisibleChanged: {
+                if(visible)
+                    speaker.say("Home Security")
+            }
         }
     }
 
