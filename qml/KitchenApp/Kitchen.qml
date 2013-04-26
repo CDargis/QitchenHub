@@ -34,11 +34,13 @@ AppInterface
         }
         var title = jsonObject.matches[cnt].recipeName;
 
-console.log(url)
+
         title = title.toString();
-        console.log(title)
+
+        console.log(appFull.width)
+        console.log(appFull.height)
         var component = Qt.createComponent("FlickItem.qml");
-        component.createObject(wall.contentItem, {"color":"white",
+        component.createObject(wall.contentItem, {"color":"white","mainW":appFull.width,"mainH":appFull.height,
                                    "x":xPos,"y":yPos,"src":imgsrc,"opacity":1,"title":title,"xpos":xPos,"ypos":y,"xframe":xframe,"url":url,"calories":calories,"ingredients":ingredients,"time":time,"rating":rating});
 
 
@@ -106,7 +108,7 @@ function loaded2(jsonObject2,i,sources,jsonObject,url,calories,ingredients,time,
     var a = 0;
 
     var count = 0;
-   var x1 = 80;
+   var x1 = ((80)/(1224))*parent.width;
     if(jsonObject2.nutritionEstimates[0] != undefined)
 
     var recipeid = jsonObject.matches[i].id
@@ -122,8 +124,6 @@ function loaded2(jsonObject2,i,sources,jsonObject,url,calories,ingredients,time,
     ingredients[i] = jsonObject2.ingredientLines[0] + "," + jsonObject2.ingredientLines[1] + "," + jsonObject2.ingredientLines[2] + ","+ jsonObject2.ingredientLines[3] + ","+ jsonObject2.ingredientLines[4] + ","+ jsonObject2.ingredientLines[5] + ","+ jsonObject2.ingredientLines[6] + ","+ jsonObject2.ingredientLines[7]
     time[i] = (jsonObject.matches[i].totalTimeInSeconds)/60;
     rating[i] = Math.floor((Math.random()*5)+1);
-    console.log("ca")
-    console.log(calories[i]);
 
     if (jsonObject2.nutritionEstimates == [])
     {calories[i] = 300;}
@@ -138,45 +138,48 @@ function loaded2(jsonObject2,i,sources,jsonObject,url,calories,ingredients,time,
             if(imgsrc != undefined)
             if(count == 3)
                 {count = 0;
-                x1 = x1 + 290;
+                x1 = x1 + ((290)/(1224))*parent.width;;
                 a = 0;}
-            createSpriteObjects(x1,95 + a,l,imgsrc,jsonObject,jsonObject2,url[l],calories[l],ingredients[l],time[l],rating[l]);
-                a = a + 180;
+            createSpriteObjects(x1,((95)/(1224))*parent.width + a,l,imgsrc,jsonObject,jsonObject2,url[l],calories[l],ingredients[l],time[l],rating[l]);
+                a = a + ((180)/(1224))*parent.width;;
             count++;
          }
     }
 }
 Image
 {
-    anchors.bottom:parent.bottom
+    anchors.top: parent.top
     anchors.right: parent.right
-    anchors.bottomMargin: 20
-    anchors.rightMargin: 180
+    anchors.topMargin: parent.height/10
+    anchors.rightMargin: parent.width/5.7
     source:"images/searchWhite.png"
-    height: 30
-    width:30
+
+
+    height: parent.height/28.05
+    width:parent.width/40.8
 }
 Rectangle
 {
 id:search
 color: "#ffffff"
-width:150
-height:30
+width:parent.width/8.16
+height:parent.height/28.05
 radius:4
-anchors.bottom: parent.bottom
+anchors.top: parent.top
 anchors.right: parent.right
-anchors.bottomMargin: 20
-anchors.rightMargin: 20
-TextInput
+anchors.topMargin: parent.height/10
+anchors.rightMargin: parent.width/20
+VirtualInput
 {
     anchors.fill: search
-text:"Search here.."
-opacity:0.7
-font.pixelSize: 20
+currentText:"Search here.."
 
-    font.italic: true
+
+
+
+
     id:searchText
-   focus:true
+  // focus:true
     Keys.onReturnPressed:
     {console.log(searchText.text)
         launch(searchText.text);
@@ -194,17 +197,22 @@ anchors.top: parent.top
 anchors.topMargin: parent.height*0.1
    // Component.onCompleted: {opacity:1}
     width: parent.width ; height: parent.height*0.9
-    contentWidth: 1350; contentHeight: r1.height
+    contentWidth: appFull.width*1.4
+
     flickableDirection: Flickable.HorizontalFlick
     clip: true
 
 
-Rectangle{
     Rectangle{id: r1
-              x:143
-              y:180
-            width:170
-            height:370
+           anchors.top: parent.top
+           anchors.left: parent.left
+           anchors.topMargin: parent.height/5
+           anchors.leftMargin: parent.width/8
+           width:recipeHome.width/6
+           height:recipeHome.height/1.7
+
+
+
             color:"black"
             Image {
                 anchors.fill: parent
@@ -216,12 +224,13 @@ Rectangle{
             }
             Text{
                 color: "#ffffff"
-                font.pixelSize: 36
+                font.pixelSize: recipeHome.width/34
                 font.family: "Helvetica"
                 font.bold: true
-                text:"Beef"
+                text:qsTr("Beef") + tr.emptyString
+
 anchors.bottom: parent.bottom
-width:170
+width:r1.width
 horizontalAlignment: Text.AlignHCenter
 }
             MouseArea{
@@ -241,10 +250,12 @@ horizontalAlignment: Text.AlignHCenter
     }
 
     Rectangle{id: r2
-              x:343
-              y:180
-              width:170
-              height:370
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height/5
+        anchors.leftMargin: parent.width/3.4
+        width:recipeHome.width/6
+        height:recipeHome.height/1.7
             color:"black"
 
             Image {
@@ -257,12 +268,13 @@ horizontalAlignment: Text.AlignHCenter
             }
             Text{
                 color: "#ffffff"
-                font.pixelSize: 36
+               font.pixelSize: recipeHome.width/34
+               width:r2.width
                 font.family: "Helvetica"
                 font.bold: true
-                text:"Steak"
+                text:qsTr("Steak") + tr.emptyString
 anchors.bottom: parent.bottom
-width:170
+
 horizontalAlignment: Text.AlignHCenter
 }
             MouseArea{
@@ -278,10 +290,13 @@ horizontalAlignment: Text.AlignHCenter
 
     }
     Rectangle{id: r3
-              x:543
-              y:180
-              width:170
-              height:370
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height/5
+        anchors.leftMargin: parent.width/2.16
+        width:recipeHome.width/6
+        height:recipeHome.height/1.7
+
             color:"black"
 
             MouseArea{
@@ -296,12 +311,12 @@ horizontalAlignment: Text.AlignHCenter
             }
             Text{
                 color: "#ffffff"
-                font.pixelSize: 36
+                font.pixelSize: recipeHome.width/34
+                width:r2.width
                 font.family: "Helvetica"
                 font.bold: true
-                text:"Chicken"
+                text:qsTr("Chicken") + tr.emptyString
 anchors.bottom: parent.bottom
-width:170
 horizontalAlignment: Text.AlignHCenter
 }
             onClicked: {
@@ -314,10 +329,12 @@ horizontalAlignment: Text.AlignHCenter
 
     }
     Rectangle{id: r4
-              x:743
-              y:180
-              width:170
-              height:370
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height/5
+        anchors.leftMargin: parent.width/1.59
+        width:recipeHome.width/6
+        height:recipeHome.height/1.7
             color:"black"
             Image {
                 anchors.fill: parent
@@ -329,12 +346,13 @@ horizontalAlignment: Text.AlignHCenter
             }
             Text{
                 color: "#ffffff"
-                font.pixelSize: 36
+                font.pixelSize: recipeHome.width/34
+                width:r2.width
                 font.family: "Helvetica"
                 font.bold: true
-                text:"Vegan"
+                text:qsTr("Vegan") + tr.emptyString
 anchors.bottom: parent.bottom
-width:170
+
 horizontalAlignment: Text.AlignHCenter
 }
             MouseArea{
@@ -349,10 +367,12 @@ horizontalAlignment: Text.AlignHCenter
             }
     }
     Rectangle{id: r5
-              x:943
-              y:180
-              width:170
-              height:370
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height/5
+        anchors.leftMargin: parent.width/1.25
+        width:recipeHome.width/6
+        height:recipeHome.height/1.7
             color:"black"
             Image {
                 anchors.fill: parent
@@ -364,12 +384,13 @@ horizontalAlignment: Text.AlignHCenter
             }
             Text{
                 color: "#ffffff"
-                font.pixelSize: 36
+                font.pixelSize: recipeHome.width/34
+                width:r2.width
                 font.family: "Helvetica"
                 font.bold: true
-                text:"Healthy"
+                text:qsTr("Healthy") + tr.emptyString
 anchors.bottom: parent.bottom
-width:170
+
 horizontalAlignment: Text.AlignHCenter
 }
             MouseArea{
@@ -383,47 +404,47 @@ horizontalAlignment: Text.AlignHCenter
             }
             }
     }
-    Rectangle{id: r6
-              x:1143
-              y:180
-              width:170
-              height:370
-            color:"black"
+//    Rectangle{id: r6
+//        anchors.top: parent.top
+//        anchors.left: parent.left
+//        anchors.topMargin: parent.height/5
+//        anchors.leftMargin: parent.width/1.03
+//        width:recipeHome.width/6
+//        height:recipeHome.height/1.7
+//            color:"black"
 
-            Image {
-                anchors.fill: parent
-                source: "images/Drinks.png"
-            }
-            Image {
-                anchors.fill: parent
-                source: "images/BlackGradient.png"
-            }
-            Text{
-                color: "#ffffff"
-                font.pixelSize: 36
-                font.family: "Helvetica"
-                font.bold: true
-                text:"Drinks"
-anchors.bottom: parent.bottom
-width:170
-horizontalAlignment: Text.AlignHCenter
+//            Image {
+//                anchors.fill: parent
+//                source: "images/Drinks.png"
+//            }
+//            Image {
+//                anchors.fill: parent
+//                source: "images/BlackGradient.png"
+//            }
+//            Text{
+//                color: "#ffffff"
+//                font.pixelSize: 36
+//                font.family: "Helvetica"
+//                font.bold: true
+//                text:"Drinks"
+//anchors.bottom: parent.bottom
+//width:170
+//horizontalAlignment: Text.AlignHCenter
+//}
+//            MouseArea{
+//            anchors.fill: parent
+
+//            onClicked: {
+//                {if(appFull.state == "")
+//                                {appFull.state = "load";
+//                                  }}
+//             launch("drinks");
+//            }
+//            }
+//    }
+
+
 }
-            MouseArea{
-            anchors.fill: parent
-
-            onClicked: {
-                {if(appFull.state == "")
-                                {appFull.state = "load";
-                                  }}
-             launch("drinks");
-            }
-            }
-    }
-
-
-}
-}
-
 
 
 function launch(cat)
@@ -440,7 +461,7 @@ function launch(cat)
     }
 
 
-    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67&q=" + cat  +"&requirePictures=true");
+    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=22759353&_app_key=94454e4573986179b5bc43c1313c1b4f&q=" + cat  +"&requirePictures=true");
 
     //doc.open("GET", "http://api.yummly.com/v1/api/recipe/recipe-id")
     doc.send();
@@ -453,7 +474,7 @@ function launch2(rid,i,sources,jsonObject,rname,url,calories,ingredients,time,ra
 
     var doc2 = new XMLHttpRequest();
 
-    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67");
+    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=22759353&_app_key=94454e4573986179b5bc43c1313c1b4f");
     doc2.send();
     doc2.onreadystatechange = function() {
         if (doc2.readyState == XMLHttpRequest.DONE) {
