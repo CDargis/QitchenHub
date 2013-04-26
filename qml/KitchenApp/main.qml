@@ -47,6 +47,37 @@ Rectangle {
               appgrid.activeList[index].changeUnits(currentUnits)
     }
 
+    Timer {
+        id: inactivityTimer
+        running: false
+        repeat: false
+        interval: 10000  // 10 seconds
+        onTriggered: idleScreen.visible = true
+    }
+
+    Timer {
+        id: inactivityCheck
+        running: true
+        repeat: true
+        interval: 100
+        property int lastX
+        property int lastY
+        onTriggered: {
+            var currentX = MouseDetector.getMouseCoords().x
+            var currentY = MouseDetector.getMouseCoords().y
+            if(lastX === currentX || lastY === currentY) {
+                if(inactivityTimer.running !== true) {
+                    inactivityTimer.start()
+                }
+            }
+            else {
+                inactivityTimer.stop()
+            }
+            lastX = currentX
+            lastY = currentY
+        }
+    }
+
     LocalSorageProxy {
         id: lsproxy
     }
@@ -212,9 +243,9 @@ Rectangle {
     }
 
     IdleScreen {
+        id: idleScreen
         visible: false
     }
-
 
     //************* launch an app ******************/
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)

@@ -15,7 +15,7 @@ WidgetInterface {
 
 
     width: parent.width
-    height: 250
+    height: 300
 
     Rectangle {
         radius: 10
@@ -97,8 +97,8 @@ WidgetInterface {
         Rectangle {
             id: securityStatusRect
             width: parent.width * .65; height: parent.height * .2
-            anchors.top: bottomSep.bottom
-            anchors.topMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             radius: 10
             color: "transparent"
