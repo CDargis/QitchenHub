@@ -11,21 +11,22 @@ Rectangle {
         id: refreshTimer
         running: true
         repeat: true
-        interval: 1000
+        interval: 500
         onTriggered: {
             var date = new Date();
             dateText.text = (date.getMonth() + 1) + " / "
                     + (date.getDate())  + " / "
                     + date.getFullYear()
-            timeText.text = date.getHours() + ":"
-                    + date.getMinutes() + ":"
-                    + date.getSeconds();
+            var hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours()
+            var mins = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes()
+            var secs = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds()
+            timeText.text = hours + ":" + mins + ":" + secs
         }
     }
     Text {
         id: dateText
         anchors.bottom: center.top
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: 40
         anchors.horizontalCenter: parent.horizontalCenter
         font.family: fontFamily
         font.pixelSize: 100
@@ -39,10 +40,10 @@ Rectangle {
     Text {
         id: timeText
         anchors.top: center.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: 40
         anchors.horizontalCenter: parent.horizontalCenter
         font.family: fontFamily
-        font.pixelSize: 75
+        font.pixelSize: 80
     }
     MouseArea {
         anchors.fill: parent

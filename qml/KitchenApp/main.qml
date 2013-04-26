@@ -43,15 +43,6 @@ Rectangle {
               appgrid.activeList[index].changeUnits(currentUnits)
     }
 
-    MouseArea {
-        id: mouseDetection
-        anchors.fill: parent
-        preventStealing: true
-        onClicked: {
-            console.log("click")
-        }
-    }
-
     Timer {
         id: inactivityTimer
         running: false
@@ -59,7 +50,6 @@ Rectangle {
         interval: 10000  // 10 seconds
         onTriggered: idleScreen.visible = true
     }
-
 
     Timer {
         id: inactivityCheck
@@ -69,8 +59,8 @@ Rectangle {
         property int lastX
         property int lastY
         onTriggered: {
-            var currentX = mouseDetection.mouseX
-            var currentY = mouseDetection.mouseY
+            var currentX = MouseDetector.getMouseCoords().x
+            var currentY = MouseDetector.getMouseCoords().y
             if(lastX === currentX || lastY === currentY) {
                 if(inactivityTimer.running !== true) {
                     inactivityTimer.start()
@@ -78,7 +68,6 @@ Rectangle {
             }
             else {
                 inactivityTimer.stop()
-                console.log("stopping timer")
             }
             lastX = currentX
             lastY = currentY
@@ -251,9 +240,8 @@ Rectangle {
 
     IdleScreen {
         id: idleScreen
-        visible: true
+        visible: false
     }
-
 
     //************* launch an app ******************/
     // qmlComp - name (string) of local qml component to launch (i.e. myapp.qml)
