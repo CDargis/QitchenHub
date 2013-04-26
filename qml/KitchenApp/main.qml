@@ -24,6 +24,10 @@ Rectangle {
     property Item speaker: statusBar.speakerRef()
     property bool playMusicOnStartup: true
     property bool musicRecommendations: true
+    property bool voiceOn: true
+    onVoiceOnChanged: {
+        console.log("voice on? " + voiceOn)
+    }
 
     onLanguageChanged: {
         // Call the C++ handler to adjust the language
