@@ -12,7 +12,8 @@ function set(g)
 {
     appFull.widText = g
 }
-
+property string mainW: ""
+property string mainH: ""
 property string title: ""
 property string xpos: ""
 property string ypos: ""
@@ -28,13 +29,17 @@ property string test: ""
 
 Flipable {
     id: flipable
-width:240
-height:240
+width:mainW/5.1
+height:mainW/5.1
+Component.onCompleted: {
+console.log(parent.width)
+console.log(parent.height)}
     property bool flipped: false
 
     front: Rectangle { id:frontRec
-        width:240
-        height:160
+        width:mainW/5.1
+        height:mainH/5.259
+
         Image{
 
             id:recipeimages
@@ -93,12 +98,12 @@ set(ingredients)
             id: title1
             anchors.bottom: recipeimages.bottom
             anchors.left: recipeimages.left
-            anchors.leftMargin: 5
+            anchors.leftMargin: ((5)/(1224))*mainW
             anchors.horizontalCenter: recipeimages.horizontalCenter
-            anchors.bottomMargin: 5
+            anchors.bottomMargin: ((5)/(1224))*mainW
             color: "white"
-            font.pixelSize: 15
-            width:240
+            font.pixelSize: ((15)/(1224))*mainW
+            width:mainW/5.1
             wrapMode: Text.Wrap
             maximumLineCount: 2
             font.bold: true
@@ -111,13 +116,13 @@ set(ingredients)
             parent:frontRec
             anchors.top : frontRec.top
             anchors.right: frontRec.right
-            width:30
-            height:15
+            width:mainW/40.8
+            height:mainW/56.1
             border.color: "white"
             opacity: 0.6
-            radius:3
-            anchors.rightMargin: 6
-            anchors.topMargin: 6
+radius:5
+            anchors.rightMargin: ((6)/(1224))*mainW
+            anchors.topMargin: ((6)/(1224))*mainW
 
 
 
@@ -132,14 +137,14 @@ set(ingredients)
             text:"info"
             font.letterSpacing: 1
             font.family: "Helvetica"
-            font.pixelSize: 10
+            font.pixelSize: mainW/122.4
             color:"black"
             font.bold: true
 
         }
     }
     back: Rectangle {id:backRec
-        width:240; height:160;
+        width:mainW/5.1; height:mainH/5.259;
         gradient: Gradient {
             GradientStop {id:g1
                 position: 0.0; color: "#7c7c85" }
@@ -148,8 +153,8 @@ set(ingredients)
                 position: 1.0; color: "#7f7878" }
         }
         Rectangle{id:ing
-            width:240
-        height:110
+            width:mainW/5.1
+        height:mainH/7.65
        gradient: Gradient {
            GradientStop {
                position: 0.0; color: "#7c7c85" }
@@ -162,21 +167,21 @@ set(ingredients)
 
             text: "Ingredients"
             anchors.top: parent.top
-            anchors.topMargin: 5
+            anchors.topMargin: mainW/244.8
             font.bold: true
             font.family: "Helvetica"
         horizontalAlignment: Text.AlignHCenter
             color:"white"
-            x:80
+            x:mainW/15.3
         }
 
 
         Text {
         parent:ing
         anchors.top: parent.top
-      anchors.topMargin: 24
-        width:230
-         font.pixelSize: 15
+        anchors.topMargin: ((24)/(1224))*mainW
+        width:((230)/(1224))*mainW
+         font.pixelSize: ((15)/(1399))*mainW
          font.family: "Helvetica"
          color:"white"
          wrapMode: Text.Wrap
@@ -188,17 +193,17 @@ maximumLineCount: 5
         Rectangle
         {
             anchors.left: parent.left
-            width:240
+            width:((240)/(1224))*mainW
             height:1
-            y:109
+            y:((109)/(1224))*mainW
         }
         }
 
 
         Rectangle{
             anchors.bottom: parent.bottom
-            width:80
-        height:50
+            width:((80)/(1224))*mainW
+        height:((50)/(1224))*mainW
        gradient: Gradient {
            GradientStop {
                position: 0.0; color: "#7c7c85" }
@@ -210,7 +215,7 @@ maximumLineCount: 5
        Text {
 
             text: "Calories"
-            width:80
+            width:((80)/(1224))*mainW
             anchors.top: parent.top
             anchors.topMargin: 4
             font.bold: true
@@ -222,18 +227,18 @@ maximumLineCount: 5
          anchors.bottom: parent.bottom
          anchors.bottomMargin: 9
          text:calories
-         font.pixelSize: 15
+         font.pixelSize: ((15)/(1224))*mainW
          font.family: "Helvetica"
          color:"white"
-       width: 80
+       width: ((80)/(1224))*mainW
        horizontalAlignment: Text.AlignHCenter
 
         }
         }
 
-        Rectangle{width:80
-        height:50
-        x:80
+        Rectangle{width:((80)/(1224))*mainW
+        height:((50)/(1224))*mainW
+        x:((80)/(1224))*mainW
         anchors.bottom: parent.bottom
          gradient: Gradient {
              GradientStop {
@@ -250,27 +255,27 @@ maximumLineCount: 5
             font.bold: true
             font.family: "Helvetica"
             color:"white"
-           width:80
+            width:((80)/(1224))*mainW
             anchors.top: parent.top
-            anchors.topMargin: 4
+            anchors.topMargin: ((4)/(1224))*mainW
         }
         Text {
          anchors.bottom: parent.bottom
-         anchors.bottomMargin: 9
+         anchors.bottomMargin: ((9)/(1224))*mainW
          text:time + " mi"
-         width:80
+         width:((80)/(1224))*mainW
          horizontalAlignment: Text.AlignHCenter
 
-         font.pixelSize: 15
+         font.pixelSize: ((15)/(1224))*mainW
          font.family: "Helvetica"
          color:"white"
 
 
         }
         }
-        Rectangle{width:80
-        height:50
-        x:160
+        Rectangle{width:((80)/(1224))*mainW
+        height:((50)/(1224))*mainW
+        x:((160)/(1224))*mainW
         anchors.bottom: parent.bottom
          gradient: Gradient {
              GradientStop {
@@ -287,18 +292,18 @@ maximumLineCount: 5
             font.bold: true
             font.family: "Helvetica"
             color:"white"
-            x:18
+            x:((18)/(1224))*mainW
             anchors.top: parent.top
-            anchors.topMargin: 4
+            anchors.topMargin: ((4)/(1224))*mainW
         }
         Text {
          anchors.bottom: parent.bottom
-         anchors.bottomMargin: 9
+         anchors.bottomMargin: ((9)/(1224))*mainW
          text:rating+".0"
-         width:80
+         width:((80)/(1224))*mainW
          horizontalAlignment: Text.AlignHCenter
 
-         font.pixelSize: 15
+         font.pixelSize: ((15)/(1224))*mainW
          font.family: "Helvetica"
          color:"white"
 
@@ -311,11 +316,11 @@ maximumLineCount: 5
         Rectangle{
             id:backButton
             parent:ing
-            width:30
-            height:15
+            width:((30)/(1224))*mainW
+            height:((15)/(1224))*mainW
 
-            x:10
-            y:5
+            x:((10)/(1224))*mainW
+            y:((5)/(1224))*mainW
             opacity:0.2
             radius:3
         }
@@ -327,13 +332,13 @@ maximumLineCount: 5
 
             anchors.centerIn: backButton
             text: "Back"
-            font.letterSpacing: 1
+            font.letterSpacing: ((1)/(1224))*mainW
             font.family: "Helvetica"
-            font.pixelSize: 10
+            font.pixelSize: ((10)/(1224))*mainW
             color:"white"
             font.bold: true
-            y:7
-            x:10
+            y:((7)/(1224))*mainW
+            x:((10)/(1224))*mainW
         }
          }
 
