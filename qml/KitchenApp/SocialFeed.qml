@@ -45,9 +45,7 @@ AppInterface{
             height: parent.height*.95
             smooth: false
             visible: false
-            Component.onCompleted: {
-                //hideBackButton();
-            }
+            onVisibleChanged: hideBackButton()
         }
     }
     function count(){
