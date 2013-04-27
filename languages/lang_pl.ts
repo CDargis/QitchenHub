@@ -47,7 +47,7 @@
     <name>EventMenu</name>
     <message>
         <source>Events for</source>
-        <translation>Wpisy na</translation>
+        <translation>Wpisy dla</translation>
     </message>
     <message>
         <source>New event</source>
@@ -120,6 +120,36 @@
     <message>
         <source>Unlocked</source>
         <translation>Otwarte</translation>
+    </message>
+</context>
+<context>
+    <name>ImageViewer</name>
+    <message>
+        <source>Gallery</source>
+        <translation>Galeria</translation>
+    </message>
+</context>
+<context>
+    <name>Kitchen</name>
+    <message>
+        <source>Beef</source>
+        <translation>Wołowina</translation>
+    </message>
+    <message>
+        <source>Steak</source>
+        <translation>Stek</translation>
+    </message>
+    <message>
+        <source>Chicken</source>
+        <translation>Kurczak</translation>
+    </message>
+    <message>
+        <source>Vegan</source>
+        <translation>Weganin</translation>
+    </message>
+    <message>
+        <source>Healthy</source>
+        <translation>Zdrowe</translation>
     </message>
 </context>
 <context>
@@ -391,6 +421,10 @@
         <source>Sign out</source>
         <translation>Wyloguj</translation>
     </message>
+    <message>
+        <source>Sign in</source>
+        <translation>Zaloguj się</translation>
+    </message>
 </context>
 <context>
     <name>StatusBar</name>
@@ -453,6 +487,10 @@
         <source>Twitter</source>
         <translation>Twitter</translation>
     </message>
+    <message>
+        <source>Timeline</source>
+        <translation>Wpisy</translation>
+    </message>
 </context>
 <context>
     <name>TwitterContent</name>
@@ -473,12 +511,15 @@
     </message>
     <message>
         <source>Sign in</source>
-        <translation>Zaloguj</translation>
+        <translation>Zaloguj się</translation>
     </message>
     <message>
         <source>Auto Refresh:</source>
-        <translation>
-Auto-odświeżanie:</translation>
+        <translation>Auto-odświeżanie:</translation>
+    </message>
+    <message>
+        <source>Sign out</source>
+        <translation>Wyloguj</translation>
     </message>
 </context>
 <context>
@@ -509,6 +550,14 @@ Auto-odświeżanie:</translation>
     <message>
         <source>Name</source>
         <translation>Imię</translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation>Miejsce</translation>
+    </message>
+    <message>
+        <source>Voice Enabled</source>
+        <translation>Głos</translation>
     </message>
 </context>
 <context>
@@ -561,6 +610,53 @@ Drogowe</translation>
     <message>
         <source>Picture Viewer</source>
         <translation>Galeria</translation>
+    </message>
+</context>
+<context>
+    <name>weather</name>
+    <message>
+        <source>High/Low : </source>
+        <translation>Max/Min:</translation>
+    </message>
+    <message>
+        <source>&lt;&lt;Back</source>
+        <translation>&lt;&lt;Wstecz</translation>
+    </message>
+    <message>
+        <source>Room Temp.</source>
+        <translation>Temp. Wewnątrz</translation>
+    </message>
+    <message>
+        <source>Room Humidity</source>
+        <translation>Wilg. Wewnątrz</translation>
+    </message>
+    <message>
+        <source>Cloud Cover</source>
+        <translation>Zachmurzenie</translation>
+    </message>
+    <message>
+        <source>Wind Speed</source>
+        <translation>Prędkość Wiatru</translation>
+    </message>
+    <message>
+        <source>Visibility</source>
+        <translation>Widoczność</translation>
+    </message>
+    <message>
+        <source>Obs. Time</source>
+        <translation>Czas Pomiaru</translation>
+    </message>
+    <message>
+        <source>Atm. Pressure</source>
+        <translation>Ciśnienie</translation>
+    </message>
+    <message>
+        <source>Humidity</source>
+        <translation>Wilgotność</translation>
+    </message>
+    <message>
+        <source>Switch Location &gt;&gt;</source>
+        <translation>Zmień Lokację &gt;&gt;</translation>
     </message>
 </context>
 </TS>

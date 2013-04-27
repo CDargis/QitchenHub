@@ -172,7 +172,7 @@ anchors.rightMargin: parent.width/20
 VirtualInput
 {
     anchors.fill: search
-currentText:"Search here.."
+    currentText: qsTr("Search here..") + tr.emptyString
 
 
 

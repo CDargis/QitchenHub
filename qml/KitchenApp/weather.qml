@@ -23,6 +23,8 @@ AppInterface{
     property string maxF1;
     property string maxF2;
 
+    property var cache
+
     onChangeUnits:
     {var temp,temp1;
         if(units === "us")
@@ -61,6 +63,11 @@ AppInterface{
             roomtempval1.text = "26°C"
         }
 
+    }
+
+    onLanguageChange: {
+        changeUnits(theMainApplication.currentUnits);
+        showprecip(qsTr("Precipitation : ") + tr.emptyString + cache.data.current_condition[0].precipMM + " mm");
     }
 
 
@@ -201,6 +208,8 @@ AppInterface{
 
     function loaded(jsonObject)
     {
+        cache = jsonObject;
+
         showHumidity(jsonObject.data.current_condition[0].humidity + "%");
         showTime();
         showprecip("Precipitation : " + jsonObject.data.current_condition[0].precipMM + " mm");
@@ -319,7 +328,7 @@ AppInterface{
         showDetails2(jsonObject.data.current_condition[0].cloudcover);
         if(theMainApplication.currentUnits == "us")
         {
-        showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
+            showDetails(qsTr("High/Low : ") + tr.emptyString + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
             maxF2 =  jsonObject.data.weather[0].tempMaxF;
             lowF2 = jsonObject.data.weather[0].tempMinF;
             maxC2 = jsonObject.data.weather[0].tempMaxC;
@@ -327,7 +336,7 @@ AppInterface{
         }
 
         else
-        {showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
+        {showDetails(qsTr("High/Low : ") + tr.emptyString + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
             maxF2 =  jsonObject.data.weather[0].tempMaxF;
             lowF2 = jsonObject.data.weather[0].tempMinF;
             maxC2 = jsonObject.data.weather[0].tempMaxC;
@@ -1476,14 +1485,14 @@ console.log(wc);
 iconURL = weathericon.source;
             if(theMainApplication.currentUnits == "us")
             {
-            showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
+            showDetails(qsTr("High/Low : ") + tr.emptyString + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
                 maxF1 =  jsonObject.data.weather[0].tempMaxF;
                 lowF1 = jsonObject.data.weather[0].tempMinF;
                 maxC1 =  jsonObject.data.weather[0].tempMaxC;
                 lowC1 = jsonObject.data.weather[0].tempMinC;
             }
             else
-            {showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
+            {showDetails(qsTr("High/Low : ") + tr.emptyString + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
                 maxF1 =  jsonObject.data.weather[0].tempMaxF;
                 lowF1 = jsonObject.data.weather[0].tempMinF;
                 maxC1 =  jsonObject.data.weather[0].tempMaxC;
@@ -3248,6 +3257,7 @@ opacity: 0
 
 
     }
+
 
 }
 

@@ -22,7 +22,7 @@ WidgetInterface
         id:ingtitle
         color: "#ffffff"
 
-        text: qsTr("Ingredients")+tr.emptyString
+        text: qsTr("Ingredients") + tr.emptyString
       // text:fname
         font.bold: true
         anchors.top: widget.top
