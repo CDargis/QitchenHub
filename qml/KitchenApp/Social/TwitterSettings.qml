@@ -8,6 +8,7 @@ Rectangle{
     anchors.fill: parent
     border.color: "#8b988b"
     property string user: "Peters1Dan"
+    property string sign: qsTr("Sign out")
     ListView {
         id: userInfo
         width: parent.width
@@ -98,7 +99,7 @@ Rectangle{
             anchors.centerIn: parent
             color: "white"
             font.family: "Sans"
-            font.pixelSize: parent.height*.55
+            font.pixelSize: parent.height*.5
             text: qsTr("Sign in") + tr.emptyString
         }
         MouseArea{
@@ -152,9 +153,11 @@ Rectangle{
         if (addText.text == "Sign out"){
             root.user = ""
             userInput.currentText = ""
+            speaker.say("Signing out");
         }
         else{
             root.user = userInput.currentText
+            speaker.say("Signing in");
         }
     }
 
@@ -165,7 +168,7 @@ Rectangle{
             name: "expanded"
             PropertyChanges {
                 target: addText
-                text: qsTr("Sign out")
+                text: sign
             }
             when: root.user != ""
         }

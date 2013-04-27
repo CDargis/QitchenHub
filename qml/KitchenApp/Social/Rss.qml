@@ -21,8 +21,8 @@ Rectangle{
             color: "black"
             Image{
                 id: rssImage
-                anchors.left: parent.left
-                anchors.leftMargin: parent.width*.005
+                anchors.right: parent.right
+                anchors.rightMargin: parent.width*.005
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width*.20
                 height: parent.width*.20
@@ -31,12 +31,11 @@ Rectangle{
             }
             Text{
                 id:rssText
-                anchors.left: rssImage.right
-                anchors.leftMargin: parent.width*.05
+                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: rssImage.bottom
                 font.bold: true
                 font.family: "DejaVu Serif"
-                font.pointSize: 25;
+                font.pointSize: 21;
                 text: qsTr("RSS") + tr.emptyString
                 color: "#36C60F"
             }

@@ -46,7 +46,7 @@ AppInterface{
             smooth: false
             visible: false
             Component.onCompleted: {
-                hideBackButton();
+                //hideBackButton();
             }
         }
     }

@@ -69,7 +69,7 @@ Item {
         }
     }
     Component.onCompleted: {
-        speaker.say("Full Image");
+        speaker.say("Image full screen");
     }
 }
 

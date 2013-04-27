@@ -9,7 +9,8 @@ AppInterface{
         id: iContainer
         height: parent.height*.1
         width: parent.width
-        border.color: "#36C60F"
+        color: "transparent"
+        border.color: "#8b988b"
         Text{
             id: imageGallery
             anchors.centerIn: parent

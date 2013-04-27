@@ -79,6 +79,7 @@ Flickable {
         // if flickable move more than 100px to the right
         if (root.contentX < -100 && root.widget == null) {
             callWidget(widgetSrc, root);
+            speaker.say("App Docked");
             root.state = "HIDDEN";
             root.interactive = false;
         }

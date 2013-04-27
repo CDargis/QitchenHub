@@ -110,7 +110,7 @@ Rectangle {
                 pointSize: 18
                 buttonText: qsTr("Home Automation") + tr.emptyString
                 // make sure you put the name of your qml as an argument
-                onButtonClick: launch("HomeAutomation.qml",0)
+                onButtonClick: {launch("HomeAutomation.qml",0);speaker.say("Home Automation")}
             }
 
             Button {
@@ -123,7 +123,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("Organizer.qml",1)
+                    onClicked: {launch("Organizer.qml",1);speaker.say("Calendar")}
                 }
             }
             Button {
@@ -136,7 +136,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("SocialFeed.qml",2)
+                    onClicked: {launch("SocialFeed.qml",2);speaker.say("Social App")}
                 }
             }
             Button {
@@ -149,7 +149,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("MusicPlayer.qml",3)
+                    onClicked: {launch("MusicPlayer.qml",3); speaker.say("Music Player")}
                 }
             }
             Button {
@@ -162,7 +162,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("weather.qml",4)
+                    onClicked: {launch("weather.qml",4);speaker.say("Weather App")}
                 }
             }
             Button {
@@ -188,7 +188,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("Traffic.qml",6)
+                    onClicked: {launch("Traffic.qml",6);speaker.say("Traffic")}
                 }
             }
             Button {
@@ -201,7 +201,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: launch("ImageViewer.qml",7)
+                    onClicked: {launch("ImageViewer.qml",7);speaker.say("Picture viewer")}
                 }
             }
         }
