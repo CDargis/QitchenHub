@@ -4,6 +4,7 @@ import ".."
 WidgetInterface {
     id: root
     height: 200
+    property string sign: qsTr("Sign out") + tr.emptyString
     Rectangle {
         radius: 5
         anchors.fill: parent
@@ -122,7 +123,7 @@ WidgetInterface {
             app.twUser()
         }
         else if(txt.text == "Sign in"){
-            txt.text = qsTr("Sign out")
+            txt.text = sign
             app.twUser2();
         }
     }
@@ -131,7 +132,7 @@ WidgetInterface {
             txt.text = qsTr("Sign in")
         }
         else if(txt.text == "Sign in"){
-            txt.text = qsTr("Sign out")
+            txt.text = sign
         }
     }
 }

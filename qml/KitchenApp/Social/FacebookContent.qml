@@ -428,7 +428,7 @@ Flickable {
             color: "white"
             border.color: "#8b988b"
             width: parent.width
-            height: childrenRect.height + parent.width*.02
+            height: childrenRect.height + width*.02
             Image{
                 id: icon8
                 anchors.left: parent.left

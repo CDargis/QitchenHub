@@ -5,7 +5,7 @@ import ".."
 
 WidgetInterface {
     id: root
-    height: 200
+    height: 150
     property string source2
     Rectangle {
         id: image
@@ -20,11 +20,11 @@ WidgetInterface {
         Image{
             smooth: true
             source: source2
-            width: parent.width*.9
-            height: parent.width*.9
+            height: root.height*.76
+            width: height*1.6
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: parent.width*.02
+            anchors.topMargin: parent.width*.009
         }
     }
     Image{

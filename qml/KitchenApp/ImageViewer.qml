@@ -16,7 +16,7 @@ AppInterface{
             anchors.centerIn: parent
             color: "#36C60F"
             font.pixelSize: parent.height*.5
-            text: qsTr("Gallery") + tr.emptyString
+            text: qsTr("Image Gallery") + tr.emptyString
         }
     }
     Flipable{
