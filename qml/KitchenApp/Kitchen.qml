@@ -182,7 +182,7 @@ currentText:"Search here.."
   // focus:true
     Keys.onReturnPressed:
     {console.log(searchText.text)
-        launch(searchText.text);
+        launch(searchText.currentText);
         if(appFull.state == "")
                                         {appFull.state = "load";
                                           }
@@ -194,9 +194,9 @@ Flickable {
 opacity:1
 
 anchors.top: parent.top
-anchors.topMargin: parent.height*0.1
+anchors.topMargin: parent.height*0.15
    // Component.onCompleted: {opacity:1}
-    width: parent.width ; height: parent.height*0.9
+    width: parent.width ; height: parent.height*0.85
     contentWidth: appFull.width*1.4
 
     flickableDirection: Flickable.HorizontalFlick
@@ -461,7 +461,7 @@ function launch(cat)
     }
 
 
-    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=22759353&_app_key=94454e4573986179b5bc43c1313c1b4f&q=" + cat  +"&requirePictures=true");
+    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf&q=" + cat  +"&requirePictures=true");
 
     //doc.open("GET", "http://api.yummly.com/v1/api/recipe/recipe-id")
     doc.send();
@@ -474,7 +474,7 @@ function launch2(rid,i,sources,jsonObject,rname,url,calories,ingredients,time,ra
 
     var doc2 = new XMLHttpRequest();
 
-    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=22759353&_app_key=94454e4573986179b5bc43c1313c1b4f");
+    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf");
     doc2.send();
     doc2.onreadystatechange = function() {
         if (doc2.readyState == XMLHttpRequest.DONE) {

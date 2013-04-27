@@ -3,6 +3,7 @@ import QtQuick 2.0
 WidgetInterface
 {property string fname: app.widText
     height:200
+    id:widget
     Rectangle
 
     {
@@ -24,9 +25,9 @@ WidgetInterface
         text: qsTr("Ingredients")+tr.emptyString
       // text:fname
         font.bold: true
-        anchors.top: parent.top
-      anchors.left: parent.left
-      anchors.leftMargin: parent.width/3.2
+        anchors.top: widget.top
+      anchors.left: widget.left
+      anchors.leftMargin: widget.width/3.2
 
         font.pointSize: 10
         font.family: "Helvetica"
@@ -44,8 +45,8 @@ WidgetInterface
     Text {
         id:inglist
         color: "#ffffff"
-        width:192
-
+        width:widget.width
+height:widget.height -5
        text:fname
         horizontalAlignment: Text.AlignHCenter
 

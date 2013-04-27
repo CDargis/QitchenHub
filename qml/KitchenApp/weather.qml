@@ -7,9 +7,62 @@ AppInterface{
     property string fontFamily:"Helvetica"
     property int bottommar: -7
     property int yValue: 365
-    property int currentTemp;
+    property string currentTemp;
+    property string currentTempF1;
+    property string currentTempF2;
+    property string currentTempC1;
+    property string currentTempC2;
     property string iconURL;
     property string stateCurrent;
+    property string lowC1;
+    property string lowC2;
+    property string maxC1;
+    property string maxC2;
+    property string lowF1;
+    property string lowF2;
+    property string maxF1;
+    property string maxF2;
+
+    onChangeUnits:
+    {var temp,temp1;
+        if(units === "us")
+        { temp = (9/5)*(parseInt(currentTempC1)) + 32
+            log.text = "\n" + Math.round(temp) + "°F"
+            currentTempF1 = log.text
+            temp1 = (9/5)*(parseInt(currentTempC2)) + 32
+            log1.text = "\n" + Math.round(temp1) + "°F"
+            currentTempF2 = log1.text
+        }
+        else if(units === "eu")
+        {temp = Math.round(((5/9)*(parseInt(currentTempF1) - 32)))
+            log.text = "\n" + temp + "°C"
+            currentTempC1 = log.text
+            temp1 = Math.round(((5/9)*(parseInt(currentTempF2) - 32)))
+            log1.text = "\n" +temp1 + "°C"
+            currentTempC2 = log1.text
+        }
+        if(units == "us")
+        {
+            detail1.text ="\n" + qsTr("High/Low : " ) + tr.emptyString + maxF2 + "/"+lowF2+"°F";
+            detail.text = "\n" +qsTr("High/Low : ") + tr.emptyString + maxF1 + "/"+lowF1+"°F";
+       }
+        else if(units === "eu")
+        {detail1.text = "\n" +qsTr("High/Low : ") + tr.emptyString + maxC2 + "/" + lowC2 +"°C";
+            detail.text ="\n" + qsTr("High/Low : ") + tr.emptyString + maxC1 + "/" + lowC1 +"°C";
+        }
+
+        if(units == "us")
+        {roomtempval.text = "78°F"
+        roomtempval1.text = "78°F"
+        }
+
+        else if(units == "eu")
+        {roomtempval.text  = "26°C"
+            roomtempval1.text = "26°C"
+        }
+
+    }
+
 
     function showRequestInfo(text) {
 
@@ -18,12 +71,16 @@ AppInterface{
     function showDegree(text) {//Display temp
         if(theMainApplication.currentUnits == "us")
 
-       { log1.text = log1.text + "\n" + text + "°" + "F"
-        currentTemp = text}
+       { log1.text = "\n" + text + "°" + "F"
+        currentTempF1 = text
+            currentTemp = text
+      }
         else if(theMainApplication.currentUnits == "eu")
 
 {log1.text = log1.text + "\n" + text + "°" + "C"
-        currentTemp = text}
+        currentTempC1 = text
+            currentTemp = text
+        }
 
     }
     function showDegreeC(text) {//Display temp in C
@@ -34,7 +91,7 @@ AppInterface{
     }
     function showDetails(text) {//Display hi/low temp
 
-        detail1.text = detail1.text + "\n" + text
+        detail1.text =  "\n" + text
 
 
     }
@@ -263,9 +320,18 @@ AppInterface{
         if(theMainApplication.currentUnits == "us")
         {
         showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
-       }
+            maxF2 =  jsonObject.data.weather[0].tempMaxF;
+            lowF2 = jsonObject.data.weather[0].tempMinF;
+            maxC2 = jsonObject.data.weather[0].tempMaxC;
+                lowC2 = jsonObject.data.weather[0].tempMinC
+        }
+
         else
         {showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
+            maxF2 =  jsonObject.data.weather[0].tempMaxF;
+            lowF2 = jsonObject.data.weather[0].tempMinF;
+            maxC2 = jsonObject.data.weather[0].tempMaxC;
+                lowC2 = jsonObject.data.weather[0].tempMinC
         }
             showDetailsfr("Haut/Bas : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
         showDetailsfrC("Haut/Bas : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
@@ -311,15 +377,18 @@ AppInterface{
             font.pixelSize: parent.width/12.24
             font.family: fontFamily
             font.bold: true
-x:parent.width/2
-y:parent.height/2
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.topMargin: parent.height/3.3
+              anchors.leftMargin: parent.width/5
+
 
 
            // anchors.margins: 20
-//            anchors.top:weathericon1.top
-//            anchors.left: weathericon1.left
-//            anchors.topMargin: -weathericon1.height
-//            anchors.leftMargin: -2*weathericon1.width
+
+//            anchors.left: image21.left
+
+//            anchors.leftMargin: parent.width/5
 
         }
         Image
@@ -354,10 +423,10 @@ y:parent.height/2
             font.family: fontFamily
             font.bold: true
             text:city.currentText
-            anchors.top:weathericon1.top
-            anchors.left: weathericon1.left
-            anchors.leftMargin: 1.6*weathericon1.width
-            anchors.topMargin: weathericon1.height/2
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.62
+           anchors.topMargin: parent.height/2.0
         }
         Text{//preciptation
             id: detail41
@@ -367,10 +436,10 @@ y:parent.height/2
             font.family: fontFamily
             font.bold: true
 
-            anchors.top:weathericon1.top
-            anchors.left: weathericon1.left
-            anchors.leftMargin: 1.6*weathericon1.width
-           anchors.topMargin: weathericon1.height/1.8
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.62
+           anchors.topMargin: parent.height/1.95
 
 
 
@@ -397,10 +466,11 @@ y:parent.height/2
 
         Image{ id:precicon1
             source:"images/weathericons/12.png"
-            anchors.top:weathericon1.top
-            anchors.left: weathericon1.left
-            anchors.leftMargin: 1.4*weathericon1.width
-           anchors.topMargin: weathericon1.height/1.3
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.69
+
+           anchors.topMargin: parent.height/1.85
 
            width:parent.width/44
            height:parent.width/44
@@ -408,10 +478,11 @@ y:parent.height/2
         }
         Image{ id:locicon1
             source:"images/lunapic_136037864284841_2.png"
-            anchors.top:weathericon1.top
-            anchors.left: weathericon1.left
-            anchors.leftMargin:1.37*weathericon1.width
-            anchors.topMargin: weathericon1.height/2
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.7
+
+           anchors.topMargin: parent.height/2
             width:parent.width/44
             height:parent.width/44
 
@@ -968,10 +1039,10 @@ anchors.margins: 20
             font.family: fontFamily
             font.bold: true
 
-            anchors.top:weathericon1.top
-            anchors.left: weathericon1.left
-            anchors.leftMargin:1.6*weathericon1.width
-            anchors.topMargin: weathericon1.height/15
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.62
+           anchors.topMargin: parent.height/2.3
 
         }
         Text {//hi lo temp
@@ -1063,10 +1134,11 @@ anchors.margins: 20
         {
             id:tempicon1
             source:"images/thermometer.png"
-            anchors.top:weathericon1.top
-            anchors.left: weathericon1.left
-            anchors.leftMargin:1.37*weathericon1.width
-            anchors.topMargin: weathericon1.height/4.4
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.71
+
+           anchors.topMargin: parent.height/2.17
             width:parent.width/44
             height:parent.width/44
 
@@ -1076,11 +1148,11 @@ anchors.margins: 20
 
 
 
-        Text {
-            id: city1
-            text: "Milwaukee,WI"
-            visible:false
-        }
+//        Text {
+//            id: city1
+//            text: "Milwaukee,WI"
+//            visible:false
+//        }
         Text {
             text:"Enter a city:"
             font.family: "Helvetica"
@@ -1097,7 +1169,7 @@ anchors.margins: 20
             parent: settingsbox
             x:parent.width/1.6
             y:citylabel.y
-            onClicked: {var a = city.text
+            onClicked: {var a = city.currentText
 
                 log1.text = ""
                 detail1.text = ""
@@ -1131,7 +1203,8 @@ anchors.margins: 20
                     }
                 }
                 // Replace YOURPRIVATEKEY by your key from free.worldweatheronline.com
-                doc.open("GET", "http://free.worldweatheronline.com/feed/weather.ashx?q=" + city.currentext + "&format=json&num_of_days=2&key=640bc6c793043201130202");
+                console.log(city.currentText)
+                doc.open("GET", "http://free.worldweatheronline.com/feed/weather.ashx?q=" + city.currentText + "&format=json&num_of_days=2&key=640bc6c793043201130202");
                 doc.send();}
         }
         Component.onCompleted: {
@@ -1147,8 +1220,9 @@ anchors.margins: 20
                     loaded(jsonObject);
                 }
             }
+            console.log(city.currentText)
             // Replace YOURPRIVATEKEY by your key from free.worldweatheronline.com
-            doc.open("GET", "http://free.worldweatheronline.com/feed/weather.ashx?q=" + city1.text + "&format=json&num_of_days=2&key=640bc6c793043201130202");
+            doc.open("GET", "http://free.worldweatheronline.com/feed/weather.ashx?q=" + city.currentText + "&format=json&num_of_days=2&key=640bc6c793043201130202");
             doc.send();
 
         }
@@ -1164,7 +1238,19 @@ anchors.margins: 20
 
         }
         function showDegree(text) {
-            log.text = log.text + "\n" + text
+            //Display temp
+                    if(theMainApplication.currentUnits == "us")
+
+                   { log.text = "\n" + text + "°" + "F"
+                    currentTempF2 = text
+                    currentTemp = text}
+                    else if(theMainApplication.currentUnits == "eu")
+
+            {log.text = log.text + "\n" + text + "°" + "C"
+                    currentTempC2 = text
+                    currentTemp = text}
+
+
 
 
         }
@@ -1279,13 +1365,13 @@ anchors.margins: 20
             showprecipfr("Précipitation : " + jsonObject.data.current_condition[0].precipMM + " mm");
 
             showPressure(jsonObject.data.current_condition[0].pressure + " Pa");
-            //        showRequestInfo("temp_C:" + jsonObject.data.current_condition[0].temp_C);
+            //        showRequestInfo("temp_C:" + jsonObject.data.cut_condition[0].temp_C);
             if(theMainApplication.currentUnits == "us")
             { console.log("us")
-                showDegree(jsonObject.data.current_condition[0].temp_F + "°" + "F");}
+                showDegree(jsonObject.data.current_condition[0].temp_F);}
             else
             { console.log("eu")
-                showDegree(jsonObject.data.current_condition[0].temp_C+ "°" + "C");}
+                showDegree(jsonObject.data.current_condition[0].temp_C);}
             showVisiblem(0.62*(parseInt(jsonObject.data.current_condition[0].visibility))+" mi");
 
             //  showDegree(jsonObject.data.weather[0].tempMaxF);
@@ -1391,9 +1477,18 @@ iconURL = weathericon.source;
             if(theMainApplication.currentUnits == "us")
             {
             showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
-           }
+                maxF1 =  jsonObject.data.weather[0].tempMaxF;
+                lowF1 = jsonObject.data.weather[0].tempMinF;
+                maxC1 =  jsonObject.data.weather[0].tempMaxC;
+                lowC1 = jsonObject.data.weather[0].tempMinC;
+            }
             else
             {showDetails("High/Low : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
+                maxF1 =  jsonObject.data.weather[0].tempMaxF;
+                lowF1 = jsonObject.data.weather[0].tempMinF;
+                maxC1 =  jsonObject.data.weather[0].tempMaxC;
+                lowC1 = jsonObject.data.weather[0].tempMinC;
+
             }
             showDetailsfr("Haut/Bas : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
             showDetailsfrC("Haut/Bas : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
@@ -1519,7 +1614,7 @@ iconURL = weathericon.source;
             Component.onCompleted: {
                 if(theMainApplication.currentUnits == "eu")
             {    roomtempval.text = "26°C"}
-                else
+                else if(theMainApplication.currentUnits == "us")
                 { roomtempval.text = "78°F"}
 
             }
@@ -1957,10 +2052,12 @@ font.pixelSize: footbar.height/3.12
             font.pixelSize: parent.width/12.24
             font.family: fontFamily
             font.bold: true
-            anchors.top:weathericon.top
-            anchors.left: weathericon.left
-            anchors.topMargin: -weathericon.height
-            anchors.leftMargin: -2*weathericon.width
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.topMargin: parent.height/3.3
+              anchors.leftMargin: parent.width/5
+            Component.onCompleted: {console.log(log.x);
+            console.log(log.y)}
 
            // anchors.margins: 20
         }
@@ -2000,10 +2097,11 @@ font.pixelSize: footbar.height/3.12
             font.family: fontFamily
             font.bold: true
 
-            anchors.top:weathericon.top
-            anchors.left: weathericon.left
-            anchors.leftMargin:1.6*weathericon.width
-            anchors.topMargin: weathericon.height/15
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.62
+           anchors.topMargin: parent.height/2.3
+
 
 
 
@@ -2085,10 +2183,10 @@ font.pixelSize: footbar.height/3.12
             font.family: fontFamily
             font.bold: true
             text:city_label.text
-            anchors.top:weathericon.top
-            anchors.left: weathericon.left
-            anchors.leftMargin: 1.6*weathericon.width
-           anchors.topMargin: weathericon.height/2
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.62
+           anchors.topMargin: parent.height/2.0
 
 
 
@@ -2104,10 +2202,10 @@ font.pixelSize: footbar.height/3.12
             font.bold: true
 
 
-            anchors.top:weathericon.top
-            anchors.left: weathericon.left
-            anchors.leftMargin: 1.6*weathericon.width
-           anchors.topMargin: weathericon.height/1.8
+            anchors.top:parent.top
+            anchors.left: parent.left
+          anchors.leftMargin:parent.width/1.62
+          anchors.topMargin: parent.height/1.95
         }
 
         Text{//preciptation
@@ -2159,10 +2257,12 @@ font.pixelSize: footbar.height/3.12
         }
         Image{ id:tempicon
             source:"images/thermometer.png"
-            anchors.top:weathericon.top
-            anchors.left: weathericon.left
-            anchors.leftMargin:1.37*weathericon.width
-            anchors.topMargin: weathericon.height/4.4
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.71
+
+           anchors.topMargin: parent.height/2.17
+
             width:parent.width/44
             height:parent.width/44
 
@@ -2172,10 +2272,12 @@ font.pixelSize: footbar.height/3.12
         }
         Image{ id:precicon
             source:"images/weathericons/12.png"
-            anchors.top:weathericon.top
-            anchors.left: weathericon.left
-            anchors.leftMargin: 1.4*weathericon.width
-           anchors.topMargin: weathericon.height/1.3
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.69
+
+           anchors.topMargin: parent.height/1.85
+
            width:parent.width/44
            height:parent.width/44
 
@@ -2184,10 +2286,11 @@ font.pixelSize: footbar.height/3.12
         }
         Image{ id:locicon
             source:"images/lunapic_136037864284841_2.png"
-            anchors.top:weathericon.top
-            anchors.left: weathericon.left
-            anchors.leftMargin:1.37*weathericon.width
-            anchors.topMargin: weathericon.height/2
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.leftMargin:parent.width/1.7
+
+           anchors.topMargin: parent.height/2
             width:parent.width/44
             height:parent.width/44
 
@@ -2200,8 +2303,8 @@ font.pixelSize: footbar.height/3.12
            anchors.bottom: parent.bottom
            anchors.right: parent.right
            anchors.bottomMargin: parent.height/8
-
-            width:200
+anchors.rightMargin: 20
+            width:300
             border.color: "white"
             color: "black"
             height: 30
@@ -2357,7 +2460,8 @@ font.pixelSize: footbar.height/3.12
                     loaded(jsonObject);
                 }
             }
-            doc.open("GET", "http://free.worldweatheronline.com/feed/weather.ashx?q=" + city_label.text + "&format=json&num_of_days=2&key=640bc6c793043201130202");
+
+            doc.open("GET", "http://free.worldweatheronline.com/feed/weather.ashx?q=" + theMainApplication.currentLocation + "&format=json&num_of_days=2&key=640bc6c793043201130202");
             doc.send();
         }
 

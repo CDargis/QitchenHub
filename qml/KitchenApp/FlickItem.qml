@@ -181,7 +181,7 @@ radius:5
         anchors.top: parent.top
         anchors.topMargin: ((24)/(1224))*mainW
         width:((230)/(1224))*mainW
-         font.pixelSize: ((15)/(1224))*mainW
+         font.pixelSize: ((15)/(1399))*mainW
          font.family: "Helvetica"
          color:"white"
          wrapMode: Text.Wrap
@@ -255,7 +255,7 @@ maximumLineCount: 5
             font.bold: true
             font.family: "Helvetica"
             color:"white"
-           width:((80)/(1224))*mainW
+            width:((80)/(1224))*mainW
             anchors.top: parent.top
             anchors.topMargin: ((4)/(1224))*mainW
         }
