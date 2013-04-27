@@ -128,6 +128,10 @@
         <source>Gallery</source>
         <translation>Galeria</translation>
     </message>
+    <message>
+        <source>Image Gallery</source>
+        <translation>Galeria</translation>
+    </message>
 </context>
 <context>
     <name>Kitchen</name>
@@ -150,6 +154,10 @@
     <message>
         <source>Healthy</source>
         <translation>Zdrowe</translation>
+    </message>
+    <message>
+        <source>Search here..</source>
+        <translation>Szukaj...</translation>
     </message>
 </context>
 <context>
@@ -657,6 +665,10 @@ Drogowe</translation>
     <message>
         <source>Switch Location &gt;&gt;</source>
         <translation>Zmień Lokację &gt;&gt;</translation>
+    </message>
+    <message>
+        <source>Precipitation : </source>
+        <translation>Opady :</translation>
     </message>
 </context>
 </TS>

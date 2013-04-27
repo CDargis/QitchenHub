@@ -336,7 +336,9 @@ Item {
 
 
     function say(string) {
-        voice.say(string);
-        root.state = "";
+        if (theMainApplication.voiceOn) {
+            voice.say(string);
+            root.state = "";
+        }
     }
 }

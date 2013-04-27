@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QQueue>
 
 class CVoice : public QObject
 {
@@ -18,11 +19,13 @@ public:
 signals:
     void finished();
     
-public slots:
+private slots:
+    void checkQueue();
 
 private:
     QProcess m_festival;
     QProcess m_echo;
+    QQueue<QString> m_queuedSentences;
     
 };
 
