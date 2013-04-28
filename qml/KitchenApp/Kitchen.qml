@@ -404,44 +404,6 @@ horizontalAlignment: Text.AlignHCenter
             }
             }
     }
-//    Rectangle{id: r6
-//        anchors.top: parent.top
-//        anchors.left: parent.left
-//        anchors.topMargin: parent.height/5
-//        anchors.leftMargin: parent.width/1.03
-//        width:recipeHome.width/6
-//        height:recipeHome.height/1.7
-//            color:"black"
-
-//            Image {
-//                anchors.fill: parent
-//                source: "images/Drinks.png"
-//            }
-//            Image {
-//                anchors.fill: parent
-//                source: "images/BlackGradient.png"
-//            }
-//            Text{
-//                color: "#ffffff"
-//                font.pixelSize: 36
-//                font.family: "Helvetica"
-//                font.bold: true
-//                text:"Drinks"
-//anchors.bottom: parent.bottom
-//width:170
-//horizontalAlignment: Text.AlignHCenter
-//}
-//            MouseArea{
-//            anchors.fill: parent
-
-//            onClicked: {
-//                {if(appFull.state == "")
-//                                {appFull.state = "load";
-//                                  }}
-//             launch("drinks");
-//            }
-//            }
-//    }
 
 
 }
@@ -463,7 +425,6 @@ function launch(cat)
 
     doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf&q=" + cat  +"&requirePictures=true");
 
-    //doc.open("GET", "http://api.yummly.com/v1/api/recipe/recipe-id")
     doc.send();
 
 
@@ -494,13 +455,13 @@ function launch2(rid,i,sources,jsonObject,rname,url,calories,ingredients,time,ra
 
 }
 
-Rectangle {
+Rectangle
+{
     id:cat1
     opacity: 0
-    x:-1280
+    x:-parent.width
 
 
-   // anchors.centerIn: parent
 width:parent.width
 height:parent.height
 gradient: Gradient {
@@ -514,25 +475,91 @@ gradient: Gradient {
 
 
 
+}
+Image
+{
+    anchors.top: parent.top
+    anchors.right: parent.right
+    anchors.topMargin: parent.height/20
+    anchors.rightMargin: parent.width/5.7
+    source:"images/plainButton.png"
+
+
+    height: 340/3
+    width:520/3
+    Text {
+        anchors.centerIn: parent
+
+        text:qsTr("Tools") + tr.emptyString
+        color:"#19BA19"
+    }
+    MouseArea{
+    anchors.fill: parent
+
+    onClicked: {
+        {if(appFull.state == "")
+                        {appFull.state = "loadTools";
+                          }}
+
+
+    }
+    }
+}
+
+Rectangle {
+    id:tools
+    opacity: 0
+
+y:-parent.height
+
+   // anchors.centerIn: parent
+width:parent.width
+height:parent.height
+//gradient: Gradient {
+//    GradientStop {id:g1
+//        position: 0.0; color: "#7c7c85" }
+
+//    GradientStop { id:g2
+//        position: 1.0; color: "#25242a" }}
+
+Tools{
+    gradient: Gradient {
+        GradientStop {
+            position: 0.0; color: "#7c7c85" }
+
+        GradientStop {
+            position: 1.0; color: "#25242a" }
+        }
+}
+
 
 
 }
+
 Image{
     id:goback
-    source:"images/Back.png"
+    source:"images/plainButton.png"
     anchors.bottom:parent.bottom
     anchors.left: parent.left
     width:480/3
     height:320/3
 opacity: 0
     anchors.leftMargin: 20
+    Text {
+anchors.centerIn: parent
+        text: qsTr("Back")
+        color:"#19BA19"
+    }
 
 }
 MouseArea{
 anchors.fill: goback
-onClicked: {wall.destroy();
+onClicked: {
     if(appFull.state == "load")
+   { wall.destroy();}
+    if(appFull.state == "load"||appFull.state == "loadTools")
                                     {appFull.state = "";
+
                                       }}
 }
 
@@ -544,6 +571,19 @@ states: [
             target: cat1
             opacity:1
             x:0
+        }
+        PropertyChanges {
+            target: goback
+            opacity:1
+        }
+
+    },
+    State {
+        name: "loadTools"
+        PropertyChanges {
+            target: tools
+            opacity:1
+            y:0
         }
         PropertyChanges {
             target: goback
@@ -566,6 +606,23 @@ transitions: [
         from: "load"
         to:""
         NumberAnimation{properties: "opacity,x"
+            duration: 500
+
+    }
+
+    },
+    Transition {
+
+        from: ""
+        to: "loadTools"
+        NumberAnimation{properties: "opacity,y"
+            duration: 500
+
+    }},
+    Transition{
+        from: "loadTools"
+        to:""
+        NumberAnimation{properties: "opacity,y"
             duration: 500
 
     }
