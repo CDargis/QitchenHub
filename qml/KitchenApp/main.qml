@@ -136,7 +136,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     // make sure you put the name of your qml as an argument
-                    onClicked: {launch("SocialFeed.qml",2);speaker.say("Social App")}
+                    onClicked: {launch("SocialFeed.qml",2);speaker.say("Social Networking")}
                 }
             }
             Button {
