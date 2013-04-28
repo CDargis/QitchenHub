@@ -131,7 +131,7 @@ Rectangle {
                 width: 200
                 height: 200
                 pointSize: 18
-                buttonText: qsTr("Social App") + tr.emptyString
+                buttonText: qsTr("Social Networking") + tr.emptyString
 
                 MouseArea {
                     anchors.fill: parent
