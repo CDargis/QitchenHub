@@ -62,6 +62,7 @@ Rectangle {
             clip: true
             wrapMode: Text.Wrap
             onCursorRectangleChanged: flick.ensureVisible(cursorRectangle)
+            Keys.onReturnPressed: theKeyboard.returnKey()
             onFocusChanged: {
                 if(focus) {z
                     theKeyboard.showKeyboard(inputContainer)
@@ -127,7 +128,6 @@ Rectangle {
     function handleReturnKey(theText) {
         console.log(currentText)
         returnPressed(currentText)
-        Keys.onReturnPressed(null)
         theInput.focus = false
         theKeyboard.hideKeyboard()
     }
