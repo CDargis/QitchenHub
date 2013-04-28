@@ -22,11 +22,15 @@ AppInterface{
     property string lowF2;
     property string maxF1;
     property string maxF2;
-
+    property string windM1;
+    property string windK1;
+    property string windM2;
+    property string windK2;
     property var cache
 
     onChangeUnits:
     {var temp,temp1;
+
         if(units === "us")
         { temp = (9/5)*(parseInt(currentTempC1)) + 32
             log.text = "\n" + Math.round(temp) + "°F"
@@ -61,6 +65,16 @@ AppInterface{
         else if(units == "eu")
         {roomtempval.text  = "26°C"
             roomtempval1.text = "26°C"
+        }
+        if(units == "us")
+        {
+            winspeed.text = windM1
+            winspeed1.text = windM2
+        }
+        else if(units == "eu")
+        {
+            winspeed.text = windK1
+            winspeed1.text = windK2
         }
 
     }
@@ -214,11 +228,11 @@ AppInterface{
         showTime();
         showprecip("Precipitation : " + jsonObject.data.current_condition[0].precipMM + " mm");
         showprecipfr("Précipitation : " + jsonObject.data.current_condition[0].precipMM + " mm");
-        showVisible(jsonObject.data.current_condition[0].visibility + " km");
+        showVisible(jsonObject.data.current_condition[0].humidity + "%");
 
         var v = 0.62*(parseInt(jsonObject.data.current_condition[0].visibility))
 
-        showVisiblem(v+" mi");
+
         showWindspeedkph(jsonObject.data.current_condition[0].windspeedKmph + " kph");
         showPressure(jsonObject.data.current_condition[0].pressure + " Pa");
         if(theMainApplication.currentUnits == "eu")
@@ -324,7 +338,16 @@ AppInterface{
         else
         {showDesc(jsonObject.data.current_condition[0].weatherDesc[0].value);
             showDescfr(jsonObject.data.current_condition[0].weatherDesc[0].value);}
-        showWindspeed(jsonObject.data.current_condition[0].windspeedMiles + " mph");
+        windM2 = jsonObject.data.current_condition[0].windspeedMiles + " mph"
+         windK2 = jsonObject.data.current_condition[0].windspeedKmph + " kph"
+        if(theMainApplication.currentUnits == "us")
+        {showWindspeed(jsonObject.data.current_condition[0].windspeedMiles + " mph");
+
+       }
+        else
+       { showWindspeed(jsonObject.data.current_condition[0].windspeedKmph + " kph");}
+
+
         showDetails2(jsonObject.data.current_condition[0].cloudcover);
         if(theMainApplication.currentUnits == "us")
         {
@@ -900,7 +923,7 @@ AppInterface{
         Text
         {
             id:visibility1
-            text:qsTr("Visibility") + tr.emptyString
+            text:qsTr("Humidity") + tr.emptyString
             parent:footbar1
 
             color:"#FFFFFF"
@@ -1269,7 +1292,7 @@ anchors.margins: 20
 
         }
         function showDetails(text) {
-            detail.text = qsTr(detail.text + "\n" + text) + tr.emptyString
+            detail.text =  "\n" + text
 
 
         }
@@ -1280,7 +1303,7 @@ anchors.margins: 20
         }
 
         function showprecip(text) {
-            detail4.text = qsTr(detail4.text + "\n" + text) + tr.emptyString;
+            detail4.text = detail4.text + "\n" + text + tr.emptyString;
 
 
         }
@@ -1381,10 +1404,9 @@ anchors.margins: 20
             else
             { console.log("eu")
                 showDegree(jsonObject.data.current_condition[0].temp_C);}
-            showVisiblem(0.62*(parseInt(jsonObject.data.current_condition[0].visibility))+" mi");
+            showVisible(jsonObject.data.current_condition[0].humidity+"%");
 
             //  showDegree(jsonObject.data.weather[0].tempMaxF);
-            showVisible(jsonObject.data.current_condition[0].visibility + " km");
             //        showRequestInfo("weatherCode:" + jsonObject.data.current_condition[0].weatherCode);
             if(jsonObject.data.current_condition[0].weatherDesc[0].value == "Partly Cloudy")
             { showDesc(jsonObject.data.current_condition[0].weatherDesc[0].value);
@@ -1501,9 +1523,14 @@ iconURL = weathericon.source;
             }
             showDetailsfr("Haut/Bas : " + jsonObject.data.weather[0].tempMaxF + "/"+jsonObject.data.weather[0].tempMinF+"°F");
             showDetailsfrC("Haut/Bas : " + jsonObject.data.weather[0].tempMaxC + "/"+jsonObject.data.weather[0].tempMinC+"°C");
+           windM1 = jsonObject.data.current_condition[0].windspeedMiles + " mph"
+            windK1 = jsonObject.data.current_condition[0].windspeedKmph + " kph"
+            if(theMainApplication.currentUnits == "us")
+            {showWindspeed(jsonObject.data.current_condition[0].windspeedMiles + " mph");
 
-            showWindspeed(jsonObject.data.current_condition[0].windspeedMiles + " mph");
-            showWindspeedk(jsonObject.data.current_condition[0].windspeedKmph + " kph");
+           }
+            else
+           { showWindspeed(jsonObject.data.current_condition[0].windspeedKmph + " kph");}
 
             showDetails2(jsonObject.data.current_condition[0].cloudcover);
 
@@ -1891,7 +1918,7 @@ font.pixelSize: footbar.height/3.12
 
         Text
         {id:visibility
-            text: qsTr("Visibility") + tr.emptyString
+            text: qsTr("Humidity") + tr.emptyString
             parent:footbar
 
             color:"#FFFFFF"

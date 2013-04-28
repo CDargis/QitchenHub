@@ -321,22 +321,20 @@ maximumLineCount: 5
 
             x:((10)/(1224))*mainW
             y:((5)/(1224))*mainW
-            opacity:0.2
+            color:"transparent"
             radius:3
         }
         MouseArea{
             anchors.fill: backButton
              onClicked: flipable.flipped = !flipable.flipped
         }
-        Text {
+        Image {
 
             anchors.centerIn: backButton
-            text: "Back"
-            font.letterSpacing: ((1)/(1224))*mainW
-            font.family: "Helvetica"
-            font.pixelSize: ((10)/(1224))*mainW
-            color:"white"
-            font.bold: true
+            source:"images/smallBack.png"
+
+width:backButton.width
+height:backButton.height
             y:((7)/(1224))*mainW
             x:((10)/(1224))*mainW
         }
