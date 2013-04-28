@@ -127,6 +127,7 @@ Rectangle {
     function handleReturnKey(theText) {
         console.log(currentText)
         returnPressed(currentText)
+        Keys.onReturnPressed(null)
         theInput.focus = false
         theKeyboard.hideKeyboard()
     }
