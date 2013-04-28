@@ -96,7 +96,7 @@ Rectangle{
             visible: false
             MouseArea {
                 anchors.fill: parent
-                onClicked: hide()
+                //onClicked: hide()
             }
         }
         Image {
@@ -111,7 +111,7 @@ Rectangle{
             height: parent.height*0.8
             MouseArea {
                 anchors.fill: parent
-                onClicked: hide()
+                //onClicked: hide()
             }
         }
     }
