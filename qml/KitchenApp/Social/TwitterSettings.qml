@@ -150,7 +150,7 @@ Rectangle{
     }
 
     function checkUser(){
-        if (addText.text == "Sign out"){
+        if (addText.text == "Sign out" || addText.text == "Wyloguj"){
             root.user = ""
             userInput.currentText = ""
             speaker.say("Signing out");
@@ -168,7 +168,7 @@ Rectangle{
             name: "expanded"
             PropertyChanges {
                 target: addText
-                text: sign
+                text: theMainApplication.language == "en" ? sign : "Wyloguj"
             }
             when: root.user != ""
         }

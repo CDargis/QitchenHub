@@ -122,8 +122,16 @@ WidgetInterface {
             txt.text = qsTr("Sign in")
             app.twUser()
         }
+        else if(txt.text == "Wyloguj"){
+            txt.text = "Zaloguj się"
+            app.twUser()
+        }
         else if(txt.text == "Sign in"){
             txt.text = sign
+            app.twUser2();
+        }
+        else{
+            txt.text = "Wyloguj"
             app.twUser2();
         }
     }
@@ -133,6 +141,12 @@ WidgetInterface {
         }
         else if(txt.text == "Sign in"){
             txt.text = sign
+        }
+        else if(txt.text == "Wyloguj"){
+            txt.text = "Zaloguj się"
+        }
+        else{
+            txt.text = "Wyloguj"
         }
     }
 }
