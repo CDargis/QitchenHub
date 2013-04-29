@@ -1,5 +1,9 @@
 import QtQuick 2.0
 Rectangle{
+    property int selectLb: 1
+    property int selectKg: 1
+    property int selectG: 0
+    property int selectOz: 0
 
     width:parent.width
     height:parent.height
@@ -321,20 +325,20 @@ Rectangle//converter
     {id:inpLeft
       anchors.left: parent.left
       anchors.top:parent.top
-      anchors.leftMargin: 0.16*parent.width
+      anchors.leftMargin: 0.13*parent.width
       anchors.topMargin: 0.33*parent.height
     color:"white"
-    width:0.333*parent.width
+    width:0.373*parent.width
     height:0.25*parent.height
     }
     Rectangle
     {id:inpRight
         anchors.left: parent.left
         anchors.top:parent.top
-        anchors.leftMargin: 0.56*parent.width
+        anchors.leftMargin: 0.53*parent.width
         anchors.topMargin: 0.33*parent.height
         color:"white"
-        width:0.333*parent.width
+        width:0.373*parent.width
         height:0.25*parent.height
     }
     Rectangle
@@ -399,16 +403,24 @@ font.bold: true
 
 
     VirtualInput
-    {
+    {   id:input
         anchors.fill: inpLeft
-        currentText: "00"
-        fontSize: 0.8*inpLeft.height
+       anchors.top:parent.top
+       anchors.topMargin: 0.15*inpLeft.height
+       anchors.leftMargin: 0.1*inpLeft.width
+       border.color: "white"
+
+        fontSize: 0.6*inpLeft.height
     }
     VirtualInput
     {
+        id:output
         anchors.fill: inpRight
-        currentText: "00"
-        fontSize: 0.8*inpLeft.height
+       anchors.top:parent.top
+
+         border.color: "white"
+       anchors.topMargin: 0.15*inpLeft.height
+         fontSize: 0.6*inpLeft.height
     }
 
     Rectangle{
@@ -443,6 +455,31 @@ Button3
     width:0.34*parent.width
     height:0.07*parent.height
     bText: "Convert"
+    MouseArea
+    {
+        anchors.fill: parent
+        onClicked: {
+            if(convRect.state == "")
+            {
+
+                if((selectKg == 1)&&(selectLb == 1))
+                {
+                    var kgval = parseFloat(input.currentText);
+                    var lbval = parseFloat(output.currentText);
+                    output.currentText = 2.2*kgval
+                }
+                else if((selectKg == 1)&&(selectOz == 1))
+                {console.log("kgtooz")}
+                else if((selectG == 1)&&(selectLb == 1))
+                {console.log("gtolb")}
+                else if((selectG == 1)&&(selectOz == 1))
+                {console.log("gtooz")}
+
+            }
+            else if (convRect.state == "volume")
+            {console.log("2")}
+        }
+    }
 }
     Text
     {id:unit3
@@ -455,7 +492,18 @@ Button3
          anchors.verticalCenter: selector.verticalCenter
          font.bold: true
          color:"white"
-     }
+         MouseArea
+         {
+             anchors.fill: parent
+             onClicked: {
+                 selector1.anchors.leftMargin=0.769*selector1.anchors.leftMargin
+             console.log(parent.width)
+                 selectLb = 1
+                 selectOz = 0
+             }
+         }
+    }
+
     Text
     {id:unit4
         anchors.top:parent.top
@@ -467,7 +515,20 @@ Button3
          anchors.verticalCenter: selector.verticalCenter
          font.bold: true
          color:"white"
-     }
+         MouseArea
+         {
+             anchors.fill: parent
+             onClicked: {
+
+
+                 selector1.anchors.leftMargin=1.3*selector1.anchors.leftMargin
+             console.log(parent.width)
+                  selectOz = 1
+                 selectLb = 0
+             }
+         }
+    }
+
     Text
     {id:unit1
         anchors.top:parent.top
@@ -479,6 +540,16 @@ Button3
          anchors.verticalCenter: selector.verticalCenter
          font.bold: true
          color:"white"
+         MouseArea
+         {
+             anchors.fill: parent
+             onClicked:
+             {selector.anchors.leftMargin=0.5*selector.anchors.leftMargin
+             console.log(parent.width)
+                 selectKg = 1
+                selectG = 0
+             }
+         }
      }
     Text
     {id:unit2
@@ -491,6 +562,15 @@ Button3
          anchors.verticalCenter: selector.verticalCenter
          font.bold: true
          color:"white"
+         MouseArea
+         {
+             anchors.fill: parent
+             onClicked: {selector.anchors.leftMargin=2*selector.anchors.leftMargin
+             console.log(parent.width)
+                 selectKg = 0
+                selectG = 1
+             }
+         }
      }
     states: [
         State {
@@ -503,18 +583,26 @@ Button3
             target:name2
             font.bold: true
             }
-//            PropertyChanges{
-//            target:name1
-//            font.bold: false
-//            }
-//            PropertyChanges{
-//            target:unit1
-//            text:pint
-//            }
-//            PropertyChanges{
-//            target:name1
-//            font.bold: false
-//            }
+            PropertyChanges{
+            target:name1
+            font.bold: false
+            }
+            PropertyChanges{
+            target:unit1
+            text:"pint"
+            }
+            PropertyChanges{
+            target:unit1
+            text:"fl.oz"
+            }
+            PropertyChanges{
+            target:unit3
+            text: "ml."
+            }
+            PropertyChanges{
+            target:unit4
+            text: "l."
+            }
         }
     ]
     transitions: [

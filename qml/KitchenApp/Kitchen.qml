@@ -480,16 +480,17 @@ Image
 {
     anchors.top: parent.top
     anchors.right: parent.right
-    anchors.topMargin: parent.height/20
-    anchors.rightMargin: parent.width/5.7
+    anchors.topMargin: 0.65*parent.height/20
+    anchors.rightMargin: 1.1*parent.width/5.7
     source:"images/plainButton.png"
 
 
-    height: 340/3
-    width:520/3
+    height: 4.4*parent.height/24
+    width:6*parent.width/40
     Text {
         anchors.centerIn: parent
-
+font.pixelSize: 0.9*parent.height/4
+font.bold: true
         text:qsTr("Tools") + tr.emptyString
         color:"#19BA19"
     }
@@ -541,13 +542,15 @@ Image{
     source:"images/plainButton.png"
     anchors.bottom:parent.bottom
     anchors.left: parent.left
-    width:480/3
-    height:320/3
+    height: 4.4*parent.height/24
+    width:6*parent.width/40
 opacity: 0
     anchors.leftMargin: 20
     Text {
+        font.pixelSize: 0.9*parent.height/4
+        font.bold: true
 anchors.centerIn: parent
-        text: qsTr("Back")
+        text: qsTr("Back") + tr.emptyString
         color:"#19BA19"
     }
 
