@@ -411,6 +411,87 @@ font.bold: true
         fontSize: 0.8*inpLeft.height
     }
 
+    Rectangle{
+       id:selector
+       width:parent.width/8.5
+       height:parent.width/20
+       radius:parent.width
+       anchors.top:parent.top
+       anchors.left: parent.left
+       anchors.topMargin: 0.67*parent.height
+        anchors.leftMargin: 0.16*parent.width
+        color:"#00CC00"
+
+    }
+    Rectangle{
+       id:selector1
+       width:parent.width/8.5
+       height:parent.width/20
+       radius:parent.width
+       anchors.top:parent.top
+       anchors.left: parent.left
+       anchors.topMargin: 0.67*parent.height
+        anchors.leftMargin: 0.56*parent.width
+        color:"#00CC00"
+
+    }
+Button3
+{
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    anchors.bottomMargin: 0.15*parent.height
+    width:0.34*parent.width
+    height:0.07*parent.height
+    bText: "Convert"
+}
+    Text
+    {id:unit3
+        anchors.top:parent.top
+        anchors.left: parent.left
+        anchors.topMargin: 0.67*parent.height
+         anchors.leftMargin: 0.6*parent.width
+         text:"lb."
+         font.pixelSize: 0.75*selector.height
+         anchors.verticalCenter: selector.verticalCenter
+         font.bold: true
+         color:"white"
+     }
+    Text
+    {id:unit4
+        anchors.top:parent.top
+        anchors.left: parent.left
+        anchors.topMargin: 0.67*parent.height
+         anchors.leftMargin: 0.75*parent.width
+         text:"oz."
+         font.pixelSize: 0.75*selector.height
+         anchors.verticalCenter: selector.verticalCenter
+         font.bold: true
+         color:"white"
+     }
+    Text
+    {id:unit1
+        anchors.top:parent.top
+        anchors.left: parent.left
+        anchors.topMargin: 0.67*parent.height
+         anchors.leftMargin: 0.19*parent.width
+         text:"kg."
+         font.pixelSize: 0.75*selector.height
+         anchors.verticalCenter: selector.verticalCenter
+         font.bold: true
+         color:"white"
+     }
+    Text
+    {id:unit2
+        anchors.top:parent.top
+        anchors.left: parent.left
+        anchors.topMargin: 0.67*parent.height
+         anchors.leftMargin: 0.36*parent.width
+         text:"g."
+         font.pixelSize: 0.75*selector.height
+         anchors.verticalCenter: selector.verticalCenter
+         font.bold: true
+         color:"white"
+     }
     states: [
         State {
             name: "volume"
@@ -422,10 +503,18 @@ font.bold: true
             target:name2
             font.bold: true
             }
-            PropertyChanges{
-            target:name1
-            font.bold: false
-            }
+//            PropertyChanges{
+//            target:name1
+//            font.bold: false
+//            }
+//            PropertyChanges{
+//            target:unit1
+//            text:pint
+//            }
+//            PropertyChanges{
+//            target:name1
+//            font.bold: false
+//            }
         }
     ]
     transitions: [
