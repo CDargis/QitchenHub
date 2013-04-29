@@ -423,7 +423,7 @@ function launch(cat)
     }
 
 
-    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf&q=" + cat  +"&requirePictures=true");
+    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67&q=" + cat  +"&requirePictures=true");
 
     doc.send();
 
@@ -435,7 +435,7 @@ function launch2(rid,i,sources,jsonObject,rname,url,calories,ingredients,time,ra
 
     var doc2 = new XMLHttpRequest();
 
-    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=7ad619f9&_app_key=66f7668e38c94348fdf8c422fd023adf");
+    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67");
     doc2.send();
     doc2.onreadystatechange = function() {
         if (doc2.readyState == XMLHttpRequest.DONE) {
@@ -477,7 +477,7 @@ gradient: Gradient {
 
 }
 Image
-{
+{id:toolButton
     anchors.top: parent.top
     anchors.right: parent.right
     anchors.topMargin: 0.65*parent.height/20
@@ -547,7 +547,8 @@ Image{
 opacity: 0
     anchors.leftMargin: 20
     Text {
-        font.pixelSize: 0.9*parent.height/4
+        font.pixelSize: 0.9*
+                        parent.height/4
         font.bold: true
 anchors.centerIn: parent
         text: qsTr("Back") + tr.emptyString
@@ -578,6 +579,10 @@ states: [
         PropertyChanges {
             target: goback
             opacity:1
+        }
+        PropertyChanges {
+            target: toolButton
+            opacity:0
         }
 
     },
