@@ -423,7 +423,7 @@ function launch(cat)
     }
 
 
-    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67&q=" + cat  +"&requirePictures=true");
+    doc.open("GET", "http://api.yummly.com/v1/api/recipes?_app_id=22759353&_app_key=94454e4573986179b5bc43c1313c1b4f&q=" + cat  +"&requirePictures=true");
 
     doc.send();
 
@@ -435,7 +435,7 @@ function launch2(rid,i,sources,jsonObject,rname,url,calories,ingredients,time,ra
 
     var doc2 = new XMLHttpRequest();
 
-    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=04b4ce46&_app_key=ffc9e76df577de742ccf1583911a0a67");
+    doc2.open("GET", "http://api.yummly.com/v1/api/recipe/"+rid+"?_app_id=22759353&_app_key=94454e4573986179b5bc43c1313c1b4f");
     doc2.send();
     doc2.onreadystatechange = function() {
         if (doc2.readyState == XMLHttpRequest.DONE) {
