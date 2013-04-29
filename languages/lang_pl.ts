@@ -159,6 +159,14 @@
         <source>Search here..</source>
         <translation>Szukaj...</translation>
     </message>
+    <message>
+        <source>Tools</source>
+        <translation>Narzędzia</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Wstecz</translation>
+    </message>
 </context>
 <context>
     <name>LanguageSelect</name>
@@ -483,6 +491,25 @@
     </message>
 </context>
 <context>
+    <name>Tools</name>
+    <message>
+        <source>Timer</source>
+        <translation>Czasomierz</translation>
+    </message>
+    <message>
+        <source>Converter</source>
+        <translation>Konwerter</translation>
+    </message>
+    <message>
+        <source>WEIGHT</source>
+        <translation>MASA</translation>
+    </message>
+    <message>
+        <source>VOLUME</source>
+        <translation>POJEMNOŚĆ</translation>
+    </message>
+</context>
+<context>
     <name>Traffic</name>
     <message>
         <source>Traffic information for</source>
@@ -618,6 +645,25 @@ Drogowe</translation>
     <message>
         <source>Picture Viewer</source>
         <translation>Galeria</translation>
+    </message>
+    <message>
+        <source>Social Networking</source>
+        <translation>Serwisy Socjalne</translation>
+    </message>
+</context>
+<context>
+    <name>test2</name>
+    <message>
+        <source>Converter</source>
+        <translation>Konwerter</translation>
+    </message>
+    <message>
+        <source>WEIGHT</source>
+        <translation>MASA</translation>
+    </message>
+    <message>
+        <source>VOLUME</source>
+        <translation>POJEMNOŚĆ</translation>
     </message>
 </context>
 <context>
