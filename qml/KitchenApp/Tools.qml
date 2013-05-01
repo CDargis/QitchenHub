@@ -4,11 +4,15 @@ Rectangle{
     property int selectKg: 1
     property int selectG: 0
     property int selectOz: 0
-
+    property int setMin;
+    property int setSec;
     width:parent.width
     height:parent.height
     function calctime()
-    {
+    {setMin = minutesTime.text
+        setSec = secondsTime.text
+        speaker.say("Timer set for" + setMin + "minutes, and "+ setSec + "seconds"   )
+
         console.log("dsF");
         console.log(minutesTime.text)
         var minutes = parseInt(minutesTime.text);
@@ -16,6 +20,7 @@ Rectangle{
         secondsStart.visible = true;
         minutesStart.visible = true;
         minutesTime.visible = false;
+
 
 
         var seconds = parseInt(secondsTime.text);
