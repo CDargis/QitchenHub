@@ -12,6 +12,7 @@ Grid {
     columnSpacing: 20
     z: 0
 
+    property int maxZ: 1
     property var activeList: [0, 0, 0, 0, 0, 0, 0, 0]
 
     property int itemCount: root.children.length
@@ -33,5 +34,13 @@ Grid {
 
     function terminateIndex(index){
         activeList[index] = 0;
+    }
+
+    function getMaxZ() {
+        return maxZ;
+    }
+
+    function incrementMaxZ() {
+        maxZ++;
     }
 }

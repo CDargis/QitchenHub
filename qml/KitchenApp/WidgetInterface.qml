@@ -33,6 +33,7 @@ Item {
         }
 
         onPressAndHold: {
+            app.ensureVisible();
             app.show();
             root.parent.destroy();
         }

@@ -35,6 +35,7 @@ Flickable {
 
     // consider these to be hidden
     // for interior use only
+    property Item appGrid
     property Item indicator
     property Item hint
 
@@ -206,5 +207,10 @@ Flickable {
 
     function hideBackButton(){
         homeButton.visible = !homeButton.visible;
+    }
+
+    function ensureVisible() {
+        appGrid.incrementMaxZ();
+        root.z = appGrid.getMaxZ();
     }
 }
