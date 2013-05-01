@@ -140,7 +140,7 @@ function loaded2(jsonObject2,i,sources,jsonObject,url,calories,ingredients,time,
                 {count = 0;
                 x1 = x1 + ((290)/(1224))*parent.width;;
                 a = 0;}
-            createSpriteObjects(x1,((95)/(1224))*parent.width + a,l,imgsrc,jsonObject,jsonObject2,url[l],calories[l],ingredients[l],time[l],rating[l]);
+            createSpriteObjects(x1,((67)/(1224))*parent.width + a,l,imgsrc,jsonObject,jsonObject2,url[l],calories[l],ingredients[l],time[l],rating[l]);
                 a = a + ((180)/(1224))*parent.width;;
             count++;
          }
