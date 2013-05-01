@@ -411,7 +411,7 @@ AppInterface{
             font.bold: true
             anchors.top:parent.top
             anchors.left: parent.left
-            anchors.topMargin: parent.height/3.3
+            anchors.topMargin: 0.9*parent.height/3.3
               anchors.leftMargin: parent.width/5
 
 
@@ -2090,7 +2090,7 @@ font.pixelSize: footbar.height/3.12
             font.bold: true
             anchors.top:parent.top
             anchors.left: parent.left
-            anchors.topMargin: parent.height/3.3
+            anchors.topMargin: 0.9*parent.height/3.3
               anchors.leftMargin: parent.width/5
             Component.onCompleted: {console.log(log.x);
             console.log(log.y)}
