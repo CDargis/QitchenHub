@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import QtQuick 2.0
 
 WidgetInterface
@@ -58,3 +59,64 @@ WidgetInterface
     }
    }
 }
+=======
+import QtQuick 2.0
+
+WidgetInterface
+{property string fname: app.widText
+    height:200
+    id:widget
+    Rectangle
+
+    {
+        anchors.fill: parent
+        radius:4
+        gradient: Gradient {
+            GradientStop {id:g1
+                position: 0.0; color: "#7c7c85" }
+
+            GradientStop { id:g2
+                position: 1.0; color: "#7f7878" }
+        }
+    }
+
+    Text {
+        id:ingtitle
+        color: "#ffffff"
+
+        text: qsTr("Ingredients") + tr.emptyString
+      // text:fname
+        font.bold: true
+        anchors.top: widget.top
+      anchors.left: widget.left
+      anchors.leftMargin: widget.width/3.2
+
+        font.pointSize: 10
+        font.family: "Helvetica"
+    }
+   Flickable
+   {
+    width:inglist.width
+    height: 165
+    anchors.top:ingtitle.bottom
+    anchors.topMargin: ingtitle.height
+    flickableDirection: Flickable.VerticalFlick
+    contentWidth: inglist.width; contentHeight: inglist.height
+    clip: true
+
+    Text {
+        id:inglist
+        color: "#ffffff"
+        width:widget.width
+height:widget.height -5
+       text:fname
+        horizontalAlignment: Text.AlignHCenter
+
+        font.pointSize: 10
+        font.family: "Helvetica"
+          wrapMode: Text.Wrap
+
+    }
+   }
+}
+>>>>>>> cbb4f5b92a5ed8ae0df3627c98d1387d7cafd1aa

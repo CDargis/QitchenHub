@@ -1,0 +1,193 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>settingsTransparent.png</file>
+        <file>settingsWhite.png</file>
+        <file>tentacle.jpeg</file>
+        <file>user.png</file>
+        <file>delete.png</file>
+        <file>lightBulb.png</file>
+        <file>security.png</file>
+        <file>Temperature-256.png</file>
+        <file>downArrow.png</file>
+        <file>upArrow.png</file>
+        <file>ex1.png</file>
+        <file>lock.png</file>
+        <file>unlock.png</file>
+        <file>green_light.png</file>
+        <file>red_light.png</file>
+        <file>arrowl.png</file>
+        <file>arrowr.png</file>
+        <file>facebook.png</file>
+        <file>googleplus.png</file>
+        <file>rss.png</file>
+        <file>twitter.png</file>
+        <file>rssSettings.png</file>
+        <file>rssBackArrow.png</file>
+        <file>collapse.png</file>
+        <file>expand.png</file>
+        <file>expand1.png</file>
+        <file>collapse1.png</file>
+        <file>openFeed.png</file>
+        <file>plus.png</file>
+        <file>down-arrow-icon.png</file>
+        <file>up-arrow-icon.png</file>
+        <file>calendar-icon.png</file>
+        <file>lcd/0.png</file>
+        <file>lcd/1.png</file>
+        <file>lcd/2.png</file>
+        <file>lcd/3.png</file>
+        <file>lcd/4.png</file>
+        <file>lcd/5.png</file>
+        <file>lcd/6.png</file>
+        <file>lcd/7.png</file>
+        <file>lcd/8.png</file>
+        <file>lcd/9.png</file>
+        <file>lcd/dots.png</file>
+        <file>wallpaper.jpg</file>
+        <file>Beef.jpg</file>
+        <file>images/weatherImages/.DS_Store</file>
+        <file>images/weatherImages/105__300x400_location-icon.png</file>
+        <file>images/weatherImages/alert.png</file>
+        <file>images/weatherImages/botbar.tiff</file>
+        <file>images/weatherImages/button.png</file>
+        <file>images/weatherImages/button-pressed.png</file>
+        <file>images/weatherImages/CenterLabel.png</file>
+        <file>images/weatherImages/ClearDay.jpg</file>
+        <file>images/weatherImages/ClearNight.jpg</file>
+        <file>images/weatherImages/close_icon.png</file>
+        <file>images/weatherImages/CloudyDay.jpg</file>
+        <file>images/weatherImages/CloudyNight.jpg</file>
+        <file>images/weatherImages/default.svg</file>
+        <file>images/weatherImages/gloss.png</file>
+        <file>images/weatherImages/Heav Rain.jpg</file>
+        <file>images/weatherImages/Heavy Rain.jpg</file>
+        <file>images/weatherImages/icon_gps.png</file>
+        <file>images/weatherImages/Light Rain.jpg</file>
+        <file>images/weatherImages/lineedit.png</file>
+        <file>images/weatherImages/lineedit.sci</file>
+        <file>images/weatherImages/lunapic_136037864284841_2.png</file>
+        <file>images/weatherImages/Mist.jpg</file>
+        <file>images/weatherImages/Overcast.jpg</file>
+        <file>images/weatherImages/Overcast.png</file>
+        <file>images/weatherImages/Overcast.tiff</file>
+        <file>images/weatherImages/PartlyCloudyDay.jpg</file>
+        <file>images/weatherImages/PartlyCloudyNight.jpg</file>
+        <file>images/weatherImages/quit.png</file>
+        <file>images/weatherImages/rsz_1google_places_pin_icon_black_white_line_art_coloring_book_colouring-2555px.png</file>
+        <file>images/weatherImages/rsz_105__300x400_location-icon.png</file>
+        <file>images/weatherImages/Snow.jpg</file>
+        <file>images/weatherImages/stripes.png</file>
+        <file>images/weatherImages/system_config_services.png</file>
+        <file>images/weatherImages/thermometer.png</file>
+        <file>images/weatherImages/titlebar.png</file>
+        <file>images/weatherImages/titlebar.sci</file>
+        <file>images/weatherImages/toolbutton.png</file>
+        <file>images/weatherImages/toolbutton.sci</file>
+        <file>images/weatherImages/weathericons/.DS_Store</file>
+        <file>images/weatherImages/weathericons/00.png</file>
+        <file>images/weatherImages/weathericons/01.png</file>
+        <file>images/weatherImages/weathericons/02.png</file>
+        <file>images/weatherImages/weathericons/03.png</file>
+        <file>images/weatherImages/weathericons/04.png</file>
+        <file>images/weatherImages/weathericons/05.png</file>
+        <file>images/weatherImages/weathericons/06.png</file>
+        <file>images/weatherImages/weathericons/07.png</file>
+        <file>images/weatherImages/weathericons/08.png</file>
+        <file>images/weatherImages/weathericons/09.png</file>
+        <file>images/weatherImages/weathericons/10.png</file>
+        <file>images/weatherImages/weathericons/11.png</file>
+        <file>images/weatherImages/weathericons/12.png</file>
+        <file>images/weatherImages/weathericons/13.png</file>
+        <file>images/weatherImages/weathericons/14.png</file>
+        <file>images/weatherImages/weathericons/15.png</file>
+        <file>images/weatherImages/weathericons/16.png</file>
+        <file>images/weatherImages/weathericons/17.png</file>
+        <file>images/weatherImages/weathericons/18.png</file>
+        <file>images/weatherImages/weathericons/20.png</file>
+        <file>images/weatherImages/weathericons/23.png</file>
+        <file>images/weatherImages/weathericons/24.png</file>
+        <file>images/weatherImages/weathericons/25.png</file>
+        <file>images/weatherImages/weathericons/26.png</file>
+        <file>images/weatherImages/weathericons/29.png</file>
+        <file>images/weatherImages/weathericons/30.png</file>
+        <file>images/weatherImages/weathericons/33.png</file>
+        <file>images/weatherImages/weathericons/34.png</file>
+        <file>images/weatherImages/weathericons/35.png</file>
+        <file>images/weatherImages/weathericons/36.png</file>
+        <file>images/weatherImages/weathericons/37.png</file>
+        <file>images/weatherImages/weathericons/38.png</file>
+        <file>images/weatherImages/weathericons/40.png</file>
+        <file>images/weatherImages/weathericons/42.png</file>
+        <file>images/weatherImages/weathericons/43.png</file>
+        <file>images/weatherImages/weathericons/44.png</file>
+        <file>images/weatherImages/weathericons/47.png</file>
+        <file>images/weatherImages/weathericons/Clear Day.png</file>
+        <file>images/weatherImages/weathericons/ClearNight.png</file>
+        <file>images/weatherImages/weathericons/CloudyDay.png</file>
+        <file>images/weatherImages/weathericons/CloudyNight.png</file>
+        <file>images/weatherImages/weathericons/LightRainDay.png</file>
+        <file>images/weatherImages/weathericons/LightRainNight.png</file>
+        <file>images/weatherImages/weathericons/LightsnowDay.png</file>
+        <file>images/weatherImages/weathericons/LightsnowNight.png</file>
+        <file>images/weatherImages/weathericons/na.png</file>
+        <file>images/weatherImages/weathericons/PartlyCloudyDay.png</file>
+        <file>images/weatherImages/weathericons/PartlyCloudyNight.png</file>
+        <file>qml/KitchenApp/Beef.jpg</file>
+        <file>next_track_button.png</file>
+        <file>pause_button.png</file>
+        <file>play_button.png</file>
+        <file>volume_mute.png</file>
+        <file>volume.png</file>
+        <file>backArrow.png</file>
+        <file>love.png</file>
+        <file>ban.png</file>
+        <file>love_glow.png</file>
+        <file>twUserHeader.png</file>
+        <file>circle1.png</file>
+        <file>circle2.png</file>
+        <file>circle3.png</file>
+        <file>circle4.png</file>
+        <file>googleshare.png</file>
+        <file>google1.png</file>
+        <file>miami.png</file>
+        <file>feed1.png</file>
+        <file>google1Arrow.png</file>
+        <file>comment.png</file>
+        <file>forward.png</file>
+        <file>avi1.jpg</file>
+        <file>avi2.jpg</file>
+        <file>avi3.jpg</file>
+        <file>avi4.jpg</file>
+        <file>avi5.jpg</file>
+        <file>avi6.jpg</file>
+        <file>avi7.jpg</file>
+        <file>avi8.jpg</file>
+        <file>avi9.jpg</file>
+        <file>socialwidget.png</file>
+        <file>search.png</file>
+        <file>wxp (2).jpg</file>
+        <file>wxp (3).jpg</file>
+        <file>wxp (4).jpg</file>
+        <file>wxp (5).jpg</file>
+        <file>wxp (6).jpg</file>
+        <file>wxp (7).jpg</file>
+        <file>wxp (8).jpg</file>
+        <file>wxp (9).jpg</file>
+        <file>wxp (10).jpg</file>
+        <file>wxp (11).jpg</file>
+        <file>wxp (12).jpg</file>
+        <file>wxp (13).jpg</file>
+        <file>wxp (14).jpg</file>
+        <file>wxp (15).jpg</file>
+        <file>wxp (16).jpg</file>
+        <file>wxp (17).jpg</file>
+        <file>wxp (18).jpg</file>
+        <file>wxp (19).jpg</file>
+        <file>wxp (20).jpg</file>
+        <file>wxp (1).jpg</file>
+        <file>rssForwardArrow.png</file>
+        <file>upArrow_white.png</file>
+        <file>downArrow_white.png</file>
+        <file>home.png</file>
+    </qresource>
+</RCC>
